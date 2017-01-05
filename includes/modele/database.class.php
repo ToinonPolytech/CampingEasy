@@ -1,4 +1,5 @@
 <?php
+	require("config.php");
 	class Database{
 		private $_db;
 		private $_objectRequest;
@@ -15,9 +16,27 @@
 				die('Erreur : '.$t->getMessage().' Numéro : '.$t->getCode());
 			}
 		}
-		function select($name_table, $array){
-			$request="SELECT * FROM ".$name_table." WHERE ";
-			foreach ($array as $key => $value)
+		function select($name_table, $array_where, $array_select="*"){
+			if (is_array($array_select))
+			{
+				foreach ($array_select as $value)
+				{
+					if (!isset($request))
+						$request="SELECT ".$value;
+					else
+						$request.=",".$value;
+				}
+			}
+			else if (!empty($array_select))
+			{
+				$request="SELECT ".$array_select;
+			}
+			else
+			{
+				$request="SELECT *";
+			}
+			$request.=" FROM ".$name_table." WHERE ";
+			foreach ($array_where as $key => $value)
 			{
 				if (strstr($request, "WHERE"))
 					$request.=" AND ";
@@ -25,7 +44,7 @@
 				$request.=$key."=:".$key;
 			}
 			$this->_objectRequest=$db->prepare($request);
-			$this->_objectRequest->execute($array);
+			$this->_objectRequest->execute($array_where);
 		}
 		function fetch(){
 			return $this->_objectRequest->fetch();

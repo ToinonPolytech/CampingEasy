@@ -1,4 +1,5 @@
 <?php
+require("database.class.php");
 
 class Reservation {
     private $_id;
