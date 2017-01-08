@@ -1,96 +1,77 @@
 <?php
 require("database.class.php");
 
+
 class PbTech{
-    
-private $_id;    
-private $_date; 
-private $_nom; 
-private $_descriptif; 
-private $_photo;
-private $_idClient; 
-
-function __construct($id) {
-    
-    
-   $table=db.select(pbtech,$id);
-    $this->_id = $id;
-    $this->_date =$table['date'];
-    $this->_nom = $table['nom'];
-    $this->_descriptif = $table['descriptif'];
-    $this->_photo = $table['photo'];
-    $this->_idClient = $table['idClient'];
-    
-    
+	private $_id;    // clé primaire
+	private $_idUser;  // id créateur probleme
+	private $_timeCreated;  // timestamp de la création
+	private $_timeEstimated; // timestamp de quand le problème devrait être résoly
+	private $_description; // description du probleme
+	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
+	private $_solved;  // 0 ou clé secondaire du technicien ayant résolu le probleme
+	function __construct($id, $idUsers, $timeCreated, $timeEstimated, $description, $isBungalow, $solved) {
+		$this->_id = $id;
+		$this->_idUser=$idUsers;
+		$this->_timeCreated=$timeCreated;
+		$this->_timeEstimated=$timeEstimated;
+		$this->_description=$description;
+		$this->_isBungalow=$isBungalow;
+		$this->_solved=$solved;
+	}
+	function __construct($id) {
+		$database = new Database();
+		$database->select('problemes_technique', array("id" => $id));
+		$data=$database->fetch();
+		$this->_id = $id;
+		$this->_idUser=$data["idUsers"];
+		$this->_timeCreated=$data["time_start"];
+		$this->_timeEstimated=$data["time_estimated"];
+		$this->_description=$data["description"];
+		$this->_isBungalow=$data["isBungalow"];
+		$this->_solved=$data["solved"];
+	}
+	function getId(){
+		return $this->_id;
+	}
+	function getIdUsers(){
+		return $this->_idUser;
+	}
+	function getTimeCreated(){
+		return $this->_timeCreated;
+	}
+	function getTimeEstimated(){
+		return $this->_timeEstimated;
+	}
+	function getDescription(){
+		return $this->_description;
+	}
+	function getIsBungalow(){
+		return $this->_isBungalow;
+	}
+	function getSolved(){
+		return $this->_solved;
+	}
+	function setId($id){
+		$this->_id=$id;
+	}
+	function setIdUsers($idUsers){
+		$this->_idUser=$idUsers;
+	}
+	function setTimeCreated($timeCreated){
+		$this->_timeCreated=$timeCreated;
+	}
+	function setTimeEstimated($timeEstimated){
+		$this->_timeEstimated=$timeEstimated;
+	}
+	function setDescription($description){
+		$this->_description=$description;
+	}
+	function setIsBungalow($isBungalow){
+		$this->_isBungalow=$isBungalow;
+	}
+	function setSolved($solved){
+		$this->_solved=$solved;
+	}
 }
-
-
-function getId() {
-    return $this->_id;
-}
-
-function getDate() {
-    return $this->_date;
-}
-
-function getNom() {
-    return $this->_nom;
-}
-
-function getDescriptif() {
-    return $this->_descriptif;
-}
-
-function getPhoto() {
-    return $this->_photo;
-}
-
-function getIdClient() {
-    return $this->_idClient;
-}
-
-function setId($id) {
-    $this->_id = $id;
-}
-
-function setDate($date) {
-    $this->_date = $date;
-}
-
-function setNom($nom) {
-    $this->_nom = $nom;
-}
-
-function setDescriptif($descriptif) {
-    $this->_descriptif = $descriptif;
-}
-
-function setPhoto($photo) {
-    $this->_photo = $photo;
-}
-
-function setIdClient($idClient) {
-    $this->_idClient = $idClient;
-}
-
-
-    
-    
-    /* données : 
--IdPbT : Int => id du pb technique 
--Date : date => date de déclaration du Pb technique 
--Nom : String => nom du pb (ex : "fuite d'eau robinet")
--Descriptif : String => Descriptif du pb technique 
--Photo : JPG ? => photo éventuelle du Pb 
--idClient : Int => id cu client concerné par le pb 
- 
- 
- */
-
-    
-    
-    
-    
-}
-
 ?>

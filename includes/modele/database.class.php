@@ -8,7 +8,7 @@
 	class Database{
 		private $_db;
 		private $_objectRequest;
-		function __construct() {
+		function __construct(){
 			try
 			{
 				// On se connecte à MySQL
@@ -76,8 +76,32 @@
 			}
 			$this->request($request, $array_where);
 		}
+		function create($name_table, $array_create){
+			foreach ($array_create as $key => $value)
+			{
+				if (!isset($request))
+					$request="INSERT INTO ".$name_table." (".$key;
+				else
+					$request.=",".$key;
+			}
+			foreach ($array_create as $key => $value)
+			{
+				if (!strstr($request, "VALUES"))
+					$request.=") VALUES (:".$key;
+				else
+					$request.=",:".$key;
+			}
+			$request.=")";
+			$this->_objectRequest=$db->prepare($request);
+			$this->_objectRequest->execute($array_create);
+		}
 		function fetch(){
 			return $this->_objectRequest->fetch();
+		}
+		function count($name_table, $array_where){
+			$request="SELECT COUNT(*) FROM ".$name_table;
+			$this->request($request, $array_where);
+			return $this->_objectRequest->fetchColumn();
 		}
 	}
 ?>
