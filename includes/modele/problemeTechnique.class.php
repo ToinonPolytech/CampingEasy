@@ -10,6 +10,7 @@ class PbTech{
 	private $_description; // description du probleme
 	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
 	private $_solved;  // 0 ou clé secondaire du technicien ayant résolu le probleme
+	private $_deleted; // true si on doit supprimer, false sinon
 	function __construct($id, $idUsers, $timeCreated, $timeEstimated, $description, $isBungalow, $solved) {
 		$this->_id = $id;
 		$this->_idUser=$idUsers;
@@ -18,6 +19,7 @@ class PbTech{
 		$this->_description=$description;
 		$this->_isBungalow=$isBungalow;
 		$this->_solved=$solved;
+		$this->_deleted=false;
 	}
 	function __construct($id) {
 		$database = new Database();
@@ -30,6 +32,22 @@ class PbTech{
 		$this->_description=$data["description"];
 		$this->_isBungalow=$data["isBungalow"];
 		$this->_solved=$data["solved"];
+		$this->_deleted=false;
+	}
+	function saveToDb(){
+		$database = new Database();
+		if ($_deleted)
+		{
+			$database->delete('problemes_technique', array("id" => $this->_id));
+		}	
+		else if ($database->count('problemes_technique', array("id" => $this->_id))) // Existe en db, on update
+		{
+			$database->update('problemes_technique', array("id" => $this->_id), array("idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
+		}
+		else
+		{
+			$database->create('problemes_technique', array("id" => $this->_id, "idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
+		}
 	}
 	function getId(){
 		return $this->_id;
@@ -52,6 +70,9 @@ class PbTech{
 	function getSolved(){
 		return $this->_solved;
 	}
+	function getDeleted(){
+		return $this->_deleted;
+	}
 	function setId($id){
 		$this->_id=$id;
 	}
@@ -72,6 +93,9 @@ class PbTech{
 	}
 	function setSolved($solved){
 		$this->_solved=$solved;
+	}
+	function setDeleted($deleted){
+		$this->_deleted=$deleted;
 	}
 }
 ?>

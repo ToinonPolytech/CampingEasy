@@ -2,100 +2,58 @@
 require("database.class.php");
 
 class Reservation {
-    private $_id;
-    private $_type;
-    private $_idClient;
-    private $_dateCreationRes;
-    private $_nbpers;
-    private $_idType;
-    private $_dateRes;   
-    
-    /* données : 
--id : Int => clef primaire 
--type : String (enum) => type de réservation (lieu commun, activité, repas)
--idClient : Int => id du client qui fait la réservation 
--dateCreationRes : date => date et heure d'inscription à la réservation 	
--nbPers : Int => nombre de personnes associées à la réservation (>0)
--idType : Int => Id de l'activité ou du lieu commun réservé (en fonction du type de réservation )
--dateRes : (type=Lieu Commun) date => date et heure à laquelle a lieu la réservation (>dateCreationRes)
- */
-    
-     function __construct($_id) {
-           
-        $table = db.select(reservation,$id);  
-        
-        $this->_id = $_id;
-        $this->_type = $table['type'];
-        $this->_idClient = $table['idClient'];
-        $this->_dateCreationRes = $table['dateCreationRes'];
-        $this->_nbpers = $table['nbpers'];
-        $this->_idType = $table['idType'];
-        $this->_dateRes= $table['dateRes'];
-    
-     }
-    function getId() {
-        return $this->_id;
+	private $_idActivite;
+	private $_idUser;
+	private $_idEquipe;
+	private $_nbrPersonne;
+	private $_deleted;
+	function __construct($idActivite, $idUser, $idEquipe, $nbrPersonne){
+		$this->_idActivite=$idActivite;
+		$this->_idUser=$idUser;
+		$this->_idEquipe=$idEquipe;
+		$this->_nbrPersonne=$nbrPersonne;
+		$this->_deleted=false;
+	}
+	function __construct($idActivite, $idUser){
+		$database = new Database();
+		$database->select('reservation', array("idActivite" => $idActivite, "idUser" => $idUser));
+		$data=$database->fetch();
+		$this->_idActivite=$idActivite;
+		$this->_idUser=$idUser;
+		$this->_idEquipe=$data["idEquipe"];
+		$this->_nbrPersonne=$data["nbrPersonne"];
+		$this->_deleted=false;
+	}
+    function getIdActivites() {
+        return $this->_idActivite;
     }
-
-    function getType() {
-        return $this->_type;
+    function getIdUser() {
+        return $this->_idUser;
     }
-
-    function getIdClient() {
-        return $this->_idClient;
+    function getIdEquipe() {
+        return $this->_idEquipe;
     }
-
-    function getDateCreationRes() {
-        return $this->_dateCreationRes;
+    function getNbrPersonne() {
+        return $this->_nbrPersonne;
     }
-
-    function getNbpers() {
-        return $this->_nbpers;
+	function getDeleted(){
+		return $this->_deleted;
+	}
+	function setIdActivites($idActivite) {
+        $this->_idActivite=$idActivite;
     }
-
-    function getIdType() {
-        return $this->_idType;
+    function setIdUser($idUser) {
+        $this->_idUser=$idUser;
     }
-
-    function getDateRes() {
-        return $this->_dateRes;
+    function setIdEquipe($idEquipe) {
+        $this->_idEquipe=$idEquipe;
     }
-
-    function setId($id) {
-        $this->_id = $id;
+    function setNbrPersonne($nbrPersonne) {
+        $this->_nbrPersonne=$nbrPersonne;
     }
-
-    function setType($type) {
-        $this->_type = $type;
-    }
-
-    function setIdClient($idClient) {
-        $this->_idClient = $idClient;
-    }
-
-    function setDateCreationRes($dateCreationRes) {
-        $this->_dateCreationRes = $dateCreationRes;
-    }
-
-    function setNbpers($nbpers) {
-        $this->_nbpers = $nbpers;
-    }
-
-    function setIdType($idType) {
-        $this->_idType = $idType;
-    }
-
-    function setDateRes($dateRes) {
-        $this->_dateRes = $dateRes;
-    }
-
-    
-
-
-
-
-
-
+	function setDeleted($deleted){
+		$this->_deleted=$deleted;
+	}
 }
 
 

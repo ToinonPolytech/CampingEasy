@@ -1,7 +1,6 @@
 <?php
 require("database.class.php");
 
-
 class LieuCommun {
 /* 
 données : 
@@ -12,23 +11,30 @@ données :
 	private $_id;
 	private $_nom;
 	private $_description; 
+	private $_deleted;
 	
 	function __construct($id, $nom, $description){
-		$_id=$id;
-		$_nom=$nom;
-		$_description=$description;
+		$this->_id=$id;
+		$this->_nom=$nom;
+		$this->_description=$description;
+		$this->_deleted=false;
 	}
 	function __construct($id){
 		$database = new Database();
 		$database->select('lieu_commun', array("id" => $id));
 		$data=$database->fetch();
-		$_id=$id;
-		$_nom=$data["nom"];
-		$_description=$data["description"];
+		$this->_id=$id;
+		$this->_nom=$data["nom"];
+		$this->_description=$data["description"];
+		$this->_deleted=false;
 	}
 	function saveToDb(){
 		$database = new Database();
-		if ($database->count('lieu_commun', array("id" => $this->_id))) // Existe en db, on update
+		if ($_deleted)
+		{
+			$database->delete('lieu_commun', array("id" => $this->_id));
+		}	
+		else if ($database->count('lieu_commun', array("id" => $this->_id))) // Existe en db, on update
 		{
 			$database->update('lieu_commun', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description));
 		}
@@ -46,6 +52,9 @@ données :
 	function getDescription() {
 		return $this->_description;
 	}
+	function getDeleted(){
+		return $this->_deleted;
+	}
 	function setId($id) {
 		$this->_id = $id;
 	}
@@ -54,5 +63,8 @@ données :
 	}
 	function setDescription($description) {
 		$this->_description = $description;
-	}  
+	} 
+	function setDeleted($deleted){
+		$this->_deleted=$deleted;
+	}
 }
