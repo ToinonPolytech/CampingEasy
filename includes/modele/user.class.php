@@ -39,7 +39,6 @@ abstract class User
 		$this->_code=$data["code"];
 		$this->_deleted=false;
 	}
-	
 	function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
@@ -52,17 +51,20 @@ abstract class User
 		}
 		else
 		{
-			$controller= new Controller_User();
-			$clef=$controller->generateKey(); // TO DO : Gérer cette partie
+			$controller= new Controller_User($this);
+			$clef=$controller->generateKey();
 			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
 		}
 	}
-	
+	function addDroits($which){
+		$controller= new Controller_User($this);
+		if (!$controller->can($which)) // Si le droit n'est pas déjà activé
+			$this->_droits+=pow(2,$which); // on lui rajoute
+	}
 	function getUserInfos(){
 		$userInfo = new UserInfos($this->_infoId);
 		return $userInfo;
 	}
-	
 	function getId(){
 		return $this->_id;
 	}
