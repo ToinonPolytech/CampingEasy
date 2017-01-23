@@ -1,6 +1,6 @@
 <?php 
 require("database.class.php");
-
+require("../controller/user.controller.class.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/
@@ -40,21 +40,25 @@ abstract class User
 		$this->_deleted=false;
 	}
 	function saveToDb(){
-		$database = new Database();
-		if ($_deleted)
-		{
-			$database->delete('users', array("id" => $this->_id));
-		}	
-		else if ($database->count('users', array("id" => $this->_id))) // Existe en db, on update
-		{
-			$database->update('users', array("id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+		$controller=new Controller_User($this);
+		if ($controller->isGood()){
+			$database = new Database();
+			if ($_deleted)
+			{
+				$database->delete('users', array("id" => $this->_id));
+			}	
+			else if ($database->count('users', array("id" => $this->_id))) // Existe en db, on update
+			{
+				$database->update('users', array("id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+			}
+			else
+			{
+				$clef=$controller->generateKey();
+				$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+			}
+			return true;
 		}
-		else
-		{
-			$controller= new Controller_User($this);
-			$clef=$controller->generateKey();
-			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
-		}
+		return false;
 	}
 	function addDroits($which){
 		$controller= new Controller_User($this);

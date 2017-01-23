@@ -1,6 +1,6 @@
 <?php
 require("database.class.php");
-
+require("reservation.controller.class.php");
 class Reservation {
 	private $_idActivite;
 	private $_idUser;
@@ -23,6 +23,26 @@ class Reservation {
 		$this->_idEquipe=$data["idEquipe"];
 		$this->_nbrPersonne=$data["nbrPersonne"];
 		$this->_deleted=false;
+	}
+	function saveToDb(){
+		$controller=new Controller_Reservation($this);
+		if ($controller->isGood()){
+			$database = new Database();
+			if ($_deleted)
+			{
+				$database->delete('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser));
+			}	
+			else if ($database->count('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser))) // Existe en db, on update
+			{
+				$database->update('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser), array("idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
+			}
+			else
+			{
+				$database->create('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser, "idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
+			}
+			return true;
+		}
+		return false;
 	}
     function getIdActivites() {
         return $this->_idActivite;
@@ -55,6 +75,4 @@ class Reservation {
 		$this->_deleted=$deleted;
 	}
 }
-
-
 ?>
