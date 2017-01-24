@@ -1,5 +1,6 @@
 <?php 
 require("database.class.php");
+require("../controller/activite.controller.class.php")
 //classe du type Activité
 
 class Activite
@@ -11,30 +12,32 @@ class Activite
 	private $_descriptif;
 	private $_ageMin;
 	private $_ageMax;
+	private $_idLieu;
 	private $_lieu;
 	private $_type;
 	private $_placesLim;
 	private $_prix;
 	private $_idOwner;
-	private $_points;
+	private $_points;	
 	private $_deleted;
 	/*données : 
 	-id : Int => clef primaire 
-	-date : date => date et heure de l'activité à venir  
+	-timeStart : Int => secondes   
 	-descriptif : String => description de l'activité 
 	-durée : Int => temps en min 
 	-catégorie : String (enum) : genre de l'activité (sportive, intellectuelle ...) : 
 	-ageMin : Int => age minimum pour participer à l'activité 
 	-ageMax : Int => age maximum pour participer à l'activité 
+	-idLieu : Int => id du lieu si celui ci existe dans la base de données 
 	-lieu : String => lieu de l'activité (dans le camping ou à l'extérieur)
-	-type : String (enum) => réservable/payante/partenariat
+	-type : String => type de l'activite ( sportif, intellectuel, jeux ..)
 	-dateLim : (type=réservable) date  => date et heure limite pour la réservation de l'activité 
 	-placesLim : (type=réservable) Int  => nombre de places limites réservables 
 	-prix : (type= payante) float => prix par personnes de l'activité 
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 	*/
-	function __construct($id, $timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu, $type, $placesLim, $prix, $idOwner, $points) {
-		$this->_id = $id;
+	function __construct($id, $timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
+		$this->_id = NULL;
 		$this->_timeStart = $timeStart;
 		$this->_nom = $nom;
 		$this->_descriptif = $descriptif;
@@ -42,6 +45,7 @@ class Activite
 		$this->_ageMin =  $ageMin;
 		$this->_ageMax =  $ageMax;
 		$this->_lieu =  $lieu;
+		$this->_idLieu = $idLieu;
 		$this->_type = $type;
 		$this->_placesLim =  $placesLim;
 		$this->_prix =  $prix;
@@ -61,6 +65,7 @@ class Activite
 		$this->_ageMin =  $data['ageMin'];
 		$this->_ageMax =  $data['ageMax'];
 		$this->_lieu =  $data['lieu'];
+		$this->_idLieu = $data['idLieu'];
 		$this->_type = $data['type'];
 		$this->_placesLim =  $data['capaciteMax'];
 		$this->_prix =  $data['prix'];
@@ -69,7 +74,9 @@ class Activite
 		$this->_deleted=false;
 	}
 	function saveToDb(){
+		$controller=new Controller_Activite($this);
 		$database = new Database();
+		if($controller->IsGood()){
 		if ($_deleted)
 		{
 			$database->delete('activites', array("id" => $this->_id));
@@ -81,7 +88,10 @@ class Activite
 		else
 		{
 			$database->create('activites', array("id" => $this->_id, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+		} 
+		return true;
 		}
+		return false; 
 	}
 	function getId() {
 	   return $this->_id;
@@ -109,6 +119,9 @@ class Activite
 	}
 	function getLieu() {
 	   return $this->_lieu;
+	}
+	function getIdLieu(){
+		return $this->_idLieu;
 	}
 	function getType() {
 	   return $this->_type;
@@ -154,6 +167,10 @@ class Activite
 	}
 	function setLieu($lieu) {
 	   $this->_lieu = $lieu;
+	}
+	
+	function setIdLieu($idLieu){
+		$this->_idLieu = $idLieu;
 	}
 	function setType($type) {
 	   $this->_type = $type;
