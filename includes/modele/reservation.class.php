@@ -1,6 +1,7 @@
 <?php
 require("database.class.php");
-require("reservation.controller.class.php");
+require("../controller/controllerObjet/reservation.controller.class.php");
+
 class Reservation {
 	private $_idActivite;
 	private $_idUser;

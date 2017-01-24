@@ -1,7 +1,8 @@
 <?php
 
-require("database.class.php");
-require("../fonctions/general.php");
+require("../../modele/database.class.php");
+require("../../modele/activite.class.php");
+require("../../fonctions/general.php");
 
 
 class Controller_Activite {
@@ -27,24 +28,24 @@ class Controller_Activite {
 		
 	}
 	
-	function dureeIdGood(){
+	function dureeIsGood(){
 		return(!empty(_act->getDuree()) && (_act->getDuree()>0));
 		
 	}
 	function nomIsGood(){
 		
-		return(!empty(_act->getNom()) && (strlen(_act->getNom())<40) &&
-		strlen(_act->getNom())>3);
+		return(!empty(_act->getNom()) && (strlen(_act->getNom())<=40) &&
+		strlen(_act->getNom())>=3);
 	}
 	function descriptifIsGood(){
-		return(!empty(_act->getDescriptif()) && (strlen(_act->getDescriptif())>20) && strlen(_act->getDescriptif())<300);
+		return(!empty(_act->getDescriptif()) && (strlen(_act->getDescriptif())>=20) && strlen(_act->getDescriptif())=<300);
 		
 	}
 	
 	function ageIsGood(){
 		return(!empty(_act->getAgeMin()) && !empty(_act->getaAgeMax()) &&
-		is_numeric(_act->getAgeMin()) && is_numeric(_act->getAgeMax()) &&
-		(_act->getAgeMin()<_act->getAgeMax()) && (_act->getAgeMin()>0) 
+		is_int(_act->getAgeMin()) && is_int(_act->getAgeMax()) &&
+		(_act->getAgeMin()<_act->getAgeMax()) && (_act->getAgeMin()>=0) 
 		&& (_act->getAgeMax()<100)); 
 			
 		
@@ -52,7 +53,7 @@ class Controller_Activite {
 	function lieuIsGood(){
 		
 		if(empty(_act->getIdLieu())){ return(!empty(_act->getLieu())
-			&& (strlen(_act->getLieu())<50 && (strlen(_act->getLieu())>5);
+			&& (strlen(_act->getLieu())<50 && (strlen(_act->getLieu())>4);
 		
 		}
 		else{ if($database->count('lieuCommun', array("id" =>_act->getIdLieu()))){

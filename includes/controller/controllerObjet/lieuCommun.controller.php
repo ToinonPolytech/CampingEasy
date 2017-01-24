@@ -1,5 +1,10 @@
 <?php
 
+require("../../modele/database.class.php");
+require("../../modele/lieuCommun.class.php");
+
+
+
 class Controller_LieuCommun(){
 
 	private $LC; 

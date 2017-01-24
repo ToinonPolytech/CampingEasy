@@ -1,5 +1,8 @@
 <?php 
-require("database.class.php");
+require("../../modele/database.class.php");
+require("../../modele/reservation.class.php");
+
+
 class Controller_Reservation
 {
 	private $_reservation;

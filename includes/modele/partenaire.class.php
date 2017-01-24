@@ -1,6 +1,6 @@
 <?php
 require("database.class.php");
-require("../controller/partenaire.controller.class.php");
+require("../controller/controllerObjet/partenaire.controller.class.php");
 //Fonctions de la classe Partenaire 
 
 class Partenaire{

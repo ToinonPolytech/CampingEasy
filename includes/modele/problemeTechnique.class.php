@@ -1,6 +1,6 @@
 <?php
 require("database.class.php");
-
+require("../controller/problemeTechnique.controller.class.php");
 
 class PbTech{
 	private $_id;    // clé primaire

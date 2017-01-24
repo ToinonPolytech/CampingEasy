@@ -1,5 +1,8 @@
 <?php
 require("database.class.php");
+require("../controller/controllerObjet/lieuCommun.controller.class.php");
+
+
 
 class LieuCommun {
 /* 

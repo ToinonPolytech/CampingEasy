@@ -1,5 +1,7 @@
 <?php 
-require("database.class.php");
+require("../../modele/database.class.php");
+require("../../modele/equipe.class.php");
+
 class Controller_Equipe
 {
 	private $_equipe;

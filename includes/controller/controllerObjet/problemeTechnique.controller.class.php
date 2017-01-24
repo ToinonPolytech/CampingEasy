@@ -1,6 +1,7 @@
 <?php 
 
-
+require("../../modele/database.class.php");
+require("../../modele/problemeTechnique.class.php");
 
 
 

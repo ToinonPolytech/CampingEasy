@@ -1,6 +1,6 @@
 <?php 
 require("database.class.php");
-require("../controller/activite.controller.class.php")
+require("../controller/controllerObjet/activite.controller.class.php");
 //classe du type Activité
 
 class Activite

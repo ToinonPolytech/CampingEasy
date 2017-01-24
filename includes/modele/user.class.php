@@ -1,6 +1,6 @@
 <?php 
 require("database.class.php");
-require("../controller/user.controller.class.php");
+require("../controller/controllerObjet/user.controller.class.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/

@@ -1,0 +1,11 @@
+TODO : 
+- ajout au modele de paramètres manquants dans le savetToDb
+
+
+
+
+
+Problématiques futures et questions existentielles : 
+
+- Une activité peut elle être crée pour l'année suivante ? Si non rajouter une condition de création 
+- La gestion des droits, pour la création d'une activité par exemple doit elle se faire dans le controller du formulaire ?

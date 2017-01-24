@@ -1,0 +1,3 @@
+Problématiques futures et questions existentielles : 
+
+- Une activité peut elle être crée pour l'année suivante ? Si non rajouter une condition de création 

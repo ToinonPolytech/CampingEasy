@@ -1,6 +1,6 @@
 <?php
 require("database.class.php");
-require("../controller/equipe.controller.class.php");
+require("../controller/controllerObjet/equipe.controller.class.php");
 class Equipe {
 	private $_id;
 	private $_nom;
