@@ -52,7 +52,7 @@ class PbTech{
 	function getId(){
 		return $this->_id;
 	}
-	function getIdUsers(){
+	function getIdUser(){
 		return $this->_idUser;
 	}
 	function getTimeCreated(){
