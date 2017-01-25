@@ -11,6 +11,7 @@
   $ageMax = htmlspecialchars ($_POST['ageMax']);
   $idLieu = htmlspecialchars ($_POST['idLieu']);
   $lieu = htmlspecialchars ($_POST['lieu']);
+  //reçoit le nom d'un type de la base de données : l'ajout d'un type à celle-ci se fait dans un formulaire sur la même page mais à part entière 
   $type = htmlspecialchars ($_POST['type']);
   $placesLim = htmlspecialchars ($_POST['placesLim']);
   $prix = htmlspecialchars ($_POST['prix']);
@@ -50,7 +51,7 @@ function timeStartIsGood($timeStart){
 		
 	}
 	
-	function dureeIsGood(){
+	function dureeIsGood($duree){
 		if(!empty($duree))
 		{	if(is_numeric($duree))
 			{
@@ -77,7 +78,7 @@ function timeStartIsGood($timeStart){
 		
 		
 	}
-	function nomIsGood(){
+	function nomIsGood($nom){
 		if(!empty($nom))
 		{
 			if((strlen($nom)<40) &&
@@ -100,7 +101,7 @@ function timeStartIsGood($timeStart){
 		}
 		
 	}
-	function descriptifIsGood(){
+	function descriptifIsGood($descriptif){
 		if(!empty($descriptif))
 		{
 			if((strlen($descriptif)>=20) && strlen($descriptif)=<300))
@@ -122,7 +123,7 @@ function timeStartIsGood($timeStart){
 		
 	}
 	
-	function ageIsGood(){
+	function ageIsGood($ageMin,$ageMax){
 		if(isset($ageMin) && isset($ageMax))
 		{
 			if(is_int($ageMin) && is_int($ageMax))
@@ -160,8 +161,8 @@ function timeStartIsGood($timeStart){
 			
 		
 	}
-	function lieuIsGood(){
-		
+	function lieuIsGood($idLieu,$lieu){
+		$database = new Database();
 		if(empty($idLieu))
 		{ 
 			if(!empty($lieu))
@@ -196,8 +197,30 @@ function timeStartIsGood($timeStart){
 		
 	}
 	//TODO : finir le controller pour ces fonctions 
-	function typeIsGood(){
+	function typeIsGood($type){
+		
 		$database = new Database();
+		
+		if(!empty($type))
+		{ 
+			if($database->count('typeActivite', array("nom" =>$type)==0)
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR :";
+				return false;
+			}
+		}
+		else
+		{
+			echo 'ERREUR : Le type de l activite est vide';
+			return false;
+		}
+		
+		
+		
 		return(!empty($Type()) && ($database->count('typeActivite', array("nom" => $Nom())==0)); 
 		
 	}

@@ -51,7 +51,7 @@ class Controller_Activite {
 		
 	}
 	function lieuIsGood(){
-		
+		$database = new Database();
 		if(empty(_act->getIdLieu())){ return(!empty(_act->getLieu())
 			&& (strlen(_act->getLieu())<50 && (strlen(_act->getLieu())>4);
 		
