@@ -55,7 +55,7 @@ function timeStartIsGood($timeStart){
 		if(!empty($duree))
 		{	if(is_numeric($duree))
 			{
-				if($durée>=0)
+				if($durée>0)
 				{
 					return true; 					
 				}
@@ -196,9 +196,9 @@ function timeStartIsGood($timeStart){
 		}
 		
 	}
-	//TODO : finir le controller pour ces fonctions 
+	
 	function typeIsGood($type){
-		
+		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
 		$database = new Database();
 		
 		if(!empty($type))
@@ -209,7 +209,7 @@ function timeStartIsGood($timeStart){
 			}
 			else
 			{
-				echo "ERREUR :";
+				echo "ERREUR : ce type d'activité n'existe pas ";
 				return false;
 			}
 		}
@@ -221,21 +221,93 @@ function timeStartIsGood($timeStart){
 		
 		
 		
-		return(!empty($Type()) && ($database->count('typeActivite', array("nom" => $Nom())==0)); 
 		
 	}
 	
-	function placesLimIsGood(){
-		return(!empty($PlacesLim()) && is_numeric($PlacesLim()) && $PlacesLim()<1000);	
+	function placesLimIsGood($placesLim){
+		if(!empty($placesLim))
+		{	if(is_int($placesLim))
+			{
+				if($placesLim>=0)
+				{
+					return true; 					
+				}
+				else
+				{ echo "ERREUR : Le nombre de places maximum pour l'activité ne peut être négatif ";
+				  return false; 
+				}
+			}
+			else
+			{
+				echo "ERREUR : le nombre de places entré n'est pas un entier ";
+				return false;
+			}
+		}
+		else 
+		{
+			echo "ERREUR : Le nombre de places maximum pour l'activité est vide";
+			return false; 
+		}
+		
+		
+			
 		
 		
 	}
-	function prixIsGood(){
-		return(!empty($Prix()) && is_numeric($Prix()) && ($Prix()<1000));
+	function prixIsGood($prix){
+		
+		if(!empty($prix))
+		{	if(is_numeric($prix))
+			{
+				if($prix>0)
+				{
+					return true; 					
+				}
+				else
+				{ echo "ERREUR : Le prix de l'activité ne peut être négatif";
+				  return false; 
+				}
+			}
+			else
+			{
+				echo "ERREUR : le prix de l'activité n'est pas de la forme numérique";
+				return false;
+			}
+		}
+		else 
+		{
+			echo "ERREUR : Le prix de l'activité est vide";
+			return false; 
+		}
+		
+		
 		
 	}
 	
-	function idOwnerIsGood(){
+	function idOwnerIsGood($idOwner){
+		if(isset($idOwner))
+		{	if(is_numeric($idOwner))
+			{
+				if($idOwner>=0)
+				{
+					return true; 					
+				}
+				else
+				{ echo "ERREUR : La durée de l'activité ne peut être négative ou nulle";
+				  return false; 
+				}
+			}
+			else
+			{
+				echo "ERREUR : la durée entrée n'est pas de la forme numérique";
+				return false;
+			}
+		}
+		else 
+		{
+			echo "ERREUR : La durée de l'activité est vide";
+			return false; 
+		}
 		
 		return(!empty($IdOwner()) && ($database->count('users', array("id" => $act->getIdOwner()))==1));
 		
