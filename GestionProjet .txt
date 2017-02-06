@@ -1,3 +1,14 @@
 Problématiques futures et questions existentielles : 
 
 - Une activité peut elle être crée pour l'année suivante ? Si non rajouter une condition de création 
+- Le passage en paramètre du partenaire qui crée son activité se fait dans la vue en fonction de la personne connectée ?
+Un admin peut il créer une activité pour un partenaire ? 
+- Une fois les vérifications effectuées pour les données du formulaire on crée un objet du type associé et on saveToDB ? 
+Dans ce cas on a un problème sur le constructeur de l'activité puiqu'on a forcément besoin de l'ID pour le crée (soit juste id soit toutes les infos)
+-Comment gère t-on l'appel du fichier controllerFormulaire sachant que ce n'est pas une classe mais qu'il contient des fonctions ? 
+- Comment choisit-on de représenter la date lors de la saisie des valeurs ? Un calendrier qui s'affiche et on sélectionne ? Dans ce cas quelles données sont envoyées dans le formulaire ? 
+- Quelle fonction de gestion de date ? date et strtime ou datetime ? 
+- Le user créeant un problème technique reste lié à ce problème mais le technicien le modifiant n'y est pas lié : a t-on pris en compte ce cas ? Il peut être utile de savoir qui a géré le problème technique 
+
+
+TODO (les petites choses à ne pas oublier) : 

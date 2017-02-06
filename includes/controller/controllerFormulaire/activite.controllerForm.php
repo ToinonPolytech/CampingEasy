@@ -1,9 +1,9 @@
 <?php 
 
 //controller des données passées en formulaire pour le type activité 
+require("../../modele/database.class.php");
 
-
-  $timeStart = htmlspecialchars ($_POST['timeStart']); //reçoit la valeur en secondes ? 
+  $timeStart = htmlspecialchars ($_POST['timeStart']);// TODO : reçoit l'heure en JJ/MM/AAAA HH:MN : doit être transformée en secondes ou gérées autrement 
   $duree = htmlspecialchars ($_POST['duree']);
   $nom = htmlspecialchars ($_POST['nom']);
   $descriptif = htmlspecialchars ($_POST['descriptif']);
@@ -20,7 +20,22 @@
  
   
 //vérification des champs obligatoires non null et non vides
-//TODO: si toutes les fonctions sont good, appelle du controller objet 
+//Ceci n'est pas une classe : comment gérer l'appel de ce fichier pour lire seulement le envoiForm ? Un main ? 
+
+function envoiForm($timeStart,$duree,$nom,$descriptif,$ageMin,$ageMax,$idLieu,$lieu,$type,$placesLim,$prix,$idOwner,$points){
+	if(timeStartIsGood($timeStart) && dureeIsGood($duree) && nomIsGood($nom) 
+		&& descriptifIsGood($descriptif) && ageIsGood($ageMin,$ageMax) && lieuIsGood($lieu,$idLieu) &&
+		typeIsGood($type) && placesLimIsGood($placesLim) && prixIsGood($proix) &&
+		idOwnerIsGood($idOwner) && pointsIsGood($points))
+		{
+			//création de l'activité à définir (cf GestionProjet.txt)
+		}
+	
+	
+	
+}
+
+
 
 function timeStartIsGood($timeStart){
 		if(!empty($timeStart)){
@@ -32,7 +47,7 @@ function timeStartIsGood($timeStart){
 					
 				}
 				else
-				{ //date de début erronée 
+				{ 
 					echo 'ERREUR : La date de début est inférieure à la date actuelle';
 					return false;
 				}
@@ -283,39 +298,73 @@ function timeStartIsGood($timeStart){
 		
 		
 	}
-	
+	//TODO : finir idOwner avec vérification de l'existence en bdd 
 	function idOwnerIsGood($idOwner){
 		if(isset($idOwner))
-		{	if(is_numeric($idOwner))
+		{	if(is_int($idOwner))
 			{
-				if($idOwner>=0)
+				if($database->count('users', array("id" => $idOwner)==1))
 				{
 					return true; 					
 				}
 				else
-				{ echo "ERREUR : La durée de l'activité ne peut être négative ou nulle";
+				{ echo "ERREUR : Le partenaire associé à l'activité n'existe pas "
 				  return false; 
 				}
 			}
 			else
 			{
-				echo "ERREUR : la durée entrée n'est pas de la forme numérique";
+				echo "ERREUR :L'id du partenaire passé en paramètre n'est pas un entier ";
 				return false;
 			}
 		}
 		else 
 		{
-			echo "ERREUR : La durée de l'activité est vide";
+			echo "ERREUR : Le partenaire associé à l'activité n'a pas envoyé ";
 			return false; 
 		}
 		
-		return(!empty($IdOwner()) && ($database->count('users', array("id" => $act->getIdOwner()))==1));
+		
 		
 		
 	}
-	function pointsIsGood(){
+	function pointsIsGood($points){
 		
-		return(!empty($Points()) && is_numeric($Points()) &&($Points()<999999999));
+		if(isset($points))
+		{	if(is_int($points))
+			{
+				if($points>=0 && $points<1000000000)
+				{	
+					if(empty($points){
+						
+						$points=0;
+					}
+					return true; 					
+				}
+				else
+				{ echo "ERREUR : le nombre de points pour l'activité doit être compris entre 0 et 1 000 000 000  ";
+				  return false; 
+				}
+			}
+			else
+			{
+				echo "ERREUR : le nombre de points entré n'est pas un entier ";
+				return false;
+			}
+		}
+		else 
+			
+		{
+			echo "ERREUR : Le nombre de points pour l'activité n'existe pas ";
+			return false; 
+		}
+	}
+		
+		
+		
+		
+		
+		
 		
 	}
 ?>

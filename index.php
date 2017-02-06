@@ -29,7 +29,7 @@
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header"><a class="navbar-brand" href="index.php">Camping Facile</a></div>
+            <div class="navbar-header"><a class="navbar-brand" href="index.php">Camping Facile : Le projet turfu </a></div>
             <ul class="nav navbar-right top-nav">
                 <li><a href="../index.php">Revenir sur le site</a></li>
             </ul>
