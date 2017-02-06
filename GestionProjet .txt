@@ -9,6 +9,17 @@ Dans ce cas on a un problème sur le constructeur de l'activité puiqu'on a forc
 - Comment choisit-on de représenter la date lors de la saisie des valeurs ? Un calendrier qui s'affiche et on sélectionne ? Dans ce cas quelles données sont envoyées dans le formulaire ? 
 - Quelle fonction de gestion de date ? date et strtime ou datetime ? 
 - Le user créeant un problème technique reste lié à ce problème mais le technicien le modifiant n'y est pas lié : a t-on pris en compte ce cas ? Il peut être utile de savoir qui a géré le problème technique 
-
-
-TODO (les petites choses à ne pas oublier) : 
+- Comment gérer les différentes langues ? Il faudra au moins avoir français / anglais or on écrit déjà les erreurs en français ... 
+- Pourquoi un statut "deleted" pour un problème technique ? besoin de le garder en mémoire pour une raison particulière ? 
+- L'utilisateur s'identifie toujours avec le code généré automtiquement ? Sachant qu'il doit pouvoir se connecter également depuis un ordinateur (surtout pour les admins a l'acceuil par exemple qui gèrent sur ordi)
+- Le partenaire est un utilisateur mais aussi un partenaire. On doit donc associer son id d'user au partenaire ? 
+- Si une réservation existe déjà (clef primaire id activité et id user ), si un user en recrée une pour la même activité => même réservation : conflit ? modification ? on dit que c'est impossible et on propose de modifier celle existante ? 
+- Comment gérer les fonctions IsGood lorsqu'elles ont un paramètre optionnel qui si il est vide dans le formulaire doit être mis à NULL ?  (pour le moment modifiés dans les fonctions mais non retournés )
+- Pourquoi une expression régulière sur le nombre de personnes pour une réservation ? 
+- Demande t-on les noms des personnes pour une réservation pour éviter les abus (une personne peut réserver pour 15 sans justifier )
+TODO (les petites choses à ne pas oublier) :
+- gérer l'envoi des formulaires vers la création d'objet 
+- supprimer les deleted dans les controller de formulaire 
+-gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
+- ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
+- A vérifier : les require dans le controller du formulaire 

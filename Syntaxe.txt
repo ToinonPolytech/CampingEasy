@@ -1,0 +1,3 @@
+ Fichier définissant la syntaxe propre à notre site (messages d'erreur, termes utilisés, commentaires spécifiques) :
+ 
+ "ERREUR : le xxx n'est pas passé en paramètre" signifie que le isset renvoie false dans le controller 

@@ -37,7 +37,7 @@ class Controller_Reservation
 		}
 		return true;
 	}
-	function nbrPersonneIsGood(){
+	function nbrPersonneIsGood(){ // pourquoi une expression régulière ? Pas de vérification si c'est un entier ? 
 		return !(empty($_reservation->getNbrPersonne()) ||  !preg_match("#^[0-9]+{1,2}$#",$_reservation->getNbrPersonne()));
 	}
 }
