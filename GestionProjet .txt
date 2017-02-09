@@ -1,42 +1,23 @@
 ﻿Problématiques futures et questions existentielles : 
 
-- Une activité peut elle être crée pour l'année suivante ? Si non rajouter une condition de création 
-	- Bien sur que oui, prennons un camping d'hiver, ils doivent bien pouvoir créer des activités pour début janvier par exemple
-- Le passage en paramètre du partenaire qui crée son activité se fait dans la vue en fonction de la personne connectée ?
-	- Oui, c'est le créateur de l'activité qui est le "propriétaire" de celle ci
-Un admin peut il créer une activité pour un partenaire ? 
-	- Je ne vois pas pourquoi, c'est plus au partenaire de le faire
-- Une fois les vérifications effectuées pour les données du formulaire on crée un objet du type associé et on saveToDB ? 
-	- On vérifie le formulaire (juste les isset), on créé l'objet et on le vérifie via le controller. Si tout est OK on saveToDB
-Dans ce cas on a un problème sur le constructeur de l'activité puiqu'on a forcément besoin de l'ID pour le crée (soit juste id soit toutes les infos)
-	- On en avait vite fait parlé, fallait qu'on revoit cette partie en effet
--Comment gère t-on l'appel du fichier controllerFormulaire sachant que ce n'est pas une classe mais qu'il contient des fonctions ? 
-- Comment choisit-on de représenter la date lors de la saisie des valeurs ? Un calendrier qui s'affiche et on sélectionne ? Dans ce cas quelles données sont envoyées dans le formulaire ? 
-	- Le plus simple pour les utilisateurs seraient bien entendu un calendrier qui s'affiche, Jour/Mois/Année. On envoie jour/mois/année au formulaire et on transforme ça en timestamp
-- Quelle fonction de gestion de date ? date et strtime ou datetime ? 
-	- date et strtime, après j'avoue que je ne connais pas datetime...
-- Le user créeant un problème technique reste lié à ce problème mais le technicien le modifiant n'y est pas lié : a t-on pris en compte ce cas ? Il peut être utile de savoir qui a géré le problème technique 
-	- Si le technicien a réglé le problème il est lié grâce à la valeur solved (qui vaut 0 quand pas résolu, et l'ID du technicien dans le cas contraire)
-- Comment gérer les différentes langues ? Il faudra au moins avoir français / anglais or on écrit déjà les erreurs en français ... 
-	- Aors dans les sites que j'ai fais, la meilleure solution que j'ai trouvé (je ne sais pas s'il y en a d'autres), est d'avoir un fichier langue.php, qui va appeller en fonction d'une variable COOKIE(ou autre) le fichier correspondant, par exemple fr.php, ou en.php. Dans ces fichiers il y a un "$lang=array();", on et on construit de la même manière les fichiers. Cela permet de faire par exemple "echo $lang['ERREUR_5'];"
-- Pourquoi un statut "deleted" pour un problème technique ? besoin de le garder en mémoire pour une raison particulière ? 
-	- Alors j'ai mis le statut deleted partout, cela n'est pas forcément utile.
-- L'utilisateur s'identifie toujours avec le code généré automtiquement ? Sachant qu'il doit pouvoir se connecter également depuis un ordinateur (surtout pour les admins a l'acceuil par exemple qui gèrent sur ordi)
-	- Je ne suis pas sur d'avoir compris... mais l'utilisateur reçoit un code à son arrivé. Il utilise ce code pour se connecter la première fois. S'il s'est bien connecté, le code est enregistré coté utilisateur. (COOKIE) Comme ça il n'a plus besoin de le rentrer plusieurs fois. Et par la suite il utilisera un code 4 chiffres qu'il décidera lui même. 
-On pourra imaginer un petit bouton "Se connecter avec un autre compte".
-- Le partenaire est un utilisateur mais aussi un partenaire. On doit donc associer son id d'user au partenaire ? 
-	- Yep tout à fait
-- Si une réservation existe déjà (clef primaire id activité et id user ), si un user en recrée une pour la même activité => même réservation : conflit ? modification ? on dit que c'est impossible et on propose de modifier celle existante ? 
-	- Il ne peut pas réserver encore, dans la vue cela ne sera pas permis (pas affiché), si jamais il le fait, on affichera un message d'erreur. Par contre dans la vue, on affichera une méthode pour modifier la réservation
-- Comment gérer les fonctions IsGood lorsqu'elles ont un paramètre optionnel qui si il est vide dans le formulaire doit être mis à NULL ?  (pour le moment modifiés dans les fonctions mais non retournés )
-	-  La sans voir exactement je dirais "if (var1IsGood() || var1==NULL)" comme ça on gère le truc, après faudra qu'on en discute
-- Pourquoi une expression régulière sur le nombre de personnes pour une réservation ? 
-	- Hum... ? La je dirais mauvaise idée de ma part ^^
-- Demande t-on les noms des personnes pour une réservation pour éviter les abus (une personne peut réserver pour 15 sans justifier )
-	- J'ai envie de dire oui... mais je n'en vois pas vraiment l'utilité. Car mettre des faux noms c'est simple aussi. Apres vu qu'on a en db la personne qui a fait la réservation ça règle tout, si jamais il abuse il pourra se prendre une sanction.
+
+- Connexion d'une personne : session ou JWT ? A priori session à confirmer 
+
+
 TODO (les petites choses à ne pas oublier) :
 - gérer l'envoi des formulaires vers la création d'objet 
 - supprimer les deleted dans les controller de formulaire 
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
 - A vérifier : les require dans le controller du formulaire 
+- Rajouter IDUser au partenaire 
+- C/C controller formulaire vers objet + controller objet
+- gérer le solved d'un pb technique  
+
+
+
+TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
+
+- alerte pour création d'une acitvité dans plus d'un an 
+- administration d'une activité partenaire par un admin 
+- gestion des langues 

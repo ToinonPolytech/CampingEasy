@@ -15,7 +15,7 @@ require("../../modele/database.class.php");
   $type = htmlspecialchars ($_POST['type']);
   $placesLim = htmlspecialchars ($_POST['placesLim']);
   $prix = htmlspecialchars ($_POST['prix']);
-  $idOwner = htmlspecialchars ($_POST['idOwner']);
+  $idOwner = htmlspecialchars ($_POST['idOwner']); //reçu en variable session 
   $points = htmlspecialchars ($_POST['points']);
  
   
@@ -240,6 +240,7 @@ function timeStartIsGood($timeStart){
 	}
 	
 	function placesLimIsGood($placesLim){
+		
 		if(!empty($placesLim))
 		{	if(is_int($placesLim))
 			{
@@ -298,7 +299,7 @@ function timeStartIsGood($timeStart){
 		
 		
 	}
-	//TODO : finir idOwner avec vérification de l'existence en bdd 
+	
 	function idOwnerIsGood($idOwner){
 		if(isset($idOwner))
 		{	if(is_int($idOwner))
@@ -308,19 +309,19 @@ function timeStartIsGood($timeStart){
 					return true; 					
 				}
 				else
-				{ echo "ERREUR : Le partenaire associé à l'activité n'existe pas "
+				{ echo "ERREUR : Le créateur de l'activité n'existe pas "
 				  return false; 
 				}
 			}
 			else
 			{
-				echo "ERREUR :L'id du partenaire passé en paramètre n'est pas un entier ";
+				echo "ERREUR :L'id du créateur de l'éctivité passé en paramètre n'est pas un entier ";
 				return false;
 			}
 		}
 		else 
 		{
-			echo "ERREUR : Le partenaire associé à l'activité n'a pas envoyé ";
+			echo "ERREUR : L'id du créateur de l'activité n'a pas été passé en paramètre  ";
 			return false; 
 		}
 		
