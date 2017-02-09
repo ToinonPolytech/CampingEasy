@@ -23,11 +23,13 @@ class Controller_Activite {
 		
 	}
 	
+	
+	
 	function timeStartIsGood(){
-		if(!empty($timeStart)){
-			if(is_numeric($act->timeStart))
+		if(!empty($act->getTimeStart())){
+			if(is_numeric($act->getTimeStart())
 			{
-				if($timeStart>time()))
+				if($act->getTimeStart()>time()))
 				{
 					return true;
 					
@@ -52,11 +54,11 @@ class Controller_Activite {
 		
 	}
 	
-	function dureeIsGood($duree){
-		if(!empty($duree))
-		{	if(is_numeric($duree))
+	function dureeIsGood(){
+		if(!empty($act->getDuree()))
+		{	if(is_numeric($act->getDuree()))
 			{
-				if($durée>0)
+				if($act->getDuree()>0)
 				{
 					return true; 					
 				}
@@ -79,11 +81,11 @@ class Controller_Activite {
 		
 		
 	}
-	function nomIsGood($nom){
-		if(!empty($nom))
+	function nomIsGood(){
+		if(!empty($act->getNom()))
 		{
-			if((strlen($nom)<40) &&
-		strlen($nom)>3)
+			if((strlen($act->getNom())<40) &&
+		strlen($act->getNom)>3)
 			{
 			return true;
 			}
@@ -102,10 +104,10 @@ class Controller_Activite {
 		}
 		
 	}
-	function descriptifIsGood($descriptif){
-		if(!empty($descriptif))
+	function descriptifIsGood(){
+		if(!empty($act->getDescriptif()))
 		{
-			if((strlen($descriptif)>=20) && strlen($descriptif)=<300))
+			if((strlen($act->getDescriptif())>=20) && strlen($act->getDescriptif())=<300))
 			{
 				return true;
 			}
@@ -124,51 +126,45 @@ class Controller_Activite {
 		
 	}
 	
-	function ageIsGood($ageMin,$ageMax){
-		if(isset($ageMin) && isset($ageMax))
+	function ageIsGood(){
+		
+		if(is_int($act->getAgeMin()) && is_int($act->getAgeMax()))
 		{
-			if(is_int($ageMin) && is_int($ageMax))
+			if(($act->getAgeMin()<$act->getAgeMax()) && ($act->getAgeMin()>=0) && ($act->getAgeMax()<100))
 			{
-				if(($AgeMin()<$AgeMax()) && ($AgeMin()>=0) && ($AgeMax()<100))
+				if(empty($act->getAgeMin()))
 				{
-					if(empty($ageMin))
-					{
-						$ageMin=0;
-					}
-					if(empty($ageMax))
-					{
-						$ageMax=0;
-					}
-				return true;
+					$act->getAgeMin()=0;
 				}
-				else
+				if(empty($act->getAgeMax()))
 				{
-					echo "ERREUR : les valeurs des ages doivent être comprises entre 0 et 99 et l'age maximum doit être supérieur à l'age minimum";
-					return false;
+					$act->getAgeMax()=0;
 				}
+			return true;
 			}
 			else
 			{
-				echo "ERREUR : Les valeurs entrées pour les age maximum et/ou minimum ne sont pas des nombres entiers";
+				echo "ERREUR : les valeurs des ages doivent être comprises entre 0 et 99 et l'age maximum doit être supérieur à l'age minimum";
 				return false;
 			}
 		}
 		else
 		{
-			echo "ERREUR : aucune donnée pour un des age ou les deux n'est parvenue";
+			echo "ERREUR : Les valeurs entrées pour les age maximum et/ou minimum ne sont pas des nombres entiers";
 			return false;
 		}
-		
-			
-		
 	}
-	function lieuIsGood($idLieu,$lieu){
+	
+		
+		
+	
+	function lieuIsGood(){
 		$database = new Database();
-		if(empty($idLieu))
+		if(empty($act->getIdLieu()))
 		{ 
-			if(!empty($lieu))
+			if(!empty($act->getLieu()))
 			{
-				if(strlen($Lieu())<50 && (strlen($Lieu())>4)
+				if(strlen($act->getLieu())<50 && (strlen($act->getLieu())>4)
 				{
 					return true;
 				}
@@ -185,7 +181,7 @@ class Controller_Activite {
 			}
 		}
 		else{ 
-			if($database->count('lieuCommun', array("id" =>$idLieu))
+			if($database->count('lieuCommun', array("id" =>$act->getIdLieu()))
 			{
 				return true;
 			} 
@@ -198,13 +194,13 @@ class Controller_Activite {
 		
 	}
 	
-	function typeIsGood($type){
+	function typeIsGood(){
 		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
 		$database = new Database();
 		
-		if(!empty($type))
+		if(!empty($act->getType()))
 		{ 
-			if($database->count('typeActivite', array("nom" =>$type)==0)
+			if($database->count('typeActivite', array("nom" =>$act->getType)==0)
 			{
 				return true;
 			}
@@ -225,12 +221,12 @@ class Controller_Activite {
 		
 	}
 	
-	function placesLimIsGood($placesLim){
+	function placesLimIsGood(){
 		
-		if(!empty($placesLim))
-		{	if(is_int($placesLim))
+		if(!empty($act->getPlacesLim()))
+		{	if(is_int($act->getPlacesLim()))
 			{
-				if($placesLim>=0)
+				if($act->getPlacesLim()>=0)
 				{
 					return true; 					
 				}
@@ -256,12 +252,12 @@ class Controller_Activite {
 		
 		
 	}
-	function prixIsGood($prix){
+	function prixIsGood(){
 		
-		if(!empty($prix))
-		{	if(is_numeric($prix))
+		if(!empty($act->getPrix()))
+		{	if(is_numeric($act->getPrix()))
 			{
-				if($prix>0)
+				if($act->getPrix()>0)
 				{
 					return true; 					
 				}
@@ -286,72 +282,55 @@ class Controller_Activite {
 		
 	}
 	
-	function idOwnerIsGood($idOwner){
-		if(isset($idOwner))
-		{	if(is_int($idOwner))
+	function idOwnerIsGood(){
+		
+		if(is_int($act->getIdOwner()))
+		{
+			if($database->count('users', array("id" => $act->getIdOwner())==1))
 			{
-				if($database->count('users', array("id" => $idOwner)==1))
-				{
-					return true; 					
-				}
-				else
-				{ echo "ERREUR : Le créateur de l'activité n'existe pas "
-				  return false; 
-				}
+				return true; 					
 			}
 			else
-			{
-				echo "ERREUR :L'id du créateur de l'éctivité passé en paramètre n'est pas un entier ";
-				return false;
+			{ echo "ERREUR : Le créateur de l'activité n'existe pas "
+			  return false; 
 			}
 		}
-		else 
+		else
 		{
-			echo "ERREUR : L'id du créateur de l'activité n'a pas été passé en paramètre  ";
-			return false; 
+			echo "ERREUR :L'id du créateur de l'éctivité passé en paramètre n'est pas un entier ";
+			return false;
 		}
+	
 		
 		
 		
 		
 	}
-	function pointsIsGood($points){
+	function pointsIsGood(){
 		
-		if(isset($points))
-		{	if(is_int($points))
-			{
-				if($points>=0 && $points<1000000000)
-				{	
-					if(empty($points){
-						
-						$points=0;
-					}
-					return true; 					
+		if(is_int($act->getPoints()))
+		{
+			if($act->getPoints()>=0 && $act->getPoints()<1000000000)
+			{	
+				if(empty($act->getPoints()){
+					
+					$act->getPoints()=0;
 				}
-				else
-				{ echo "ERREUR : le nombre de points pour l'activité doit être compris entre 0 et 1 000 000 000  ";
-				  return false; 
-				}
+				return true; 					
 			}
 			else
-			{
-				echo "ERREUR : le nombre de points entré n'est pas un entier ";
-				return false;
+			{ echo "ERREUR : le nombre de points pour l'activité doit être compris entre 0 et 1 000 000 000  ";
+			  return false; 
 			}
 		}
-		else 
+		else
+		{
+			echo "ERREUR : le nombre de points entré n'est pas un entier ";
+			return false;
+		}
+	}
+		
 			
-		{
-			echo "ERREUR : Le nombre de points pour l'activité n'existe pas ";
-			return false; 
-		}
-	}
-		
-		
-		
-		
-		
-		
 		
 	}
 }

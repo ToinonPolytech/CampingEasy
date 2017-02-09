@@ -6,31 +6,135 @@ require("../../modele/partenaire.class.php");
 
 class Controller_Partenaire
 {
-	private $_partenaire;
+	private $partenaire;
 	function __construct Controller_Partenaire($partenaire){
 		$this->_partenaire=$partenaire;
 	}
+	
 	function isGood(){
 		return (nomIsGood() && libelleIsGood() && mailIsGood() && siteWebIsGood() && telephoneIsGood());
 	}
+	
+	
 	function nomIsGood(){
-		return(!empty(_partenaire->getNom()) && (strlen(_partenaire->getNom())<40) &&
-		strlen(_partenaire->getNom())>3);
+	
+	
+	if(!empty($partenaire->getNom()))
+		{
+			if((strlen($partenaire->getNom())<40) &&
+		strlen($partenaire->getNom())>3)
+			{
+			return true;
+			}
+			else 
+			{
+				echo 'ERREUR : Le nom doit du partenaire contenir entre 3 et 40 caractères';
+				return false;
+			}
+		else
+		{
+			echo 'ERREUR : Le nom du partenaire est vide';
+			return false; 
+		}
+		
+				
+		}
+	
 		
 	}
 	function libelleIsGood(){
-		return(!empty(_partenaire->getLibelle()) && (strlen(_partenaire->getLibelle())>20)
-		&& strlen(_partenaire->getLibelle())<300);
+		
+		if(!empty($partenaire->getLibelle()))
+		{
+			if((strlen($partenaire->getLibelle())>=20) && strlen($partenaire->getLibelle())=<300))
+			{
+				return true;
+			}
+			else
+			{
+				echo 'ERREUR : Le descriptif du partenaire doit contenir entre 20 et 300 caractères';
+				return false;
+			}
+		}
+		else
+		{
+			echo 'ERREUR : Le libelle de du partenaire est vide';
+			return false;
+		}
+		
+		
 	}
 	function mailIsGood(){
-		return (!empty(_partenaire->getMail()); //manque reg exp pour le format du mail 
+		if(!empty($partenaire->getMail()))
+		{
+				if($partenaire->getMail()=regexp) //format voulu du mail en regexp
+				{
+					return true;
+				}
+				else 
+				{
+					echo "ERREUR : le format du mail n'est pas correct";
+					return false;
+				}
+		}
+		else
+		{
+			echo "ERREUR : le mail n'est n'est pas passé en paramètre "
+		}
+	
+		
 	}
 	function siteWebIsGood(){
-		return (true); //manque le regexp pour le format de l'adresse web 
-		//pas de vérification du vide car ce champ peut être null 
+		if(isset($partenaire->getSiteWeb()))
+		{
+			if(empty($partenaire->getSiteWeb()))
+			{
+				$mail= NULL; 
+			}
+			if($partenaire->getSiteWeb()==regexp)// format voulu di site web en regexp 
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : le site web n'a pas le bon format ";
+				return false;
+			}
+		}
+		else 
+		{
+			echo "ERREUR : le site web n'est pas passé en paramètre  ";
+			return false; 
+		}
+		
 	}
+	
+	
+	
+	
 	function telephoneIsGood(){
-		return (); //manque regexp pour format du numéro de téléphone 
+		if(isset($partenaire->getTelephone()))
+		{
+			if(empty($partenaire->getTelephone()))
+			{
+				$partenaire->getTelephone()= NULL; 
+			}
+			if($partenaire->getTelephone()==regexp)// format voulu du site web en regexp 
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
+				return false;
+			}
+		}
+		else 
+		{
+			echo "ERREUR : le numero de téléphone  n'est pas passé en paramètre  ";
+			return false; 
+		}
+		
 	}
 }
 ?>

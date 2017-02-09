@@ -11,8 +11,8 @@ class Partenaire{
 	private $_siteWeb;
 	private $_telephone;
 	private $_deleted;
-	function __construct($id, $nom, $description, $mail, $url, $telephone){         
-		$this->_id = $id;
+	function __construct($nom, $description, $mail, $url, $telephone){         
+		$this->_id = NULL;
 		$this->_nom = $nom;
 		$this->_libelle = $description;
 		$this->_mail = $mail;
