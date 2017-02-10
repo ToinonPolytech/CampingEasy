@@ -8,10 +8,10 @@ require("../../modele/problemeTechnique.class.php");
 class Controller_PbTech {
 	
 	
-	private $pbTech; 
+	private $_PbTech; 
 	
 	function __construct Controller_PbTech($pbTech){
-		this->_PbTech=$pbTech; 
+		$this->_PbTech=$pbTech; 
 			
 	}
 	
@@ -147,9 +147,9 @@ function idUserIsGood(){
 		if(isset($_PbTech->getSolved()))
 		{	if(empty($_PbTech->getSolved())
 			{//si le critère résolu n'est pas donné alors il est à false 
-				$_PbTech->getSolved() = false; 
+				$_PbTech->getSolved() = "NON_RESOLU"; 
 			}
-			if(is_bool($_PbTech->getSolved())
+			if($_PbTech->getSolved()=="NON_RESOLU" || $_PbTech->getSolved()=="RESOLU" || $_PbTech->getSolved()=="EN_COURS")
 			{
 				return true;
 			}
