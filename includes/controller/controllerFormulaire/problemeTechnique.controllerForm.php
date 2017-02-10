@@ -22,9 +22,12 @@ if(isset($idUser) && isset($timeCreated) && isset($timeEstimated) && isset($desc
  $timeSecCreated = strtotime($timeCreated) ; 
  $timeSecEstimated = strtotime($timeEstimated);
  
- $pbTech = new PbTech();
- $pbTech->saveToDb();
+ $pbTech = new PbTech($idUsers, $timeSecCreated, $timeSecEstimated, $description, $isBungalow, $solved);
  
+ if($pbTech->isGood()){	 
+	
+	$pbTech->saveToDb();
+ }
 	
 }
 	

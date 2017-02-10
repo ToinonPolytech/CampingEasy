@@ -12,8 +12,10 @@ $nom = htmlspecialchars ($_POST['nom']);
 if(isset($nom) && isset($libelle) && isset($mail) && isset($siteWeb) && isset($telephone)){
 	
 	$partenaire = new Partenaire($nom, $description, $mail, $url, $telephone);
+	if($partenaire->isGood()){
 	$partenaire->saveToDb();
 	
+	}
 	
 }
 

@@ -24,10 +24,13 @@ if(isset($timeStart) && isset($duree) && isset($nom) && isset($descriptif)
 	&& isset($ageMin) && isset($ageMax) && isset($idLieu) && isset($lieu) 
 && isset($type) && isset($placesLim) && isset($prix) && isset($udOwner) &&
 isset($points)){
-	
+
 	$act = new Activite($timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points);
-	$act->saveToDb();
 	
+	if($act->isGood()){
+			
+	$act->saveToDb();
+	}
 	
 }
 

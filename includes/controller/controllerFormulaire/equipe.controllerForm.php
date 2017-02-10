@@ -13,7 +13,12 @@ require("../../modele/equipe.class.php");
 	if(isset($nom) && isset($score)){
 		
 		$equipe = new Equipe($nom,$score);
-		$equipe->saveToDb();
+		
+		if($equipe->isGood()){
+			
+			$equipe->saveToDb();
+		}
+		
 		
 	}
 

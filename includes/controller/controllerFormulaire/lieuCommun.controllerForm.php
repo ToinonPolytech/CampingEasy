@@ -12,8 +12,10 @@ require("../controllerObjet/lieuCommun.controller.class.php");
 if(isset($nom) && isset($description)){
 	
 	$LC = new lieuCommun($nom, $description);
-	$LC->saveToDb();
-	
+	if($LC->isGood()){
+		
+		$LC->saveToDb();
+	}
 	
 }	 
 	 
