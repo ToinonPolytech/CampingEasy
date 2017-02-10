@@ -1,7 +1,5 @@
 <?php
 require("database.class.php");
-require("../controller/problemeTechnique.controller.class.php");
-
 class PbTech{
 	private $_id;    // clé primaire
 	private $_idUser;  // id créateur probleme
@@ -9,10 +7,10 @@ class PbTech{
 	private $_timeEstimated; // timestamp de quand le problème devrait être résoly
 	private $_description; // description du probleme
 	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
-	private $_solved;  // 0 ou clé secondaire du technicien ayant résolu le probleme
+	private $_solved;  // ENUM{NON_RESOLU, EN_COURS, RESOLU}
 	private $_deleted; // true si on doit supprimer, false sinon
-	function __construct($id, $idUsers, $timeCreated, $timeEstimated, $description, $isBungalow, $solved) {
-		$this->_id = $id;
+	function __construct($idUsers, $timeCreated, $timeEstimated, $description, $isBungalow, $solved="NON_RESOLU") {
+		$this->_id = NULL;
 		$this->_idUser=$idUsers;
 		$this->_timeCreated=$timeCreated;
 		$this->_timeEstimated=$timeEstimated;
@@ -40,7 +38,7 @@ class PbTech{
 		{
 			$database->delete('problemes_technique', array("id" => $this->_id));
 		}	
-		else if ($database->count('problemes_technique', array("id" => $this->_id))) // Existe en db, on update
+		else if ($this->_id!=NULL && $database->count('problemes_technique', array("id" => $this->_id))) // Existe en db, on update
 		{
 			$database->update('problemes_technique', array("id" => $this->_id), array("idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
 		}
