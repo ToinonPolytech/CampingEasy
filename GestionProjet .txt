@@ -2,22 +2,27 @@
 
 
 - Connexion d'une personne : session ou JWT ? A priori session à confirmer 
-
+- Dans controller_problemeTechniqueInfo formulaire tu fais la vérif de isgood du controllerObjet alors qu'il est déjà appelé dans le savetodb 
+Dans les autres j'ai mis direct savetodb, ca fera les vérifs normalement (enfin c'est comme ça que tu as conçu les fonction de sauvegarde en db)
+- Les infosIDUser sont la sous classe correspondant aux infos en fonction du type de user ? dans le controller on vérifie qu'elles n'existent pas déjà ou qu'elles existent ? 
+- Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
+	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
+					- création user avec son id ? même problème que pour activité ? 
+					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
 
 TODO (les petites choses à ne pas oublier) :
-- gérer l'envoi des formulaires vers la création d'objet 
 - supprimer les deleted dans les controller de formulaire 
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
 - A vérifier : les require dans le controller du formulaire 
 - Rajouter IDUser au partenaire 
 - C/C controller formulaire vers objet + controller objet
-- gérer le solved d'un pb technique  
+- gérer le solved d'un pb technique //done ?? 
 
 
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
 
-- alerte pour création d'une acitvité dans plus d'un an 
+- alerte pour création d'une activité dans plus d'un an 
 - administration d'une activité partenaire par un admin 
 - gestion des langues 

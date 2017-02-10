@@ -19,23 +19,116 @@ class Controller_User
 		return $clef;
 	}
 	function isGood(){
-		return (nomIsGood() && prenomIsGood() && codeIsGood() && droitsIsGood() && infoIdIsGood()) ? true : false;
+		return (nomIsGood() && prenomIsGood() && codeIsGood() && droitsIsGood() && infoIdIsGood());
 	}
 	function nomIsGood(){
-		return (empty($_user->getNom()) ||  !preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getNom())) ? false : true;
+		if(!empty($_user->getNom()))
+		{
+			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getNom()))
+			{
+					return true;
+			}
+			else
+			{
+				echo "ERREUR : le nom de l'utilisateur n'est pas de la bonne forme (doit être compris entre 3 et 40 caractères)";
+				return false;
+			}
+		}
+		else
+		{
+			echo "ERREUR : le nom de l'utilisateur est vide ";
+			return false; 
+		}
+		
 	}
+	
 	function prenomIsGood(){
-		return (empty($_user->getPrenom()) ||  !preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getPrenom())) ? false : true;
+		if(!empty($_user->getPrenom()))
+		{
+			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getPrenom()))
+			{
+					return true;
+			}
+			else
+			{
+				echo "ERREUR : le prénom de l'utilisateur n'est pas de la bonne forme (doit être compris entre 3 et 40 caractères)";
+				return false;
+			}
+		}
+		else
+		{
+			echo "ERREUR : le prénom de l'utilisateur est vide ";
+			return false; 
+		}
+		
 	}
+	
 	function codeIsGood(){
-		return (empty($_user->getCode()) || !preg_match("#^[0-9]+{4}$#", $_user->getCode())) ? false : true;
+		if(!empty($_user->getCode()))
+		{
+			if(preg_match("#^[0-9]+{4}$#", $_user->getCode())))
+			{
+					return true;
+			}
+			else
+			{
+				echo "ERREUR : le code entré n'est pas de la bonne forme (il doit contenir 4 chiffres )";
+				return false;
+			}
+		}
+		else
+		{
+			echo "ERREUR : le code entré est vide ";
+			return false; 
+		}
+		
 	}
+		
+	
 	function droitsIsGood(){
-		return (empty($_user->getDroits()) || !preg_match("#^[0-9]+{1,255}$#", $_user->getDroits())) ? false : true;
+		if(!empty($_user->getDroits()))
+		{
+			if(preg_match("#^[0-9]+{1,255}$#", $_user->getDroits()))
+			{
+					return true;
+			}
+			else
+			{
+				echo "ERREUR : les droits n'ont pas le bon format ";
+				return false;
+			}
+		}
+		else
+		{
+			echo "ERREUR : aucun droit entré ";
+			return false; 
+		}
+		
 	}
+		
+	
 	function infoIdIsGood(){
 		$database = new Database();
-		return (empty($_user->getInfoId()) || !$database->count('userinfos', array("id" => $_user->getInfoId()))) ? false : true;	
+		if(!empty($_user->getInfoId()))
+		{
+			if($database->count('userinfos', array("id" => $_user->getInfoId())))
+			{
+					return true;
+			}
+			else
+			{
+				echo "ERREUR : les infos de l'utilisateur n'existent pas  ";
+				return false;
+			}
+		}
+		else
+		{
+			echo "ERREUR : aucun id correspondant aux infos de l'utilisateur n'ont été entrées  ";
+			return false; 
+		}
+		
+		
+		
 	}
 	/**
 		Exemple : can(CAN_CREATE_SUBACCOUNT); grâce au fichier config.php cela donne la puissance adéquate et tout est géré automatiquement.

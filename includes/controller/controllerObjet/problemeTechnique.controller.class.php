@@ -144,8 +144,7 @@ function idUserIsGood(){
 	}
 	
 	function solvedIsGood(){
-		if(isset($_PbTech->getSolved()))
-		{	if(empty($_PbTech->getSolved())
+		if(empty($_PbTech->getSolved())
 			{//si le critère résolu n'est pas donné alors il est à false 
 				$_PbTech->getSolved() = "NON_RESOLU"; 
 			}
@@ -155,15 +154,12 @@ function idUserIsGood(){
 			}
 			else
 			{
-				echo "ERREUR : la variable définissant si le problème est résolu n'est pas du bon type  ";
+				echo "ERREUR : le type résolu du problème est incorrect   ";
 				return false;
 			}
 		}
-		else
-		{
-			echo "ERREUR : le critère résolu du problème est inexistant ";
-			return false; 
-		}
+		
+	
 		
 		
 	}
