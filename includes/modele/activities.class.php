@@ -36,7 +36,7 @@ class Activite
 	-prix : (type= payante) float => prix par personnes de l'activité 
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 	*/
-	function __construct($id, $timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
+	function __construct($timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
 		$this->_id = NULL;
 		$this->_timeStart = $timeStart;
 		$this->_nom = $nom;
@@ -81,7 +81,7 @@ class Activite
 		{
 			$database->delete('activites', array("id" => $this->_id));
 		}	
-		else if ($database->count('activites', array("id" => $this->_id))) // Existe en db, on update
+		else if ($this->_id!=NULL && $database->count('activites', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
 			$database->update('activites', array("id" => $this->_id), array("time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		}
