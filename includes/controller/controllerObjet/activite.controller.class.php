@@ -9,7 +9,7 @@ class Controller_Activite {
 	
 	private $_act;
 	function __construct Controller_Activite($act){
-		this->_act=$act; 
+		this->act=$act; 
 		
 		
 	}
@@ -82,7 +82,7 @@ class Controller_Activite {
 		
 	}
 	function nomIsGood(){
-		if(!empty($act->getNom()))
+		if(!em	pty($act->getNom()))
 		{
 			if((strlen($act->getNom())<40) &&
 		strlen($act->getNom)>3)

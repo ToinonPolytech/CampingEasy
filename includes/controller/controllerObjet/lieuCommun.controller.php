@@ -10,7 +10,7 @@ class Controller_LieuCommun(){
 	private $LC; 
 	
 	function __construct Controller_LieuCommun($LC){
-		this->_LC=$LC;
+		$this->LC=$LC;
 
 		
 	}

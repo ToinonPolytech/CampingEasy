@@ -8,7 +8,7 @@ class Controller_Partenaire
 {
 	private $partenaire;
 	function __construct Controller_Partenaire($partenaire){
-		$this->_partenaire=$partenaire;
+		$this->partenaire=$partenaire;
 	}
 	
 	function isGood(){
