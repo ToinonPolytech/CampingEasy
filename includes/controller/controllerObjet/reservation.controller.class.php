@@ -1,8 +1,6 @@
 <?php 
 require("../../modele/database.class.php");
 require("../../modele/reservation.class.php");
-
-
 class Controller_Reservation
 {
 	private $_reservation;
@@ -13,32 +11,69 @@ class Controller_Reservation
 		return (idActivitesIsGood() && idUserIsGood() && idEquipeIsGood() && nbrPersonneIsGood());
 	}
 	function idActivitesIsGood(){
-		if (empty($_reservation->getIdActivite()))
-			return false;
+		if (!empty($_reservation->getIdActivite()))
+		{
+			if (is_numeric($_reservation->getIdActivite()))
+			{
+				$database=new Database();
+				if ($database->count('activities', array("id" => $_reservation->getIdActivite()))==1)
+					return true;
+				else
+					echo "ERREUR : L'activité n'existe pas.";
+			}
+			else
+				echo "ERREUR : L'activité n'est pas valide.";
+		}
+		else
+			echo "ERREUR : Vous devez sélectionner une activité.";
 		
-		$database=new Database();
-		return ($database->count('activities', array("id" => $_reservation->getIdActivite()))==1);
+		return false;
 	}
 	function idUserIsGood(){
-		if (empty($_reservation->getIdUser()))
-			return false;
+		if (!empty($_reservation->getIdUser()))
+		{
+			if (is_numeric($_reservation->getIdUser()))
+			{
+				$database=new Database();
+				if ($database->count('users', array("id" => $_reservation->getIdUser()))==1)
+					return true;
+				else
+					echo "ERREUR : Le client n'existe pas.";
+			}
+			else
+				echo "ERREUR : Le client n'est pas valide.";
+		}
+		else
+			echo "ERREUR : Vous devez être connecté / Le client sélectionné doit être valide.";
 		
-		$database=new Database();
-		return ($database->count('users', array("id" => $_reservation->getIdUser()))==1);
+		return false;
 	}
 	function idEquipeIsGood(){
-		if (empty($_reservation->idEquipe()))
-			return false;
-		
-		if ($_reservation->getIdEquipe()!=0)
+		if (!empty($_reservation->idEquipe()))
 		{
 			$database=new Database();
-			return ($database->count('equipe', array("id" => $_reservation->getIdActivite()))==1);
+			if ($_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $_reservation->getIdActivite()))==1)
+				return true;
+			else
+				echo "ERREUR : Ce groupe n'existe pas.";
 		}
-		return true;
+		else
+			echo "ERREUR : Vous devez indiquer un groupe où si vous vous inscrivez tout seul.";
+
+		return false;
 	}
-	function nbrPersonneIsGood(){ // pourquoi une expression régulière ? Pas de vérification si c'est un entier ? 
-		return !(empty($_reservation->getNbrPersonne()) ||  !preg_match("#^[0-9]+{1,2}$#",$_reservation->getNbrPersonne()));
+	function nbrPersonneIsGood(){
+		if (!empty($_reservation->getNbrPersonne()))
+		{
+			if (is_numeric($_reservation->getNbrPersonne()) && $_reservation->getNbrPersonne()>0 && $_reservation->getNbrPersonne()<15)
+				return true;
+			else
+				echo "ERREUR : Vous devez rentrer un nombre entre 1 et 14 pour la réservation.";
+		}
+		else
+			echo "ERREUR : Vous devez indiquer pour combien vous réservez.";
+		
+		return false;
 	}
 }
 ?>
