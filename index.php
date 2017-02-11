@@ -33,7 +33,7 @@
 <body>
     <div id="wrapper">
         <?php 
-			require ("includes//view/menu.php");
+			require ("includes/view/menu.php");
 		?>
         <div id="page-wrapper">
 			<div class="container-fluid">

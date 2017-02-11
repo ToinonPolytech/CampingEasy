@@ -13,7 +13,7 @@ if(isset($_POST['idUser']) && isset($_POST['timeCreated']) && isset($_POST['time
 	}
 }
 else
-{
-	echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire."
+{	
+	echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
 }
 ?> 

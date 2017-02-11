@@ -12,9 +12,23 @@
 - Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
   => ERREUR de ma part dans un c/c : je voulais que ce soit le siteweb a NULL s'il est vide parce qu'il n'est pas obligatoire mais je ne sais pas si cette ligne est indispensable 
 
+- Faire un menu déroulant avec : - 100 valeurs (ageMin et ageMax )
+								- Des valeurs de la base données (tableau avec les lieux par exemple) 
+								
+- A t-on rajouté la catégorie dans la base de données ? en tout cas on l 'a pas fait dans le modele et prit en compte dans aucun des controllers 
+(catégorie : payante, gratuite, associée à un partenaire, réservable ... )
 
 
+- Comment ajoute-on les maj de base données dans phpmyadmin ? (pour les tests en localhost)
 
+- Ne faudrait -il pas créer un fichier sql avec l'ajout de valeur dans certaines tables pour commencer les tets (lieux et type des activités par exemple) ? 
+
+-Les points donnés pour une activité reviennent uniquement au premier ? si on fait un classement et des points pour les 3 premiers par exemple il faudra gérer ca en base de données (tableau de points ?)
+
+- L'id du user qui crée l'activité est passée en post ? récupérée en session ? 
+
+- Je cherche à inclure une page de formulaire dans une autre : lorsqu'on crée une activité il faudrait pouvoir créer un type ou lieu sur la même page sans charger le reste en cochant juste une option (dynamique ? )
+- On a pas encore géré l'ajout d'une photo/de photos au problème technique 
 
 
 
@@ -25,7 +39,7 @@ TODO (les petites choses à ne pas oublier) :
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
 - A vérifier : les require dans le controller du formulaire 
 - Rajouter IDUser au partenaire 
-- C/C controller formulaire vers objet + controller objet
+
 - gérer le solved d'un pb technique //done ?? 
 
 

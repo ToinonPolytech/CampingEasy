@@ -200,7 +200,7 @@ class Controller_Activite {
 		
 		if(!empty($act->getType()))
 		{ 
-			if($database->count('typeActivite', array("nom" =>$act->getType)==0)
+			if($database->count('typeActivite', array("nom" =>$act->getType())==0)
 			{
 				return true;
 			}
