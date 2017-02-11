@@ -10,6 +10,7 @@ Dans les autres j'ai mis direct savetodb, ca fera les vérifs normalement (enfin
 					- création user avec son id ? même problème que pour activité ? 
 					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
 
+Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
 TODO (les petites choses à ne pas oublier) :
 - supprimer les deleted dans les controller de formulaire 
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )

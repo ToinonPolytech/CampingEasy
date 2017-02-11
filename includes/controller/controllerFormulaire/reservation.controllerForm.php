@@ -1,7 +1,7 @@
 <?php 
 //controller des données passées par le formulaire pour la création ou modification d'une réservation 
-require("../../modele/database.class.php");
-
+require("../../modele/reservation.class.php");
+require("../controllerObject/reservation.controller.class.php");
 
 $idAct = htmlspecialchars ($_POST['idActivite']);// TODO : reçoit l'heure en JJ/MM/AAAA HH:MN : doit être transformée en secondes ou gérées autrement 
   $idUser = htmlspecialchars ($_POST['idUser']);

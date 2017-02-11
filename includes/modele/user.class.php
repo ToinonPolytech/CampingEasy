@@ -1,6 +1,5 @@
 <?php 
 require("database.class.php");
-require("../controller/controllerObjet/user.controller.class.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/
@@ -15,8 +14,8 @@ abstract class User
 	protected $_code;
 	protected $_deleted;
 	
-	function __construct($id, $infoId, $accessLevel, $droits, $nom, $prenom, $code){
-		$this->_id=$id;
+	function __construct($infoId, $accessLevel, $droits, $nom, $prenom, $code){
+		$this->_id=NULL;
 		$this->_infoId=$infoId;
 		$this->_accessLevel=$accessLevel;
 		$this->_droits=$droits;
@@ -40,25 +39,20 @@ abstract class User
 		$this->_deleted=false;
 	}
 	function saveToDb(){
-		$controller=new Controller_User($this);
-		if ($controller->isGood()){
-			$database = new Database();
-			if ($_deleted)
-			{
-				$database->delete('users', array("id" => $this->_id));
-			}	
-			else if ($database->count('users', array("id" => $this->_id))) // Existe en db, on update
-			{
-				$database->update('users', array("id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
-			}
-			else
-			{
-				$clef=$controller->generateKey();
-				$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
-			}
-			return true;
+		$database = new Database();
+		if ($_deleted)
+		{
+			$database->delete('users', array("id" => $this->_id));
+		}	
+		else if ($this->_id!=NULL && $database->count('users', array("id" => $this->_id))) // Existe en db, on update
+		{
+			$database->update('users', array("id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
 		}
-		return false;
+		else
+		{
+			$clef=$controller->generateKey();
+			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+		}
 	}
 	function addDroits($which){
 		$controller= new Controller_User($this);

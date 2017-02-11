@@ -1,6 +1,5 @@
 <?php 
 require("database.class.php");
-require("../controller/controllerObjet/activite.controller.class.php");
 //classe du type Activité
 
 class Activite
@@ -74,9 +73,7 @@ class Activite
 		$this->_deleted=false;
 	}
 	function saveToDb(){
-		$controller=new Controller_Activite($this);
 		$database = new Database();
-		if($controller->IsGood()){
 		if ($_deleted)
 		{
 			$database->delete('activites', array("id" => $this->_id));
@@ -89,9 +86,6 @@ class Activite
 		{
 			$database->create('activites', array("id" => $this->_id, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
-		return true;
-		}
-		return false; 
 	}
 	function getId() {
 	   return $this->_id;
@@ -168,7 +162,6 @@ class Activite
 	function setLieu($lieu) {
 	   $this->_lieu = $lieu;
 	}
-	
 	function setIdLieu($idLieu){
 		$this->_idLieu = $idLieu;
 	}

@@ -67,31 +67,29 @@ class Controller_Partenaire
 	function mailIsGood(){
 		if(!empty($partenaire->getMail()))
 		{
-				if($partenaire->getMail()=regexp) //format voulu du mail en regexp
-				{
-					return true;
-				}
-				else 
-				{
-					echo "ERREUR : le format du mail n'est pas correct";
-					return false;
-				}
+			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $partenaire->getMail())) //format voulu du mail en regexp
+			{
+				return true;
+			}
+			else 
+			{
+				echo "ERREUR : le format du mail n'est pas correct";
+			}
 		}
 		else
 		{
 			echo "ERREUR : le mail n'est n'est pas passé en paramètre "
 		}
-	
-		
+		return false;
 	}
 	function siteWebIsGood(){
 		if(isset($partenaire->getSiteWeb()))
 		{
 			if(empty($partenaire->getSiteWeb()))
 			{
-				$mail= NULL; 
+				$mail= NULL; // ?????
 			}
-			if($partenaire->getSiteWeb()==regexp)// format voulu di site web en regexp 
+			if(preg_match("#^http://[a-z0-9._/-]+$#", $partenaire->getSiteWeb()))
 			{
 				return true;
 			}
@@ -119,7 +117,7 @@ class Controller_Partenaire
 			{
 				$partenaire->getTelephone()= NULL; 
 			}
-			if($partenaire->getTelephone()==regexp)// format voulu du site web en regexp 
+			if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $partenaire->getTelephone()))
 			{
 				return true;
 			}

@@ -1,9 +1,5 @@
 <?php
 require("database.class.php");
-require("../controller/controllerObjet/lieuCommun.controller.class.php");
-
-
-
 class LieuCommun {
 /* 
 données : 
@@ -16,8 +12,8 @@ données :
 	private $_description; 
 	private $_deleted;
 	
-	function __construct($id, $nom, $description){
-		$this->_id=$id;
+	function __construct($nom, $description){
+		$this->_id=NULL;
 		$this->_nom=$nom;
 		$this->_description=$description;
 		$this->_deleted=false;
@@ -37,7 +33,7 @@ données :
 		{
 			$database->delete('lieu_commun', array("id" => $this->_id));
 		}	
-		else if ($database->count('lieu_commun', array("id" => $this->_id))) // Existe en db, on update
+		else if ($this->_id!=NULL && $database->count('lieu_commun', array("id" => $this->_id))) // Existe en db, on update
 		{
 			$database->update('lieu_commun', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description));
 		}

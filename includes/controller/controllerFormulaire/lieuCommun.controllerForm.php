@@ -1,34 +1,16 @@
 <?php 
-
-//controller de vérification des données entrées lors de la création d'un lieu commun via un formulaire 
-require("../../modele/database.class.php");
-require("../controllerObjet/lieuCommun.controller.class.php");
-
-
- $nom = htmlspecialchars ($_POST['nom']);
- $description = htmlspecialchars ($POST['description']);
- 
- 
-if(isset($nom) && isset($description)){
-	
-	$LC = new lieuCommun($nom, $description);
-	if($LC->isGood()){
-		
-		$LC->saveToDb();
+	require("../../modele/lieuCommun.class.php");
+	require("../controllerObjet/lieuCommun.controller.class.php");
+	if(isset($_POST['nom']) && isset($_POST['description']))
+	{
+		$LC = new lieuCommun(htmlspecialchars($_POST['nom']), htmlspecialchars ($_POST['description']));
+		$LCController=new Controller_LieuCommun($LC);
+		if($LCController->isGood()){
+			$LC->saveToDb();
+		}
+	}	
+	else
+	{
+		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
 	}
-	
-}	 
-	 
-	 
-	 
- 
- 
-
-
-
-
-
-
-
-
 ?>

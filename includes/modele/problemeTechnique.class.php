@@ -9,14 +9,14 @@ class PbTech{
 	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
 	private $_solved;  // ENUM{NON_RESOLU, EN_COURS, RESOLU}
 	private $_deleted; // true si on doit supprimer, false sinon
-	function __construct($idUsers, $timeCreated, $timeEstimated, $description, $isBungalow, $solved="NON_RESOLU") {
+	function __construct($idUsers, $timeCreated, $timeEstimated, $description, $isBungalow) {
 		$this->_id = NULL;
 		$this->_idUser=$idUsers;
 		$this->_timeCreated=$timeCreated;
 		$this->_timeEstimated=$timeEstimated;
 		$this->_description=$description;
 		$this->_isBungalow=$isBungalow;
-		$this->_solved=$solved;
+		$this->_solved="NON_RESOLU";
 		$this->_deleted=false;
 	}
 	function __construct($id) {

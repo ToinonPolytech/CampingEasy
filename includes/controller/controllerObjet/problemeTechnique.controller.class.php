@@ -6,53 +6,44 @@ require("../../modele/problemeTechnique.class.php");
 
 
 class Controller_PbTech {
-	
-	
+
 	private $_PbTech; 
-	
 	function __construct Controller_PbTech($pbTech){
-		$this->_PbTech=$pbTech; 
-			
+		$this->_PbTech=$pbTech; 	
 	}
-	
 	function isGood(){
-		
 		return(idUserIsGood() && timeCreatedIsGood() && timeEstimatedIsGood() 
 		&& descriptionIsGood() && isBungalowIsGood() && solvedIsGood()); 
 		
 	}
 
-function idUserIsGood(){
-	$database = new Database(); 
-	if(!empty($_PbTech->getIdUser()))
-	{
-		if($is_int($_PbTech->getIdUser()))
+	function idUserIsGood(){
+		$database = new Database(); 
+		if(!empty($_PbTech->getIdUser()))
 		{
-			if($database->count('problemes_technique', array("id" => $_PbTech->getIdUser())==1)
+			if($is_int($_PbTech->getIdUser()))
 			{
-				return true;
+				if($database->count('problemes_technique', array("id" => $_PbTech->getIdUser())==1)
+				{
+					return true;
+				}
+				else
+				{
+					echo "ERREUR : l'utilisateur créant le problème technique n'existe pas dans la base de données ";
+					return false;
+				}
 			}
-			else
+			else 
 			{
-				echo "ERREUR : l'utilisateur créant le problème technique n'existe pas dans la base de données ";
+				echo "ERREUR : l'id de l'utilisateur créant le problème technique n'est pas un entier ";
 				return false;
 			}
 		}
 		else 
 		{
-			echo "ERREUR : l'id de l'utilisateur créant le problème technique n'est pas un entier ";
+			echo "ERREUR : il n a pas d'utilisateur passé en paramètre dans le formulaire ";
 			return false;
-		}
-		
-		
-	}
-	else 
-	{
-		echo "ERREUR : il n a pas d'utilisateur passé en paramètre dans le formulaire ";
-		return false;
-	}
-
-				
+		}			
 	}
 	
 	function timeIsGood(){
@@ -91,13 +82,8 @@ function idUserIsGood(){
 			
 		}
 		
-	}
-	
-		
-			
-		
+	}	
 	function descriptionIsGood(){
-		
 		if(!empty($_PbTech->getDescription()))
 		{
 			if((strlen($_PbTech->getDescription())>20) && (strlen($_PbTech->getDescription())<1000))
@@ -114,11 +100,7 @@ function idUserIsGood(){
 		{	echo "ERREUR : la description du problème technique est vide ";
 			return false;
 		}
-		
-		
 	}
-	
-	
 	function isBungalowIsGood(){
 		if(!empty($_PbTech->getIsBungalow())
 		{
@@ -139,30 +121,14 @@ function idUserIsGood(){
 			return false;
 			
 		}
-		
-		
 	}
-	
 	function solvedIsGood(){
-		if(empty($_PbTech->getSolved())
-			{//si le critère résolu n'est pas donné alors il est à false 
-				$_PbTech->getSolved() = "NON_RESOLU"; 
-			}
-			if($_PbTech->getSolved()=="NON_RESOLU" || $_PbTech->getSolved()=="RESOLU" || $_PbTech->getSolved()=="EN_COURS")
-			{
-				return true;
-			}
-			else
-			{
-				echo "ERREUR : le type résolu du problème est incorrect   ";
-				return false;
-			}
-		}
+		if($_PbTech->getSolved()=="NON_RESOLU" || $_PbTech->getSolved()=="RESOLU" || $_PbTech->getSolved()=="EN_COURS")
+			return true;
 		
-	
-		
-		
-	}
+		echo "ERREUR : le type résolu du problème est incorrect   ";
+		return false;
+	}	
 }
 
 

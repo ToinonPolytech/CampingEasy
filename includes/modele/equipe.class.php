@@ -1,6 +1,5 @@
 <?php
 require("database.class.php");
-require("../controller/controllerObjet/equipe.controller.class.php");
 class Equipe {
 	private $_id;
 	private $_nom;
@@ -29,7 +28,7 @@ class Equipe {
 			{
 				$database->delete('equipe', array("id" => $this->_id));
 			}	
-			else if ($database->count('equipe', array("id" => $this->_id))) // Existe en db, on update
+			else if ($this->_id!=NULL && $database->count('equipe', array("id" => $this->_id))) // Existe en db, on update
 			{
 				$database->update('equipe', array("id" => $this->_id), array("nom" => $this->_nom, "score" => $this->_score));
 			}
