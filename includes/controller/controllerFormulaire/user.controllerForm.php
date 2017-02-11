@@ -1,8 +1,11 @@
 <?php 
 //controller du formulaire de création ou de modification d'un utilisateur 
-
+require("../../modele/user.class.php");
 require("../../modele/user.controller.class.php");
-require("../../modele/equipe.class.php");
+
+/***
+	Il faudra revoir toute cette page. Et qu'on en discute 
+**/
 
 
 $nom = htmlspecialchars($_POST['nom']);

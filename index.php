@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -25,33 +28,20 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Morris Charts JavaScript -->
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header"><a class="navbar-brand" href="index.php">Camping Facile : Le projet turfu </a></div>
-            <ul class="nav navbar-right top-nav">
-                <li><a href="../index.php">Revenir sur le site</a></li>
-            </ul>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav side-nav">
-					<li>
-						<a href="index.php"><i class="fa fa-shopping-cart"></i>Accueil</a>
-					</li>
-				</ul>
-			</div>
-            <!-- /.navbar-collapse -->
-        </nav>
+        <?php 
+			require ("includes/menu.php");
+		?>
         <div id="page-wrapper">
-            <div class="container-fluid">
-			<div class="row">
-				<form role="form">
-				<div class="form-group">
-					<br/><label class="control-label">Nom de compte</label>
-					<input type="text" class="form-control" name="name" id="name" value=""><br/>
+			<div class="container-fluid">
+				<div id="mainAjax" name="mainAjax">
+				<?php
+					require ("includes/home.php");
+				?>
 				</div>
-				</form>
-			</div>
 			</div>
             <!-- /.container-fluid -->
         </div>
