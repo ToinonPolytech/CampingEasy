@@ -87,7 +87,7 @@ class Controller_Partenaire
 		{
 			if(empty($partenaire->getSiteWeb()))
 			{
-				$mail= NULL; // ?????
+				$siteWeb= NULL; 
 			}
 			if(preg_match("#^http://[a-z0-9._/-]+$#", $partenaire->getSiteWeb()))
 			{

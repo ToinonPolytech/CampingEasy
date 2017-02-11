@@ -2,15 +2,23 @@
 
 
 - Connexion d'une personne : session ou JWT ? A priori session à confirmer 
-- Dans controller_problemeTechniqueInfo formulaire tu fais la vérif de isgood du controllerObjet alors qu'il est déjà appelé dans le savetodb 
-Dans les autres j'ai mis direct savetodb, ca fera les vérifs normalement (enfin c'est comme ça que tu as conçu les fonction de sauvegarde en db)
+
 - Les infosIDUser sont la sous classe correspondant aux infos en fonction du type de user ? dans le controller on vérifie qu'elles n'existent pas déjà ou qu'elles existent ? 
 - Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
 	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
 					- création user avec son id ? même problème que pour activité ? 
 					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
 
-Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
+- Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
+  => ERREUR de ma part dans un c/c : je voulais que ce soit le siteweb a NULL s'il est vide parce qu'il n'est pas obligatoire mais je ne sais pas si cette ligne est indispensable 
+
+
+
+
+
+
+
+
 TODO (les petites choses à ne pas oublier) :
 - supprimer les deleted dans les controller de formulaire 
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )

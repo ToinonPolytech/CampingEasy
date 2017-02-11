@@ -1,7 +1,7 @@
 <?php
-	if (!isset($_SESSION)) // Pour gérer les appels dynamique
+	/*if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
-	
+	*/
 	require("fonctions/general.php");
 	require("modele/database.class.php");
 	?>

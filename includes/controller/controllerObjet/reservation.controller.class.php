@@ -1,6 +1,7 @@
 <?php 
 require("../../modele/database.class.php");
 require("../../modele/reservation.class.php");
+
 class Controller_Reservation
 {
 	private $_reservation;
@@ -58,7 +59,7 @@ class Controller_Reservation
 				echo "ERREUR : Ce groupe n'existe pas.";
 		}
 		else
-			echo "ERREUR : Vous devez indiquer un groupe où si vous vous inscrivez tout seul.";
+			echo "ERREUR : Vous devez indiquer un groupe ou si vous vous inscrivez tout seul.";
 
 		return false;
 	}
@@ -68,7 +69,7 @@ class Controller_Reservation
 			if (is_numeric($_reservation->getNbrPersonne()) && $_reservation->getNbrPersonne()>0 && $_reservation->getNbrPersonne()<15)
 				return true;
 			else
-				echo "ERREUR : Vous devez rentrer un nombre entre 1 et 14 pour la réservation.";
+				echo "ERREUR : Vous devez rentrer un nombre de personnes entre 1 et 14 pour la réservation.";
 		}
 		else
 			echo "ERREUR : Vous devez indiquer pour combien vous réservez.";

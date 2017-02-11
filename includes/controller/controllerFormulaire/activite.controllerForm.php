@@ -1,6 +1,7 @@
 <?php 
 require("../../modele/activities.class.php");
 require("../controllerObjet/activite.controller.class.php");
+
 if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"]) && isset($_POST["descriptif"]) 
 && isset($_POST["ageMin"]) && isset($_POST["ageMax"]) && isset($_POST["idLieu"]) && isset($_POST["lieu"]) 
 && isset($_POST["type"]) && isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["idOwner"]) && isset($_POST["points"]))
@@ -9,6 +10,9 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 	htmlspecialchars($_POST["ageMin"]), htmlspecialchars($_POST["ageMax"]), htmlspecialchars($_POST["lieu"]), htmlspecialchars($_POST["idLieu"]), htmlspecialchars($_POST["type"]),
 	htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]), htmlspecialchars($_POST["idOwner"]), htmlspecialchars($_POST["points"]));
 	$actController = new Controller_Activite($act);
+	
+	
+	
 	if($actController->isGood())
 	{
 		$act->saveToDb();
