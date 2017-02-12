@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/database.class.php");
-require("../../modele/problemeTechniqueInfo.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/problemeTechniqueInfo.class.php");
 
 class Controller_PbTechInfo{
 	private $_PbTechInfo; 

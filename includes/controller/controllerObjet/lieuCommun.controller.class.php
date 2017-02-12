@@ -1,7 +1,7 @@
 <?php
 
-require("/../../modele/database.class.php");
-require("/../../modele/lieuCommun.class.php");
+require_once("/../../modele/database.class.php");
+require_once("/../../modele/lieuCommun.class.php");
 
 
 

@@ -1,7 +1,7 @@
 <?php 
-require("../../modele/database.class.php");
-require("../../modele/equipe.class.php");
-require("../fonctions/general.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/equipe.class.php");
+require_once("../fonctions/general.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/

@@ -24,7 +24,7 @@
 	
 	Lieu où se déroule l'activité dans le camping <br />
 	Lieu Ponctuel 
-	<input type="text" name="lieu" /> <br /> ou  <?php require("/ajoutLieuCommunForm.php"); ?>
+	<input type="text" name="lieu" /> <br /> ou  <?php require_once("/ajoutLieuCommunForm.php"); ?>
 	Ou lieu existant : 
 	manque menu déroulant pour les lieux <br />
 	

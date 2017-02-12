@@ -1,7 +1,7 @@
 <?php 
 
-require("../../modele/database.class.php");
-require("../../modele/problemeTechnique.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/problemeTechnique.class.php");
 
 
 

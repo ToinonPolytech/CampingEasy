@@ -1,6 +1,6 @@
 <?php 
-	require("../../modele/lieuCommun.class.php");
-	require("../controllerObjet/lieuCommun.controller.class.php");
+	require_once("../../modele/lieuCommun.class.php");
+	require_once("../controllerObjet/lieuCommun.controller.class.php");
 	if(isset($_POST['nom']) && isset($_POST['description']))
 	{
 		$LC = new lieuCommun(htmlspecialchars($_POST['nom']), htmlspecialchars ($_POST['description']));

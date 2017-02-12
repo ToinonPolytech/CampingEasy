@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/equipe.class.php");
-require("../controllerObjet/equipe.controller.class.php");
+require_once("../../modele/equipe.class.php");
+require_once("../controllerObjet/equipe.controller.class.php");
 if(isset($_POST['nom']) && isset($_POST['score']))
 {
 	$equipe = new Equipe($_POST['nom'],$_POST['score']);

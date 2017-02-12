@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/database.class.php");
-require("../../modele/partenaire.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/partenaire.class.php");
 
 
 

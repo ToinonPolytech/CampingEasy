@@ -1,7 +1,7 @@
 <?php
-require("../../modele/database.class.php");
-require("../../modele/user.class.php");
-require("../../modele/user.controller.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/user.class.php");
+require_once("../../modele/user.controller.class.php");
 
 $database = new Database();
 if (isset($_POST["clef"]) && $database->count('users', array("clef" => $_POST["clef"])))

@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/problemeTechniqueInfo.class.php");
-require("../controllerObjet/problemeTechniqueInfo.controller.class.php");
+require_once("../../modele/problemeTechniqueInfo.class.php");
+require_once("../controllerObjet/problemeTechniqueInfo.controller.class.php");
 if(isset($_POST['idUser']) && isset($_POST['idPbTech']) && isset($_POST['message'])) // Nos variables existent, alors on peut les utiliser
 {
 	$idUser = htmlspecialchars($_POST['idUser']);

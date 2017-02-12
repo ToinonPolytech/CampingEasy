@@ -1,8 +1,8 @@
 <?php
 
-require("../../modele/database.class.php");
-require("../../modele/activite.class.php");
-require("../../fonctions/general.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/activite.class.php");
+require_once("../../fonctions/general.php");
 
 
 class Controller_Activite {

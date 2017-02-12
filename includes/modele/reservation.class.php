@@ -1,5 +1,5 @@
 <?php
-require("database.class.php");
+require_once("database.class.php");
 class Reservation {
 	private $_idActivite;
 	private $_idUser;

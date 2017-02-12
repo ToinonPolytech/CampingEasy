@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/problemeTechnique.class.php");
-require("../controllerObject/problemeTechnique.controller.class.php");
+require_once("../../modele/problemeTechnique.class.php");
+require_once("../controllerObject/problemeTechnique.controller.class.php");
 if(isset($_POST['idUser']) && isset($_POST['timeCreated']) && isset($_POST['timeEstimated']) && isset($_POST['description']) && isset($_POST['isBungalow']))
 {
 	//conversion des dates en secondes écoulées depuis le 1er janvier 1970 

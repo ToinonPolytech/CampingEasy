@@ -1,5 +1,5 @@
 <?php 
-require("database.class.php");
+require_once("database.class.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/

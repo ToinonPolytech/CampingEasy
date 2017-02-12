@@ -1,5 +1,5 @@
 <?php 
-require("database.class.php");
+require_once("database.class.php");
 //classe du type Activité
 
 class Activite

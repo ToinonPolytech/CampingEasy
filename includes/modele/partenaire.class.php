@@ -1,5 +1,5 @@
 <?php
-require("database.class.php");
+require_once("database.class.php");
 //Fonctions de la classe Partenaire 
 class Partenaire{
 	private $_id;

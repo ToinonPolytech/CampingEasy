@@ -1,5 +1,5 @@
 <?php
-require("database.class.php");
+require_once("database.class.php");
 class PbTech{
 	private $_id;    // clé primaire
 	private $_idUser;  // id créateur probleme

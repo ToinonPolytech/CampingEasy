@@ -1,6 +1,6 @@
 <?php 
-require("database.class.php");
-require("user.class.php");
+require_once("database.class.php");
+require_once("user.class.php");
 
 class Staff extends User
 {

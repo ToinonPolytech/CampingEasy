@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/database.class.php");
-require("../../modele/reservation.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/reservation.class.php");
 
 class Controller_Reservation
 {

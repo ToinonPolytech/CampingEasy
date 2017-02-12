@@ -1,7 +1,7 @@
 <?php 
 //controller du formulaire de création ou de modification d'un utilisateur 
-require("../../modele/user.class.php");
-require("../../modele/user.controller.class.php");
+require_once("../../modele/user.class.php");
+require_once("../../modele/user.controller.class.php");
 
 /***
 	Il faudra revoir toute cette page. Et qu'on en discute 

@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/database.class.php");
-require("../../modele/equipe.class.php");
+require_once("../../modele/database.class.php");
+require_once("../../modele/equipe.class.php");
 
 class Controller_Equipe
 {

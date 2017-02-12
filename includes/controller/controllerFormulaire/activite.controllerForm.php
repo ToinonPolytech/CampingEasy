@@ -1,6 +1,6 @@
 <?php 
-require("../../modele/activities.class.php");
-require("../controllerObjet/activite.controller.class.php");
+require_once("../../modele/activities.class.php");
+require_once("../controllerObjet/activite.controller.class.php");
 
 if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"]) && isset($_POST["descriptif"]) 
 && isset($_POST["ageMin"]) && isset($_POST["ageMax"]) && isset($_POST["idLieu"]) && isset($_POST["lieu"]) 

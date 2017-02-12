@@ -4,7 +4,7 @@
 		- Sécurité sur le nom des tables/valeurs update et select
 		- Sécurité sur les variables en argument (forcer les types)
 	**/
-	require("config.php");
+	require_once("config.php");
 	
 	class Database{
 		private $_db;
