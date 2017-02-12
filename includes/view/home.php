@@ -8,7 +8,7 @@
 	<div class="col-lg-6" style="width:100%;" name="form-connexion" id="form-connexion">
 		<?php
 		if (auth()) 
-		{
+		{	 echo "ok"; 
 			/**
 				- On affiche les options disponibles à cet utilisateur.
 			**/

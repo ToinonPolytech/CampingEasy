@@ -7,7 +7,9 @@
 			<li>
 				<a href="/includes/view/home.php"><i class="fa fa-shopping-cart"></i>Accueil</a>
 				<a href="/includes/view/ajoutLieuCommunForm.php"><i class="fa fa-shopping-cart"></i>Ajouter un lieu commun</a>
-				<a href="/includes/view/creationActiviteForm.php"><i class="fa fa-shopping-cart"></i>Créer une activité </a>
+				<a href="/includes/view/ajoutActiviteForm.php"><i class="fa fa-shopping-cart"></i>Créer une activité </a>
+				<a href="/includes/view/ajoutProblemeTechniqueForm.php"><i class="fa fa-shopping-cart"></i>Signaler un problème technique </a>
+				<a href="/includes/view/ajoutProblemeTechniqueForm.php"><i class="fa fa-shopping-cart"></i>Signaler un problème technique </a>
 				<a href="/includes/view/ajoutProblemeTechniqueForm.php"><i class="fa fa-shopping-cart"></i>Signaler un problème technique </a>
 			</li>
 			
