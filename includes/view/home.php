@@ -2,8 +2,8 @@
 	/*if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 	*/
-	require("fonctions/general.php");
-	require("modele/database.class.php");
+	require("/../fonctions/general.php");
+	require("/../modele/database.class.php");
 	?>
 	<div class="col-lg-6" style="width:100%;" name="form-connexion" id="form-connexion">
 		<?php

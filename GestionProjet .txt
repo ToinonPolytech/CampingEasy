@@ -1,13 +1,10 @@
 ﻿Problématiques futures et questions existentielles : 
 
 
-- Connexion d'une personne : session ou JWT ? A priori session à confirmer 
 
-- Les infosIDUser sont la sous classe correspondant aux infos en fonction du type de user ? dans le controller on vérifie qu'elles n'existent pas déjà ou qu'elles existent ? 
-- Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
-	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
-					- création user avec son id ? même problème que pour activité ? 
-					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
+
+
+
 
 - Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
   => ERREUR de ma part dans un c/c : je voulais que ce soit le siteweb a NULL s'il est vide parce qu'il n'est pas obligatoire mais je ne sais pas si cette ligne est indispensable 
@@ -15,22 +12,30 @@
 - Faire un menu déroulant avec : - 100 valeurs (ageMin et ageMax )
 								- Des valeurs de la base données (tableau avec les lieux par exemple) 
 								
-- A t-on rajouté la catégorie dans la base de données ? en tout cas on l 'a pas fait dans le modele et prit en compte dans aucun des controllers 
-(catégorie : payante, gratuite, associée à un partenaire, réservable ... )
 
 
-- Comment ajoute-on les maj de base données dans phpmyadmin ? (pour les tests en localhost)
-
-- Ne faudrait -il pas créer un fichier sql avec l'ajout de valeur dans certaines tables pour commencer les tets (lieux et type des activités par exemple) ? 
-
+Activité : 
 -Les points donnés pour une activité reviennent uniquement au premier ? si on fait un classement et des points pour les 3 premiers par exemple il faudra gérer ca en base de données (tableau de points ?)
 
+
+User : 
 - L'id du user qui crée l'activité est passée en post ? récupérée en session ? 
+- Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
+	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
+					- création user avec son id ? même problème que pour activité ? 
+					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
+- Les infosIDUser sont la sous classe correspondant aux infos en fonction du type de user ? dans le controller on vérifie qu'elles n'existent pas déjà ou qu'elles existent ? 
 
-- Je cherche à inclure une page de formulaire dans une autre : lorsqu'on crée une activité il faudrait pouvoir créer un type ou lieu sur la même page sans charger le reste en cochant juste une option (dynamique ? )
-- On a pas encore géré l'ajout d'une photo/de photos au problème technique 
+Problème technique : 
+-	Gérer l'Ajout des photos du problème technique : quel procédé en formulaire ? quelle méthode de stockage ? 
 
 
+Autre : 
+
+- Problème avec deux constructeurs et la fonction constructeur ne doit pas avoir de nom 
+
+
+- L'ajout d'un partenaire se fait par un admin ou le partenaire lui même qui détient un droit d'accès "partenaire" et peut s'ajouter une fois son compte crée par un admin? 
 
 
 TODO (les petites choses à ne pas oublier) :
@@ -38,11 +43,13 @@ TODO (les petites choses à ne pas oublier) :
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
 - A vérifier : les require dans le controller du formulaire 
-- Rajouter IDUser au partenaire 
+
 
 - gérer le solved d'un pb technique //done ?? 
 
-
+	Au niveau DB : 
+		- Rajouter IDUser au partenaire 
+		- Ajouter catégorie pour l'activité (sportive, intellectuelle .. )
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
 

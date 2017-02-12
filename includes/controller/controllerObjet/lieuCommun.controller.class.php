@@ -1,15 +1,15 @@
 <?php
 
-require("../../modele/database.class.php");
-require("../../modele/lieuCommun.class.php");
+require("/../../modele/database.class.php");
+require("/../../modele/lieuCommun.class.php");
 
 
 
-class Controller_LieuCommun(){
+class Controller_LieuCommun {
 
 	private $LC; 
 	
-	function __construct Controller_LieuCommun($LC){
+	function __construct ($LC){
 		$this->LC=$LC;
 
 		
@@ -32,6 +32,7 @@ function nomIsGood(){
 				echo 'ERREUR : Le nom doit contenir entre 3 et 40 caractères';
 				return false;
 			}
+		}
 		else
 		{
 			echo 'ERREUR : Le nom du lieu crée est vide';
@@ -47,7 +48,7 @@ function nomIsGood(){
  function descriptionIsGood(){
 	if(!empty($LC->getDescription()))
 		{
-			if(strlen($LC->getDescription())=<500))
+			if(strlen($LC->getDescription())<=500)
 			{
 				return true;
 			}
@@ -74,7 +75,7 @@ function nomIsGood(){
 
 
 
-}
+
 
 
 ?>

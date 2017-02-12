@@ -5,6 +5,7 @@
 		- Sécurité sur les variables en argument (forcer les types)
 	**/
 	require("config.php");
+	
 	class Database{
 		private $_db;
 		private $_objectRequest;
@@ -37,6 +38,7 @@
 			$this->_objectRequest=$db->prepare($request);
 			$this->_objectRequest->execute($array_where);
 		}
+		
 		function select($name_table, $array_where, $array_select="*"){
 			if (is_array($array_select))
 			{

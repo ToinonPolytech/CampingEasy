@@ -33,13 +33,13 @@
 <body>
     <div id="wrapper">
         <?php 
-			require ("includes/view/menu.php");
+			require ("./includes/view/menu.php");
 		?>
         <div id="page-wrapper">
 			<div class="container-fluid">
 				<div id="mainAjax" name="mainAjax">
 				<?php
-					require ("includes/view/home.php");
+					require ("./includes/view/home.php");
 				?>
 				</div>
 			</div>

@@ -5,7 +5,7 @@ require("../../modele/equipe.class.php");
 class Controller_Equipe
 {
 	private $_equipe;
-	function __construct Controller_Equipe($equipe){
+	function __construct ($equipe){
 		$this->_equipe=$equipe;
 	}
 	function isGood(){

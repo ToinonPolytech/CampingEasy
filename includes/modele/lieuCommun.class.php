@@ -18,6 +18,7 @@ données :
 		$this->_description=$description;
 		$this->_deleted=false;
 	}
+	/*
 	function __construct($id){
 		$database = new Database();
 		$database->select('lieu_commun', array("id" => $id));
@@ -27,6 +28,7 @@ données :
 		$this->_description=$data["description"];
 		$this->_deleted=false;
 	}
+	*/
 	function saveToDb(){
 		$database = new Database();
 		if ($_deleted)

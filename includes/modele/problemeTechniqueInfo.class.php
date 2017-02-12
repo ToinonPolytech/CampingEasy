@@ -5,7 +5,7 @@ class PbTechInfo{
 	private $_idPbTech;    // id probleme technique
 	private $_idUser;  // id technicien
 	private $_time;  // timestamp de l'entrée
-	private $_message; // timestamp de quand le problème devrait être résoly
+	private $_message; // timestamp de quand le problème devrait être résolu
 	private $_deleted; // true si on doit supprimer, false sinon
 	function __construct($idPbTech, $idUser, $time, $message) {
 		$this->_id = NULL;

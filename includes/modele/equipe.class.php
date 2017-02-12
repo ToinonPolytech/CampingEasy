@@ -11,6 +11,7 @@ class Equipe {
 		$this->_score=$score;
 		$this->_deleted=false;
 	}
+	/*
 	function __construct($id){
 		$database = new Database();
 		$database->select('equipe', array("id" => $id));
@@ -19,7 +20,7 @@ class Equipe {
 		$this->_nom=$data["nom"];
 		$this->_score=$data["score"];
 		$this->_deleted=false;
-	}
+	} */ 
 	function saveToDb(){
 		$controller=new Controller_Equipe($this);
 		if ($controller->isGood()){

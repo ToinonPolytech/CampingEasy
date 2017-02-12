@@ -23,11 +23,19 @@
 	<input type="text" name="ageMax" /> <br />
 	
 	Lieu où se déroule l'activité dans le camping <br />
-	<input type="text" name="lieu" /> <br />
+	Lieu Ponctuel 
+	<input type="text" name="lieu" /> <br /> ou  <?php require("/ajoutLieuCommunForm.php"); ?>
+	Ou lieu existant : 
 	manque menu déroulant pour les lieux <br />
 	
-	
-	<input type="text" name="type" /> <br />
+	Type d'activité : 
+	<select name="type">
+    <option value="NORMAL">NORMAL</option>
+    <option value="RESERVABLE">RESERVABLE</option>
+    <option value="PAYANT">PAYANT</option>
+    <option value="RESERVABLE_PAYANT">RESERVABLE PAYANT </option>
+</select> <br/> 
+
 	Si réservable : 
 	
 	
