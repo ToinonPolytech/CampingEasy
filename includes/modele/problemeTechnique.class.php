@@ -9,7 +9,7 @@ class PbTech{
 	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
 	private $_solved;  // ENUM{NON_RESOLU, EN_COURS, RESOLU}
 	private $_deleted; // true si on doit supprimer, false sinon
-	function __construct($idUsers, $timeCreated, $timeEstimated, $description, $isBungalow) {
+	public function __construct($idUsers, $timeCreated, $timeEstimated, $description, $isBungalow) {
 		$this->_id = NULL;
 		$this->_idUser=$idUsers;
 		$this->_timeCreated=$timeCreated;
@@ -19,7 +19,7 @@ class PbTech{
 		$this->_solved="NON_RESOLU";
 		$this->_deleted=false;
 	}
-	function __construct($id) {
+	public function __construct($id) {
 		$database = new Database();
 		$database->select('problemes_technique', array("id" => $id));
 		$data=$database->fetch();
@@ -32,7 +32,7 @@ class PbTech{
 		$this->_solved=$data["solved"];
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -47,52 +47,52 @@ class PbTech{
 			$database->create('problemes_technique', array("id" => $this->_id, "idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
 		}
 	}
-	function getId(){
+	public function getId(){
 		return $this->_id;
 	}
-	function getIdUser(){
+	public function getIdUser(){
 		return $this->_idUser;
 	}
-	function getTimeCreated(){
+	public function getTimeCreated(){
 		return $this->_timeCreated;
 	}
-	function getTimeEstimated(){
+	public function getTimeEstimated(){
 		return $this->_timeEstimated;
 	}
-	function getDescription(){
+	public function getDescription(){
 		return $this->_description;
 	}
-	function getIsBungalow(){
+	public function getIsBungalow(){
 		return $this->_isBungalow;
 	}
-	function getSolved(){
+	public function getSolved(){
 		return $this->_solved;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id){
+	public function setId($id){
 		$this->_id=$id;
 	}
-	function setIdUsers($idUsers){
+	public function setIdUsers($idUsers){
 		$this->_idUser=$idUsers;
 	}
-	function setTimeCreated($timeCreated){
+	public function setTimeCreated($timeCreated){
 		$this->_timeCreated=$timeCreated;
 	}
-	function setTimeEstimated($timeEstimated){
+	public function setTimeEstimated($timeEstimated){
 		$this->_timeEstimated=$timeEstimated;
 	}
-	function setDescription($description){
+	public function setDescription($description){
 		$this->_description=$description;
 	}
-	function setIsBungalow($isBungalow){
+	public function setIsBungalow($isBungalow){
 		$this->_isBungalow=$isBungalow;
 	}
-	function setSolved($solved){
+	public function setSolved($solved){
 		$this->_solved=$solved;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

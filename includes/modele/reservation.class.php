@@ -6,14 +6,14 @@ class Reservation {
 	private $_idEquipe;
 	private $_nbrPersonne;
 	private $_deleted;
-	function __construct($idActivite, $idUser, $idEquipe, $nbrPersonne){
+	public function __construct($idActivite, $idUser, $idEquipe, $nbrPersonne){
 		$this->_idActivite=$idActivite;
 		$this->_idUser=$idUser;
 		$this->_idEquipe=$idEquipe;
 		$this->_nbrPersonne=$nbrPersonne;
 		$this->_deleted=false;
 	}
-	function __construct($idActivite, $idUser){
+	public function __construct($idActivite, $idUser){
 		$database = new Database();
 		$database->select('reservation', array("idActivite" => $idActivite, "idUser" => $idUser));
 		$data=$database->fetch();
@@ -23,7 +23,7 @@ class Reservation {
 		$this->_nbrPersonne=$data["nbrPersonne"];
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -38,34 +38,34 @@ class Reservation {
 			$database->create('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser, "idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
 		}
 	}
-    function getIdActivites() {
+    public function getIdActivites() {
         return $this->_idActivite;
     }
-    function getIdUser() {
+    public function getIdUser() {
         return $this->_idUser;
     }
-    function getIdEquipe() {
+    public function getIdEquipe() {
         return $this->_idEquipe;
     }
-    function getNbrPersonne() {
+    public function getNbrPersonne() {
         return $this->_nbrPersonne;
     }
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setIdActivites($idActivite) {
+	public function setIdActivites($idActivite) {
         $this->_idActivite=$idActivite;
     }
-    function setIdUser($idUser) {
+    public function setIdUser($idUser) {
         $this->_idUser=$idUser;
     }
-    function setIdEquipe($idEquipe) {
+    public function setIdEquipe($idEquipe) {
         $this->_idEquipe=$idEquipe;
     }
-    function setNbrPersonne($nbrPersonne) {
+    public function setNbrPersonne($nbrPersonne) {
         $this->_nbrPersonne=$nbrPersonne;
     }
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

@@ -9,7 +9,7 @@
 	class Database{
 		private $_db;
 		private $_objectRequest;
-		function __construct(){
+		public function __construct(){
 			try
 			{
 				// On se connecte à MySQL
@@ -22,7 +22,7 @@
 				die('Erreur : '.$t->getMessage().' Numéro : '.$t->getCode());
 			}
 		}
-		function request($request, $array_where){
+		public function request($request, $array_where){
 			if (!empty($array_where) && !is_array($array_where))
 				return;
 			
@@ -35,11 +35,11 @@
 				
 				$request.=$key."=:".$key;
 			}
-			$this->_objectRequest=$db->prepare($request);
+			$this->_objectRequest=$this->_db->prepare($request);
 			$this->_objectRequest->execute($array_where);
 		}
 		
-		function select($name_table, $array_where, $array_select="*"){
+		public function select($name_table, $array_where, $array_select="*"){
 			if (is_array($array_select))
 			{
 				foreach ($array_select as $value)
@@ -61,11 +61,11 @@
 			$request.=" FROM ".$name_table;
 			$this->request($request, $array_where);
 		}
-		function delete($name_table, $array_where){
+		public function delete($name_table, $array_where){
 			$request="DELETE FROM ".$name_table;
 			$this->request($request, $array_where);
 		}
-		function update($name_table, $array_where, $array_update){
+		public function update($name_table, $array_where, $array_update){
 			if (!is_array($array_update)) // On ne peut gérer que des tableaux pour la sécurité en PDO.
 				return;
 			
@@ -78,7 +78,7 @@
 			}
 			$this->request($request, $array_where);
 		}
-		function create($name_table, $array_create){
+		public function create($name_table, $array_create){
 			foreach ($array_create as $key => $value)
 			{
 				if (!isset($request))
@@ -94,13 +94,13 @@
 					$request.=",:".$key;
 			}
 			$request.=")";
-			$this->_objectRequest=$db->prepare($request);
+			$this->_objectRequest=$this->_db->prepare($request);
 			$this->_objectRequest->execute($array_create);
 		}
-		function fetch(){
+		public function fetch(){
 			return $this->_objectRequest->fetch();
 		}
-		function count($name_table, $array_where){
+		public function count($name_table, $array_where){
 			$request="SELECT COUNT(*) FROM ".$name_table;
 			$this->request($request, $array_where);
 			return $this->_objectRequest->fetchColumn();

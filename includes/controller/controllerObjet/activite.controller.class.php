@@ -8,11 +8,11 @@ require_once("../../fonctions/general.php");
 class Controller_Activite {
 	
 	private $_act;
-	function __construct ($act){
+	public function __construct ($act){
 		this->act=$act; 
 	}
 	
-	function isGood(){
+	public function isGood(){
 		
 		return(timeStartIsGood() && dureeIsGood() && nomIsGood() 
 		&& descriptifIsGood() && ageIsGood() && lieuIsGood() &&
@@ -23,7 +23,7 @@ class Controller_Activite {
 	
 	
 	
-	function timeStartIsGood(){
+	public function timeStartIsGood(){
 		if(!empty($act->getTimeStart())){
 			if(is_numeric($act->getTimeStart())
 			{
@@ -52,7 +52,7 @@ class Controller_Activite {
 		
 	}
 	
-	function dureeIsGood(){
+	public function dureeIsGood(){
 		if(!empty($act->getDuree()))
 		{	if(is_numeric($act->getDuree()))
 			{
@@ -79,7 +79,7 @@ class Controller_Activite {
 		
 		
 	}
-	function nomIsGood(){
+	public function nomIsGood(){
 		if(!em	pty($act->getNom()))
 		{
 			if((strlen($act->getNom())<40) &&
@@ -102,7 +102,7 @@ class Controller_Activite {
 		}
 		
 	}
-	function descriptifIsGood(){
+	public function descriptifIsGood(){
 		if(!empty($act->getDescriptif()))
 		{
 			if((strlen($act->getDescriptif())>=20) && strlen($act->getDescriptif())=<300))
@@ -124,7 +124,7 @@ class Controller_Activite {
 		
 	}
 	
-	function ageIsGood(){
+	public function ageIsGood(){
 		
 		if(is_int($act->getAgeMin()) && is_int($act->getAgeMax()))
 		{
@@ -156,7 +156,7 @@ class Controller_Activite {
 		
 		
 	
-	function lieuIsGood(){
+	public function lieuIsGood(){
 		$database = new Database();
 		if(empty($act->getIdLieu()))
 		{ 
@@ -192,7 +192,7 @@ class Controller_Activite {
 		
 	}
 	
-	function typeIsGood(){
+	public function typeIsGood(){
 		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
 		$database = new Database();
 		
@@ -219,7 +219,7 @@ class Controller_Activite {
 		
 	}
 	
-	function placesLimIsGood(){
+	public function placesLimIsGood(){
 		
 		if(!empty($act->getPlacesLim()))
 		{	if(is_int($act->getPlacesLim()))
@@ -250,7 +250,7 @@ class Controller_Activite {
 		
 		
 	}
-	function prixIsGood(){
+	public function prixIsGood(){
 		
 		if(!empty($act->getPrix()))
 		{	if(is_numeric($act->getPrix()))
@@ -280,7 +280,7 @@ class Controller_Activite {
 		
 	}
 	
-	function idOwnerIsGood(){
+	public function idOwnerIsGood(){
 		
 		if(is_int($act->getIdOwner()))
 		{
@@ -304,7 +304,7 @@ class Controller_Activite {
 		
 		
 	}
-	function pointsIsGood(){
+	public function pointsIsGood(){
 		
 		if(is_int($act->getPoints()))
 		{

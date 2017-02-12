@@ -5,7 +5,7 @@ class Equipe {
 	private $_nom;
 	private $_score;
 	private $_deleted;
-	function __construct($id, $nom=NULL, $score=NULL){
+	public function __construct($id, $nom=NULL, $score=NULL){
 		$this->_id=$id;
 		if ($id==NULL)
 		{
@@ -22,7 +22,7 @@ class Equipe {
 		}
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -38,28 +38,28 @@ class Equipe {
 		}
 		return true;
 	}
-	function getId() {
+	public function getId() {
 		return $this->_id;
 	}
-	function getNom() {
+	public function getNom() {
 		return $this->_nom;
 	}
-	function getScore() {
+	public function getScore() {
 		return $this->_score;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id) {
+	public function setId($id) {
 		$this->_id = $id;
 	}
-	function setNom($nom) {
+	public function setNom($nom) {
 		$this->_nom = $nom;
 	}
-	function setScore($score) {
+	public function setScore($score) {
 		$this->_score = $score;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

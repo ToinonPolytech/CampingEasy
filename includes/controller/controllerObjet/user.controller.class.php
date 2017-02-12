@@ -8,20 +8,20 @@ require_once("../fonctions/general.php");
 class Controller_User
 {
 	private $_user;
-	function __construct ($user){
+	public function __construct ($user){
 		$this->_user=$user;
 	}
-	function generateKey(){
+	public function generateKey(){
 		$database = new Database();
 		do{
 			$clef=generateRandomCharacters(6);
 		}while($database->count('users', array("clef" => $clef)));
 		return $clef;
 	}
-	function isGood(){
+	public function isGood(){
 		return (nomIsGood() && prenomIsGood() && codeIsGood() && droitsIsGood() && infoIdIsGood());
 	}
-	function nomIsGood(){
+	public function nomIsGood(){
 		if(!empty($_user->getNom()))
 		{
 			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getNom()))
@@ -42,7 +42,7 @@ class Controller_User
 		
 	}
 	
-	function prenomIsGood(){
+	public function prenomIsGood(){
 		if(!empty($_user->getPrenom()))
 		{
 			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getPrenom()))
@@ -63,7 +63,7 @@ class Controller_User
 		
 	}
 	
-	function codeIsGood(){
+	public function codeIsGood(){
 		if(!empty($_user->getCode()))
 		{
 			if(preg_match("#^[0-9]+{4}$#", $_user->getCode())))
@@ -85,7 +85,7 @@ class Controller_User
 	}
 		
 	
-	function droitsIsGood(){
+	public function droitsIsGood(){
 		if(!empty($_user->getDroits()))
 		{
 			if(preg_match("#^[0-9]+{1,255}$#", $_user->getDroits()))
@@ -107,7 +107,7 @@ class Controller_User
 	}
 		
 	
-	function infoIdIsGood(){
+	public function infoIdIsGood(){
 		$database = new Database();
 		if(!empty($_user->getInfoId()))
 		{
@@ -133,7 +133,7 @@ class Controller_User
 	/**
 		Exemple : can(CAN_CREATE_SUBACCOUNT); grâce au fichier config.php cela donne la puissance adéquate et tout est géré automatiquement.
 	**/
-	function can($which){
+	public function can($which){
 		$etat=false;
 		$droits = $_user->getDroits();
 		$p=0;$n=1;

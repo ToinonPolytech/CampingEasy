@@ -8,16 +8,16 @@ require_once("../../modele/problemeTechnique.class.php");
 class Controller_PbTech {
 
 	private $_PbTech; 
-	function __construct ($pbTech){
+	public function __construct ($pbTech){
 		$this->_PbTech=$pbTech; 	
 	}
-	function isGood(){
+	public function isGood(){
 		return(idUserIsGood() && timeCreatedIsGood() && timeEstimatedIsGood() 
 		&& descriptionIsGood() && isBungalowIsGood() && solvedIsGood()); 
 		
 	}
 
-	function idUserIsGood(){
+	public function idUserIsGood(){
 		$database = new Database(); 
 		if(!empty($_PbTech->getIdUser()))
 		{
@@ -46,7 +46,7 @@ class Controller_PbTech {
 		}			
 	}
 	
-	function timeIsGood(){
+	public function timeIsGood(){
 		if(!empty($_PbTech->getTimeCreated()) && isset($_PbTech->getTimeEstimated()))
 		{
 			if($_PbTech->getTimeCreated()<=time())
@@ -83,7 +83,7 @@ class Controller_PbTech {
 		}
 		
 	}	
-	function descriptionIsGood(){
+	public function descriptionIsGood(){
 		if(!empty($_PbTech->getDescription()))
 		{
 			if((strlen($_PbTech->getDescription())>20) && (strlen($_PbTech->getDescription())<1000))
@@ -101,7 +101,7 @@ class Controller_PbTech {
 			return false;
 		}
 	}
-	function isBungalowIsGood(){
+	public function isBungalowIsGood(){
 		if(!empty($_PbTech->getIsBungalow())
 		{
 			if(is_bool($_PbTech->getIsBungalow())
@@ -122,7 +122,7 @@ class Controller_PbTech {
 			
 		}
 	}
-	function solvedIsGood(){
+	public function solvedIsGood(){
 		if($_PbTech->getSolved()=="NON_RESOLU" || $_PbTech->getSolved()=="RESOLU" || $_PbTech->getSolved()=="EN_COURS")
 			return true;
 		

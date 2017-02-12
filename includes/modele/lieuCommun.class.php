@@ -12,14 +12,14 @@ données :
 	private $_description; 
 	private $_deleted;
 	
-	function __construct($nom, $description){
+	public function __construct($nom, $description){
 		$this->_id=NULL;
 		$this->_nom=$nom;
 		$this->_description=$description;
 		$this->_deleted=false;
 	}
 	/*
-	function __construct($id){
+	public function __construct($id){
 		$database = new Database();
 		$database->select('lieu_commun', array("id" => $id));
 		$data=$database->fetch();
@@ -29,9 +29,9 @@ données :
 		$this->_deleted=false;
 	}
 	*/
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('lieu_commun', array("id" => $this->_id));
 		}	
@@ -44,28 +44,28 @@ données :
 			$database->create('lieu_commun', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description));
 		}
 	}
-	function getId() {
+	public function getId() {
 		return $this->_id;
 	}
-	function getNom() {
+	public function getNom() {
 		return $this->_nom;
 	}
-	function getDescription() {
+	public function getDescription() {
 		return $this->_description;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id) {
+	public function setId($id) {
 		$this->_id = $id;
 	}
-	function setNom($nom) {
+	public function setNom($nom) {
 		$this->_nom = $nom;
 	}
-	function setDescription($description) {
+	public function setDescription($description) {
 		$this->_description = $description;
 	} 
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

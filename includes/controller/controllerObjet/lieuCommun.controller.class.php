@@ -9,23 +9,19 @@ class Controller_LieuCommun {
 
 	private $LC; 
 	
-	function __construct ($LC){
+	public function __construct ($LC){
 		$this->LC=$LC;
-
-		
 	}
-	function isGood(){
-		
-		return (nomIsGood() && descriptionIsGood());
+	public function isGood(){
+		return ($this->nomIsGood() && $this->descriptionIsGood());
 	}
 	
-function nomIsGood(){
-	 
-	 if(!empty($LC->getNom()))
+	public function nomIsGood(){
+		if(!empty($this->LC->getNom()))
 		{
-			if((strlen($LC->getNom)<40) && strlen($LC->getNom())>3)
+			if((strlen($this->LC->getNom())<40) && strlen($this->LC->getNom())>3)
 			{
-			return true;
+				return true;
 			}
 			else 
 			{
@@ -37,18 +33,16 @@ function nomIsGood(){
 		{
 			echo 'ERREUR : Le nom du lieu crée est vide';
 			return false; 
-		}
-		
-				
-		}
+		}	
+	}
 	 
- }
+
  
  
- function descriptionIsGood(){
-	if(!empty($LC->getDescription()))
+	public function descriptionIsGood(){
+	if(!empty($this->LC->getDescription()))
 		{
-			if(strlen($LC->getDescription())<=500)
+			if(strlen($this->LC->getDescription())<=500)
 			{
 				return true;
 			}
@@ -68,7 +62,7 @@ function nomIsGood(){
 	} 	
 
 
-
+}
 
 
 

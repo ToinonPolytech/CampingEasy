@@ -7,16 +7,16 @@ require_once("../../modele/partenaire.class.php");
 class Controller_Partenaire
 {
 	private $partenaire;
-	function __construct ($partenaire){
+	public function __construct ($partenaire){
 		$this->partenaire=$partenaire;
 	}
 	
-	function isGood(){
+	public function isGood(){
 		return (nomIsGood() && libelleIsGood() && mailIsGood() && siteWebIsGood() && telephoneIsGood());
 	}
 	
 	
-	function nomIsGood(){
+	public function nomIsGood(){
 	
 	
 	if(!empty($partenaire->getNom()))
@@ -42,7 +42,7 @@ class Controller_Partenaire
 	
 		
 	}
-	function libelleIsGood(){
+	public function libelleIsGood(){
 		
 		if(!empty($partenaire->getLibelle()))
 		{
@@ -64,7 +64,7 @@ class Controller_Partenaire
 		
 		
 	}
-	function mailIsGood(){
+	public function mailIsGood(){
 		if(!empty($partenaire->getMail()))
 		{
 			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $partenaire->getMail())) //format voulu du mail en regexp
@@ -82,7 +82,7 @@ class Controller_Partenaire
 		}
 		return false;
 	}
-	function siteWebIsGood(){
+	public function siteWebIsGood(){
 		if(isset($partenaire->getSiteWeb()))
 		{
 			if(empty($partenaire->getSiteWeb()))
@@ -110,7 +110,7 @@ class Controller_Partenaire
 	
 	
 	
-	function telephoneIsGood(){
+	public function telephoneIsGood(){
 		if(isset($partenaire->getTelephone()))
 		{
 			if(empty($partenaire->getTelephone()))

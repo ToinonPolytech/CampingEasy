@@ -14,7 +14,7 @@ abstract class User
 	protected $_code;
 	protected $_deleted;
 	
-	function __construct($infoId, $accessLevel, $droits, $nom, $prenom, $code){
+	public function __construct($infoId, $accessLevel, $droits, $nom, $prenom, $code){
 		$this->_id=NULL;
 		$this->_infoId=$infoId;
 		$this->_accessLevel=$accessLevel;
@@ -25,7 +25,7 @@ abstract class User
 		$this->_deleted=false;
 	}
 	
-	function __construct($id){
+	public function __construct($id){
 		$database = new Database();
 		$database->select('users', array("id" => $id));
 		$data=$database->fetch();
@@ -38,7 +38,7 @@ abstract class User
 		$this->_code=$data["code"];
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -54,61 +54,61 @@ abstract class User
 			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
 		}
 	}
-	function addDroits($which){
+	public function addDroits($which){
 		$controller= new Controller_User($this);
 		if (!$controller->can($which)) // Si le droit n'est pas déjà activé
 			$this->_droits+=pow(2,$which); // on lui rajoute
 	}
-	function getUserInfos(){
+	public function getUserInfos(){
 		$userInfo = new UserInfos($this->_infoId);
 		return $userInfo;
 	}
-	function getId(){
+	public function getId(){
 		return $this->_id;
 	}
-	function getInfoId(){
+	public function getInfoId(){
 		return $this->_infoId;
 	}
-	function getAccessLevel(){
+	public function getAccessLevel(){
 		return $this->_accessLevel;
 	}
-	function getDroits(){
+	public function getDroits(){
 		return $this->_droits;
 	}
-	function getNom(){
+	public function getNom(){
 		return $this->_nom;
 	}
-	function getPrenom(){
+	public function getPrenom(){
 		return $this->_prenom;
 	}
-	function getCode(){
+	public function getCode(){
 		return $this->_code;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id){
+	public function setId($id){
 		$this->_id=$id;
 	}
-	function setInfoId($infoId){
+	public function setInfoId($infoId){
 		$this->_infoId=$infoId;
 	}
-	function setAccessLevel($accessLevel){
+	public function setAccessLevel($accessLevel){
 		$this->_accessLevel=$accessLevel;
 	}
-	function setDroits($droits){
+	public function setDroits($droits){
 		$this->_droits=$droits;
 	}
-	function setNom($nom){
+	public function setNom($nom){
 		$this->_nom=$nom;
 	}
-	function setPrenom($prenom){
+	public function setPrenom($prenom){
 		$this->_prenom=$prenom;
 	}
-	function setCode($code){
+	public function setCode($code){
 		$this->_code=$code;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

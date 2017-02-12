@@ -5,13 +5,13 @@ require_once("../../modele/equipe.class.php");
 class Controller_Equipe
 {
 	private $_equipe;
-	function __construct ($equipe){
+	public function __construct ($equipe){
 		$this->_equipe=$equipe;
 	}
-	function isGood(){
+	public function isGood(){
 		return (nomIsGood() && scoreIsGood());
 	}
-	function nomIsGood(){
+	public function nomIsGood(){
 		if(!empty($_equipe->getNom() || preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_equipe->getNom()) ))
 		{
 			return true;
@@ -24,7 +24,7 @@ class Controller_Equipe
 		
 	}
 	
-	function scoreIsGood(){
+	public function scoreIsGood(){
 		
 		if(!empty($_equipe->getScore()) ||  preg_match("#^[0-9]+{1,255}$#",$_equipe->getScore()))
 		{

@@ -35,7 +35,7 @@ class Activite
 	-prix : (type= payante) float => prix par personnes de l'activité 
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 	*/
-	function __construct($timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
+	public function __construct($timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
 		$this->_id = NULL;
 		$this->_timeStart = $timeStart;
 		$this->_nom = $nom;
@@ -52,7 +52,7 @@ class Activite
 		$this->_points = $points;
 		$this->_deleted=false;
 	}
-	function __construct($id) {
+	public function __construct($id) {
 		$database = new Database();
 		$database->select('activites', array("id" => $id));
 		$data=$database->fetch();
@@ -72,7 +72,7 @@ class Activite
 		$this->_points = $data["points"];
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -87,100 +87,100 @@ class Activite
 			$database->create('activites', array("id" => $this->_id, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
 	}
-	function getId() {
+	public function getId() {
 	   return $this->_id;
 	}
-	function getDate() {
+	public function getDate() {
 	   return $this->_date;
 	}
-	function getNom() {
+	public function getNom() {
 	   return $this->_nom;
 	}
-	function getDescriptif() {
+	public function getDescriptif() {
 	   return $this->_descriptif;
 	}
-	function getDuree() {
+	public function getDuree() {
 	   return $this->_duree;
 	}
-	function getCategorie() {
+	public function getCategorie() {
 	   return $this->_categorie;
 	}
-	function getAgeMin() {
+	public function getAgeMin() {
 	   return $this->_ageMin;
 	}
-	function getAgeMax() {
+	public function getAgeMax() {
 	   return $this->_ageMax;
 	}
-	function getLieu() {
+	public function getLieu() {
 	   return $this->_lieu;
 	}
-	function getIdLieu(){
+	public function getIdLieu(){
 		return $this->_idLieu;
 	}
-	function getType() {
+	public function getType() {
 	   return $this->_type;
 	}
-	function getDateLim() {
+	public function getDateLim() {
 	   return $this->_dateLim;
 	}
-	function getPlacesLim() {
+	public function getPlacesLim() {
 	   return $this->_placesLim;
 	}
-	function getPrix() {
+	public function getPrix() {
 	   return $this->_prix;
 	}
-	function getIdPart() {
+	public function getIdPart() {
 	   return $this->_idPart;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id) {
+	public function setId($id) {
 	   $this->_id = $id;
 	}
-	function setDate($date) {
+	public function setDate($date) {
 	   $this->_date = $date;
 	}
-	function setNom($nom) {
+	public function setNom($nom) {
 	   $this->_nom = $nom;
 	}
-	function setDescriptif($descriptif) {
+	public function setDescriptif($descriptif) {
 	   $this->_descriptif = $descriptif;
 	}
-	function setDuree($duree) {
+	public function setDuree($duree) {
 	   $this->_duree = $duree;
 	}
-	function setCategorie($categorie) {
+	public function setCategorie($categorie) {
 	   $this->_categorie = $categorie;
 	}
-	function setAgeMin($ageMin) {
+	public function setAgeMin($ageMin) {
 	   $this->_ageMin = $ageMin;
 	}
-	function setAgeMax($ageMax) {
+	public function setAgeMax($ageMax) {
 	   $this->_ageMax = $ageMax;
 	}
-	function setLieu($lieu) {
+	public function setLieu($lieu) {
 	   $this->_lieu = $lieu;
 	}
-	function setIdLieu($idLieu){
+	public function setIdLieu($idLieu){
 		$this->_idLieu = $idLieu;
 	}
-	function setType($type) {
+	public function setType($type) {
 	   $this->_type = $type;
 	}
-	function setDateLim($dateLim) {
+	public function setDateLim($dateLim) {
 	   $this->_dateLim = $dateLim;
 	}
-	function setPlacesLim($placesLim) {
+	public function setPlacesLim($placesLim) {
 	   $this->_placesLim = $placesLim;
 	}
-	function setPrix($prix) {
+	public function setPrix($prix) {
 	   $this->_prix = $prix;
 	}
-	function setIdPart($idPart) {
+	public function setIdPart($idPart) {
 	   $this->_idPart = $idPart;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

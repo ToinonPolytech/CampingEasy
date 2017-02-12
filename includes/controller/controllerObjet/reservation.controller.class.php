@@ -5,13 +5,13 @@ require_once("../../modele/reservation.class.php");
 class Controller_Reservation
 {
 	private $_reservation;
-	function __construct ($reservation){
+	public function __construct ($reservation){
 		$this->_reservation=$reservation;
 	}
-	function isGood(){
+	public function isGood(){
 		return (idActivitesIsGood() && idUserIsGood() && idEquipeIsGood() && nbrPersonneIsGood());
 	}
-	function idActivitesIsGood(){
+	public function idActivitesIsGood(){
 		if (!empty($_reservation->getIdActivite()))
 		{
 			if (is_numeric($_reservation->getIdActivite()))
@@ -30,7 +30,7 @@ class Controller_Reservation
 		
 		return false;
 	}
-	function idUserIsGood(){
+	public function idUserIsGood(){
 		if (!empty($_reservation->getIdUser()))
 		{
 			if (is_numeric($_reservation->getIdUser()))
@@ -49,7 +49,7 @@ class Controller_Reservation
 		
 		return false;
 	}
-	function idEquipeIsGood(){
+	public function idEquipeIsGood(){
 		if (!empty($_reservation->idEquipe()))
 		{
 			$database=new Database();
@@ -63,7 +63,7 @@ class Controller_Reservation
 
 		return false;
 	}
-	function nbrPersonneIsGood(){
+	public function nbrPersonneIsGood(){
 		if (!empty($_reservation->getNbrPersonne()))
 		{
 			if (is_numeric($_reservation->getNbrPersonne()) && $_reservation->getNbrPersonne()>0 && $_reservation->getNbrPersonne()<15)

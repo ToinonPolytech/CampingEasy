@@ -9,7 +9,7 @@ class Partenaire{
 	private $_siteWeb;
 	private $_telephone;
 	private $_deleted;
-	function __construct($id, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
+	public function __construct($id, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -33,7 +33,7 @@ class Partenaire{
 			$this->_deleted=false;
 		}
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -48,46 +48,46 @@ class Partenaire{
 			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
 		}
 	}
-	function getId() {
+	public function getId() {
 	   return $this->_id;
 	}
-	function getNom() {
+	public function getNom() {
 	   return $this->_nom;
 	}
-	function getLibelle() {
+	public function getLibelle() {
 	   return $this->_libelle;
 	}
-	function getMail() {
+	public function getMail() {
 	   return $this->_mail;
 	}
-	function getSiteWeb() {
+	public function getSiteWeb() {
 	   return $this->_siteWeb;
 	}
-	function getTelephone() {
+	public function getTelephone() {
 	   return $this->_telephone;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id) {
+	public function setId($id) {
 	   $this->_id = $id;
 	}
-	function setNom($nom) {
+	public function setNom($nom) {
 	   $this->_nom = $nom;
 	}
-	function setLibelle($libelle) {
+	public function setLibelle($libelle) {
 	   $this->_libelle = $libelle;
 	}
-	function setMail($mail) {
+	public function setMail($mail) {
 	   $this->_mail = $mail;
 	}
-	function setSiteWeb($siteWeb) {
+	public function setSiteWeb($siteWeb) {
 	   $this->_siteWeb = $siteWeb;
 	}
-	function setTelephone($telephone) {
+	public function setTelephone($telephone) {
 	   $this->_telephone = $telephone;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }

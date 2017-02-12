@@ -7,7 +7,7 @@ class PbTechInfo{
 	private $_time;  // timestamp de l'entrée
 	private $_message; // timestamp de quand le problème devrait être résolu
 	private $_deleted; // true si on doit supprimer, false sinon
-	function __construct($idPbTech, $idUser, $time, $message) {
+	public function __construct($idPbTech, $idUser, $time, $message) {
 		$this->_id = NULL;
 		$this->_idPbTech=$idPbTech;
 		$this->_idUser=$idUser;
@@ -15,7 +15,7 @@ class PbTechInfo{
 		$this->_message=$message;
 		$this->_deleted=false;
 	}
-	function __construct($id) {
+	public function __construct($id) {
 		$database = new Database();
 		$database->select('problemes_technique_info', array("id" => $id));
 		$data=$database->fetch();
@@ -26,7 +26,7 @@ class PbTechInfo{
 		$this->_message=$data["message"];
 		$this->_deleted=false;
 	}
-	function saveToDb(){
+	public function saveToDb(){
 		$database = new Database();
 		if ($_deleted)
 		{
@@ -41,40 +41,40 @@ class PbTechInfo{
 			$database->create('problemes_technique_info', array("id" => $this->_id, "idPbTech" => $this->_idPbTech, "idUser" => $this->_idUser, "time" => $this->_time, "message" => $this->_message));
 		}
 	}
-	function getId(){
+	public function getId(){
 		return $this->_id;
 	}
-	function getIdPbTech(){
+	public function getIdPbTech(){
 		return $this->_idPbTech;
 	}
-	function getIdUser(){
+	public function getIdUser(){
 		return $this->_idUser;
 	}
-	function getTime(){
+	public function getTime(){
 		return $this->_time;
 	}
-	function getMessage(){
+	public function getMessage(){
 		return $this->_message;
 	}
-	function getDeleted(){
+	public function getDeleted(){
 		return $this->_deleted;
 	}
-	function setId($id){
+	public function setId($id){
 		$this->_id=$id;
 	}
-	function setIdPbTech($idPbTech){
+	public function setIdPbTech($idPbTech){
 		$this->_idPbTech=$idPbTech;
 	}
-	function setIdUser($idUser){
+	public function setIdUser($idUser){
 		$this->_idUser=$idUser;
 	}
-	function setTime($time){
+	public function setTime($time){
 		$this->_time=$time;
 	}
-	function setMessage($message){
+	public function setMessage($message){
 		$this->_message=$message;
 	}
-	function setDeleted($deleted){
+	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
 	}
 }
