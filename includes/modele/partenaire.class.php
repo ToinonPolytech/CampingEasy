@@ -9,27 +9,29 @@ class Partenaire{
 	private $_siteWeb;
 	private $_telephone;
 	private $_deleted;
-	function __construct($nom, $description, $mail, $url, $telephone){         
-		$this->_id = NULL;
-		$this->_nom = $nom;
-		$this->_libelle = $description;
-		$this->_mail = $mail;
-		$this->_siteWeb = $url;
-		$this->_telephone = $telephone;
-		$this->_deleted=false;
-	}
-	function __construct($id){         
-		$database = new Database();
-		$database->select('partenaire', array("id" => $id));
-		$data=$database->fetch();
-
+	function __construct($id, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
 		$this->_id = $id;
-		$this->_nom = $data['nom'];
-		$this->_libelle = $data['description'];
-		$this->_mail = $data['mail'];
-		$this->_siteWeb = $data['url'];
-		$this->_telephone = $data['telephone'];
-		$this->_deleted=false;
+		if ($id==NULL)
+		{
+			$this->_nom = $nom;
+			$this->_libelle = $description;
+			$this->_mail = $mail;
+			$this->_siteWeb = $url;
+			$this->_telephone = $telephone;
+			$this->_deleted=false;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('partenaire', array("id" => $this->_id));
+			$data=$database->fetch();
+			$this->_nom = $data['nom'];
+			$this->_libelle = $data['description'];
+			$this->_mail = $data['mail'];
+			$this->_siteWeb = $data['url'];
+			$this->_telephone = $data['telephone'];
+			$this->_deleted=false;
+		}
 	}
 	function saveToDb(){
 		$controller=new Controller_Equipe($this);
