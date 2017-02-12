@@ -12,23 +12,24 @@ données :
 	private $_description; 
 	private $_deleted;
 	
-	public function __construct($nom, $description){
-		$this->_id=NULL;
-		$this->_nom=$nom;
-		$this->_description=$description;
-		$this->_deleted=false;
-	}
-	/*
-	public function __construct($id){
-		$database = new Database();
-		$database->select('lieu_commun', array("id" => $id));
-		$data=$database->fetch();
+	public function __construct($id, $nom=NULL, $description=NULL){
 		$this->_id=$id;
-		$this->_nom=$data["nom"];
-		$this->_description=$data["description"];
+		if ($id==NULL)
+		{
+			$this->_nom=$nom;
+			$this->_description=$description;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('lieu_commun', array("id" => $id));
+			$data=$database->fetch();
+			$this->_nom=$data["nom"];
+			$this->_description=$data["description"];
+			$this->_deleted=false;
+		}
 		$this->_deleted=false;
 	}
-	*/
 	public function saveToDb(){
 		$database = new Database();
 		if ($this->_deleted)

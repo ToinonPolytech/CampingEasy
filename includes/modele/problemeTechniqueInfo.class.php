@@ -7,28 +7,30 @@ class PbTechInfo{
 	private $_time;  // timestamp de l'entrée
 	private $_message; // timestamp de quand le problème devrait être résolu
 	private $_deleted; // true si on doit supprimer, false sinon
-	public function __construct($idPbTech, $idUser, $time, $message) {
-		$this->_id = NULL;
-		$this->_idPbTech=$idPbTech;
-		$this->_idUser=$idUser;
-		$this->_time=$time;
-		$this->_message=$message;
-		$this->_deleted=false;
-	}
-	public function __construct($id) {
-		$database = new Database();
-		$database->select('problemes_technique_info', array("id" => $id));
-		$data=$database->fetch();
+	public function __construct($id, $idPbTech=NULL, $idUser=NULL, $time=NULL, $message=NULL) {
 		$this->_id = $id;
-		$this->_idPbTech=$data["idPbTech"];
-		$this->_idUser=$data["idUser"];
-		$this->_time=$data["time"];
-		$this->_message=$data["message"];
+		if ($id==NULL)
+		{
+			$this->_idPbTech=$idPbTech;
+			$this->_idUser=$idUser;
+			$this->_time=$time;
+			$this->_message=$message;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('problemes_technique_info', array("id" => $id));
+			$data=$database->fetch();
+			$this->_idPbTech=$data["idPbTech"];
+			$this->_idUser=$data["idUser"];
+			$this->_time=$data["time"];
+			$this->_message=$data["message"];
+		}
 		$this->_deleted=false;
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('problemes_technique_info', array("id" => $this->_id));
 		}	

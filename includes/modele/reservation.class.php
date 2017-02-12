@@ -6,26 +6,27 @@ class Reservation {
 	private $_idEquipe;
 	private $_nbrPersonne;
 	private $_deleted;
-	public function __construct($idActivite, $idUser, $idEquipe, $nbrPersonne){
+	public function __construct($idActivite, $idUser, $idEquipe=NULL, $nbrPersonne=NULL){
 		$this->_idActivite=$idActivite;
 		$this->_idUser=$idUser;
-		$this->_idEquipe=$idEquipe;
-		$this->_nbrPersonne=$nbrPersonne;
-		$this->_deleted=false;
-	}
-	public function __construct($idActivite, $idUser){
-		$database = new Database();
-		$database->select('reservation', array("idActivite" => $idActivite, "idUser" => $idUser));
-		$data=$database->fetch();
-		$this->_idActivite=$idActivite;
-		$this->_idUser=$idUser;
-		$this->_idEquipe=$data["idEquipe"];
-		$this->_nbrPersonne=$data["nbrPersonne"];
+		if ($idActivite==NULL && $idUser==NULL)
+		{
+			$this->_idEquipe=$idEquipe;
+			$this->_nbrPersonne=$nbrPersonne;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('reservation', array("idActivite" => $idActivite, "idUser" => $idUser));
+			$data=$database->fetch();
+			$this->_idEquipe=$data["idEquipe"];
+			$this->_nbrPersonne=$data["nbrPersonne"];
+		}
 		$this->_deleted=false;
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser));
 		}	

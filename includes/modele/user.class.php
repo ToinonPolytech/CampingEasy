@@ -14,33 +14,35 @@ abstract class User
 	protected $_code;
 	protected $_deleted;
 	
-	public function __construct($infoId, $accessLevel, $droits, $nom, $prenom, $code){
-		$this->_id=NULL;
-		$this->_infoId=$infoId;
-		$this->_accessLevel=$accessLevel;
-		$this->_droits=$droits;
-		$this->_nom=$nom;
-		$this->_prenom=$prenom;
-		$this->_code=$code;
-		$this->_deleted=false;
-	}
-	
-	public function __construct($id){
-		$database = new Database();
-		$database->select('users', array("id" => $id));
-		$data=$database->fetch();
+	public function __construct($id, $infoId=NULL, $accessLevel=NULL, $droits=NULL, $nom=NULL, $prenom=NULL, $code=NULL){
 		$this->_id=$id;
-		$this->_infoId=$data["infoId"];
-		$this->_accessLevel=$data["access_level"];
-		$this->_droits=$data["droits"];
-		$this->_nom=$data["nom"];
-		$this->_prenom=$data["prenom"];
-		$this->_code=$data["code"];
+		if ($id==NULL)
+		{
+			$this->_infoId=$infoId;
+			$this->_accessLevel=$accessLevel;
+			$this->_droits=$droits;
+			$this->_nom=$nom;
+			$this->_prenom=$prenom;
+			$this->_code=$code;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('users', array("id" => $id));
+			$data=$database->fetch();
+			$this->_infoId=$data["infoId"];
+			$this->_accessLevel=$data["access_level"];
+			$this->_droits=$data["droits"];
+			$this->_nom=$data["nom"];
+			$this->_prenom=$data["prenom"];
+			$this->_code=$data["code"];
+		}
 		$this->_deleted=false;
 	}
+
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('users', array("id" => $this->_id));
 		}	

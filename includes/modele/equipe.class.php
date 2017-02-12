@@ -24,7 +24,7 @@ class Equipe {
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('equipe', array("id" => $this->_id));
 		}	

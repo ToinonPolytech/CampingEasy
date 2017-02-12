@@ -35,46 +35,48 @@ class Activite
 	-prix : (type= payante) float => prix par personnes de l'activité 
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 	*/
-	public function __construct($timeStart, $nom, $descriptif, $duree, $ageMin, $ageMax, $lieu,$idLieu, $type, $placesLim, $prix, $idOwner, $points) {
-		$this->_id = NULL;
-		$this->_timeStart = $timeStart;
-		$this->_nom = $nom;
-		$this->_descriptif = $descriptif;
-		$this->_duree = $duree;
-		$this->_ageMin =  $ageMin;
-		$this->_ageMax =  $ageMax;
-		$this->_lieu =  $lieu;
-		$this->_idLieu = $idLieu;
-		$this->_type = $type;
-		$this->_placesLim =  $placesLim;
-		$this->_prix =  $prix;
-		$this->_idOwner = $idOwner;
-		$this->_points = $points;
-		$this->_deleted=false;
-	}
-	public function __construct($id) {
-		$database = new Database();
-		$database->select('activites', array("id" => $id));
-		$data=$database->fetch();
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $idLieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL) {
 		$this->_id = $id;
-		$this->_timeStart = $data['time_start'];
-		$this->_nom = $data['nom'];
-		$this->_descriptif = $data['description'];
-		$this->_duree = $data['duree'];
-		$this->_ageMin =  $data['ageMin'];
-		$this->_ageMax =  $data['ageMax'];
-		$this->_lieu =  $data['lieu'];
-		$this->_idLieu = $data['idLieu'];
-		$this->_type = $data['type'];
-		$this->_placesLim =  $data['capaciteMax'];
-		$this->_prix =  $data['prix'];
-		$this->_idOwner = $data['idOwner'];
-		$this->_points = $data["points"];
+		if ($id==NULL)
+		{
+			$this->_timeStart = $timeStart;
+			$this->_nom = $nom;
+			$this->_descriptif = $descriptif;
+			$this->_duree = $duree;
+			$this->_ageMin =  $ageMin;
+			$this->_ageMax =  $ageMax;
+			$this->_lieu =  $lieu;
+			$this->_idLieu = $idLieu;
+			$this->_type = $type;
+			$this->_placesLim =  $placesLim;
+			$this->_prix =  $prix;
+			$this->_idOwner = $idOwner;
+			$this->_points = $points;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('activites', array("id" => $id));
+			$data=$database->fetch();
+			$this->_timeStart = $data['time_start'];
+			$this->_nom = $data['nom'];
+			$this->_descriptif = $data['description'];
+			$this->_duree = $data['duree'];
+			$this->_ageMin =  $data['ageMin'];
+			$this->_ageMax =  $data['ageMax'];
+			$this->_lieu =  $data['lieu'];
+			$this->_idLieu = $data['idLieu'];
+			$this->_type = $data['type'];
+			$this->_placesLim =  $data['capaciteMax'];
+			$this->_prix =  $data['prix'];
+			$this->_idOwner = $data['idOwner'];
+			$this->_points = $data["points"];
+		}
 		$this->_deleted=false;
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->deleted)
 		{
 			$database->delete('activites', array("id" => $this->_id));
 		}	

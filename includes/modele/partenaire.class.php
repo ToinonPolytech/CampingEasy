@@ -18,7 +18,6 @@ class Partenaire{
 			$this->_mail = $mail;
 			$this->_siteWeb = $url;
 			$this->_telephone = $telephone;
-			$this->_deleted=false;
 		}
 		else
 		{
@@ -30,12 +29,12 @@ class Partenaire{
 			$this->_mail = $data['mail'];
 			$this->_siteWeb = $data['url'];
 			$this->_telephone = $data['telephone'];
-			$this->_deleted=false;
 		}
+		$this->_deleted=false;
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($_deleted)
+		if ($this->_deleted)
 		{
 			$database->delete('partenaire', array("id" => $this->_id));
 		}	
@@ -91,12 +90,3 @@ class Partenaire{
 		$this->_deleted=$deleted;
 	}
 }
-
-
-
-
-
-
-
-
-
