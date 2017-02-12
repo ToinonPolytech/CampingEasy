@@ -10,8 +10,6 @@ class Controller_Activite {
 	private $_act;
 	function __construct Controller_Activite($act){
 		this->act=$act; 
-		
-		
 	}
 	
 	function isGood(){

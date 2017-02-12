@@ -1,7 +1,7 @@
 <?php
-	/*if (!isset($_SESSION)) // Pour gérer les appels dynamiques
+	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
-	*/
+	
 	require("/../fonctions/general.php");
 	require("/../modele/database.class.php");
 	?>
@@ -37,7 +37,7 @@
 					setcookie("clef", "", time()-3600);
 				
 				?>
-				<form role="form">
+				<form role="form" onsubmit="$(this).children().children('button').click(); return false;">
 					<div class="form-group">
 						<label class="control-label">Votre identifiant</label>
 						<input type="text" class="form-control" name="clef" id="clef" placeholder="Votre identifiant de 6 caractères."><br/>

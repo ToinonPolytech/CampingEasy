@@ -34,24 +34,19 @@ class Partenaire{
 		}
 	}
 	function saveToDb(){
-		$controller=new Controller_Equipe($this);
-		if ($controller->isGood()){
-			$database = new Database();
-			if ($_deleted)
-			{
-				$database->delete('partenaire', array("id" => $this->_id));
-			}	
-			else if ($this->_id!=NULL && $database->count('partenaire', array("id" => $this->_id))) // Existe en db, on update
-			{
-				$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
-			}
-			else
-			{
-				$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
-			}
-			return true;
+		$database = new Database();
+		if ($_deleted)
+		{
+			$database->delete('partenaire', array("id" => $this->_id));
+		}	
+		else if ($this->_id!=NULL && $database->count('partenaire', array("id" => $this->_id))) // Existe en db, on update
+		{
+			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
 		}
-		return false;
+		else
+		{
+			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
+		}
 	}
 	function getId() {
 	   return $this->_id;

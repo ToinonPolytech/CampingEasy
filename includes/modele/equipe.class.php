@@ -5,41 +5,38 @@ class Equipe {
 	private $_nom;
 	private $_score;
 	private $_deleted;
-	function __construct($nom, $score){
-		$this->_id=NULL;
-		$this->_nom=$nom;
-		$this->_score=$score;
+	function __construct($id, $nom=NULL, $score=NULL){
+		$this->_id=$id;
+		if ($id==NULL)
+		{
+			$this->_nom=$nom;
+			$this->_score=$score;
+		}
+		else
+		{
+			$database = new Database();
+			$database->select('equipe', array("id" => $id));
+			$data=$database->fetch();
+			$this->_nom=$data["nom"];
+			$this->_score=$data["score"];
+		}
 		$this->_deleted=false;
 	}
-	/*
-	function __construct($id){
-		$database = new Database();
-		$database->select('equipe', array("id" => $id));
-		$data=$database->fetch();
-		$this->_id=$id;
-		$this->_nom=$data["nom"];
-		$this->_score=$data["score"];
-		$this->_deleted=false;
-	} */ 
 	function saveToDb(){
-		$controller=new Controller_Equipe($this);
-		if ($controller->isGood()){
-			$database = new Database();
-			if ($_deleted)
-			{
-				$database->delete('equipe', array("id" => $this->_id));
-			}	
-			else if ($this->_id!=NULL && $database->count('equipe', array("id" => $this->_id))) // Existe en db, on update
-			{
-				$database->update('equipe', array("id" => $this->_id), array("nom" => $this->_nom, "score" => $this->_score));
-			}
-			else
-			{
-				$database->create('equipe', array("id" => $this->_id, "nom" => $this->_nom, "score" => $this->_score));
-			}
-			return true;
+		$database = new Database();
+		if ($_deleted)
+		{
+			$database->delete('equipe', array("id" => $this->_id));
+		}	
+		else if ($this->_id!=NULL && $database->count('equipe', array("id" => $this->_id))) // Existe en db, on update
+		{
+			$database->update('equipe', array("id" => $this->_id), array("nom" => $this->_nom, "score" => $this->_score));
 		}
-		return false;
+		else
+		{
+			$database->create('equipe', array("id" => $this->_id, "nom" => $this->_nom, "score" => $this->_score));
+		}
+		return true;
 	}
 	function getId() {
 		return $this->_id;
