@@ -7,7 +7,7 @@ require("../../modele/partenaire.class.php");
 class Controller_Partenaire
 {
 	private $partenaire;
-	function __construct Controller_Partenaire($partenaire){
+	function __construct ($partenaire){
 		$this->partenaire=$partenaire;
 	}
 	

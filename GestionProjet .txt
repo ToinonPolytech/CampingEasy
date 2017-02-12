@@ -2,24 +2,18 @@
 
 
 
-
-
-
-
-- Ligne 90 du fichier partenaire.controller.class.php  : je ne comprends pas
-  => ERREUR de ma part dans un c/c : je voulais que ce soit le siteweb a NULL s'il est vide parce qu'il n'est pas obligatoire mais je ne sais pas si cette ligne est indispensable 
-
 - Faire un menu déroulant avec : - 100 valeurs (ageMin et ageMax )
-								- Des valeurs de la base données (tableau avec les lieux par exemple) 
+								- Des valeurs de la base données (tableau avec les lieux par exemple) => for (...) { echo "<option value='$i'>".$i."</option>"; }
+while ($data=$request->fetch()) { }
+for ($i=0;$i<100;$i++)
 								
 
 
-Activité : 
--Les points donnés pour une activité reviennent uniquement au premier ? si on fait un classement et des points pour les 3 premiers par exemple il faudra gérer ca en base de données (tableau de points ?)
+
 
 
 User : 
-- L'id du user qui crée l'activité est passée en post ? récupérée en session ? 
+
 - Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
 	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
 					- création user avec son id ? même problème que pour activité ? 
@@ -30,12 +24,12 @@ Problème technique :
 -	Gérer l'Ajout des photos du problème technique : quel procédé en formulaire ? quelle méthode de stockage ? 
 
 
-Autre : 
-
-- Problème avec deux constructeurs et la fonction constructeur ne doit pas avoir de nom 
 
 
-- L'ajout d'un partenaire se fait par un admin ou le partenaire lui même qui détient un droit d'accès "partenaire" et peut s'ajouter une fois son compte crée par un admin? 
+
+
+
+
 
 
 TODO (les petites choses à ne pas oublier) :
@@ -43,16 +37,19 @@ TODO (les petites choses à ne pas oublier) :
 -gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
 - A vérifier : les require dans le controller du formulaire 
-
+- modifs du type des activité : à faire dans les controller et modele 
 
 - gérer le solved d'un pb technique //done ?? 
 
 	Au niveau DB : 
 		- Rajouter IDUser au partenaire 
 		- Ajouter catégorie pour l'activité (sportive, intellectuelle .. )
+		- Rajouter gestion des photos problème technique 
+		-Ajout d'un type user partenaire 
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
 
 - alerte pour création d'une activité dans plus d'un an 
 - administration d'une activité partenaire par un admin 
 - gestion des langues 
+- gérer une attribution des points de l'activité avec classement (l'activité vaut 100 pour premier, 50 pour deuxieme etc ...) 

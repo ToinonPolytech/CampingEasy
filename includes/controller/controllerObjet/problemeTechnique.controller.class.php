@@ -8,7 +8,7 @@ require("../../modele/problemeTechnique.class.php");
 class Controller_PbTech {
 
 	private $_PbTech; 
-	function __construct Controller_PbTech($pbTech){
+	function __construct ($pbTech){
 		$this->_PbTech=$pbTech; 	
 	}
 	function isGood(){

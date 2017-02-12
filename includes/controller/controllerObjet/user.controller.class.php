@@ -8,7 +8,7 @@ require("../fonctions/general.php");
 class Controller_User
 {
 	private $_user;
-	function __construct Controller_User($user){
+	function __construct ($user){
 		$this->_user=$user;
 	}
 	function generateKey(){
