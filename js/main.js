@@ -1,4 +1,4 @@
-function loadToSpecific(urlCalled, dataUsed, location, type, callback)
+function loadTo(urlCalled, dataUsed, location, type, callback)
 {
 	$.ajax({
 		url: urlCalled,
@@ -10,17 +10,12 @@ function loadToSpecific(urlCalled, dataUsed, location, type, callback)
 		else if (type=="append")
 			$(location).append(data);
 		else
-			$(location).preprend(data);
+			$(location).prepend(data);
 		
 		if (typeof(callback) === "function") { callback(); }
 	});
 }
 function loadToMain(urlCalled, dataUsed, callback) // dataUsed : { nomVar : valeur, nomVar2 : valeur2 }
 {
-	loadToSpecific(urlCalled, dataUsed, "#mainAjax", "replace", callback);
+	loadTo(urlCalled, dataUsed, "#mainAjax", "replace", callback);
 }
-$(document).ready(function(){
-	$("a").click(function(){
-		loadToMain($(this).attr("href"), "{}");
-	});
-});

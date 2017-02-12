@@ -50,3 +50,10 @@
     <!-- /#wrapper -->
 </body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("a").click(function(){
+		loadToMain($(this).attr("href"), "{}"); return false;
+	});
+});
+</script>

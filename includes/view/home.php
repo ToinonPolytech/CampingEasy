@@ -26,7 +26,7 @@
 						<input type="text" class="form-control" name="code" id="code" placeholder="Votre mot de passe de 4 caractères."><br/>
 						<input type="hidden" class="form-control" name="clef" id="clef" value="<?php echo htmlspecialchars($_COOKIE["clef"]); ?>"><br/>
 						<label class="control-label"><a href="home.php?new=true">Ceci n'est pas vous ?</a></label>
-						<button class="btn btn-success" onclick="loadTo('includes/controllerFormulaire/connexionUser.controller.php', {code : $('#code').val(), clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
+						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {code : $('#code').val(), clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
 					</div>
 				</form>	
 				<?php
@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<label class="control-label">Votre identifiant</label>
 						<input type="text" class="form-control" name="clef" id="clef" placeholder="Votre identifiant de 6 caractères."><br/>
-						<button class="btn btn-success" onclick="loadTo('includes/controllerFormulaire/connexionUser.controller.php', {clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 1/2</button>
+						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 1/2</button>
 					</div>
 				</form>		
 				<?php

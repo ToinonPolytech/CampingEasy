@@ -1,7 +1,7 @@
 <?php 
 require_once("../../modele/database.class.php");
 require_once("../../modele/equipe.class.php");
-require_once("../fonctions/general.php");
+require_once("../../fonctions/general.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/
@@ -66,7 +66,7 @@ class Controller_User
 	public function codeIsGood(){
 		if(!empty($_user->getCode()))
 		{
-			if(preg_match("#^[0-9]+{4}$#", $_user->getCode())))
+			if(preg_match("#^[0-9]+{4}$#", $_user->getCode()))
 			{
 					return true;
 			}

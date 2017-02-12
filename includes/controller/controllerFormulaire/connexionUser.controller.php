@@ -1,45 +1,57 @@
 <?php
 require_once("../../modele/database.class.php");
 require_once("../../modele/user.class.php");
-require_once("../../modele/user.controller.class.php");
-
-$database = new Database();
-if (isset($_POST["clef"]) && $database->count('users', array("clef" => $_POST["clef"])))
-{
-	if (isset($_POST["code"]))
+require_once("../controllerObjet/user.controller.class.php");
+?>
+<div class="alert alert-danger" role="alert" name="infoErreur" id="infoErreur">
+	<?php
+	$database = new Database();
+	if (isset($_POST["clef"]) && $database->count('users', array("clef" => $_POST["clef"])))
 	{
-		if ($database->count('users', array("clef" => $_POST["clef"], "code" => $_POST["code"])))
+		if (isset($_POST["code"]))
 		{
-			$database->select('users', array("clef" => $_POST["clef"], "code" => $_POST["code"]), array("id"));
-			$data=$database->fetch();
-			$_SESSION["id"]=$data["id"]; // Et hop ! On est connecté 
-			/**
-				TODO : Je dois appeller mon frère pour voir à propos des sessions si c'est une bonne idée de stocker plus de données que juste l'id.
-				J'aimerais bien, au moins, rajouter l'info_id et l'access_level.
-			**/
+			if ($database->count('users', array("clef" => $_POST["clef"], "code" => $_POST["code"])))
+			{
+				$database->select('users', array("clef" => $_POST["clef"], "code" => $_POST["code"]), array("id", "access_level"));
+				$data=$database->fetch();
+				$_SESSION["id"]=$data["id"]; // Et hop ! On est connecté 
+				$_SESSION["access_level"]=$data["access_level"];
+				?>
+				<script type="text/javascript">
+					loadToMain("includes/home.php", "{}");
+				</script>
+				<?php
+			}
+			else
+			{
+				echo "<strong>Oops</strong><br/>";
+				echo "Un problème est survenu lors de la connexion.";
+				?>
+				<script type="text/javascript">
+					$("#infoErreur").fadeOut(5500, function(){ $("#infoErreur").remove(); });
+				</script>
+				<?php
+			}
+		}
+		else
+		{
+			setcookie("clef", $_POST["clef"], time()+7*3600*24);
 			?>
 			<script type="text/javascript">
 				loadToMain("includes/home.php", "{}");
 			</script>
 			<?php
 		}
-		else
-		{
-			echo "ERREUR : Un problème est survenu lors de la connexion.";
-		}
 	}
 	else
 	{
-		setcookie("clef", $_POST["clef"], time()+7*3600*24);
+		echo "<strong>Oops</strong><br/>";
+		echo "Un problème est survenu lors de la connexion.";
 		?>
 		<script type="text/javascript">
-			loadToMain("includes/home.php", "{}");
+			$("#infoErreur").fadeOut(5500, function(){ $("#infoErreur").remove(); });
 		</script>
 		<?php
 	}
-}
-else
-{
-	echo "ERREUR : Un problème est survenu lors de la connexion.";
-}
-?>
+	?>
+</div>
