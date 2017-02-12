@@ -16,7 +16,7 @@ class Controller_LieuCommun {
 	}
 	function isGood(){
 		
-		return(nomIsGood() && descriptionIsGood());
+		return (nomIsGood() && descriptionIsGood());
 	}
 	
 function nomIsGood(){

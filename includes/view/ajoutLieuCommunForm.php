@@ -6,7 +6,7 @@
 	Nom de lieu  <br /> 
     <input type="text" name="nom" /> <br />
 	Description du lieu  <br />
-	<textarea name="libelle" rows="6" cols="30"> 
+	<textarea name="description" rows="6" cols="30"> 
 	</textarea> <br />
 	
 	
