@@ -5,7 +5,7 @@ require("../../modele/reservation.class.php");
 class Controller_Reservation
 {
 	private $_reservation;
-	function __construct Controller_Reservation($reservation){
+	function __construct ($reservation){
 		$this->_reservation=$reservation;
 	}
 	function isGood(){

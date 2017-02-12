@@ -4,7 +4,7 @@ require("../../modele/problemeTechniqueInfo.class.php");
 
 class Controller_PbTechInfo{
 	private $_PbTechInfo; 
-	function __construct Controller_PbTechInfo($pbTechInfo){
+	function __construct ($pbTechInfo){
 		$this->_PbTechInfo=$pbTechInfo; 
 	}
 	function isGood(){

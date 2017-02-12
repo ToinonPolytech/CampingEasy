@@ -14,7 +14,7 @@
 			{
 				// On se connecte à MySQL
 				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-				$this->_db = new PDO('mysql:host=localhost;dbname=name_db', 'user', 'password', $pdo_options);
+				$this->_db = new PDO('mysql:host=localhost;dbname=campingeasy', 'root', '', $pdo_options);
 			}
 			catch(Exception $t)
 			{
