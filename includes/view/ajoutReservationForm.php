@@ -1,22 +1,10 @@
- 
- <html> 
-				Réservez l'activité 
- <form action="../controller/controllerFormulaire/reservation.controllerForm.php" method="post">
-<p>	//manque la récupération de l'activité correspondante et du compte 
-	 <br /> 
-	 Nombre de personnes à inscrire 
-    <input type="text" name="nbrPersonnes" /> <br />
-	Joindre une équipe   <br />
-	//menu déroulant avec les équipes auxquelles appartient le compte (récupérées en db )
-	
-	
-    <input type="submit" value="Ajouter un lieu  " />
-	
-	
-</p>
-</form>
- 
- 
- 
- 
- </html> 
+<div class="col-lg-6" style="width:100%;" name="form-reservation" id="form-reservation">
+	<span class="pull-left">Réserver l'activité <!-- On peut afficher le nom ici de l'activité qu'on veut réserver --></span><br/>
+	<form role="form" method="post">
+		<div class="form-group">
+			<label for="nom">Nombre de personnes à inscrire</label><br/>
+			<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control"/><br/>
+			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/reservation.controllerForm.php', {nbrPersonnes : $('#nbrPersonnes').val()}, '#form-reservation', 'prepend'); return false;">Ajouter</button>
+		</div>
+	</form>
+</div>

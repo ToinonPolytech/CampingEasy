@@ -24,7 +24,11 @@
 		}
 		public function request($request, $array_where, $array_update=NULL){
 			if (!empty($array_where) && !is_array($array_where))
+			{
+				$this->_objectRequest=$this->_db->query($request);
 				return;
+			}
+				
 			
 			$array_where2=array();
 			foreach ($array_where as $key => $value)
