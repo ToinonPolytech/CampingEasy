@@ -16,17 +16,27 @@
 		else
 		{
 			$database = new Database();
-			if (!isset($_GET["new"]) && isset($_COOKIE["clef"]) && $database->count('users', array("id" => htmlspecialchars($_COOKIE["clef"])))==1)
+			if (!isset($_GET["new"]) && isset($_COOKIE["clef"]) && $database->count('users', array("clef" => htmlspecialchars($_COOKIE["clef"])))==1)
 			{
 				?>
-				<span class="pull-left">Clef : <?php echo htmlspecialchars($_COOKIE["clef"]); ?></span>
+				<span class="pull-left">Bonjour, <?php echo htmlspecialchars($database->getValue('users', array("clef" => htmlspecialchars($_COOKIE["clef"])), "nom"))." ".htmlspecialchars($database->getValue('users', array("clef" => htmlspecialchars($_COOKIE["clef"])), "prenom")); ?></span><br/>
 				<form role="form">
 					<div class="form-group">
-						<label class="control-label">Votre mot de passe</label>
-						<input type="text" class="form-control" name="code" id="code" placeholder="Votre mot de passe de 4 caractères."><br/>
-						<input type="hidden" class="form-control" name="clef" id="clef" value="<?php echo htmlspecialchars($_COOKIE["clef"]); ?>"><br/>
-						<label class="control-label"><a href="home.php?new=true">Ceci n'est pas vous ?</a></label>
-						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {code : $('#code').val(), clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
+						<?php
+						if ($database->count('users', array("clef" => htmlspecialchars($_COOKIE["clef"]), "code" => NULL))==1)
+						{
+						?>
+							<input type="text" class="form-control" name="code" id="code" placeholder="Créez votre mot de passe de 4 caractères."><br/>
+						<?php
+						}
+						else
+						{
+						?>
+							<input type="text" class="form-control" name="code" id="code" placeholder="Votre mot de passe de 4 caractères."><br/>
+						<?php
+						}
+						?>
+						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {code : $('#code').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
 					</div>
 				</form>	
 				<?php

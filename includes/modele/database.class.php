@@ -22,10 +22,35 @@
 				die('Erreur : '.$t->getMessage().' Numéro : '.$t->getCode());
 			}
 		}
-		public function request($request, $array_where){
+		public function request($request, $array_where, $array_update=NULL){
 			if (!empty($array_where) && !is_array($array_where))
 				return;
 			
+			$array_where2=array();
+			foreach ($array_where as $key => $value)
+			{
+				if (strstr($request, "WHERE"))
+					$request.=" AND ";
+				else
+					$request.=" WHERE ";
+				
+				if ($value==NULL)
+					$request.=$key." IS NULL";
+				else
+				{
+					$request.=$key."=:".$key;
+					$array_where2[$key]=$value;
+				}
+			}
+			if ($array_update!=NULL)
+			{
+				$array_where2=array_merge($array_where2, $array_update);
+			}
+			$this->_objectRequest=$this->_db->prepare($request);
+			$this->_objectRequest->execute($array_where2);
+		}
+		public function getValue($name_table, $array_where, $colonne){
+			$request="SELECT ".$colonne." FROM ".$name_table;
 			foreach ($array_where as $key => $value)
 			{
 				if (strstr($request, "WHERE"))
@@ -37,8 +62,9 @@
 			}
 			$this->_objectRequest=$this->_db->prepare($request);
 			$this->_objectRequest->execute($array_where);
+			$data=$this->fetch();
+			return $data[$colonne];
 		}
-		
 		public function select($name_table, $array_where, $array_select="*"){
 			if (is_array($array_select))
 			{
@@ -76,7 +102,7 @@
 				else
 					$request.=",".$key."=:".$key;
 			}
-			$this->request($request, $array_where);
+			$this->request($request, $array_where, $array_update);
 		}
 		public function create($name_table, $array_create){
 			foreach ($array_create as $key => $value)
