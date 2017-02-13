@@ -19,7 +19,7 @@ class Controller_User
 		return $clef;
 	}
 	public function isGood(){
-		return (nomIsGood() && prenomIsGood() && codeIsGood() && droitsIsGood() && infoIdIsGood());
+		return ($this->nomIsGood() && $this->prenomIsGood() && $this->codeIsGood() && $this->droitsIsGood() && $this->infoIdIsGood());
 	}
 	public function nomIsGood(){
 		if(!empty($_user->getNom()))

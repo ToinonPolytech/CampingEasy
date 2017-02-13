@@ -9,7 +9,7 @@ class Controller_Reservation
 		$this->_reservation=$reservation;
 	}
 	public function isGood(){
-		return (idActivitesIsGood() && idUserIsGood() && idEquipeIsGood() && nbrPersonneIsGood());
+		return ($this->idActivitesIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood());
 	}
 	public function idActivitesIsGood(){
 		if (!empty($_reservation->getIdActivite()))

@@ -12,8 +12,8 @@ class Controller_PbTech {
 		$this->_PbTech=$pbTech; 	
 	}
 	public function isGood(){
-		return(idUserIsGood() && timeCreatedIsGood() && timeEstimatedIsGood() 
-		&& descriptionIsGood() && isBungalowIsGood() && solvedIsGood()); 
+		return($this->idUserIsGood() && $this->timeCreatedIsGood() && $this->timeEstimatedIsGood() 
+		&& $this->descriptionIsGood() && $this->isBungalowIsGood() && $this->solvedIsGood()); 
 		
 	}
 

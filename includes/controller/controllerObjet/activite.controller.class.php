@@ -14,10 +14,10 @@ class Controller_Activite {
 	
 	public function isGood(){
 		
-		return(timeStartIsGood() && dureeIsGood() && nomIsGood() 
-		&& descriptifIsGood() && ageIsGood() && lieuIsGood() &&
-		typeIsGood() && placesLimIsGood() && prixIsGood() &&
-		idOwnerIsGood() && pointsIsGood()); 
+		return($this->timeStartIsGood() && $this->dureeIsGood() && $this->nomIsGood() 
+		&& $this->descriptifIsGood() && $this->ageIsGood() && $this->lieuIsGood() &&
+		$this->typeIsGood() && $this->placesLimIsGood() && $this->prixIsGood() &&
+		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()); 
 		
 	}
 	
@@ -329,10 +329,14 @@ class Controller_Activite {
 	}
 		
 			
+	public function mustBeReservedIsGood(){
+		if ($act->getMustBeReserved()==0 || $act->getMustBeReserved()==1) 
+			return true;
 		
-	}
+		echo "ERREUR : Vous devez indiquer si l'activité doit être réserver ou non.";
+		return false;
+	}	
 }
- 
 
 
 

@@ -9,7 +9,7 @@ class Controller_PbTechInfo{
 	}
 	public function isGood(){
 		// On ne vérifie pas le time, car le time n'est pas envoyé par le client mais géré depuis le serveur
-		return(idIsGood() && idPbTechIsGood() && idUserIsGood() && messageIsGood()); 
+		return($this->idIsGood() && $this->idPbTechIsGood() && $this->idUserIsGood() && $this->messageIsGood()); 
 	}
 	public function idIsGood(){
 		return ($this->_PbTechInfo->getId()==NULL && is_numeric($this->_PbTechInfo->getId()));

@@ -12,7 +12,7 @@ class Controller_Partenaire
 	}
 	
 	public function isGood(){
-		return (nomIsGood() && libelleIsGood() && mailIsGood() && siteWebIsGood() && telephoneIsGood());
+		return ($this->nomIsGood() && $this->libelleIsGood() && $this->mailIsGood() && $this->siteWebIsGood() && $this->telephoneIsGood());
 	}
 	
 	

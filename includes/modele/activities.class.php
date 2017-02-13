@@ -18,6 +18,7 @@ class Activite
 	private $_prix;
 	private $_idOwner;
 	private $_points;	
+	private $_mustBeReserved;
 	private $_deleted;
 	/*données : 
 	-id : Int => clef primaire 
@@ -34,8 +35,9 @@ class Activite
 	-placesLim : (type=réservable) Int  => nombre de places limites réservables 
 	-prix : (type= payante) float => prix par personnes de l'activité 
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
+	_mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
 	*/
-	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $idLieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL) {
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $idLieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -52,6 +54,7 @@ class Activite
 			$this->_prix =  $prix;
 			$this->_idOwner = $idOwner;
 			$this->_points = $points;
+			$this->_mustBeReserved = $mustBeReserved;
 		}
 		else
 		{
@@ -71,6 +74,7 @@ class Activite
 			$this->_prix =  $data['prix'];
 			$this->_idOwner = $data['idOwner'];
 			$this->_points = $data["points"];
+			$this->_mustBeReserved = $data["mustBeReserved"];
 		}
 		$this->_deleted=false;
 	}
@@ -82,11 +86,11 @@ class Activite
 		}	
 		else if ($this->_id!=NULL && $database->count('activites', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
-			$database->update('activites', array("id" => $this->_id), array("time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->update('activites', array("id" => $this->_id), array("mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		}
 		else
 		{
-			$database->create('activites', array("id" => $this->_id, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->create('activites', array("id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
 	}
 	public function getId() {
@@ -137,6 +141,9 @@ class Activite
 	public function getDeleted(){
 		return $this->_deleted;
 	}
+	public function getMustBeReserved(){
+		return $this->_mustBeReserved;
+	}
 	public function setId($id) {
 	   $this->_id = $id;
 	}
@@ -184,6 +191,9 @@ class Activite
 	}
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
+	}
+	public function setMustBeReserved($mbr){
+		$this->_mustBeReserved=$mbr;
 	}
 }
 ?>
