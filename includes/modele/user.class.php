@@ -1,41 +1,49 @@
 <?php 
 require_once("database.class.php");
+require_once("userInfo.class.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/
 abstract class User
 {
 	protected $_id;
-	protected $_infoId;
+	protected $_userInfos;
 	protected $_accessLevel;
 	protected $_droits;
 	protected $_nom;
 	protected $_prenom;
 	protected $_code;
+	protected $_clef;
 	protected $_deleted;
 	
-	public function __construct($id, $infoId=NULL, $accessLevel=NULL, $droits=NULL, $nom=NULL, $prenom=NULL, $code=NULL){
+	public function __construct($id, $infoId=NULL, $accessLevel=NULL, $droits=NULL, $nom=NULL, $prenom=NULL, $code=NULL, $clef=NULL){
 		$this->_id=$id;
 		if ($id==NULL)
 		{
-			$this->_infoId=$infoId;
+			if ($infoId>0)
+				$this->_userInfos=new UserInfo($infoId);
+			else
+				$this->_userInfos=new UserInfo(NULL);
+			
 			$this->_accessLevel=$accessLevel;
 			$this->_droits=$droits;
 			$this->_nom=$nom;
 			$this->_prenom=$prenom;
 			$this->_code=$code;
+			$this->_clef=$clef;
 		}
 		else
 		{
 			$database = new Database();
 			$database->select('users', array("id" => $id));
 			$data=$database->fetch();
-			$this->_infoId=$data["infoId"];
+			$this->_userInfos=new UserInfo($data["infoId"]);
 			$this->_accessLevel=$data["access_level"];
 			$this->_droits=$data["droits"];
 			$this->_nom=$data["nom"];
 			$this->_prenom=$data["prenom"];
 			$this->_code=$data["code"];
+			$this->_clef=$data["clef"];
 		}
 		$this->_deleted=false;
 	}
@@ -52,8 +60,7 @@ abstract class User
 		}
 		else
 		{
-			$clef=$controller->generateKey();
-			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+			$database->create('users', array("clef" => $this->_clef, "id" => $this->_id, "infoId" => $this->_userInfos->getId(), "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
 		}
 	}
 	public function addDroits($which){
@@ -62,14 +69,10 @@ abstract class User
 			$this->_droits+=pow(2,$which); // on lui rajoute
 	}
 	public function getUserInfos(){
-		$userInfo = new UserInfos($this->_infoId);
-		return $userInfo;
+		return $this->_userInfos;
 	}
 	public function getId(){
 		return $this->_id;
-	}
-	public function getInfoId(){
-		return $this->_infoId;
 	}
 	public function getAccessLevel(){
 		return $this->_accessLevel;
@@ -89,11 +92,14 @@ abstract class User
 	public function getDeleted(){
 		return $this->_deleted;
 	}
+	public function getClef(){
+		return $this->_clef;
+	}
 	public function setId($id){
 		$this->_id=$id;
 	}
-	public function setInfoId($infoId){
-		$this->_infoId=$infoId;
+	public function setUserInfos($object){
+		$this->_userInfos=$object;
 	}
 	public function setAccessLevel($accessLevel){
 		$this->_accessLevel=$accessLevel;
@@ -109,6 +115,9 @@ abstract class User
 	}
 	public function setCode($code){
 		$this->_code=$code;
+	}
+	public function setClef($clef){
+		$this->_clef=$clef;
 	}
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;

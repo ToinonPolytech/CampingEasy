@@ -22,10 +22,11 @@ User :
 
 
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
+	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
 
 
 - Problème avec équipe : pas de score de départ donc n'existe pas dans la création du formulaire : soit on fait un formulaire différent pour la création et la modification soit on le passe en hidden 
-
+	Oui mais quand y'a la création coté controller tu mets 0 de base
 
 
 

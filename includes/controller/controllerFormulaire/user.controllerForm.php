@@ -1,35 +1,55 @@
 <?php 
 //controller du formulaire de création ou de modification d'un utilisateur 
-require_once("../../modele/user.class.php");
-require_once("../../modele/user.controller.class.php");
-
-
-	$accessLevel = htmlspecialchars($_POST['accessLevel']);
-
-if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['droits']) && isset($_POST['infoID']) && isset($_POST['accessLevel']){
-	
-	if($access_level == "client" ){
-		$client = new Client(NULL, htmlspecialchars($_POST['infoID']),htmlspecialchars($_POST['accessLevel']) , htmlspecialchars($_POST['droits'])
-		, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom']));
-		$controllerClient = new Controller_Client($client);
-		if($controllerClient->isGood()){
-				$client->saveToDb(); 
-			}
-	}
-	else 
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['numPlace']) && isset($_POST['email']) && isset($_POST['date']) && isset($_POST['type']))
+{
+	require_once("../controllerObjet/userInfos.controller.class.php");
+	if ($_POST['type']=="CLIENT")
 	{
-		if($access_level == "ANIMATEUR" || $access_level == "PATRON" || $access_level == "TECHNICIEN"){
-			$staff = new Staff(NULL, htmlspecialchars($_POST['infoID']),htmlspecialchars($_POST['accessLevel']) , htmlspecialchars($_POST['droits'])
-		, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom']));;
-		$controllerStaff = new Controller_Staff($staff);
-			if($controllerStaff->isGood()){
-				$staff->saveToDb(); 
-			}
+		require_once("../../modele/client.class.php");
+		require_once("../controllerObjet/client.controller.class.php");
+		$user = new Client(NULL, NULL, $_POST['type'], $droits, $_POST['nom'], $_POST['prenom'], NULL);
+		$controllerUser = new Controller_Client($user);
+		$clef = $controllerUser->generateKey();
+		$userInfos = new UserInfo(NULL, $_POST['numPlace'], $_POST['email'], $_POST['date'], $clef);
+		$user->setUserInfos($userInfos);
+		$user->setClef($clef);
+		$controllerUser = new Controller_Client($user); // On met à jour notre controller
+		$controllerUserInfo = new Controller_UserInfo($userInfos);
+		if ($controllerUserInfo->isGood() && $controllerUser->isGood())
+		{
+			$userInfos->saveToDb();
+			$user->saveToDb();
+		}
+		else
+		{
 			
 		}
 	}
-	
+	else
+	{
+		require_once("../../modele/staff.class.php");
+		require_once("../controllerObjet/staff.controller.class.php");
+		$user = new Staff(NULL, NULL, $_POST['type'], $droits, $_POST['nom'], $_POST['prenom'], NULL);
+		$controllerUser = new Controller_Staff($user);
+		$clef = $controllerUser->generateKey();
+		$userInfos = new UserInfo(NULL, $_POST['numPlace'], $_POST['email'], $_POST['date'], $clef);
+		$user->setUserInfos($userInfos);
+		$user->setClef($clef);
+		$controllerUser = new Controller_Staff($user); // On met à jour notre controller
+		$controllerUserInfo = new Controller_UserInfo($userInfos);
+		if ($controllerUserInfo->isGood() && $controllerUser->isGood())
+		{
+			$userInfos->saveToDb();
+			$user->saveToDb();
+		}
+		else
+		{
+			
+		}
+	}
+}
+else
+{
 	
 }
-
-?> 
+?>

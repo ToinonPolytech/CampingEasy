@@ -5,7 +5,7 @@ require_once("../../fonctions/general.php");
 /**
 	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
 **/
-class Controller_User
+abstract class Controller_User
 {
 	private $_user;
 	public function __construct ($user){
@@ -109,11 +109,11 @@ class Controller_User
 	
 	public function infoIdIsGood(){
 		$database = new Database();
-		if(!empty($this->getInfoId()))
+		if(!empty($this->getUserInfos()->getId()))
 		{
-			if($database->count('userinfos', array("id" => $this->getInfoId())))
+			if($database->count('userinfos', array("id" => $this->getUserInfos()->getId())))
 			{
-					return true;
+				return true;
 			}
 			else
 			{
@@ -126,9 +126,6 @@ class Controller_User
 			echo "ERREUR : aucun id correspondant aux infos de l'utilisateur n'ont été entrées  ";
 			return false; 
 		}
-		
-		
-		
 	}
 	/**
 		Exemple : can(CAN_CREATE_SUBACCOUNT); grâce au fichier config.php cela donne la puissance adéquate et tout est géré automatiquement.

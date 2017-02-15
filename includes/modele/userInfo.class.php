@@ -1,10 +1,7 @@
 <?php 
-
 require_once("database.class.php");
-/**
-	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
-**/
-abstract class User
+
+class UserInfo
 {
 	protected $_numPlace;
 	protected $_email;
@@ -19,14 +16,14 @@ abstract class User
 		{
 			$this->_numPlace=$numPlace;
 			$this->_email=$email;
+			$this->_solde=0;
 			$this->_timeDepart=$timeDepart;
-			$this->_clef=$clef;
-			
+			$this->_clef=$clef;		
 		}
 		else
 		{
 			$database = new Database();
-			$database->select('users', array("id" => $id));
+			$database->select('usersinfos', array("id" => $id));
 			$data=$database->fetch();
 			$this->_numPlace=$data["emplacement"];
 			$this->_email=$data["email"];
@@ -50,8 +47,8 @@ abstract class User
 		}
 		else
 		{
-			$clef=$controller->generateKey();
-			$database->create('users', array("clef" => $clef, "id" => $this->_id), array("emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart);
+			$database->create('users', array("clef" => $this->_clef, "id" => $this->_id, "emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart);
+			$this->_id=$database->lastInsertId; // Ca marche ça ?
 		}
 	}
 	
