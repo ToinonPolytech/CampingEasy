@@ -1,15 +1,15 @@
 <?php
 
-require_once("../../modele/database.class.php");
-require_once("../../modele/activite.class.php");
-require_once("../../fonctions/general.php");
+require_once("/../../modele/database.class.php");
+require_once("/../../modele/activities.class.php");
+require_once("/../../fonctions/general.php");
 
 
 class Controller_Activite {
 	
-	private $_act;
+	private $act;
 	public function __construct ($act){
-		this->act=$act; 
+		$this->act=$act; 
 	}
 	
 	public function isGood(){
@@ -24,10 +24,10 @@ class Controller_Activite {
 	
 	
 	public function timeStartIsGood(){
-		if(!empty($act->getTimeStart())){
-			if(is_numeric($act->getTimeStart())
+		if(!empty($this->act->getTimeStart())){
+			if(is_numeric($this->act->getTimeStart()))
 			{
-				if($act->getTimeStart()>time()))
+				if($this->act->getTimeStart()>time())
 				{
 					return true;
 					
@@ -46,17 +46,17 @@ class Controller_Activite {
 		}
 		else 
 		{ 
-			echo "ERREUR : La date de début d'activité est vide "
+			echo "ERREUR : La date de début d'activité est vide ";
 			return false; 
 		}
 		
 	}
 	
 	public function dureeIsGood(){
-		if(!empty($act->getDuree()))
-		{	if(is_numeric($act->getDuree()))
+		if(!empty($this->act->getDuree()))
+		{	if(is_numeric($this->act->getDuree()))
 			{
-				if($act->getDuree()>0)
+				if($this->act->getDuree()>0)
 				{
 					return true; 					
 				}
@@ -80,10 +80,10 @@ class Controller_Activite {
 		
 	}
 	public function nomIsGood(){
-		if(!em	pty($act->getNom()))
+		if(!empty($this->act->getNom()))
 		{
-			if((strlen($act->getNom())<40) &&
-		strlen($act->getNom)>3)
+			if((strlen($this->act->getNom())<40) &&
+		strlen($this->act->getNom)>3)
 			{
 			return true;
 			}
@@ -92,6 +92,7 @@ class Controller_Activite {
 				echo 'ERREUR : Le nom doit contenir entre 3 et 40 caractères';
 				return false;
 			}
+		}
 		else
 		{
 			echo 'ERREUR : Le nom de l activité est vide';
@@ -99,13 +100,13 @@ class Controller_Activite {
 		}
 		
 				
-		}
+		
 		
 	}
 	public function descriptifIsGood(){
-		if(!empty($act->getDescriptif()))
+		if(!empty($this->act->getDescriptif()))
 		{
-			if((strlen($act->getDescriptif())>=20) && strlen($act->getDescriptif())=<300))
+			if((strlen($this->act->getDescriptif())>=20) && strlen($this->act->getDescriptif())<=300)
 			{
 				return true;
 			}
@@ -126,17 +127,17 @@ class Controller_Activite {
 	
 	public function ageIsGood(){
 		
-		if(is_int($act->getAgeMin()) && is_int($act->getAgeMax()))
+		if(is_int($this->act->getAgeMin()) && is_int($this->act->getAgeMax()))
 		{
-			if(($act->getAgeMin()<$act->getAgeMax()) && ($act->getAgeMin()>=0) && ($act->getAgeMax()<100))
+			if(($this->act->getAgeMin()<$this->act->getAgeMax()) && ($this->act->getAgeMin()>=0) && ($this->act->getAgeMax()<100))
 			{
-				if(empty($act->getAgeMin()))
+				if(empty($this->act->getAgeMin()))
 				{
-					$act->getAgeMin()=0;
+					$this->act->setAgeMin(0);
 				}
-				if(empty($act->getAgeMax()))
+				if(empty($this->act->getAgeMax()))
 				{
-					$act->getAgeMax()=0;
+					$this->act->setAgeMax(0);
 				}
 			return true;
 			}
@@ -158,11 +159,11 @@ class Controller_Activite {
 	
 	public function lieuIsGood(){
 		$database = new Database();
-		if(empty($act->getIdLieu()))
+		if(empty($this->act->getIdLieu()))
 		{ 
-			if(!empty($act->getLieu()))
+			if(!empty($this->act->getLieu()))
 			{
-				if(strlen($act->getLieu())<50 && (strlen($act->getLieu())>4)
+				if(strlen($this->act->getLieu())<50 && (strlen($this->act->getLieu())>4))
 				{
 					return true;
 				}
@@ -179,7 +180,7 @@ class Controller_Activite {
 			}
 		}
 		else{ 
-			if($database->count('lieuCommun', array("id" =>$act->getIdLieu()))
+			if($database->count('lieuCommun', array("id" =>$this->act->getIdLieu())))
 			{
 				return true;
 			} 
@@ -196,9 +197,9 @@ class Controller_Activite {
 		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
 		$database = new Database();
 		
-		if(!empty($act->getType()))
+		if(!empty($this->act->getType()))
 		{ 
-			if($database->count('typeActivite', array("nom" =>$act->getType())==0)
+			if($database->count('typeActivite', array("nom" =>$this->act->getType())==0))
 			{
 				return true;
 			}
@@ -221,10 +222,10 @@ class Controller_Activite {
 	
 	public function placesLimIsGood(){
 		
-		if(!empty($act->getPlacesLim()))
-		{	if(is_int($act->getPlacesLim()))
+		if(!empty($this->act->getPlacesLim()))
+		{	if(is_int($this->act->getPlacesLim()))
 			{
-				if($act->getPlacesLim()>=0)
+				if($this->act->getPlacesLim()>=0)
 				{
 					return true; 					
 				}
@@ -252,10 +253,10 @@ class Controller_Activite {
 	}
 	public function prixIsGood(){
 		
-		if(!empty($act->getPrix()))
-		{	if(is_numeric($act->getPrix()))
+		if(!empty($this->act->getPrix()))
+		{	if(is_numeric($this->act->getPrix()))
 			{
-				if($act->getPrix()>0)
+				if($this->act->getPrix()>0)
 				{
 					return true; 					
 				}
@@ -282,14 +283,14 @@ class Controller_Activite {
 	
 	public function idOwnerIsGood(){
 		
-		if(is_int($act->getIdOwner()))
+		if(is_int($this->act->getIdOwner()))
 		{
-			if($database->count('users', array("id" => $act->getIdOwner())==1))
+			if($database->count('users', array("id" => $this->act->getIdOwner())==1))
 			{
 				return true; 					
 			}
 			else
-			{ echo "ERREUR : Le créateur de l'activité n'existe pas "
+			{ echo "ERREUR : Le créateur de l'activité n'existe pas ";
 			  return false; 
 			}
 		}
@@ -306,13 +307,14 @@ class Controller_Activite {
 	}
 	public function pointsIsGood(){
 		
-		if(is_int($act->getPoints()))
+		if(is_int($this->act->getPoints()))
 		{
-			if($act->getPoints()>=0 && $act->getPoints()<1000000000)
+			if($this->act->getPoints()>=0 && $this->act->getPoints()<1000000000)
 			{	
-				if(empty($act->getPoints()){
+				if(empty($this->act->getPoints()))
+				{
 					
-					$act->getPoints()=0;
+					$this->act->setPoints(0);
 				}
 				return true; 					
 			}
@@ -330,7 +332,7 @@ class Controller_Activite {
 		
 			
 	public function mustBeReservedIsGood(){
-		if ($act->getMustBeReserved()==0 || $act->getMustBeReserved()==1) 
+		if ($this->act->getMustBeReserved()==0 || $this->act->getMustBeReserved()==1) 
 			return true;
 		
 		echo "ERREUR : Vous devez indiquer si l'activité doit être réserver ou non.";

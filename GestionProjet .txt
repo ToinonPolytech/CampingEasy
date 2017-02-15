@@ -18,14 +18,13 @@ User :
 	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
 					- création user avec son id ? même problème que pour activité ? 
 					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
-- Les infosIDUser sont la sous classe correspondant aux infos en fonction du type de user ? dans le controller on vérifie qu'elles n'existent pas déjà ou qu'elles existent ? 
-
-Problème technique : 
--	Gérer l'Ajout des photos du problème technique : quel procédé en formulaire ? quelle méthode de stockage ? 
 
 
 
+- Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
 
+
+- Problème avec équipe : pas de score de départ donc n'existe pas dans la création du formulaire : soit on fait un formulaire différent pour la création et la modification soit on le passe en hidden 
 
 
 
@@ -33,17 +32,17 @@ Problème technique :
 
 
 TODO (les petites choses à ne pas oublier) :
-- supprimer les deleted dans les controller de formulaire 
--gérer les formats date et strtotime (fait dans problemetechnique.controller.form mais pas dans act )
+
+-gérer les formats date et strtotime (a faire surtout dans activité )
 - ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
-- A vérifier : les require dans le controller du formulaire 
-- modifs du type des activité : à faire dans les controller et modele 
+- A vérifier : tous les require 
+- modifier tous les controller pour que l'objet fonctionne 
+- page d'ajout user 
+- Gérer les authentifications et l'affichage des pages en fonctions ainsi que la récupération des ID pour les objets en ayant besoin (équipe, activité .. )
 
-- gérer le solved d'un pb technique //done ?? 
 
-	Au niveau DB : 
-		- Rajouter IDUser au partenaire 
-		- Ajouter catégorie pour l'activité (sportive, intellectuelle .. )
+
+	Ajout DB : 
 		- Rajouter gestion des photos problème technique 
 		-Ajout d'un type user partenaire 
 

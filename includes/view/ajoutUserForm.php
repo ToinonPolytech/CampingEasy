@@ -4,13 +4,14 @@
 	
 	require_once("/../fonctions/general.php");
 	require_once("/../modele/database.class.php");
+	
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
-	<h3>Créer votre activité ! </h3><br/>
+	<h3>Ajoutez un utilisateur  </h3><br/>
 	<form role="form"  method="post">
 		<div class="form-group">
-			<label for="timeStart">Date et heure du début de l'activité</label><br/>
-			<input class="form-control" type="datetime" name="timeStart" id="timeStart"/> <br />
+			<label for="timeStart">Numéro d'emplacement </label><br/>
+			<input class="form-control" type="datetime" name="numPlace" id="timeStart"/> <br />
 			<label for="nom">Nom de l'activité</label><br/>
 			<input class="form-control" type="text" name="nom" id="nom"/> <br />
 			<label for="descriptif">Donnez une description de votre activité</label><br/>
@@ -50,7 +51,7 @@
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" id="points"/><br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', {nom : $('#nom').val()}, '#form-equipe', 'prepend'); return false;">Créer</button>
+			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/user.controllerForm.php', {nom : $('#nom').val()}, '#form-equipe', 'prepend'); return false;">Créer</button>
 		</div>
 	</form>
 </div>

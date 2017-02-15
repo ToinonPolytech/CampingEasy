@@ -22,9 +22,9 @@ class Controller_User
 		return ($this->nomIsGood() && $this->prenomIsGood() && $this->codeIsGood() && $this->droitsIsGood() && $this->infoIdIsGood());
 	}
 	public function nomIsGood(){
-		if(!empty($_user->getNom()))
+		if(!empty($this->getNom()))
 		{
-			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getNom()))
+			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$this->getNom()))
 			{
 					return true;
 			}
@@ -43,9 +43,9 @@ class Controller_User
 	}
 	
 	public function prenomIsGood(){
-		if(!empty($_user->getPrenom()))
+		if(!empty($this->getPrenom()))
 		{
-			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_user->getPrenom()))
+			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$this->getPrenom()))
 			{
 					return true;
 			}
@@ -66,7 +66,7 @@ class Controller_User
 	public function codeIsGood(){
 		if(!empty($_user->getCode()))
 		{
-			if(preg_match("#^[0-9]+{4}$#", $_user->getCode()))
+			if(preg_match("#^[0-9]+{4}$#", $this->getCode()) || $this->getCode()==NULL)
 			{
 					return true;
 			}
@@ -86,9 +86,9 @@ class Controller_User
 		
 	
 	public function droitsIsGood(){
-		if(!empty($_user->getDroits()))
+		if(!empty($this->getDroits()))
 		{
-			if(preg_match("#^[0-9]+{1,255}$#", $_user->getDroits()))
+			if(preg_match("#^[0-9]+{1,255}$#", $this->getDroits()))
 			{
 					return true;
 			}
@@ -109,9 +109,9 @@ class Controller_User
 	
 	public function infoIdIsGood(){
 		$database = new Database();
-		if(!empty($_user->getInfoId()))
+		if(!empty($this->getInfoId()))
 		{
-			if($database->count('userinfos', array("id" => $_user->getInfoId())))
+			if($database->count('userinfos', array("id" => $this->getInfoId())))
 			{
 					return true;
 			}
@@ -135,7 +135,7 @@ class Controller_User
 	**/
 	public function can($which){
 		$etat=false;
-		$droits = $_user->getDroits();
+		$droits = $this->getDroits();
 		$p=0;$n=1;
 		while ($n<$droits) { $n*=2; $p++; }
 		if ($n>$droits) { $p--; $n/=2; }

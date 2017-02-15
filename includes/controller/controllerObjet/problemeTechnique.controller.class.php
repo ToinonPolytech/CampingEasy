@@ -23,7 +23,7 @@ class Controller_PbTech {
 		{
 			if($is_int($_PbTech->getIdUser()))
 			{
-				if($database->count('problemes_technique', array("id" => $_PbTech->getIdUser())==1)
+				if($database->count('problemes_technique', array("id" => $_PbTech->getIdUser())==1))
 				{
 					return true;
 				}
@@ -47,7 +47,7 @@ class Controller_PbTech {
 	}
 	
 	public function timeIsGood(){
-		if(!empty($_PbTech->getTimeCreated()) && isset($_PbTech->getTimeEstimated()))
+		if(!empty($_PbTech->getTimeCreated()) )
 		{
 			if($_PbTech->getTimeCreated()<=time())
 			{
@@ -77,7 +77,7 @@ class Controller_PbTech {
 		}
 		else
 		{
-			echo "ERREUR : la date de création est vide ou la date de passage estimée n'existe pas ";
+			echo "ERREUR : la date de création est vide  ";
 			return false; 
 			
 		}
@@ -102,9 +102,9 @@ class Controller_PbTech {
 		}
 	}
 	public function isBungalowIsGood(){
-		if(!empty($_PbTech->getIsBungalow())
+		if(!empty($_PbTech->getIsBungalow()))
 		{
-			if(is_bool($_PbTech->getIsBungalow())
+			if(is_bool($_PbTech->getIsBungalow()))
 			{
 				return true;
 				

@@ -3,28 +3,28 @@
 require_once("../../modele/user.class.php");
 require_once("../../modele/user.controller.class.php");
 
-/***
-	Il faudra revoir toute cette page. Et qu'on en discute 
-**/
 
-
-$nom = htmlspecialchars($_POST['nom']);
-	$prenom = htmlspecialchars($_POST['prenom']); 
-	$droits = htmlspecialchars($_POST['droits']); 
-	$infosId = htmlspecialchars($_POST['infosId']);
 	$accessLevel = htmlspecialchars($_POST['accessLevel']);
 
-if(isset($nom) && isset($prenom) && isset($droits) && isset($infosId) && isset($accesLevel){
-	//partie prototype : je ne sais pas comment on gère tout ça 
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['droits']) && isset($_POST['infoID']) && isset($_POST['accessLevel']){
+	
 	if($access_level == "client" ){
-		$client = new Client($infoId, $accessLevel, $droits, $nom, $prenom, $code);
-		$client->saveToDb();
+		$client = new Client(NULL, htmlspecialchars($_POST['infoID']),htmlspecialchars($_POST['accessLevel']) , htmlspecialchars($_POST['droits'])
+		, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom']));
+		$controllerClient = new Controller_Client($client);
+		if($controllerClient->isGood()){
+				$client->saveToDb(); 
+			}
 	}
 	else 
 	{
-		if($access_level == "staff"){
-			$staff = new Staff($infoId, $accessLevel, $droits, $nom, $prenom, $code);
-			$staff->saveToDb(); 
+		if($access_level == "ANIMATEUR" || $access_level == "PATRON" || $access_level == "TECHNICIEN"){
+			$staff = new Staff(NULL, htmlspecialchars($_POST['infoID']),htmlspecialchars($_POST['accessLevel']) , htmlspecialchars($_POST['droits'])
+		, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom']));;
+		$controllerStaff = new Controller_Staff($staff);
+			if($controllerStaff->isGood()){
+				$staff->saveToDb(); 
+			}
 			
 		}
 	}

@@ -7,6 +7,7 @@
 			<label for="isBungalow">Le problème se passe dans mon bungalow ?</label><br/>
 			<input type="radio" name="isBungalow" value="true" id="oui" checked="checked" />Oui
 			<input type="radio"  name="isBungalow" value="false" id="non" />Non<br/>
+			<input type="radio"  name="isBungalow" value="false" id="non" />Non<br/>
 			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/problemeTechnique.controllerForm.php', {nom : $('#nom').val(), isBungalow :  $('#isBungalow').val()}, '#form-pbt', 'prepend'); return false;">Signaler</button>
 		</div>
 	</form>

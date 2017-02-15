@@ -12,7 +12,7 @@ class Controller_Equipe
 		return ($this->nomIsGood() && $this->scoreIsGood());
 	}
 	public function nomIsGood(){
-		if(!empty($_equipe->getNom() || preg_match("#^[a-zA-Z0-9]+{3,40}$#",$_equipe->getNom()) ))
+		if(!empty($this->_equipe->getNom() || preg_match("#^[a-zA-Z0-9]+{3,40}$#",$this->_equipe->getNom()) ))
 		{
 			return true;
 		}
@@ -26,7 +26,7 @@ class Controller_Equipe
 	
 	public function scoreIsGood(){
 		
-		if(!empty($_equipe->getScore()) ||  preg_match("#^[0-9]+{1,255}$#",$_equipe->getScore()))
+		if(!empty($this->_equipe->getScore()) ||  preg_match("#^[0-9]+{1,255}$#",$this->_equipe->getScore()))
 		{
 				return true;
 		}
