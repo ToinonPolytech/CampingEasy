@@ -32,7 +32,7 @@ class Controller_UserInfo
 	public function emailIsGood(){
 		if(!empty($this->userInfo->getEmail()))
 		{
-			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->userInfo->getEmail())) //format du mail 
+			if(true /*preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->userInfo->getEmail())*/) //format du mail 
 			{
 				return true;
 			}

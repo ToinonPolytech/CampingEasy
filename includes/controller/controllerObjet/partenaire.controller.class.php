@@ -17,12 +17,12 @@ class Controller_Partenaire
 	
 	
 	public function nomIsGood(){
+	echo "nom : ",$this->partenaire->getNom();
 	
-	
-	if(!empty($partenaire->getNom()))
+	if(!empty($this->partenaire->getNom()))
 		{
-			if((strlen($partenaire->getNom())<40) &&
-		strlen($partenaire->getNom())>3)
+			if((strlen($this->partenaire->getNom())<40) &&
+		strlen($this->partenaire->getNom())>3)
 			{
 			return true;
 			}
@@ -31,6 +31,7 @@ class Controller_Partenaire
 				echo 'ERREUR : Le nom doit du partenaire contenir entre 3 et 40 caractères';
 				return false;
 			}
+		}
 		else
 		{
 			echo 'ERREUR : Le nom du partenaire est vide';
@@ -38,15 +39,15 @@ class Controller_Partenaire
 		}
 		
 				
-		}
+		
 	
 		
 	}
 	public function libelleIsGood(){
 		
-		if(!empty($partenaire->getLibelle()))
+		if(!empty($this->partenaire->getLibelle()))
 		{
-			if((strlen($partenaire->getLibelle())>=20) && strlen($partenaire->getLibelle())=<300))
+			if((strlen($this->partenaire->getLibelle())>=20) && strlen($this->partenaire->getLibelle())<=300)
 			{
 				return true;
 			}
@@ -65,9 +66,9 @@ class Controller_Partenaire
 		
 	}
 	public function mailIsGood(){
-		if(!empty($partenaire->getMail()))
+		if(!empty($this->partenaire->getMail()))
 		{
-			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $partenaire->getMail())) //format voulu du mail en regexp
+			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->partenaire->getMail())) //format voulu du mail en regexp
 			{
 				return true;
 			}
@@ -78,61 +79,52 @@ class Controller_Partenaire
 		}
 		else
 		{
-			echo "ERREUR : le mail n'est n'est pas passé en paramètre "
+			echo "ERREUR : le mail n'est n'est pas passé en paramètre ";
 		}
 		return false;
 	}
 	public function siteWebIsGood(){
-		if(isset($partenaire->getSiteWeb()))
+		
+		if(empty($this->partenaire->getSiteWeb()))
 		{
-			if(empty($partenaire->getSiteWeb()))
-			{
-				$siteWeb= NULL; 
-			}
-			if(preg_match("#^http://[a-z0-9._/-]+$#", $partenaire->getSiteWeb()))
-			{
-				return true;
-			}
-			else
-			{
-				echo "ERREUR : le site web n'a pas le bon format ";
-				return false;
-			}
+			$siteWeb= NULL; 
 		}
-		else 
+		if(preg_match("#^http://[a-z0-9._/-]+$#", $this->partenaire->getSiteWeb()))
 		{
-			echo "ERREUR : le site web n'est pas passé en paramètre  ";
-			return false; 
+			return true;
 		}
+		else
+		{
+			echo "ERREUR : le site web n'a pas le bon format ";
+			
+		}
+		return false;
 		
 	}
+		
+	
 	
 	
 	
 	
 	public function telephoneIsGood(){
-		if(isset($partenaire->getTelephone()))
-		{
-			if(empty($partenaire->getTelephone()))
+	
+			if(empty($this->partenaire->getTelephone()))
 			{
-				$partenaire->getTelephone()= NULL; 
+				$this->partenaire->setTelephone(NULL); 
 			}
-			if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $partenaire->getTelephone()))
+			if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $this->partenaire->getTelephone()))
 			{
 				return true;
 			}
 			else
 			{
 				echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
-				return false;
+				
 			}
-		}
-		else 
-		{
-			echo "ERREUR : le numero de téléphone  n'est pas passé en paramètre  ";
-			return false; 
-		}
 		
-	}
+		
+}
+	
 }
 ?>
