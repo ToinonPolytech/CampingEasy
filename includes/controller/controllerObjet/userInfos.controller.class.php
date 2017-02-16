@@ -8,11 +8,11 @@ class Controller_UserInfo
 	}
 	
 	public function isGood(){
-		return ($this->numPlaceIsGood() && $this->emailIsGood() && $this->soldeIsGood() && $this->time_departIsGood() && $this->clefIdIsGood());
+		return ($this->numPlaceIsGood() && $this->emailIsGood() && $this->soldeIsGood() && $this->time_departIsGood() && $this->clefIsGood());
 	}
 	
 	public function numPlaceIsGood(){
-		if(!empty($this->userInfo->getNumPlace())){
+		if(!empty($this->userInfo->getEmplacement())){
 			return true; 
 			
 			
@@ -30,9 +30,9 @@ class Controller_UserInfo
 	}
 	
 	public function emailIsGood(){
-		if(!empty($this->userInfo->getMail()))
+		if(!empty($this->userInfo->getEmail()))
 		{
-			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->userInfo->getMail())) //format du mail 
+			if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->userInfo->getEmail())) //format du mail 
 			{
 				return true;
 			}
@@ -43,16 +43,16 @@ class Controller_UserInfo
 		}
 		else
 		{
-			echo "ERREUR : le mail n'est n'est pas passé en paramètre "
+			echo "ERREUR : le mail n'est n'est pas passé en paramètre ";
 		}
 		return false;
 	}
 		
-	}
+	
 	public function soldeIsGood(){
-		if(!empty($this->userInfo->getSolde()))
+		if(!empty($this->userInfo->getSolde()) || $this->userInfo->getSolde()==0)
 		{
-			if(is_numeric($this->userInfo->getSolde())
+			if(is_numeric($this->userInfo->getSolde()))
 			{
 				if($this->userInfo->getSolde()>=0)
 				{
@@ -81,13 +81,13 @@ class Controller_UserInfo
 	public function time_departIsGood(){
 		if(!empty($this->userInfo->getTimeDepart()))
 		{
-			if($this->userInfo->getTimeDepart()>time())
+			if ($this->userInfo->getTimeDepart()>time())
 			{
 				return true;
 			}
 			else 
 			{
-				echo "ERREUR : la date de départ ne peut être avant la date actuelle ";
+				echo "ERREUR : la date de départ ne peut précéder la date actuelle ";
 			}
 		}
 		else
@@ -98,8 +98,11 @@ class Controller_UserInfo
 	}
 	
 	public function clefIsGood(){
-		
-		return true; 
-		
+		if ($this->userInfo->getClef()!=NULL)
+			return true;
+
+		echo "ERREUR : la clef ne peut être vide  ";
+		return false;
 	}
+}
 ?> 

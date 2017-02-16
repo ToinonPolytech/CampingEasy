@@ -9,9 +9,9 @@
 			<label for="numPlace">Numéro d'emplacement </label><br/>
 			<input class="form-control" type="number" name="numPlace" id="numPlace"/> <br />
 			<label for="email">Adresse mail</label><br/>
-			<input class="form-control" type="mail" name="email" id="email"/> <br />
+			<input class="form-control" type="email" name="email" id="email"/> <br />
 			<label for="date">Date de départ</label><br/>
-			<input class="form-control" type="datetime" name="date" id="date"/> <br />
+			<input id="date" name="date" type="text" ><br />
 			<label for="type">Type du compte</label><br/>
 			<select class="form-control" name="type" id="type">
 				<option value="CLIENT">Client</option>
@@ -27,3 +27,8 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+	$("#date").datetimepicker({
+		format:'d-m-Y H:00'
+	});
+</script>

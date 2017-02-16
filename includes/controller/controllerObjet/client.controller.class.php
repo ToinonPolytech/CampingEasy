@@ -1,17 +1,9 @@
 <?php 
-require_once("../../modele/database.class.php");
-require_once("../../modele/equipe.class.php");
-
-class Controller_Client
+require_once("user.controller.class.php");
+class Controller_Client extends Controller_User
 {
-	private $client;
-	public function __construct ($client){
-		$this->client=$client;
-	}
 
-public function isGood(){
-		return (parent::isGood());
-	}	
+}
 	
 	
 	

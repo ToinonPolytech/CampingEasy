@@ -135,5 +135,8 @@
 			$this->request($request, $array_where);
 			return $this->_objectRequest->fetchColumn();
 		}
+		public function lastInsertId(){
+			return $this->_db->lastInsertId();
+		}
 	}
 ?>

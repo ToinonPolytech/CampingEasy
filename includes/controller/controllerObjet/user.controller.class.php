@@ -8,8 +8,10 @@ require_once("../../fonctions/general.php");
 abstract class Controller_User
 {
 	private $_user;
-	public function __construct ($user){
+	private $_withInfoId;
+	public function __construct ($user, $withInfoId=true){
 		$this->_user=$user;
+		$this->_withInfoId=$withInfoId;
 	}
 	public function generateKey(){
 		$database = new Database();
@@ -19,12 +21,12 @@ abstract class Controller_User
 		return $clef;
 	}
 	public function isGood(){
-		return ($this->nomIsGood() && $this->prenomIsGood() && $this->codeIsGood() && $this->droitsIsGood() && $this->infoIdIsGood());
+		return ($this->nomIsGood() && $this->prenomIsGood() && $this->codeIsGood() && $this->droitsIsGood() && (!$this->_withInfoId || $this->infoIdIsGood()));
 	}
 	public function nomIsGood(){
-		if(!empty($this->getNom()))
+		if(!empty($this->_user->getNom()))
 		{
-			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$this->getNom()))
+			if(preg_match("#[a-zA-Z0-9]{3,40}#",$this->_user->getNom()))
 			{
 					return true;
 			}
@@ -43,9 +45,9 @@ abstract class Controller_User
 	}
 	
 	public function prenomIsGood(){
-		if(!empty($this->getPrenom()))
+		if(!empty($this->_user->getPrenom()))
 		{
-			if(preg_match("#^[a-zA-Z0-9]+{3,40}$#",$this->getPrenom()))
+			if(preg_match("#^[a-zA-Z0-9]{3,40}$#",$this->_user->getPrenom()))
 			{
 					return true;
 			}
@@ -64,31 +66,22 @@ abstract class Controller_User
 	}
 	
 	public function codeIsGood(){
-		if(!empty($_user->getCode()))
+		if(preg_match("#^[0-9]{4}$#", $this->_user->getCode()) || $this->_user->getCode()==NULL)
 		{
-			if(preg_match("#^[0-9]+{4}$#", $this->getCode()) || $this->getCode()==NULL)
-			{
-					return true;
-			}
-			else
-			{
-				echo "ERREUR : le code entré n'est pas de la bonne forme (il doit contenir 4 chiffres )";
-				return false;
-			}
+				return true;
 		}
 		else
 		{
-			echo "ERREUR : le code entré est vide ";
-			return false; 
+			echo "ERREUR : le code entré n'est pas de la bonne forme (il doit contenir 4 chiffres )";
+			return false;
 		}
-		
 	}
 		
 	
 	public function droitsIsGood(){
-		if(!empty($this->getDroits()))
+		if(!empty($this->_user->getDroits()))
 		{
-			if(preg_match("#^[0-9]+{1,255}$#", $this->getDroits()))
+			if(preg_match("#^[0-9]{1,255}$#", $this->_user->getDroits()))
 			{
 					return true;
 			}
@@ -109,9 +102,9 @@ abstract class Controller_User
 	
 	public function infoIdIsGood(){
 		$database = new Database();
-		if(!empty($this->getUserInfos()->getId()))
+		if(!empty($this->_user->getUserInfos()->getId()))
 		{
-			if($database->count('userinfos', array("id" => $this->getUserInfos()->getId())))
+			if($database->count('userinfos', array("id" => $this->_user->getUserInfos()->getId())))
 			{
 				return true;
 			}
@@ -132,7 +125,7 @@ abstract class Controller_User
 	**/
 	public function can($which){
 		$etat=false;
-		$droits = $this->getDroits();
+		$droits = $this->_user->getDroits();
 		$p=0;$n=1;
 		while ($n<$droits) { $n*=2; $p++; }
 		if ($n>$droits) { $p--; $n/=2; }

@@ -39,16 +39,16 @@ class UserInfo
 		$database = new Database();
 		if ($this->_deleted)
 		{
-			$database->delete('users', array("id" => $this->_id));
+			$database->delete('userinfos', array("id" => $this->_id));
 		}	
-		else if ($this->_id!=NULL && $database->count('users', array("id" => $this->_id))) // Existe en db, on update
+		else if ($this->_id!=NULL && $database->count('userinfos', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('users', array("id" => $this->_id), array("emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart, "clef" => $this->_clef));
+			$database->update('userinfos', array("id" => $this->_id), array("emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart, "clef" => $this->_clef));
 		}
 		else
 		{
-			$database->create('users', array("clef" => $this->_clef, "id" => $this->_id, "emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart);
-			$this->_id=$database->lastInsertId; // Ca marche ça ?
+			$database->create('userinfos', array("clef" => $this->_clef, "id" => $this->_id, "emplacement" => $this->_numPlace, "email" => $this->_email, "solde" => $this->_solde, "time_depart" => $this->_timeDepart));
+			$this->_id=$database->lastInsertId(); // Ca marche ça ?
 		}
 	}
 	
