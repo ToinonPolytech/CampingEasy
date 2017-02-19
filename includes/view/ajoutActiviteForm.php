@@ -5,9 +5,9 @@
 	require_once("/../fonctions/general.php");
 	require_once("/../modele/database.class.php");
 ?>
-<div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
+<div class="col-lg-6" style="width:100%;" name="form-act" id="form-act">
 	<h3>Créer votre activité ! </h3><br/>
-	<form role="form"  method="post">
+	<form role="form"  method="post" id="form_act" name="form_act">
 		<div class="form-group">
 			<label for="timeStart">Date et heure du début de l'activité</label><br/>
 			<input class="form-control" type="datetime" name="timeStart" id="timeStart"/> <br />
@@ -47,12 +47,11 @@
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
 			<label for="placesLim" class="mustBeReserved_hide" style="display:none;">Nombre de places</label><br/>
 			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" id="placesLim"  style="display:none;"/><br/>
-				<input type="hidden" name="placesLim" value="0"> <?php // méthode barbare pour éviter d'avoir les places lim n'existant pas, à vérifier ?>
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" id="points"/><br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', {nom : $('#nom').val()}, '#form-equipe', 'prepend'); return false;">Créer</button>
+			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
 	</form>
 </div>
