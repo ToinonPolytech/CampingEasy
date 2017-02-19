@@ -31,6 +31,7 @@
 				
 			
 			$array_where2=array();
+			if($array_where!=NULL){ //modif freestyle pour éviter erreur sur un tableau null 
 			foreach ($array_where as $key => $value)
 			{
 				if (strstr($request, "WHERE"))
@@ -45,7 +46,7 @@
 					$request.=$key."=:".$key;
 					$array_where2[$key]=$value;
 				}
-			}
+			}}
 			if ($array_update!=NULL)
 			{
 				$array_where2=array_merge($array_where2, $array_update);
@@ -91,6 +92,13 @@
 			$request.=" FROM ".$name_table;
 			$this->request($request, $array_where);
 		}
+		
+		
+		
+		
+		
+		
+		
 		public function delete($name_table, $array_where){
 			$request="DELETE FROM ".$name_table;
 			$this->request($request, $array_where);

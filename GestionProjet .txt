@@ -2,23 +2,17 @@
 
 
 
-- Faire un menu déroulant avec : - 100 valeurs (ageMin et ageMax )
+- Faire un menu déroulant avec : 
 								- Des valeurs de la base données (tableau avec les lieux par exemple) => for (...) { echo "<option value='$i'>".$i."</option>"; }
 while ($data=$request->fetch()) { }
 for ($i=0;$i<100;$i++)
 								
+-Modif pas sur dans la database (fonction request) : lorsque je passais un aaray_where null j'avais erreur 
 
+- Pour les lieux il doit être possible de réserver un lieu mais pas tous (terrain de tennis par exemple )
 
-
-
-
-User : 
-
-- Besoin d'explications sur la gestion générale des users (controller formulaire et objet et modele )
-	Q pour user : -access_level = admin / acceuil / client ... ? passage en formulaire lors de la création d'un user ? 
-					- création user avec son id ? même problème que pour activité ? 
-					- je ne me souviens plus comment on gère l'héritage pour la création d'un nouvel objet (appel dans le controller de la bonne class epour création admin ou client)
-
+- Pour les champs non passés en paramètres dans les formulaires (le score de l'équipe lors de la création par exemple )
+ on utilise un hidden pour faire apsser la donnée à 0 ou on fait if(!isset(var)){var = 0 } dans le controllerform  ? 
 
 
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
@@ -29,7 +23,7 @@ User :
 	Oui mais quand y'a la création coté controller tu mets 0 de base
 
 
-
+- Affichage des données de la db : par un objet ou directement ? 
 
 
 TODO (les petites choses à ne pas oublier) :

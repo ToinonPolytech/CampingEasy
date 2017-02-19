@@ -12,12 +12,12 @@ class Controller_Reservation
 		return ($this->idActivitesIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood());
 	}
 	public function idActivitesIsGood(){
-		if (!empty($_reservation->getIdActivite()))
+		if (!empty($this->_reservation->getIdActivite()))
 		{
-			if (is_numeric($_reservation->getIdActivite()))
+			if (is_numeric($this->_reservation->getIdActivite()))
 			{
 				$database=new Database();
-				if ($database->count('activities', array("id" => $_reservation->getIdActivite()))==1)
+				if ($database->count('activities', array("id" => $this->_reservation->getIdActivite()))==1)
 					return true;
 				else
 					echo "ERREUR : L'activité n'existe pas.";
@@ -31,12 +31,12 @@ class Controller_Reservation
 		return false;
 	}
 	public function idUserIsGood(){
-		if (!empty($_reservation->getIdUser()))
+		if (!empty($this->_reservation->getIdUser()))
 		{
-			if (is_numeric($_reservation->getIdUser()))
+			if (is_numeric($this->_reservation->getIdUser()))
 			{
 				$database=new Database();
-				if ($database->count('users', array("id" => $_reservation->getIdUser()))==1)
+				if ($database->count('users', array("id" => $this->_reservation->getIdUser()))==1)
 					return true;
 				else
 					echo "ERREUR : Le client n'existe pas.";
@@ -50,10 +50,10 @@ class Controller_Reservation
 		return false;
 	}
 	public function idEquipeIsGood(){
-		if (!empty($_reservation->idEquipe()))
+		if (!empty($this->_reservation->idEquipe()))
 		{
 			$database=new Database();
-			if ($_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $_reservation->getIdActivite()))==1)
+			if ($this->_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $this->_reservation->getIdActivite()))==1)
 				return true;
 			else
 				echo "ERREUR : Ce groupe n'existe pas.";
@@ -64,9 +64,9 @@ class Controller_Reservation
 		return false;
 	}
 	public function nbrPersonneIsGood(){
-		if (!empty($_reservation->getNbrPersonne()))
+		if (!empty($this->_reservation->getNbrPersonne()))
 		{
-			if (is_numeric($_reservation->getNbrPersonne()) && $_reservation->getNbrPersonne()>0 && $_reservation->getNbrPersonne()<15)
+			if (is_numeric($this->_reservation->getNbrPersonne()) && $this->_reservation->getNbrPersonne()>0 && $this->_reservation->getNbrPersonne()<15)
 				return true;
 			else
 				echo "ERREUR : Vous devez rentrer un nombre de personnes entre 1 et 14 pour la réservation.";

@@ -12,6 +12,10 @@
 				<a href="/includes/view/ajoutEquipeForm.php"><i class="fa fa-shopping-cart"></i> Créer une équipe </a>
 				<a href="/includes/view/ajoutPartenaireForm.php"><i class="fa fa-shopping-cart"></i>Ajouter un partenaire </a>
 				<a href="/includes/view/ajoutUserForm.php"><i class="fa fa-shopping-cart"></i>Ajouter un utilisateur </a>
+				<a href="/includes/view/activitesView.php"><i class="fa fa-shopping-cart"></i>Les activités du camping   </a>
+				<a href="/includes/view/activiteView.php"><i class="fa fa-shopping-cart"></i>Voir activité   </a>
+				<a href="/includes/view/mesReservationsView.php"><i class="fa fa-shopping-cart"></i>Mes réservations    </a>
+				
 			</li>
 			
 			

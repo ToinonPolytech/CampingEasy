@@ -42,10 +42,12 @@
 				<option value="SPORTIF">SPORTIF</option>
 				<option value="INTELLECTUEL">INTELLECTUEL</option>
 			</select><br/>
+		
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
 			<label for="placesLim" class="mustBeReserved_hide" style="display:none;">Nombre de places</label><br/>
-			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" id="placesLim" style="display:none;"/><br/>
+			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" id="placesLim"  style="display:none;"/><br/>
+				<input type="hidden" name="placesLim" value="0"> <?php // méthode barbare pour éviter d'avoir les places lim n'existant pas, à vérifier ?>
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
@@ -54,3 +56,8 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+	$("#timeStart").datetimepicker({
+		format:'d-m-Y H:00'
+	});
+</script>
