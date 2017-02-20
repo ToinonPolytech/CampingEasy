@@ -9,19 +9,13 @@ for ($i=0;$i<100;$i++)
 								
 -Modif pas sur dans la database (fonction request) : lorsque je passais un aaray_where null j'avais erreur 
 
-- Pour les lieux il doit être possible de réserver un lieu mais pas tous (terrain de tennis par exemple )
-
-- Pour les champs non passés en paramètres dans les formulaires (le score de l'équipe lors de la création par exemple )
- on utilise un hidden pour faire apsser la donnée à 0 ou on fait if(!isset(var)){var = 0 } dans le controllerform  ? 
-
+- Pour les lieux il doit être possible de réserver un lieu mais pas tous (terrain de tennis par exemple ) => implique qu'une réservation a un type : lieu ou activité 
+-
 
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
 	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
 
-
-- Vérifier que l'équipe n'existe pas déjà 
-
-- Avoir une date d'ouverture des réservations pour une activités (pour éviter de réserver dans 3 mois)
+- Avoir une date d'ouverture des réservations pour une activité (pour éviter de réserver dans 3 mois)
 
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 
@@ -29,18 +23,17 @@ for ($i=0;$i<100;$i++)
 
 TODO (les petites choses à ne pas oublier) :
 
--gérer les formats date et strtotime (a faire surtout dans activité )
-- ajouter l'expression régulière pour le format du numéro de téléphone du mail et  du site web du partenaire dans les deux controller du partenaire 
-- A vérifier : tous les require 
-- modifier tous les controller pour que l'objet fonctionne 
-- page d'ajout user 
 - Gérer les authentifications et l'affichage des pages en fonctions ainsi que la récupération des ID pour les objets en ayant besoin (équipe, activité .. )
-
+- 
 
 
 	Ajout DB : 
-		- Rajouter gestion des photos problème technique 
+		- Rajouter gestion des photos problème technique / activité / partenaire / lieu commun
 		-Ajout d'un type user partenaire 
+		- Reservation lieu commun 
+		- Reservation etat des lieux 
+		- Date d'ouverture et fermeture des réservations pour une activité 
+		
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
 

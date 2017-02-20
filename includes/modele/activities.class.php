@@ -93,7 +93,7 @@ class Activite
 	   return $this->_id;
 	}
 	public function getDate() {
-	   return $this->_date;
+	   return $this->_timeStart;
 	}
 	public function getNom() {
 	   return $this->_nom;
@@ -116,9 +116,8 @@ class Activite
 	public function getLieu() {
 	   return $this->_lieu;
 	}
-	public function getIdLieu(){
-		return $this->_idLieu;
-	}
+	
+	
 	public function getType() {
 	   return $this->_type;
 	}

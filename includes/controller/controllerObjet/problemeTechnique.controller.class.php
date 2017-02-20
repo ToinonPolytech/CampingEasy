@@ -12,61 +12,71 @@ class Controller_PbTech {
 		$this->_PbTech=$pbTech; 	
 	}
 	public function isGood(){
-		return($this->idUserIsGood() && $this->timeCreatedIsGood() && $this->timeEstimatedIsGood() 
+		return($this->idUserIsGood() && $this->timeIsGood()
 		&& $this->descriptionIsGood() && $this->isBungalowIsGood() && $this->solvedIsGood()); 
 		
 	}
 
 	public function idUserIsGood(){
 		$database = new Database(); 
-		if(!empty($_PbTech->getIdUser()))
-		{
-			if($is_int($_PbTech->getIdUser()))
+		
+		if(!empty($this->_PbTech->getIdUser()))
+		{	
+			if(is_numeric($this->_PbTech->getIdUser()))
 			{
-				if($database->count('problemes_technique', array("id" => $_PbTech->getIdUser())==1))
+				if($database->count('users', array("id" => $this->_PbTech->getIdUser())==1))
 				{
 					return true;
 				}
 				else
 				{
 					echo "ERREUR : l'utilisateur créant le problème technique n'existe pas dans la base de données ";
-					return false;
+					
 				}
 			}
 			else 
 			{
 				echo "ERREUR : l'id de l'utilisateur créant le problème technique n'est pas un entier ";
-				return false;
+				
 			}
 		}
 		else 
 		{
 			echo "ERREUR : il n a pas d'utilisateur passé en paramètre dans le formulaire ";
-			return false;
-		}			
+			
+		}	
+		return false;
 	}
 	
 	public function timeIsGood(){
-		if(!empty($_PbTech->getTimeCreated()) )
+		if(!empty($this->_PbTech->getTimeCreated()) )
 		{
-			if($_PbTech->getTimeCreated()<=time())
-			{
-				if($_PbTech->getTimeEstimated()>time())
+			if($this->_PbTech->getTimeCreated()<=time())
+			{	
+				if(!empty($this->_PbTech->getTimeEstimated()))
 				{
-					if($_PbTech->getTimeCreated()<$_PbTech->getTimeEstimated())
+					if($this->_PbTech->getTimeEstimated()>time())
 					{
-						return true;
+						if($this->_PbTech->getTimeCreated()<$this->_PbTech->getTimeEstimated())
+						{
+							return true;
+						}
+						else
+						{
+							echo "ERREUR : la date de passage estimée ne peut être avant la date de création du problème technique ";
+							return false; 
+						}
 					}
-					else
+					else 
 					{
-						echo "ERREUR : la date de passage estimée ne peut être avant la date de création du problème technique ";
+						echo "ERREUR : la date de passage estimée ne peut être avant la dtae actuelle ";
 						return false; 
 					}
 				}
-				else 
+				else
 				{
-					echo "ERREUR : la date de passage estimée ne peut être avant la dtae actuelle ";
-					return false; 
+					$this->_PbTech->setTimeEstimated(-1);
+					return true;
 				}
 			}
 			else 
@@ -84,27 +94,28 @@ class Controller_PbTech {
 		
 	}	
 	public function descriptionIsGood(){
-		if(!empty($_PbTech->getDescription()))
+		if(!empty($this->_PbTech->getDescription()))
 		{
-			if((strlen($_PbTech->getDescription())>20) && (strlen($_PbTech->getDescription())<1000))
+			if((strlen($this->_PbTech->getDescription())>20) && (strlen($this->_PbTech->getDescription())<1000))
 			{
 				return true;
 			}
 			else
 			{	
 				echo "ERREUR : la description doit être comprise entre 21 et 999 caractères ";
-				return false;
+				
 			}
 		}
 		else
 		{	echo "ERREUR : la description du problème technique est vide ";
-			return false;
+			
 		}
+		return false;
 	}
 	public function isBungalowIsGood(){
-		if(!empty($_PbTech->getIsBungalow()))
-		{
-			if(is_bool($_PbTech->getIsBungalow()))
+		if(!empty($this->_PbTech->getIsBungalow()))
+		{	
+			if(is_bool($this->_PbTech->getIsBungalow()))
 			{
 				return true;
 				
@@ -112,18 +123,19 @@ class Controller_PbTech {
 			else
 			{
 				echo "ERREUR : le critère définissant si le problème est dans un bungalow n'est pas du bon type  ";
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo "ERREUR : vous devez préciser si le problème se passe dans un bungalow ou non   ";
-			return false;
+			
 			
 		}
+		return false;
 	}
 	public function solvedIsGood(){
-		if($_PbTech->getSolved()=="NON_RESOLU" || $_PbTech->getSolved()=="RESOLU" || $_PbTech->getSolved()=="EN_COURS")
+		if($this->_PbTech->getSolved()=="NON_RESOLU" || $this->_PbTech->getSolved()=="RESOLU" || $this->_PbTech->getSolved()=="EN_COURS")
 			return true;
 		
 		echo "ERREUR : le type résolu du problème est incorrect   ";

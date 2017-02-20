@@ -24,10 +24,10 @@ class Controller_Activite {
 	
 	
 	public function timeStartIsGood(){
-		if(!empty($this->act->getTimeStart())){
-			if(is_numeric($this->act->getTimeStart()))
+		if(!empty($this->act->getDate())){
+			if(is_numeric($this->act->getDate()))
 			{
-				if($this->act->getTimeStart()>time())
+				if($this->act->getDate()>time())
 				{
 					return true;
 					
@@ -83,7 +83,7 @@ class Controller_Activite {
 		if(!empty($this->act->getNom()))
 		{
 			if((strlen($this->act->getNom())<40) &&
-		strlen($this->act->getNom)>3)
+		strlen($this->act->getNom())>3)
 			{
 			return true;
 			}
@@ -126,20 +126,22 @@ class Controller_Activite {
 	}
 	
 	public function ageIsGood(){
-		
-		if(is_int($this->act->getAgeMin()) && is_int($this->act->getAgeMax()))
-		{
-			if(($this->act->getAgeMin()<$this->act->getAgeMax()) && ($this->act->getAgeMin()>=0) && ($this->act->getAgeMax()<100))
+		if(empty($this->act->getAgeMin()))
 			{
-				if(empty($this->act->getAgeMin()))
-				{
-					$this->act->setAgeMin(0);
-				}
-				if(empty($this->act->getAgeMax()))
-				{
-					$this->act->setAgeMax(0);
-				}
-			return true;
+				$this->act->setAgeMin(0);
+			}
+		if(empty($this->act->getAgeMax()))
+			{
+				$this->act->setAgeMax(0);
+			}
+		
+		
+		if(is_numeric($this->act->getAgeMin()) && is_numeric($this->act->getAgeMax()))
+		{
+			if(($this->act->getAgeMin()>=0) && ($this->act->getAgeMax()<100))
+			{ if(($this->act->getAgeMin()<=$this->act->getAgeMax()) ||  $this->act->getAgeMin()==0 )
+				
+				return true;
 			}
 			else
 			{
@@ -159,9 +161,8 @@ class Controller_Activite {
 	
 	public function lieuIsGood(){
 		$database = new Database();
-		if(empty($this->act->getIdLieu()))
-		{ 
-			if(!empty($this->act->getLieu()))
+		
+		if(!empty($this->act->getLieu()))
 			{
 				if(strlen($this->act->getLieu())<50 && (strlen($this->act->getLieu())>4))
 				{
@@ -170,26 +171,16 @@ class Controller_Activite {
 				else 
 				{
 					echo "ERREUR : le nom du lieu doit être compris entre 4 et 50 caractères  ";
-					return false;
+					
 				}
 			}
 			else 
-			{
-				echo "ERREUR : le champ du lieu est vide";
-				return false;
-			}
-		}
-		else{ 
-			if($database->count('lieuCommun', array("id" =>$this->act->getIdLieu())))
-			{
+			{	$this->act->setLieu("Lieu non précisé");
+				echo "Attention : aucun lieu n'a été précisé. L'activité est enregistrée mais nous vous conseillons d'ajouter un lieu dans Gérer mes activités";
 				return true;
-			} 
-			else
-			{   echo "ERREUR : le lieu proposé n'existe pas encore";
-				return false;
 			}
+		return false;
 		
-		}
 		
 	}
 	
@@ -199,7 +190,7 @@ class Controller_Activite {
 		
 		if(!empty($this->act->getType()))
 		{ 
-			if($database->count('typeActivite', array("nom" =>$this->act->getType())==0))
+			if($database->count('activite', array("nom" =>$this->act->getType())==0))
 			{
 				return true;
 			}
