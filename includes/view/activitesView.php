@@ -1,16 +1,20 @@
 <?php
 require_once("/../modele/database.class.php");
+date_default_timezone_set('Europe/Paris');
 $db= new Database();
-$timeDeb=mktime(0,0,0,date("n"),date("d")-date("w")+1,date("y"));
+$x = date("w")-6;
+if ($x<0)
+	$x+=7;
+
+$timeDeb = mktime(0,0,0,date("n"),date("d")-($x)%7,date("y"));
 $dateDeb = date("d/m/Y", $timeDeb);
-$dateFin = date("d/m/Y", mktime(0,0,0,date("n"),date("d")-date("w")+7,date("y")));
+$dateFin = date("d/m/Y", $timeDeb+7*3600*24);
 ?>
 <div id="titreMois">
     <a href=""><<</a> Semaine du  : <?php echo $dateDeb; ?> au <?php echo $dateFin; ?> <a href="">>></a>
 </div>
 <?php
-	$jourTexte = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
-	$plageH = array('8:00','9:00','10:00','11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00');
+	$jourTexte = array('Samedi', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi');
 	switch(date('m'))
 	{
 		case 1 : $nom_mois = 'Janvier'; break;
@@ -39,7 +43,7 @@ $dateFin = date("d/m/Y", mktime(0,0,0,date("n"),date("d")-date("w")+7,date("y"))
 			for($k=0;$k<7;$k++)
 			{
 				?>
-					<th <?php if ($k==date("w")-1) { ?>style="background:orange;"<?php } ?>><div><?php echo $jourTexte[$k]." ".date("d", mktime(0,0,0,date("n"),date("d")-date("w")+$k+1,date("y"))); ?></div></th>
+					<th <?php if (($k+6)%7==date("w")) { ?>style="background:orange;"<?php } ?>><div><?php echo $jourTexte[$k]." ".date("d", mktime(0,0,0,date("n"),date("d")-($x)%7+$k,date("y"))); ?></div></th>
 				<?php
 			}
 			?>
@@ -58,12 +62,14 @@ $dateFin = date("d/m/Y", mktime(0,0,0,date("n"),date("d")-date("w")+7,date("y"))
 						?>
 						<td>
 							<?php
-								$timeStart=$timeDeb+($j-1)*24*3600+$h*3600;
+								$timeStart=$timeDeb+($j-1)*24*3600+($h)*3600;
 								$timeEnd=$timeStart+3599;
 								$db->select("activities", array("time_start" => array($timeStart, $timeEnd)));
 								while ($data=$db->fetch())
 								{
-									echo "une activité a été detectée";
+									?>
+									<a href='see' onclick="loadToMain('includes/view/activiteView.php', {id : <?php echo $data["id"]; ?>}); return false;"><?php echo $data["nom"]; ?></a>
+									<?php
 								}
 							?>
 						</td>
