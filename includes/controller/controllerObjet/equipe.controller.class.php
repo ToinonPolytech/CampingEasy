@@ -13,8 +13,15 @@ class Controller_Equipe
 	}
 	public function nomIsGood(){
 		if(!empty($this->_equipe->getNom() || preg_match("#^[a-zA-Z0-9]{3,40}$#",$this->_equipe->getNom()) ))
-		{
-			return true;
+		{	$db = new Database();
+			if($db->count('equipe',array('nom' => $this->_equipe->getNom()))==0)
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : une équipe avec ce nom existe déjà";
+			}
 		}
 		else 
 		{

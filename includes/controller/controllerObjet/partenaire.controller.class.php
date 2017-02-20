@@ -17,7 +17,7 @@ class Controller_Partenaire
 	
 	
 	public function nomIsGood(){
-	echo "nom : ",$this->partenaire->getNom();
+	
 	
 	if(!empty($this->partenaire->getNom()))
 		{
@@ -29,16 +29,16 @@ class Controller_Partenaire
 			else 
 			{
 				echo 'ERREUR : Le nom doit du partenaire contenir entre 3 et 40 caractères';
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo 'ERREUR : Le nom du partenaire est vide';
-			return false; 
+			
 		}
 		
-				
+		return false; 		
 		
 	
 		
@@ -54,14 +54,15 @@ class Controller_Partenaire
 			else
 			{
 				echo 'ERREUR : Le descriptif du partenaire doit contenir entre 20 et 300 caractères';
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo 'ERREUR : Le libelle de du partenaire est vide';
-			return false;
+			
 		}
+		return false;
 		
 		
 	}
@@ -88,18 +89,22 @@ class Controller_Partenaire
 		if(empty($this->partenaire->getSiteWeb()))
 		{
 			$siteWeb= NULL; 
-		}
-		if(preg_match("#^http://[a-z0-9._/-]+$#", $this->partenaire->getSiteWeb()))
-		{
 			return true;
 		}
 		else
 		{
-			echo "ERREUR : le site web n'a pas le bon format ";
 			
+			if(preg_match("#^http://[a-z0-9._/-]+$#", $this->partenaire->getSiteWeb()))
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : le site web n'a pas le bon format ";
+				
+			}
+			return false;
 		}
-		return false;
-		
 	}
 		
 	
@@ -112,17 +117,20 @@ class Controller_Partenaire
 			if(empty($this->partenaire->getTelephone()))
 			{
 				$this->partenaire->setTelephone(NULL); 
-			}
-			if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $this->partenaire->getTelephone()))
-			{
 				return true;
 			}
 			else
 			{
-				echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
-				
+				if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $this->partenaire->getTelephone()))
+				{
+					return true;
+				}
+				else
+				{
+					echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
+					
+				}
 			}
-		
 		
 }
 	

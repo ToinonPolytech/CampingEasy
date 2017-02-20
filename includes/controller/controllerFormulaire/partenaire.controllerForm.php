@@ -8,6 +8,7 @@ if(isset($_POST['nom']) && isset($_POST['libelle']) && isset($_POST['mail']) && 
 	if($partenaireController->isGood())
 	{
 		$partenaire->saveToDb();
+		echo "Ajout du partenaire réussi";
 	}
 }
 else

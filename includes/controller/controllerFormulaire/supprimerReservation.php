@@ -5,12 +5,19 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 require_once('../../modele/database.class.php');
 
 
-if(isset($_POST['suppReservation'] && isset($_SESSION['id'){
+if(isset($_POST['id']) && isset($_SESSION['id'])){
 	
 	$db = new Database();
-$db->delete("reservation",array('idActivite' => $_POST['suppReservation'], 'idUser' => $_SESSION['id']),NULL); 
-$db->fetch();
+$db->delete("reservation",array('idActivite' => $_POST['id'], 'idUser' => $_SESSION['id']),NULL); 
 
+echo 'réservation supprimée';
+
+}
+else
+{
+	echo "erreur lors de la suppression";
+	
+	
 }
 
 

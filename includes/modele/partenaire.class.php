@@ -44,7 +44,7 @@ class Partenaire{
 		}
 		else
 		{
-			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
+			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
 		}
 	}
 	public function getId() {
