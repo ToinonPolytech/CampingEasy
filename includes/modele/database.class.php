@@ -52,7 +52,7 @@
 					{
 						$array_where2[$key]=$value;
 					}
-					$request.=$key.$operator":".$key;
+					$request.=$key.$operator.":".$key;
 				}
 			}
 			if ($array_update!=NULL)
@@ -82,7 +82,7 @@
 				{
 					$array_where2[$key]=$value;
 				}
-				$request.=$key.$operator":".$key;
+				$request.=$key.$operator.":".$key;
 			}
 			$this->_objectRequest=$this->_db->prepare($request);
 			$this->_objectRequest->execute($array_where2);

@@ -6,12 +6,11 @@
 	<?php		
 		require_once("/../modele/database.class.php");
 		$db = new Database();
-		$db->selectJoin("reservation", array("activities ON id=idActivite"), rray('idUser' => $_SESSION['id']));
+		$db->selectJoin("reservation", array("activities ON id=idActivite"), array('idUser' => $_SESSION['id']));
 	?>
 	<table class='table'>
 		<thead>
 			<tr>
-			  <th>#</th>
 			  <th>Activité </th>
 			  <th>Date </th>
 			  <th>Nombre de personnes </th>
