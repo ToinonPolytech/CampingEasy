@@ -19,12 +19,13 @@ for ($i=0;$i<100;$i++)
 	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
 
 
-- Problème avec équipe : pas de score de départ donc n'existe pas dans la création du formulaire : soit on fait un formulaire différent pour la création et la modification soit on le passe en hidden 
-	Oui mais quand y'a la création coté controller tu mets 0 de base
+- Vérifier que l'équipe n'existe pas déjà 
 
+- Avoir une date d'ouverture des réservations pour une activités (pour éviter de réserver dans 3 mois)
 
-- Affichage des données de la db : par un objet ou directement ? 
+- Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 
+- Erreur dans la db : equipe  doit pouvoir être NULL pour une réservation 
 
 TODO (les petites choses à ne pas oublier) :
 

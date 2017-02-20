@@ -21,31 +21,39 @@ echo "<table class='table'>
       <th>Activité </th>
       <th>Date </th>
       <th>Nombre de personnes </th>
+	  <th>Modifier</th>
 	  <th>Consulter l'activité</th>
 	  <th> Supprimer </th> 
     </tr>
   </thead>
   <tbody>";
 
-$i=1;
+$i=0;
 
 while($res=$db1->fetch()){
+	$i++;
 	$db2->select("activities", array('id' => $res['idActivite']),NULL); 
 	$act=$db2->fetch(); 
 	echo '<tr><th scope="row">'.$i.'</th>
 			<td>'.$act['nom'].'</td> 
-			<td>'.date("d/m/y H:i",$act['time_start']).'</td>
-			<td>'.$res['nbrPersonne'].'</td>
-			<td> <button type="button" class="btn btn-info btn-sm" name="suppReservation" value='.$res["idActivite"].' onclick="loadTo("includes/controller/controllerFormulaire/supprimerReservation.php">Consulter</button></td>
+			<td>'.date("d/m/y H:i",$act['time_start']).'</td>';
+			?>
+			<?php //manque à gérer l'envoi en formulaire de la donnée modifiée (dans l'idéal en dynamique)     ?>
+			<td><input class="form-control" type="number" name="nbrPersonne" value="<?php echo $res['nbrPersonne'];?>" id="nbrPersonne"/> <br/></td>
+			
+			<td> <button type="button" class="btn btn-info btn-sm" name="suppReservation" value='<?php.$res["idActivite"]?>.' onclick="loadTo("includes/controller/controllerFormulaire/activiteView.php")">Consulter</button></td>
+			
+			<td> <button type="button" class="btn btn-info btn-sm" name="suppReservation" value='<?php.$res["idActivite"]?>.' onclick="loadTo("includes/controller/controllerFormulaire/activiteView.php")">Consulter</button></td>
 	
-			<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation" value='.$res["idActivite"].' onclick="loadTo("includes/controller/controllerFormulaire/supprimerReservation.php">Supprimer</button>';
+			<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation" value='<?php.$res["idActivite"]?>.' onclick="loadTo("includes/controller/controllerFormulaire/supprimerReservation.php")">Supprimer</button>
 	
-	
+	<?php
 	echo'<td>';
 	echo '</tr>';
 	
-	$i++;
+	
 }
+if($i==0) echo "Vous n'avez pas de réservation ";
 
 
 ?>

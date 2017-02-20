@@ -15,6 +15,9 @@
 				<a href="/includes/view/activitesView.php"><i class="fa fa-shopping-cart"></i>Les activités du camping   </a>
 				<a href="/includes/view/activiteView.php"><i class="fa fa-shopping-cart"></i>Voir activité   </a>
 				<a href="/includes/view/mesReservationsView.php"><i class="fa fa-shopping-cart"></i>Mes réservations    </a>
+				<a href="/includes/view/mesActivitesView.php"><i class="fa fa-shopping-cart"></i> Mes activités   </a>
+				<a href="/includes/view/gererActiviteForm.php"><i class="fa fa-shopping-cart"></i> Gérer activité    </a>
+				
 				
 			</li>
 			

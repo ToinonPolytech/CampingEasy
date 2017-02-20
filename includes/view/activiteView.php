@@ -20,7 +20,7 @@ echo '<ul class="list-group">
    <li class="list-group-item>Prix de l activité : '.$act['prix'].'</li>
 </ul>';
 
-if($act['mustBeReserved']==0){ //si activité réservable 
+if($act['mustBeReserved']==1){ //si activité réservable 
 	//bouton de réservation 
 	echo '<div align ="right">';
 	require_once("/ajoutReservationForm.php");
