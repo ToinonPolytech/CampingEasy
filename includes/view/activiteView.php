@@ -1,12 +1,16 @@
 <?php 
 require_once("/../modele/database.class.php");
 
+if (!isset($_POST["id"]) || !is_numeric($_POST["id"]))
+	exit();
+
+$id=$_POST["id"];
 ?> 
 <div class="col-lg-6" style="width:40%;" name="form-equipe" id="form-equipe">
 
 <?php 
 $database = new Database();
-$database->select("activities", array( 'id' => 1), NULL); //id à remplacer par l'id passé en post  
+$database->select("activities", array( 'id' => $id)); //id à remplacer par l'id passé en post  
 
 $act = $database->fetch(); 
 echo '<ul class="list-group">
