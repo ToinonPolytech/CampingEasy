@@ -11,7 +11,6 @@ class Activite
 	private $_descriptif;
 	private $_ageMin;
 	private $_ageMax;
-	private $_idLieu;
 	private $_lieu;
 	private $_type;
 	private $_placesLim;
@@ -28,7 +27,6 @@ class Activite
 	-catégorie : String (enum) : genre de l'activité (sportive, intellectuelle ...) : 
 	-ageMin : Int => age minimum pour participer à l'activité 
 	-ageMax : Int => age maximum pour participer à l'activité 
-	-idLieu : Int => id du lieu si celui ci existe dans la base de données 
 	-lieu : String => lieu de l'activité (dans le camping ou à l'extérieur)
 	-type : String => type de l'activite ( sportif, intellectuel, jeux ..)
 	-dateLim : (type=réservable) date  => date et heure limite pour la réservation de l'activité 
@@ -37,7 +35,7 @@ class Activite
 	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 	_mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
 	*/
-	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $idLieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL) {
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -48,7 +46,6 @@ class Activite
 			$this->_ageMin =  $ageMin;
 			$this->_ageMax =  $ageMax;
 			$this->_lieu =  $lieu;
-			$this->_idLieu = $idLieu;
 			$this->_type = $type;
 			$this->_placesLim =  $placesLim;
 			$this->_prix =  $prix;
@@ -68,7 +65,6 @@ class Activite
 			$this->_ageMin =  $data['ageMin'];
 			$this->_ageMax =  $data['ageMax'];
 			$this->_lieu =  $data['lieu'];
-			$this->_idLieu = $data['idLieu'];
 			$this->_type = $data['type'];
 			$this->_placesLim =  $data['capaciteMax'];
 			$this->_prix =  $data['prix'];

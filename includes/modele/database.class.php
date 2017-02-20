@@ -22,8 +22,8 @@
 				die('Erreur : '.$t->getMessage().' Numéro : '.$t->getCode());
 			}
 		}
-		public function request($request, $array_where, $array_update=NULL){
-			if (!empty($array_where) && !is_array($array_where))
+		public function request($request, $array_where=NULL, $array_update=NULL){
+			if (empty($array_where) || !is_array($array_where))
 			{
 				$this->_objectRequest=$this->_db->query($request);
 				return;
@@ -31,7 +31,6 @@
 				
 			
 			$array_where2=array();
-			if($array_where!=NULL){ //modif freestyle pour éviter erreur sur un tableau null 
 			foreach ($array_where as $key => $value)
 			{
 				if (strstr($request, "WHERE"))
@@ -43,10 +42,19 @@
 					$request.=$key." IS NULL";
 				else
 				{
-					$request.=$key."=:".$key;
-					$array_where2[$key]=$value;
+					$operator="=";
+					if (is_array($value))
+					{
+						$operator=$value[0];
+						$array_where2[$key]=$value[1];
+					}
+					else
+					{
+						$array_where2[$key]=$value;
+					}
+					$request.=$key.$operator":".$key;
 				}
-			}}
+			}
 			if ($array_update!=NULL)
 			{
 				$array_where2=array_merge($array_where2, $array_update);
@@ -56,6 +64,7 @@
 		}
 		public function getValue($name_table, $array_where, $colonne){
 			$request="SELECT ".$colonne." FROM ".$name_table;
+			$array_where2=array();
 			foreach ($array_where as $key => $value)
 			{
 				if (strstr($request, "WHERE"))
@@ -63,14 +72,24 @@
 				else
 					$request.=" WHERE ";
 				
-				$request.=$key."=:".$key;
+				$operator="=";
+				if (is_array($value))
+				{
+					$operator=$value[0];
+					$array_where2[$key]=$value[1];
+				}
+				else
+				{
+					$array_where2[$key]=$value;
+				}
+				$request.=$key.$operator":".$key;
 			}
 			$this->_objectRequest=$this->_db->prepare($request);
-			$this->_objectRequest->execute($array_where);
+			$this->_objectRequest->execute($array_where2);
 			$data=$this->fetch();
 			return $data[$colonne];
 		}
-		public function select($name_table, $array_where, $array_select="*"){
+		public function select($name_table, $array_where=NULL, $array_select="*"){
 			if (is_array($array_select))
 			{
 				foreach ($array_select as $value)
@@ -92,13 +111,32 @@
 			$request.=" FROM ".$name_table;
 			$this->request($request, $array_where);
 		}
-		
-		
-		
-		
-		
-		
-		
+		public function selectJoin($name_table, $array_join, $array_where=NULL, $array_select="*"){
+			if (is_array($array_select))
+			{
+				foreach ($array_select as $value)
+				{
+					if (!isset($request))
+						$request="SELECT ".$value;
+					else
+						$request.=",".$value;
+				}
+			}
+			else if (!empty($array_select))
+			{
+				$request="SELECT ".$array_select;
+			}
+			else
+			{
+				$request="SELECT *";
+			}
+			$request.=" FROM ".$name_table." LEFT JOIN ";
+			foreach ($array_join as $value)
+			{
+				$request.=$value." ";
+			}
+			$this->request($request, $array_where);
+		}
 		public function delete($name_table, $array_where){
 			$request="DELETE FROM ".$name_table;
 			$this->request($request, $array_where);
