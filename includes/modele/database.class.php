@@ -27,9 +27,7 @@
 			{
 				$this->_objectRequest=$this->_db->query($request);
 				return;
-			}
-				
-			
+			}			
 			$array_where2=array();
 			foreach ($array_where as $key => $value)
 			{
@@ -42,17 +40,26 @@
 					$request.=$key." IS NULL";
 				else
 				{
-					$operator="=";
 					if (is_array($value))
 					{
-						$operator=$value[0];
-						$array_where2[$key]=$value[1];
+						if ($value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=")
+						{
+							$request.=$key.">=:".$key;
+							$array_where2[$key]=$value[0];
+							$request.=" AND ".$key."<=:".$key."_bis";
+							$array_where2[$key."_bis"]=$value[1];
+						}
+						else
+						{
+							$request.=$key.$value[0].":".$key;
+							$array_where2[$key]=$value[1];
+						}
 					}
 					else
 					{
 						$array_where2[$key]=$value;
+						$request.=$key."=:".$key;
 					}
-					$request.=$key.$operator.":".$key;
 				}
 			}
 			if ($array_update!=NULL)
@@ -64,28 +71,7 @@
 		}
 		public function getValue($name_table, $array_where, $colonne){
 			$request="SELECT ".$colonne." FROM ".$name_table;
-			$array_where2=array();
-			foreach ($array_where as $key => $value)
-			{
-				if (strstr($request, "WHERE"))
-					$request.=" AND ";
-				else
-					$request.=" WHERE ";
-				
-				$operator="=";
-				if (is_array($value))
-				{
-					$operator=$value[0];
-					$array_where2[$key]=$value[1];
-				}
-				else
-				{
-					$array_where2[$key]=$value;
-				}
-				$request.=$key.$operator.":".$key;
-			}
-			$this->_objectRequest=$this->_db->prepare($request);
-			$this->_objectRequest->execute($array_where2);
+			$this->request($request, $array_where);
 			$data=$this->fetch();
 			return $data[$colonne];
 		}
