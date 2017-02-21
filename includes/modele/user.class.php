@@ -64,7 +64,7 @@ abstract class User
 		}
 	}
 	public function addDroits($which){
-		$controller= new Controller_User($this);
+		$controller= new Controller_Client($this);
 		if (!$controller->can($which)) // Si le droit n'est pas déjà activé
 			$this->_droits+=pow(2,$which); // on lui rajoute
 	}

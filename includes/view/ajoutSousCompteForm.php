@@ -2,7 +2,7 @@
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 ?>
-<div class="col-lg-6" style="width:100%;" name="form_user" id="form_user">
+<div class="col-lg-6" style="width:100%;" name="form-user" id="form-user">
 	<h3>Ajoutez un sous utilisateur </h3><br/>
 	<form role="form"  method="post" id="form_user" name="form_user">
 		<div class="form-group">

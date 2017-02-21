@@ -23,7 +23,7 @@ class UserInfo
 		else
 		{
 			$database = new Database();
-			$database->select('usersinfos', array("id" => $id));
+			$database->select('userinfos', array("id" => $id));
 			$data=$database->fetch();
 			$this->_numPlace=$data["emplacement"];
 			$this->_email=$data["email"];

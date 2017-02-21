@@ -1,11 +1,14 @@
  <?php
- 
+ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
+		session_start();
  
  
  
  if(isset($_POST['nom']) && isset($_POST['prenom']))
  {
 	  require_once("../controllerObjet/user.controller.class.php");
+	  require_once("../../modele/client.class.php");
+	require_once("../controllerObjet/client.controller.class.php");
 	  require_once("../../modele/database.class.php");
 	  $db = new Database();
 	  $infoID= $db->getValue('users',array('id' => $_SESSION['id']), 'infoId');
@@ -15,26 +18,26 @@
 	  
 	  $sousClient->setClef($controllerSousClient->generateKey());
 	  
-	  if(isset($POST['creerSousCompte']))
-	  {
-		  $sousClient->addDroit("CAN_CREATE_SUBACCOUNT");
+	  if(isset($_POST['creerSousCompte']))
+	  {		
+		  $sousClient->addDroits("CAN_CREATE_SUBACCOUNT");
 	  }
-	  if(isset($POST['reserverActivite']))
-	  {
-		  $sousClient->addDroit("CAN_JOIN_ACTIVITIES");
+	  if(isset($_POST['reserverActivite']))
+	  { 
+		  $sousClient->addDroits("CAN_JOIN_ACTIVITIES");
 	  }
-	  if(isset($POST['creerActivite']))
+	  if(isset($_POST['creerActivite']))
 	  {
-		  $sousClient->addDroit("CAN_CREATE_ACTIVITIE");
+		  $sousClient->addDroits("CAN_CREATE_ACTIVITIES");
 	  }
-	  if(isset($POST['payer']))
+	  if(isset($_POST['payer']))
 	  {
-		  $sousClient->addDroit("CAN_PAY");
+		  $sousClient->addDroits("CAN_PAY");
 	  }
 	  
-	  if($controllerClient->isGood())
+	  if($controllerSousClient->isGood())
 	  {
-		  $client->saveToDb(); 
+		  $sousClient->saveToDb(); 
 		  echo "Le sous compte a bien été ajouté "; 
 	  }
  }
