@@ -37,9 +37,9 @@ while($act=$db1->fetch()){
 			<td>'.$act['nom'].'</td> 
 			<td>'.date("d/m/y H:i",$act['time_start']).'</td>
 			<td>'.$nbRes.'</td>';
-			?><td> <button type="button" class="btn btn-info btn-sm" name="modifActivite" value='<?php echo $act['id'];?>' onclick="loadTo("includes/view/gererActivite.php")">Modifier</button></td>
+			?><td> <button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('includes/view/gererActiviteForm.php',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
 	
-			<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation" value='<?php echo $act['id']; ?>.' onclick="loadTo("includes/controller/controllerFormulaire/supprimerReservation.php")">Supprimer</button>
+			<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('includes/controller/controllerFormulaire/supprimerActivite.php')">Supprimer</button>
 	
 	<?php
 	echo'<td>';

@@ -7,7 +7,7 @@
 <div class="col-lg-6" style="width:40%;" name="form-equipe" id="form-equipe">
 	<?php 
 		$database = new Database();
-		$database->select("activities", array('id' => $id)); //id à remplacer par l'id passé en post  
+		$database->select("activities", array('id' => $id));  
 		$act = $database->fetch(); 
 	?>
 	<ul class="list-group">

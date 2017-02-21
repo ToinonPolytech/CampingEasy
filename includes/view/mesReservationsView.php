@@ -27,7 +27,7 @@
 				<td><?php echo $data['nom']; ?></td> 
 				<td><?php echo date("d/m/y H:i",$data['time_start']); ?></td>
 				<td><input class="form-control" type="number" name="nbrPersonne" value="<?php echo $data['nbrPersonne'];?>" id="nbrPersonne"/> <button type="button" class="btn btn-info btn-sm" name="suppReservation" onclick="loadToMain('includes/controller/controllerFormulaire/activiteView.php', {id : <?php echo $data["idActivite"]; ?>}); return false;">Modifier</button></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="suppReservation" onclick="loadToMain('includes/view/activiteView.php', {id : <?php echo $data["idActivite"]; ?>}); return false;">Consulter</button></td>
+				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('includes/view/activiteView.php', {id : <?php echo $data["idActivite"]; ?>}); return false;">Consulter</button></td>
 				<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation" onclick="loadToMain('includes/controller/controllerFormulaire/supprimerReservation.php', {id : <?php echo $data["idActivite"]; ?>}); return false;">Supprimer</button><td>
 			</tr>
 			<?php
