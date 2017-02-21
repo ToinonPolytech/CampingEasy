@@ -22,7 +22,7 @@
 	</ul>
 </div>
 <?php
-	if($act['mustBeReserved']==1)
+	if($act['mustBeReserved']==1 && $act['debutReservation']<=time() && $act["finReservation"]>=time())
 	{
 		?>
 		<div class="col-lg-6 pull-right" style="width:40%;">
