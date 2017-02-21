@@ -2,13 +2,6 @@
 
 
 
-- Faire un menu déroulant avec : 
-								- Des valeurs de la base données (tableau avec les lieux par exemple) => for (...) { echo "<option value='$i'>".$i."</option>"; }
-while ($data=$request->fetch()) { }
-for ($i=0;$i<100;$i++)
-								
--Modif pas sur dans la database (fonction request) : lorsque je passais un aaray_where null j'avais erreur 
-
 - Pour les lieux il doit être possible de réserver un lieu mais pas tous (terrain de tennis par exemple ) => implique qu'une réservation a un type : lieu ou activité 
 -
 
@@ -25,14 +18,6 @@ TODO (les petites choses à ne pas oublier) :
 
 - Gérer les authentifications et l'affichage des pages en fonctions ainsi que la récupération des ID pour les objets en ayant besoin (équipe, activité .. )
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
-
-
-	Ajout DB : 
-		- Rajouter gestion des photos problème technique / activité / partenaire / lieu commun
-		-Ajout d'un type user partenaire 
-		- Reservation lieu commun 
-		- Reservation etat des lieux 
-		- Date d'ouverture et fermeture des réservations pour une activité 
 		
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 

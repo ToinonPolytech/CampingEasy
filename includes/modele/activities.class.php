@@ -18,24 +18,27 @@ class Activite
 	private $_idOwner;
 	private $_points;	
 	private $_mustBeReserved;
+	private $_debutReservation;
+	private $_finReservation;
+	private $_photos;
 	private $_deleted;
 	/*données : 
-	-id : Int => clef primaire 
-	-timeStart : Int => secondes   
-	-descriptif : String => description de l'activité 
-	-durée : Int => temps en min 
-	-catégorie : String (enum) : genre de l'activité (sportive, intellectuelle ...) : 
-	-ageMin : Int => age minimum pour participer à l'activité 
-	-ageMax : Int => age maximum pour participer à l'activité 
-	-lieu : String => lieu de l'activité (dans le camping ou à l'extérieur)
-	-type : String => type de l'activite ( sportif, intellectuel, jeux ..)
-	-dateLim : (type=réservable) date  => date et heure limite pour la réservation de l'activité 
-	-placesLim : (type=réservable) Int  => nombre de places limites réservables 
-	-prix : (type= payante) float => prix par personnes de l'activité 
-	-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
-	_mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
+		-id : Int => clef primaire 
+		-timeStart : Int => secondes   
+		-descriptif : String => description de l'activité 
+		-durée : Int => temps en min 
+		-catégorie : String (enum) : genre de l'activité (sportive, intellectuelle ...) : 
+		-ageMin : Int => age minimum pour participer à l'activité 
+		-ageMax : Int => age maximum pour participer à l'activité 
+		-lieu : String => lieu de l'activité (dans le camping ou à l'extérieur)
+		-type : String => type de l'activite ( sportif, intellectuel, jeux ..)
+		-dateLim : (type=réservable) date  => date et heure limite pour la réservation de l'activité 
+		-placesLim : (type=réservable) Int  => nombre de places limites réservables 
+		-prix : (type= payante) float => prix par personnes de l'activité 
+		-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
+		-mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
 	*/
-	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL) {
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL, $debutReservation=NULL, $finReservation=NULL, $photos=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
 		{	
@@ -52,6 +55,9 @@ class Activite
 			$this->_idOwner = $idOwner;
 			$this->_points = $points;
 			$this->_mustBeReserved = $mustBeReserved;
+			$this->_debutReservation = $debutReservation;
+			$this->_finReservation = $finReservation;
+			$this->_photos = $photos;
 		}
 		else
 		{
@@ -71,6 +77,9 @@ class Activite
 			$this->_idOwner = $data['idOwner'];
 			$this->_points = $data["points"];
 			$this->_mustBeReserved = $data["mustBeReserved"];
+			$this->_debutReservation = $data["debutReservation"];
+			$this->_finReservation = $data["finReservation"];
+			$this->_photos = $data["photos"];
 		}
 		$this->_deleted=false;
 	}
@@ -82,11 +91,11 @@ class Activite
 		}	
 		else if ($this->_id!=NULL && $database->count('activites', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
-			$database->update('activities', array("id" => $this->_id), array("mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->update('activities', array("id" => $this->_id), array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		}
 		else
 		{
-			$database->create('activities', array("id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->create('activities', array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
 	}
 	public function getId() {
@@ -119,8 +128,6 @@ class Activite
 	public function getPoints(){
 		return $this->_points;
 	}
-	
-	
 	public function getType() {
 	   return $this->_type;
 	}
@@ -141,6 +148,15 @@ class Activite
 	}
 	public function getMustBeReserved(){
 		return $this->_mustBeReserved;
+	}
+	public function getDebutReservation() {
+	   return $this->_debutReservation;
+	}
+	public function getFinReservation(){
+		return $this->_finReservation;
+	}
+	public function getPhotos(){
+		return $this->_photos;
 	}
 	public function setId($id) {
 	   $this->_id = $id;
@@ -196,6 +212,15 @@ class Activite
 	}
 	public function setMustBeReserved($mbr){
 		$this->_mustBeReserved=$mbr;
+	}
+	public function setDebutReservation($debutR) {
+	   $this->_debutReservation = $debutR;
+	}
+	public function setFinReservation($finR){
+		$this->_finReservation=$finR;
+	}
+	public function setPhotos($photos){
+		$this->_photos=$photos;
 	}
 }
 ?>

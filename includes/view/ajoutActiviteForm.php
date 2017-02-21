@@ -10,7 +10,7 @@
 	<form role="form"  method="post" id="form_act" name="form_act">
 		<div class="form-group">
 			<label for="timeStart">Date et heure du début de l'activité</label><br/>
-			<input class="form-control" type="datetime" name="timeStart" id="timeStart"/> <br />
+			<input class="form-control" type="text" name="timeStart" id="timeStart"/> <br />
 			<label for="nom">Nom de l'activité</label><br/>
 			<input class="form-control" type="text" name="nom" id="nom"/> <br />
 			<label for="descriptif">Donnez une description de votre activité</label><br/>
@@ -45,18 +45,31 @@
 		
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
-			<label for="placesLim" class="mustBeReserved_hide" style="display:none;">Nombre de places</label><br/>
-			<input class="form-control mustBeReserved_hide" type="number" name="placesLim"  id="placesLim"  style="display:none;"/><br/>
+			<div class="mustBeReserved_hide" style="display:none;">
+				<label for="placesLim">Nombre de places</label><br/>
+				<input class="form-control" type="number" name="placesLim"  id="placesLim"/><br/>
+				<label for="debutReservation">Date début de la réservation</label><br/>
+				<input class="form-control" type="text" name="debutReservation" id="debutReservation" value="<?php echo date("d-m-Y H:00"); ?>"/><br />
+				<label for="finReservation">Date limite pour la réservation</label><br/>
+				<input class="form-control" type="text" name="finReservation" id="finReservation"/><br />
+			</div>
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" id="points"/><br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	$("#timeStart").datetimepicker({
+		startDate:new Date(),
+		format:'d-m-Y H:00',
+		onChangeDateTime:function(dp,$input){
+			$("#finReservation").val($input.val());
+		}
+	});
+	$("#debutReservation,#finReservation").datetimepicker({
+		startDate:new Date(),
 		format:'d-m-Y H:00'
 	});
 </script>
