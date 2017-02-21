@@ -17,7 +17,7 @@
 				<a href="/includes/view/mesReservationsView.php"><i class="fa fa-shopping-cart"></i>Mes réservations    </a>
 				<a href="/includes/view/mesActivitesView.php"><i class="fa fa-shopping-cart"></i> Mes activités   </a>
 				<a href="/includes/view/gererActiviteForm.php"><i class="fa fa-shopping-cart"></i> Gérer activité    </a>
-				
+				<a href="/includes/view/ajoutSousCompteForm.php"><i class="fa fa-shopping-cart"></i>Ajouter un sous compte    </a>
 				
 			</li>
 			

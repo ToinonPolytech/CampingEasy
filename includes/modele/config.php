@@ -7,6 +7,7 @@
 	define("CAN_CREATE_SUBACCOUNT", $puissance); $puissance++;
 	define("CAN_CREATE_ACTIVITIES", $puissance); $puissance++;
 	define("CAN_JOIN_ACTIVITIES", $puissance); $puissance++;
+	define("CAN_PAY", $puissance); $puissance++;
 	/**
 		TODO : A FAIRE
 	**/
