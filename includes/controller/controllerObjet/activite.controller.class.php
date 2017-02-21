@@ -186,11 +186,11 @@ class Controller_Activite {
 	
 	public function typeIsGood(){
 		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
-		$database = new Database();
+		
 		
 		if(!empty($this->act->getType()))
 		{ 
-			if($database->count('activite', array("nom" =>$this->act->getType())==0))
+			if($this->act->getType()=="SPORTIF" || $this->act->getType()=="INTELLECTUELLE")
 			{
 				return true;
 			}
@@ -222,32 +222,33 @@ class Controller_Activite {
 				}
 				else
 				{ echo "ERREUR : Le nombre de places maximum pour l'activité ne peut être négatif ";
-				  return false; 
+				
 				}
 			}
 			else
 			{
 				echo "ERREUR : le nombre de places entré n'est pas un entier ";
-				return false;
+				
 			}
 		}
 		else 
 		{
-			echo "ERREUR : Le nombre de places maximum pour l'activité est vide";
-			return false; 
+			$this->act->setPlacesLim(0);
+			return true; 
+			
 		}
 		
-		
+		return false;
 			
 		
 		
 	}
 	public function prixIsGood(){
 		
-		if(!empty($this->act->getPrix()))
+		if(!empty($this->act->getPrix()) || $this->act->getPrix()==0)
 		{	if(is_numeric($this->act->getPrix()))
 			{
-				if($this->act->getPrix()>0)
+				if($this->act->getPrix()>=0)
 				{
 					return true; 					
 				}
@@ -263,7 +264,7 @@ class Controller_Activite {
 			}
 		}
 		else 
-		{
+		{	echo $this->act->getPrix();
 			echo "ERREUR : Le prix de l'activité est vide";
 			return false; 
 		}
@@ -273,8 +274,8 @@ class Controller_Activite {
 	}
 	
 	public function idOwnerIsGood(){
-		
-		if(is_int($this->act->getIdOwner()))
+		$database = new Database();
+		if(is_numeric($this->act->getIdOwner()))
 		{
 			if($database->count('users', array("id" => $this->act->getIdOwner())==1))
 			{
@@ -298,7 +299,7 @@ class Controller_Activite {
 	}
 	public function pointsIsGood(){
 		
-		if(is_int($this->act->getPoints()))
+		if(is_numeric($this->act->getPoints()))
 		{
 			if($this->act->getPoints()>=0 && $this->act->getPoints()<1000000000)
 			{	

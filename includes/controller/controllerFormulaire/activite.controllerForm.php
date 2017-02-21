@@ -6,8 +6,15 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 
 if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"]) && isset($_POST["descriptif"]) 
 && isset($_POST["ageMin"]) && isset($_POST["ageMax"]) && isset($_POST["lieu"])
-&& isset($_POST["type"]) && isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["points"]) && isset($_POST["mustBeReserved"]) && isset($_POST["lieu_type"]))
-{
+&& isset($_POST["type"]) && isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["points"]) && isset($_POST["lieu_type"]))
+{	if(isset($_POST["mustBeReserved"]))
+		{
+			$mustBeReserved = 1;
+		}
+		else
+		{
+			$mustBeReserved = 0; 
+		}
 	$lieu=$_POST["lieu"];
 	if (!is_numeric($_POST["lieu"]) && $_POST["lieu_type"]==1)
 	{
@@ -23,7 +30,7 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 		
 		$act = new Activite(NULL, htmlspecialchars(strtotime($_POST["timeStart"])), htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["descriptif"]), htmlspecialchars($_POST["duree"]),
 		htmlspecialchars($_POST["ageMin"]), htmlspecialchars($_POST["ageMax"]), htmlspecialchars($lieu), htmlspecialchars($_POST["type"]),
-		htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]), htmlspecialchars($_POST["mustBeReserved"]));
+		htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved);
 		$actController = new Controller_Activite($act);	
 		if($actController->isGood())
 		{

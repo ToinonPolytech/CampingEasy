@@ -40,13 +40,13 @@
 			<label for="type">Type d'activité</label><br/>
 			<select name="type" id="type">
 				<option value="SPORTIF">SPORTIF</option>
-				<option value="INTELLECTUEL">INTELLECTUEL</option>
+				<option value="INTELLECTUELLE">INTELLECTUELLE</option>
 			</select><br/>
 		
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
 			<label for="placesLim" class="mustBeReserved_hide" style="display:none;">Nombre de places</label><br/>
-			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" id="placesLim"  style="display:none;"/><br/>
+			<input class="form-control mustBeReserved_hide" type="number" name="placesLim"  id="placesLim"  style="display:none;"/><br/>
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>

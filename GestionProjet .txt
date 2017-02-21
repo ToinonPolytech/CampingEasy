@@ -24,7 +24,7 @@ for ($i=0;$i<100;$i++)
 TODO (les petites choses à ne pas oublier) :
 
 - Gérer les authentifications et l'affichage des pages en fonctions ainsi que la récupération des ID pour les objets en ayant besoin (équipe, activité .. )
-- 
+- Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
 
 
 	Ajout DB : 

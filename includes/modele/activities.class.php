@@ -38,7 +38,7 @@ class Activite
 	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
-		{
+		{	
 			$this->_timeStart = $timeStart;
 			$this->_nom = $nom;
 			$this->_descriptif = $descriptif;
@@ -76,17 +76,17 @@ class Activite
 	}
 	public function saveToDb(){
 		$database = new Database();
-		if ($this->deleted)
+		if ($this->_deleted)
 		{
-			$database->delete('activites', array("id" => $this->_id));
+			$database->delete('activities', array("id" => $this->_id));
 		}	
 		else if ($this->_id!=NULL && $database->count('activites', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
-			$database->update('activites', array("id" => $this->_id), array("mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->update('activities', array("id" => $this->_id), array("mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		}
 		else
 		{
-			$database->create('activites', array("id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->create('activities', array("id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
 	}
 	public function getId() {
@@ -116,6 +116,9 @@ class Activite
 	public function getLieu() {
 	   return $this->_lieu;
 	}
+	public function getPoints(){
+		return $this->_points;
+	}
 	
 	
 	public function getType() {
@@ -130,8 +133,8 @@ class Activite
 	public function getPrix() {
 	   return $this->_prix;
 	}
-	public function getIdPart() {
-	   return $this->_idPart;
+	public function getIdOwner() {
+	   return $this->_idOwner;
 	}
 	public function getDeleted(){
 		return $this->_deleted;
@@ -168,6 +171,10 @@ class Activite
 	}
 	public function setIdLieu($idLieu){
 		$this->_idLieu = $idLieu;
+	}
+	public function setPoints($points){
+		
+		$this->_points=$points;
 	}
 	public function setType($type) {
 	   $this->_type = $type;
