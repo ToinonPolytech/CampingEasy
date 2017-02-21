@@ -29,8 +29,3 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript">
-	$("#date").datetimepicker({
-		format:'d-m-Y H:00'
-	});
-</script>

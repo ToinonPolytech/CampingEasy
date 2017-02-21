@@ -132,9 +132,9 @@ abstract class Controller_User
 		for ($i=$droits;$i>0 && !$etat && $which<=$p;$n/=2){
 			if ($i>$n){
 				$i-=$n;
-				if ($p==$which)
-					$etat=true;
 			}
+			if ($p==$which)
+				$etat=true;
 			$p--;
 		}
 		return $etat;

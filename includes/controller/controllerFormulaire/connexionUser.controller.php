@@ -35,10 +35,11 @@ require_once("../controllerObjet/user.controller.class.php");
 							exit(); // On stop le fichier
 						}
 					}
-					$database->select('users', array("clef" => $_COOKIE["clef"]), array("id", "access_level"));
+					$database->select('users', array("clef" => $_COOKIE["clef"]), array("id", "access_level", "infoId"));
 					$data=$database->fetch();
 					$_SESSION["id"]=$data["id"]; // Et hop ! On est connecté 
 					$_SESSION["access_level"]=$data["access_level"];
+					$_SESSION["infoId"]=$data["infoId"];
 					?>
 					<script type="text/javascript">
 						loadToMain("includes/view/home.php", "{}");
