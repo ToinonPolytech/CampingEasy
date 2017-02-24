@@ -2,8 +2,8 @@
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 	
-	require_once("/../fonctions/general.php");
-	require_once("/../modele/database.class.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("database.class.php"));
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-act" id="form-act">
 	<h3>Créer votre activité ! </h3><br/>

@@ -3,10 +3,11 @@
 		session_start();
  
  
-	require_once("../controllerObjet/user.controller.class.php");
-	require_once("../../modele/client.class.php");
-	require_once("../controllerObjet/client.controller.class.php");
-	require_once("../../modele/database.class.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("user.controller.class.php"));
+	require_once(i("client.class.php"));
+	require_once(i("client.controller.class.php"));
+	require_once(i("database.class.php"));
 	
 	$clientParent=new Client($_SESSION["id"]);
 	$controller=new Controller_Client($clientParent);

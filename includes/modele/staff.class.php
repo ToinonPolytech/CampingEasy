@@ -1,6 +1,7 @@
 <?php 
-require_once("database.class.php");
-require_once("user.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
+require_once(i("user.class.php"));
 
 class Staff extends User
 {

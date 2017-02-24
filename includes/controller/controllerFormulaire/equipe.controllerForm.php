@@ -1,6 +1,8 @@
 <?php 
-require_once("../../modele/equipe.class.php");
-require_once("../controllerObjet/equipe.controller.class.php");
+
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("equipe.class.php"));
+require_once(i("equipe.controller.class.php"));
 
 if(isset($_POST['nom']))
 {

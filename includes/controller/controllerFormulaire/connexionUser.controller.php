@@ -2,9 +2,10 @@
 if (!isset($_SESSION))
 	session_start();
 
-require_once("../../modele/database.class.php");
-require_once("../../modele/user.class.php");
-require_once("../controllerObjet/user.controller.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
+require_once(i("user.class.php"));
+require_once(i("user.controller.class.php"));
 ?>
 <div class="alert alert-danger" role="alert" name="infoErreur" id="infoErreur">
 	<?php

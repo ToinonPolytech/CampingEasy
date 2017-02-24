@@ -1,7 +1,7 @@
 <?php 
-
-require_once("../../modele/database.class.php");
-require_once("../../modele/problemeTechnique.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
+require_once(i("problemeTechnique.class.php"));
 
 
 

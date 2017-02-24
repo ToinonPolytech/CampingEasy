@@ -1,5 +1,6 @@
 <?php
-require_once("database.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
 //Fonctions de la classe Partenaire 
 class Partenaire{
 	private $_id;

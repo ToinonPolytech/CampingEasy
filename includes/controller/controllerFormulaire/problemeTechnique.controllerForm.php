@@ -1,6 +1,7 @@
 <?php 
-require_once("../../modele/problemeTechnique.class.php");
-require_once("../controllerObjet/problemeTechnique.controller.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("problemeTechnique.class.php"));
+require_once(i("problemeTechnique.controller.class.php"));
 
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 	session_start();

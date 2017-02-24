@@ -1,5 +1,6 @@
 <?php
-require_once("/../modele/database.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
 date_default_timezone_set('Europe/Paris');
 $db= new Database();
 $x = date("w")-6;

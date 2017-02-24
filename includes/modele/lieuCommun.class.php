@@ -1,5 +1,6 @@
 <?php
-require_once("database.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
 class LieuCommun {
 /* 
 données : 

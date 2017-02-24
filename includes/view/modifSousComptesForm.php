@@ -1,9 +1,10 @@
 <?php
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
-		
-	require_once("../modele/client.class.php");
-	require_once("../controller/controllerObjet/client.controller.class.php");
+	
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("client.class.php"));
+	require_once(i("client.controller.class.php"));
 	$clientParent=new Client($_SESSION["id"]);
 	$clientChild=new Client($_POST["id"]);
 	$controller=new Controller_Client($clientParent);

@@ -2,7 +2,8 @@
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 
- require_once("/../modele/database.class.php");
+		require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+ require_once(i("database.class.php"));
 $db1 = new Database();
 $db2 = new Database();
 $db1->select("activities", array('idDirigeant' => $_SESSION['id']));

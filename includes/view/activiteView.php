@@ -1,5 +1,6 @@
 <?php 
-	require_once("/../modele/database.class.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("database.class.php"));
 	if (!isset($_POST["id"]) || !is_numeric($_POST["id"]))
 		exit();
 	$id=$_POST["id"];

@@ -1,6 +1,7 @@
 <?php 
-require_once("../../modele/reservation.class.php");
-require_once("../controllerObject/reservation.controller.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("reservation.class.php"));
+require_once(i("reservation.controller.class.php"));
 
 if (isset($_POST["idActivite"]) && isset($_POST["idUser"]) && isset($_POST["idEquipe"]) && isset($_POST["nbrPersonnes"]))
 {

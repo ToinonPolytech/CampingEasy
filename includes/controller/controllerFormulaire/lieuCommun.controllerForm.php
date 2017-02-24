@@ -1,6 +1,7 @@
 <?php 
-	require_once("../../modele/lieuCommun.class.php");
-	require_once("../controllerObjet/lieuCommun.controller.class.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("lieuCommun.class.php"));
+	require_once(i("lieuCommun.controller.class.php"));
 	if(isset($_POST['nom']) && isset($_POST['description']))
 	{
 		$LC = new lieuCommun(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars ($_POST['description']));

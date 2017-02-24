@@ -1,6 +1,7 @@
 <?php 
-require_once("../../modele/database.class.php");
-require_once("../../modele/reservation.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
+require_once(i("reservation.class.php"));
 
 class Controller_Reservation
 {

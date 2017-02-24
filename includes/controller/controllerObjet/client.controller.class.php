@@ -1,5 +1,6 @@
 <?php 
-require_once("user.controller.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("user.controller.class.php"));
 class Controller_Client extends Controller_User
 {
 	public function canEdit($o){

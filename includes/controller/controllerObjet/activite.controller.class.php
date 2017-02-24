@@ -1,8 +1,8 @@
 <?php
 
-require_once("/../../modele/database.class.php");
-require_once("/../../modele/activities.class.php");
-require_once("/../../fonctions/general.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
+require_once(i("activities.class.php"));
 
 
 class Controller_Activite {

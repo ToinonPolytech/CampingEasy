@@ -1,10 +1,12 @@
 <?php
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
+		
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
 	<?php		
-		require_once("../modele/database.class.php");
+		require_once(i("database.class.php"));
 		$db = new Database();
 		$db->select("users", array('infoId' => $_SESSION["infoId"]));
 	?>

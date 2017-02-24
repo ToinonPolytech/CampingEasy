@@ -2,8 +2,8 @@
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 	
-	require_once("/../fonctions/general.php");
-	require_once("/../modele/database.class.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("database.class.php"));
 	
 	$db = new Database();
 	$db->select("activities", array('id' => $_POST['id']),NULL) ; //id de l'activité doit passer en post 

@@ -1,13 +1,16 @@
+<?php
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+?>
 <div class="alert alert-danger" role="alert" name="infoErreur" id="infoErreur">
 	<?php 
 	//controller du formulaire de création d'un utilisateur via l'administration
 	if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['numPlace']) && isset($_POST['mail']) && isset($_POST['date']) && isset($_POST['type']) && $date=strtotime($_POST["date"])!==false)
 	{
-		require_once("../controllerObjet/userInfos.controller.class.php");
+		require_once(i("userInfos.controller.class.php"));
 		if ($_POST['type']=="CLIENT")
 		{
-			require_once("../../modele/client.class.php");
-			require_once("../controllerObjet/client.controller.class.php");
+			require_once(i("client.class.php"));
+			require_once(i("client.controller.class.php"));
 			// Le client maître, a tout les droits disponible pour un client
 			$droits=0;
 			for ($i=$puissance;$i>0;$i--)
@@ -31,8 +34,8 @@
 		}
 		else
 		{
-			require_once("../../modele/staff.class.php");
-			require_once("../controllerObjet/staff.controller.class.php");
+			require_once(i("staff.class.php"));
+			require_once(i("staff.controller.class.php"));
 			$user = new Staff(NULL, NULL, $_POST['type'], 0, $_POST['nom'], $_POST['prenom'], NULL); // TODO : faire les droits en fonction de... ?
 			$controllerUser = new Controller_Staff($user);
 			$clef = $controllerUser->generateKey();

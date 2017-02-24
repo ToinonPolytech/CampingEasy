@@ -1,6 +1,7 @@
 <?php 
-require_once("../../modele/activities.class.php");
-require_once("../controllerObjet/activite.controller.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("activities.class.php")));
+require_once(i("activite.controller.class.php")));
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 
