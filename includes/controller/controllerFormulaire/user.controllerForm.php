@@ -60,6 +60,7 @@
 			$("#infoErreur").removeClass("alert-danger").addClass("alert-success");.fadeOut(5500, function(){ $("#infoErreur").remove(); });
 		</script>
 		<?php
+		echo 'La clef de connexion du client est : '.$user->getClef();
 	}
 	?>
 </div>
