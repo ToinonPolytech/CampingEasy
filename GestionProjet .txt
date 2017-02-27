@@ -8,7 +8,7 @@
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
 	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
 
-- Avoir une date d'ouverture des réservations pour une activité (pour éviter de réserver dans 3 mois)
+
 
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 
@@ -16,8 +16,28 @@
 
 TODO (les petites choses à ne pas oublier) :
 
-- Gérer les authentifications et l'affichage des pages en fonctions ainsi que la récupération des ID pour les objets en ayant besoin (équipe, activité .. )
+- Gérer les authentifications et l'affichage des pages en fonctions 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
+- Vérif pour éviter les doublons lors de la sauvegarde en db (pour à peu près toutes les entités)
+
+Client : 
+-  Consulter partenaire : listes et affichage individuel => système de contact mail direct ? affichage des activités proposées par ce partenaire ? 
+Un partenaire peut proposer autre chose que des activités : on gère ca de manière individuelle ? 
+-  Réserver : - une table de resto (impliquera de connaitre la capacité max du resto ) 
+				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
+				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
+						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
+				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
+- Affichage du classement des équipes 
+
+Admin: 
+- Gérer réservations : affichage de celles ci avec critères de choix 
+- Gérer partenaires : même affichage pour les partenaires que client mais bouton pour modifier ? 
+- Gérer les comptes clients : modifs/ voir la clef / ... 
+- Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
+- Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
+- Ajouter / Gérer les options du restaurant 
+- 
 		
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
@@ -26,3 +46,5 @@ TODO Lointain (améliorations possibles et détails dans un futur lointain ):
 - administration d'une activité partenaire par un admin 
 - gestion des langues 
 - gérer une attribution des points de l'activité avec classement (l'activité vaut 100 pour premier, 50 pour deuxieme etc ...) 
+- inventaire sur l'appli ? 
+- système de messages au staff pour un contact direct 
