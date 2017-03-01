@@ -6,7 +6,7 @@
 	require_once(i("database.class.php"));
 	
 	$db = new Database();
-	$db->select("activities", array('id' => $_POST['id']),NULL) ; //id de l'activité doit passer en post 
+	$db->select("activities", array('id' => $_POST['id']),NULL) ; 
 	$act= $db->fetch();
 	
 ?>

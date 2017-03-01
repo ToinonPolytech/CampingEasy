@@ -2,17 +2,21 @@
 
 
 
-- Pour les lieux il doit être possible de réserver un lieu mais pas tous (terrain de tennis par exemple ) => implique qu'une réservation a un type : lieu ou activité 
+
 -
 
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
 	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
 
-
+_ Enlever l'affichage des activités passées
+- Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
 
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
-
+Modif db : 
 - Erreur dans la db : equipe  doit pouvoir être NULL pour une réservation 
+- Ajout pour le partenaire du type de service proposé / du iduser associé 
+- Ajout d'un critère réservable pour les lieux 
+
 
 TODO (les petites choses à ne pas oublier) :
 
@@ -29,6 +33,7 @@ Un partenaire peut proposer autre chose que des activités : on gère ca de mani
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
 				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
 - Affichage du classement des équipes 
+- Gérer mes équipes / ajouter des personnes à l'équipe /donner un droit pour ajouter d'autres membres ?
 
 Admin: 
 - Gérer réservations : affichage de celles ci avec critères de choix 
