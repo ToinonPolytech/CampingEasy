@@ -3,8 +3,19 @@
 		session_start();
 		
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	
+	if (!auth())
+		exit();
+	
+	require_once(i("client.class.php"));
+	require_once(i("client.controller.class.php"));
+	$client=new Client($_SESSION["id"]);
+	$controller=new Controller_Client($client);
+	if (!$controller->can(CAN_CREATE_SUBACCOUNT))
+		exit;
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
+	<a href="/includes/view/ajoutSousCompteForm.php" class="pull-left">Ajouter un sous-compte</a>
 	<?php		
 		require_once(i("database.class.php"));
 		$db = new Database();

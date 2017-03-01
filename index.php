@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 ?>
 <html>
 	<head>
@@ -32,9 +33,13 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<?php 
-				require ("./includes/view/menu.php");
-			?>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu_nav">
+				<div class="navbar-header"><a class="navbar-brand" href="index.php">Camping Facile : Le projet turfu </a></div>
+				<ul class="nav navbar-right top-nav"></ul>
+				<?php 
+					if (auth()) require ("./includes/view/menu.php");
+				?>
+			</nav>
 			<div id="page-wrapper">
 				<div class="container-fluid">
 					<div id="mainAjax" name="mainAjax">

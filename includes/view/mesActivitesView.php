@@ -8,7 +8,9 @@ $db1 = new Database();
 $db2 = new Database();
 $db1->select("activities", array('idDirigeant' => $_SESSION['id']));
 
-
+?>
+<a href="/includes/view/ajoutActiviteForm.php" class="pull-left">Créer une activité </a>
+<?php
 echo "<table class='table'>
   <thead>
     <tr>

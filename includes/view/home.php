@@ -8,10 +8,13 @@
 	<div class="col-lg-6" style="width:100%;" name="form-connexion" id="form-connexion">
 		<?php
 		if (auth()) 
-		{	 echo "Vous êtes connecté"; 
-			/**
-				- On affiche les options disponibles à cet utilisateur.
-			**/
+		{	 
+			echo "Vous êtes dorénavant connecté.";
+			?>
+			<script type="text/javascript">
+				loadTo("includes/view/menu.php", {}, "#menu_nav", "append");
+			</script>
+			<?php
 		}
 		else
 		{

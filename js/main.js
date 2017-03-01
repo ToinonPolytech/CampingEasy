@@ -13,6 +13,10 @@ function loadTo(urlCalled, dataUsed, location, type, callback) // path vers le f
 			$(location).prepend(data);
 		
 		if (typeof(callback) === "function") { callback(); }
+		
+		$("a").click(function(){
+			loadToMain($(this).attr("href"), "{}"); return false;
+		});
 	});
 }
 function loadToMain(urlCalled, dataUsed, callback) // dataUsed : { nomVar : valeur, nomVar2 : valeur2 }
