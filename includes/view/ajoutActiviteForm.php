@@ -57,6 +57,7 @@
 			<input class="form-control" type="number" name="prix" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" id="points"/><br/>
+			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
 	</form>
 </div>
