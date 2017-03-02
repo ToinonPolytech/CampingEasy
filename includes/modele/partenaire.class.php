@@ -41,7 +41,7 @@ class Partenaire{
 		}	
 		else if ($this->_id!=NULL && $database->count('partenaire', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
+			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
 		}
 		else
 		{

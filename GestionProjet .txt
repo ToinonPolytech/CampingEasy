@@ -3,7 +3,8 @@
 
 
 
--
+- Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
+- Début réservation et fin réservation toujours problématiques 
 
 - Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
 	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
@@ -34,6 +35,7 @@ Un partenaire peut proposer autre chose que des activités : on gère ca de mani
 				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
 - Affichage du classement des équipes 
 - Gérer mes équipes / ajouter des personnes à l'équipe /donner un droit pour ajouter d'autres membres ?
+
 
 Admin: 
 - Gérer réservations : affichage de celles ci avec critères de choix 

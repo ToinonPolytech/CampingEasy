@@ -7,7 +7,7 @@
 	
 	if(isset($_POST['id']))
 	{
-		
+		 
 		$db = new Database(); 
 		$db->select("partenaire",array('id' => $_POST['id'])); 
 		$part=$db->fetch(); 
@@ -16,6 +16,7 @@
 			<span class="pull-left">Modifier le partenaire </span><br/>
 			<form role="form" method="post">
 				<div class="form-group">
+				
 					<label for="nom">Entrez le nom du partenaire</label><br/>
 					<input class="form-control" type="text" name="nom" id="nom" value=" <?php echo $part['nom']; ?>" required/><br/>
 					<label for="nom">Description du partenaire</label><br/>
@@ -26,7 +27,7 @@
 					<input class="form-control" type="url" name="siteWeb" id="siteWeb" value=" <?php echo $part['url']; ?>"/><br/>
 					<label for="nom">Téléphone</label><br/>
 					<input class="form-control" type="tel" name="telephone" id="telephone" value=" <?php echo $part['telephone']; ?>"/><br/>
-					<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/partenaire.controllerForm.php', {nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Modifier</button>
+					<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/partenaire.controllerForm.php', {id : <?php echo $_POST['id']; ?>, nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Modifier</button>
 				</div>
 			</form>
 		</div>

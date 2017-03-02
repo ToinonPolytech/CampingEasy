@@ -35,7 +35,7 @@
 				<?php if ($_SESSION["access_level"]!="CLIENT")
 				{ ?> 				
 					<td><button type="button" class="btn btn-info btn-sm" name="modifPart" onclick="loadToMain('includes/view/modifierPartenaireForm.php', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('includes/controller/controllerFormulaire/supprimerReservation.php', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('includes/controller/controllerFormulaire/supprimerPartenaire.php', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
 				<?php } ?> 
 				
 			</tr>
