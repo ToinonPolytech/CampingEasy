@@ -5,6 +5,10 @@
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("client.class.php"));
 	require_once(i("client.controller.class.php"));
+	
+	if (!auth())
+		exit();
+	
 	$clientParent=new Client($_SESSION["id"]);
 	$clientChild=new Client($_POST["id"]);
 	$controller=new Controller_Client($clientParent);
@@ -33,7 +37,7 @@
 			<input type="radio" name="payer" value="true" id="oui" <?php if ($controller->can(CAN_PAY)) { echo 'checked="checked"'; } ?> />Oui
 			<input type="radio"  name="payer" value="false" id="non" <?php if (!$controller->can(CAN_PAY)) { echo 'checked="checked"'; } ?> />Non<br/>
 			<input type="hidden"  name="id" value="<?php echo htmlentities($_POST["id"]); ?>" id="id" />
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/subUser.controllerForm.php',$('#form_user').serialize() , '#form_user', 'prepend'); return false;">Ajouter</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('subUser.controllerForm.php')); ?>',$('#form_user').serialize() , '#form_user', 'prepend'); return false;">Ajouter</button>
 		</div>
 	</form>
 </div>

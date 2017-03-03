@@ -9,7 +9,7 @@
 	$db1->select("activities", array('idDirigeant' => $_SESSION['id']));
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-actview" id="form-actview">
-	<a href="/includes/view/ajoutActiviteForm.php" class="pull-left">Créer une activité </a>
+	<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutActiviteForm.php')); ?>" class="pull-left">Créer une activité </a>
 	<table class='table'>
 		<thead>
 			<tr>
@@ -38,8 +38,8 @@
 				<td><?php echo htmlentities($act['nom']); ?></td> 
 				<td><?php echo date("d/m/y H:i",$act['time_start']); ?></td>
 				<td><?php echo $nbRes; ?></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('includes/view/gererActiviteForm.php',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
-				<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('includes/controller/controllerFormulaire/supprimerActivite.php')">Supprimer</button></td>
+				<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
+				<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>')">Supprimer</button></td>
 			</tr>
 			<?php
 		}

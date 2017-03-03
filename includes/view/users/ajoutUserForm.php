@@ -1,6 +1,8 @@
 <?php
-	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
+	if (!isset($_SESSION))
 		session_start();
+	
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-user" id="form-user">
 	<h3>Ajoutez un utilisateur </h3><br/>
@@ -23,7 +25,7 @@
 			<input class="form-control" type="text" name="nom" id="nom"/> <br/>
 			<label for="prenom">Prénom</label><br/>
 			<input class="form-control" type="text" name="prenom" id="prenom"/> <br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/user.controllerForm.php', {numPlace : $('#numPlace').val(), mail : $('#email').val(), date : $('#date').val(), type : $('#type').val(), nom : $('#nom').val(), prenom : $('#prenom').val()}, '#form-user', 'prepend'); return false;">Ajouter</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('user.controllerForm.php')); ?>', {numPlace : $('#numPlace').val(), mail : $('#email').val(), date : $('#date').val(), type : $('#type').val(), nom : $('#nom').val(), prenom : $('#prenom').val()}, '#form-user', 'prepend'); return false;">Ajouter</button>
 		</div>
 	</form>
 </div>

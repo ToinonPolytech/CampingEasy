@@ -63,7 +63,7 @@
 			<input class="form-control" type="number" name="prix" value="<?php echo $act['prix']; ?>" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" value="<?php echo $act['points']; ?>" id="points"/><br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/activite.controllerForm.php', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Enregistrer les modifications</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Enregistrer les modifications</button>
 		</div>
 	</form>
 </div>

@@ -7,8 +7,8 @@ require_once(i("equipe.class.php"));
 **/
 abstract class Controller_User
 {
-	private $_user;
-	private $_withInfoId;
+	protected $_user;
+	protected $_withInfoId;
 	public function __construct ($user, $withInfoId=true){
 		$this->_user=$user;
 		$this->_withInfoId=$withInfoId;

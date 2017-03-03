@@ -29,7 +29,7 @@
 				}
 				?>
 			<td><input class="form-control" type="input" name="ajoutPers"  id="ajoutPers"/> 
-			<button type="button" class="btn btn-info btn-sm" name="ajouterPers" onclick="loadToMain('includes/controller/controllerFormulaire/equipeMembres.controllerForm.php', {id : <?php $id ?>, ajoutPers : $('#ajoutPers').val() }); return false;">Ajouter à l'équipe </button></td>
+			<button type="button" class="btn btn-info btn-sm" name="ajouterPers" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('equipeMembres.controllerForm.php')); ?>', {id : <?php $id ?>, ajoutPers : $('#ajoutPers').val() }); return false;">Ajouter à l'équipe </button></td>
 
 			
 

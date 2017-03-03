@@ -33,9 +33,9 @@
 				<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control" value="1"/><br/>
 				<?php if($_SESSION['id']==$act['idOwner'])
 						{ ?>
-							<button class="btn btn-success" onclick="loadTo('includes/view/gererActivite.php', {id: <?php echo $_POST['id']; ?> }); return false;">Modifier</button>
+							<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActivite.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Modifier</button>
 						<?php } ?> 
-				<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/reservation.controllerForm.php', $('#form_reservation').serialize(), '#form-equipe', 'prepend'); return false;">Réserver</button>
+				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', $('#form_reservation').serialize(), '#form-equipe', 'prepend'); return false;">Réserver</button>
 			</form>
 		</div>
 		<?php	

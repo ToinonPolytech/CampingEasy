@@ -15,7 +15,7 @@
 		exit;
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
-	<a href="/includes/view/ajoutSousCompteForm.php" class="pull-left">Ajouter un sous-compte</a>
+	<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutSousCompteForm.php')); ?>" class="pull-left">Ajouter un sous-compte</a>
 	<?php		
 		require_once(i("database.class.php"));
 		$db = new Database();
@@ -39,7 +39,7 @@
 				<tr>
 					<td><?php echo $data['nom']; ?></td> 
 					<td><?php echo $data['prenom']; ?></td>
-					<td><button type="button" class="btn btn-warning" onclick="loadToMain('includes/view/modifSousComptesForm.php', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button><td>
+					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button><td>
 				</tr>
 			<?php
 			}

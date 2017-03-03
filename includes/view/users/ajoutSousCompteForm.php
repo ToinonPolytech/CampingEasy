@@ -1,6 +1,8 @@
 <?php
-	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
+	if (!isset($_SESSION))
 		session_start();
+	
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-user" id="form-user">
 	<h3>Ajoutez un sous utilisateur </h3><br/>
@@ -25,7 +27,7 @@
 			
 			
 			
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/subUser.controllerForm.php',$('#form_user').serialize() , '#form_user', 'prepend'); return false;">Ajouter</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('subUser.controllerForm.php')); ?>',$('#form_user').serialize() , '#form_user', 'prepend'); return false;">Ajouter</button>
 		</div>
 	</form>
 </div>

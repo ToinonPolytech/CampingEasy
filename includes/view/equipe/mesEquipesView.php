@@ -33,8 +33,8 @@
 			<tr>
 				<td><?php echo $data['nom']; ?></td> 
 				<td><?php echo $data['score']; ?></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('includes/view/equipeView.php', {id : <?php echo $data["id"]; ?>}); return false;">Gérer</button></td>
-				<td><button type="button" class="btn btn-danger btn-sm" name="voirActivite" onclick="loadToMain('includes/controller/controllerForm/supprimerEquipe.php', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
+				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('equipeView.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Gérer</button></td>
+				<td><button type="button" class="btn btn-danger btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerEquipe.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
 				
 
 			</tr>

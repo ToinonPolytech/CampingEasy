@@ -77,7 +77,7 @@ $dateFin = date("d/m/Y", $timeDeb+6*3600*24);
 							{
 								$done=true;
 								?>
-								<td><a href='see' onclick="loadToMain('includes/view/activiteView.php', {id : <?php echo $data["id"]; ?>}); return false;"><?php echo $data["nom"]; ?></a></td>
+								<td><a href='see' onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;"><?php echo $data["nom"]; ?></a></td>
 								<?php
 							}
 						}

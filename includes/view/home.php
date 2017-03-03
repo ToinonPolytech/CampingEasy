@@ -39,7 +39,7 @@
 						<?php
 						}
 						?>
-						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {code : $('#code').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
+						<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('connexionUser.controller.php')); ?>', {code : $('#code').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 2/2</button>
 					</div>
 				</form>	
 				<?php
@@ -54,7 +54,7 @@
 					<div class="form-group">
 						<label class="control-label">Votre identifiant</label>
 						<input type="text" class="form-control" name="clef" id="clef" placeholder="Votre identifiant de 6 caractères."><br/>
-						<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/connexionUser.controller.php', {clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 1/2</button>
+						<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('connexionUser.controller.php')); ?>', {clef : $('#clef').val()}, '#form-connexion', 'prepend'); return false;">Se connecter 1/2</button>
 					</div>
 				</form>		
 				<?php

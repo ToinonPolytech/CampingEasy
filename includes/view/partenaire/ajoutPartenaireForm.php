@@ -1,3 +1,9 @@
+<?php
+	if (!isset($_SESSION))
+		session_start();
+	
+	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+?>
 <div class="col-lg-6" style="width:100%;" name="form-partenaire" id="form-partenaire">
 	<span class="pull-left">Ajouter un partenaire</span><br/>
 	<form role="form" method="post">
@@ -12,7 +18,7 @@
 			<input class="form-control" type="url" name="siteWeb" id="siteWeb"/><br/>
 			<label for="nom">Téléphone</label><br/>
 			<input class="form-control" type="tel" name="telephone" id="telephone"/><br/>
-			<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/partenaire.controllerForm.php', {nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Ajouter</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('partenaire.controllerForm.php')); ?>', {nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Ajouter</button>
 		</div>
 	</form>
 </div>

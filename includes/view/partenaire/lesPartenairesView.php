@@ -31,11 +31,11 @@
 			<tr>
 				<td><?php echo $data['nom']; ?></td> 
 				<td><?php echo $data['description']; ?></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('includes/view/activiteView.php', {id : <?php echo $data["id"]; ?>  }); return false;">Contacter </button></td>
+				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Contacter </button></td>
 				<?php if ($_SESSION["access_level"]!="CLIENT")
 				{ ?> 				
-					<td><button type="button" class="btn btn-info btn-sm" name="modifPart" onclick="loadToMain('includes/view/modifierPartenaireForm.php', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('includes/controller/controllerFormulaire/supprimerPartenaire.php', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
+					<td><button type="button" class="btn btn-info btn-sm" name="modifPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifierPartenaireForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerPartenaire.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
 				<?php } ?> 
 				
 			</tr>

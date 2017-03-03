@@ -27,7 +27,7 @@
 					<input class="form-control" type="url" name="siteWeb" id="siteWeb" value=" <?php echo $part['url']; ?>"/><br/>
 					<label for="nom">Téléphone</label><br/>
 					<input class="form-control" type="tel" name="telephone" id="telephone" value=" <?php echo $part['telephone']; ?>"/><br/>
-					<button class="btn btn-success" onclick="loadTo('includes/controller/controllerFormulaire/partenaire.controllerForm.php', {id : <?php echo $_POST['id']; ?>, nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Modifier</button>
+					<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('partenaire.controllerForm.php')); ?>', {id : <?php echo $_POST['id']; ?>, nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Modifier</button>
 				</div>
 			</form>
 		</div>
