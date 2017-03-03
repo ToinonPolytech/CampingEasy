@@ -1,6 +1,6 @@
 ﻿Problématiques futures et questions existentielles : 
 
-
+A tester : modifier activité / meséquipes / voir équipe / supprimer equipe /
 
 
 - Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
@@ -13,6 +13,8 @@ _ Enlever l'affichage des activités passées
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
 
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
+
+
 Modif db : 
 - Erreur dans la db : equipe  doit pouvoir être NULL pour une réservation 
 - Ajout pour le partenaire du type de service proposé / du iduser associé 
