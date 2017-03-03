@@ -21,17 +21,19 @@
 		<li class="list-group-item">Membres : </li>
 		<?php while($idUser=$database->fetch())
 				{
-					$db2->select("users",array('id' => $idUser)); 
+					$db2->select("users",array('id' => $idUser[0])); 
 					$user= $db2->fetch();
 					echo $user['prenom'];
 					echo '  '.$user['nom']; 
 
 				}
+				?>
+			<td><input class="form-control" type="input" name="ajoutPers"  id="ajoutPers"/> 
+			<button type="button" class="btn btn-info btn-sm" name="ajouterPers" onclick="loadToMain('includes/controller/controllerFormulaire/equipeMembres.controllerForm.php', {id : <?php $id ?>, ajoutPers : $('#ajoutPers').val() }); return false;">Ajouter à l'équipe </button></td>
 
+			
 
-
-
-			?> 
+			
 		
 	</ul>
 </div>

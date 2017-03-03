@@ -40,7 +40,7 @@ class Controller_Equipe
 		}
 		else
 		{
-			echo "ERREUR : le score de l'équipé est vide ou n'est pas un nombre correct ";
+			echo "ERREUR : le score de l'équipe est vide ou n'est pas un nombre correct ";
 			return false;
 		}
 	}

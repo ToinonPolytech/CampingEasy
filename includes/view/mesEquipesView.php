@@ -25,16 +25,16 @@
 		<tbody>
 		<?php
 		while($idEquipe=$db->fetch())
-		{	$db2->select("equipe", array( 'id' => $idEquipe ));
+		{	$db2->select("equipe", array( 'id' => $idEquipe[0] ));
 			$data = $db2->fetch();
 
 			
 			?>
 			<tr>
 				<td><?php echo $data['nom']; ?></td> 
-				<td><?php echo $date['score']; ?></td>
+				<td><?php echo $data['score']; ?></td>
 				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('includes/view/equipeView.php', {id : <?php echo $data["id"]; ?>}); return false;">Gérer</button></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('includes/view/supprimerEquipe.php', {id : <?php echo $data["i"]; ?>}); return false;">Supprimer</button></td>
+				<td><button type="button" class="btn btn-danger btn-sm" name="voirActivite" onclick="loadToMain('includes/controller/controllerForm/supprimerEquipe.php', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
 				
 
 			</tr>
