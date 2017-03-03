@@ -56,9 +56,11 @@
 </html>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("a").click(function(){
-		loadToMain($(this).attr("href"), "{}"); return false;
-	});
+	$("a[class!='ajaxed']").click(function(){
+			loadToMain($(this).attr("href"), "{}"); return false;
+		});
+	//$("a[class!='ajaxed']").attr('href', '');
+	$("a[class!='ajaxed']").addClass('ajaxed');
 	$.datetimepicker.setLocale('fr');
 });
 </script>

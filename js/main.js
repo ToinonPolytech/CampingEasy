@@ -14,9 +14,10 @@ function loadTo(urlCalled, dataUsed, location, type, callback) // path vers le f
 		
 		if (typeof(callback) === "function") { callback(); }
 		
-		$("a").click(function(){
+		$("a[class!='ajaxed']").click(function(){
 			loadToMain($(this).attr("href"), "{}"); return false;
 		});
+		$("a[class!='ajaxed']").addClass('ajaxed');
 	});
 }
 function loadToMain(urlCalled, dataUsed, callback) // dataUsed : { nomVar : valeur, nomVar2 : valeur2 }
