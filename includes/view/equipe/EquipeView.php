@@ -10,30 +10,50 @@
 		$database = new Database();
 		$database->select("equipe", array('id' => $id));  
 		$equipe = $database->fetch(); 
-		// a mettre en jointure 
-		$database->select("equipe_membres",array('idEquipe'=> $_POST['id']),array('idUser'));
-		$db2 = new Database(); 
-
+		$database->selectJoin("equipe_membres", array("users ON idUser=id"), array('idEquipe'=> $_POST['id']), array("prenom", "nom", "idUser"));
 	?>
 	<ul class="list-group">
 		<li class="list-group-item">Nom : <?php echo $equipe['nom']; ?></li>
 		<li class="list-group-item">Score : <?php echo $equipe['score']; ?></li>
-		<li class="list-group-item">Membres : </li>
-		<?php while($idUser=$database->fetch())
+		<li class="list-group-item">
+			Membres : 
+			<?php 
+				while($data=$database->fetch())
 				{
-					$db2->select("users",array('id' => $idUser[0])); 
-					$user= $db2->fetch();
-					echo $user['prenom'];
-					echo '  '.$user['nom']; 
-
+					echo $data['prenom'];
+					echo '  '.$data['nom']; 
 				}
-				?>
-			<td><input class="form-control" type="input" name="ajoutPers"  id="ajoutPers"/> 
-			<button type="button" class="btn btn-info btn-sm" name="ajouterPers" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('equipeMembres.controllerForm.php')); ?>', {id : <?php $id ?>, ajoutPers : $('#ajoutPers').val() }); return false;">Ajouter à l'équipe </button></td>
-
-			
-
-			
-		
+			?>
+		</li>
+		<input class="form-control" type="text" name="ajoutPers"  id="ajoutPers"/> 
+		<div id="search_pers" name="search_pers" style="display:hidden;"></div>
+		<button type="button" class="btn btn-info btn-sm" name="ajouterPers" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('equipeMembres.controllerForm.php')); ?>', {id : <?php echo $id ?>, ajoutPers : $('#ajoutPers').val() }); return false;">Ajouter à l'équipe </button>
 	</ul>
 </div>
+<script type="text/javascript">
+	$old="";
+	$time=$.now();
+	$time_config=500;
+	$("#ajoutPers").keyup(function (event){
+		if ($old!=$(this).val())
+		{
+			$old=$(this).val();
+			$time=$.now();
+			setTimeout(function(){ searchPers(); }, $time_config);
+		}
+	});
+	function searchPers(){
+		if ($time+$time_config<=$.now())
+		{
+			if ($old!="")
+			{
+				$("#search_pers").show();
+				loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('equipeMembres_search.php')); ?>', {name : $old}, '#search_pers', 'replace');
+			}
+			else
+			{
+				$("#search_pers").hide();
+			}
+		}
+	}
+</script>

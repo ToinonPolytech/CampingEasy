@@ -42,7 +42,7 @@
 				{
 					if (is_array($value))
 					{
-						if ($value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=")
+						if ($value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=" && $value[0]!=" LIKE ")
 						{
 							$request.=$key.">=:".$key;
 							$array_where2[$key]=$value[0];
