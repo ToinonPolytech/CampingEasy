@@ -8,7 +8,10 @@
 	<?php		
 		require_once(i("database.class.php"));
 		$db = new Database();
-		$db->select("equipe", array( 'id' => $_SESSION['id']));
+		$db->select("equipe_membres",array( 'idUser' => $_SESSION['id']),array("idEquipe"));
+		$db2 = new Database(); 
+		
+		
 	?>
 	<table class='table'>
 		<thead>
@@ -21,8 +24,11 @@
 		</thead>
 		<tbody>
 		<?php
-		while($data=$db->fetch())
-		{
+		while($idEquipe=$db->fetch())
+		{	$db2->select("equipe", array( 'id' => $idEquipe ));
+			$data = $db2->fetch();
+
+			
 			?>
 			<tr>
 				<td><?php echo $data['nom']; ?></td> 

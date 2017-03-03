@@ -15,7 +15,7 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 	$lieu=$_POST["lieu"];
 	if (!is_numeric($_POST["lieu"]) && $_POST["lieu_type"]==1)
 	{
-		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
+		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.  ";
 	}
 	else
 	{
@@ -34,7 +34,7 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 			$act->setAgeMin(htmlspecialchars($_POST["ageMin"]));
 			$act->setAgeMax(htmlspecialchars($_POST["ageMax"]));
 			$act->setLieu(htmlspecialchars($lieu)); 
-			$act->setTypehtmlspecialchars($_POST["type"]));
+			$act->setType(htmlspecialchars($_POST["type"]));
 			$act->setPlacesLim(htmlspecialchars($_POST["placesLim"]));
 			$act->setPrix(htmlspecialchars($_POST["prix"]));
 			$act->setPoints(htmlspecialchars($_POST["points"]));

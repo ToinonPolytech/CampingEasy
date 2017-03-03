@@ -50,7 +50,14 @@
 		
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" value="<?php echo $act['mustBeReserved']; ?>" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
-			<label for="placesLim" class="mustBeReserved_hide" style="display:none;">Nombre de places</label><br/>
+			<div class="mustBeReserved_hide" style="display:none;">
+				<label for="placesLim">Nombre de places</label><br/>
+				<input class="form-control" type="number" name="placesLim"  id="placesLim"/><br/>
+				<label for="debutReservation">Date début de la réservation</label><br/>
+				<input class="form-control" type="text" name="debutReservation" id="debutReservation" value="<?php echo $act['debutReservation']; ?>"/><br />
+				<label for="finReservation">Date limite pour la réservation</label><br/>
+				<input class="form-control" type="text" name="finReservation" id="finReservation" value="<?php echo $act['debutReservation']; ?>"/><br />
+			</div>
 			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" value="<?php echo $act['capaciteMax']; ?>" id="placesLim"  style="display:none;"/><br/>
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" value="<?php echo $act['prix']; ?>" id="prix"/><br/>

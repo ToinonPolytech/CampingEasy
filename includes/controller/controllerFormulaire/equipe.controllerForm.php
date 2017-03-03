@@ -11,6 +11,7 @@ if(isset($_POST['nom']))
 	if($equipeController->isGood())
 	{
 		$equipe->saveToDb();
+		
 		echo "Equipe ajoutée";
 	}
 }

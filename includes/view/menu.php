@@ -18,7 +18,8 @@
 			<a href="/includes/view/gererSousComptesView.php"><i class="fa fa-shopping-cart"></i>Gérer sous comptes</a>
 			<a href="/includes/view/ajoutEquipeForm.php"><i class="fa fa-shopping-cart"></i> Créer une équipe </a>
 			<a href="/includes/view/lesPartenairesView.php"><i class="fa fa-shopping-cart"></i> Les partenaires  </a>
-			
+			<a href="/includes/view/mesEquipesView.php"><i class="fa fa-shopping-cart"></i> Mes équipes   </a>
+				
 			<?php
 				if ($_SESSION["access_level"]!="CLIENT")
 				{
