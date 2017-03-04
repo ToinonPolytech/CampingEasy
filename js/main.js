@@ -31,5 +31,5 @@ function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path 
 }
 function loadToMain(urlCalled, dataUsed, callback) // dataUsed : { nomVar : valeur, nomVar2 : valeur2 }
 {
-	loadTo(urlCalled, dataUsed, "#mainAjax", "replace", callback);
+	loadTo(urlCalled, dataUsed, "#mainAjax", "replace", false, callback);
 }
