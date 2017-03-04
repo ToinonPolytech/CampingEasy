@@ -1,0 +1,31 @@
+Comment mettre en place l'upload des images (Exemple dans ajoutProblemeTechniqueForm.php) : 
+Rajouter un label : <label for="imageAjax" onclick="addImage();">Ajouter une photo</label>
+Modifier le enctype du formulaire comme ceci : enctype="multipart/form-data"
+Modifier les arguments de loadTo (le button), 2ème argument comme ceci : (window.FormData) ? new FormData($('#ID_DU_FORM')[0]) : $('#ID_DU_FORM').serialize()
+
+Le formulaire est mis en place.
+Coté php (Exemple dans problemeTechnique.controllerForm.php) : 
+Rajouter : require_once(i("images.class.php"));
+Rajouter ceci avant tout ce qui est Controller :
+$photos="";
+if (isset($_FILES))
+{
+	$dir="pbTechniques";
+	$maxsize=2048000;
+	$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' , 'bmp' );
+	$imagesUpload=new Image_upload($_FILES, $maxsize, $extensions_valides, $dir);
+	$photos=$imagesUpload->getUrl();
+}
+		
+if (!isset($imagesUpload) || !$imagesUpload->getError())
+{
+	/** LE RESTE DU CODE **/
+}
+else
+{
+	echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
+}
+
+Le coté php est géré
+->getUrl(), renvoie l'ensemble des chemins vers le fichier sous la forme de chemin1,chemin2,
+$dir, définie le répertoire de sauvegarde

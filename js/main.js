@@ -3,7 +3,9 @@ function loadTo(urlCalled, dataUsed, location, type, callback) // path vers le f
 	$.ajax({
 		url: urlCalled,
 		type: "POST",
-		data: dataUsed
+		data: dataUsed,
+		contentType: false,
+		processData: false
 	}).done(function (data) {
 		if (type=="replace")
 			$(location).html(data);

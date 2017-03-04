@@ -30,6 +30,7 @@
 		<!-- Morris Charts JavaScript -->
 		<script type="text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/formPictures.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">

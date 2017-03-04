@@ -8,9 +8,10 @@ class PbTech{
 	private $_timeEstimated; // timestamp de quand le problème devrait être résoly
 	private $_description; // description du probleme
 	private $_isBungalow; // boolean, si le probleme se situe dans le bungalow
+	private $_photos; // texte
 	private $_solved;  // ENUM{NON_RESOLU, EN_COURS, RESOLU}
 	private $_deleted; // true si on doit supprimer, false sinon
-	public function __construct($id, $idUsers=NULL, $timeCreated=NULL, $timeEstimated=NULL, $description=NULL, $isBungalow=NULL){
+	public function __construct($id, $idUsers=NULL, $timeCreated=NULL, $timeEstimated=NULL, $description=NULL, $isBungalow=NULL, $photos=""){
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -19,6 +20,7 @@ class PbTech{
 			$this->_timeEstimated=$timeEstimated;
 			$this->_description=$description;
 			$this->_isBungalow=$isBungalow;
+			$this->_photos=$photos;
 			$this->_solved="NON_RESOLU";
 		}
 		else
@@ -31,6 +33,7 @@ class PbTech{
 			$this->_timeEstimated=$data["time_estimated"];
 			$this->_description=$data["description"];
 			$this->_isBungalow=$data["isBungalow"];
+			$this->_photos=$data["photos"];
 			$this->_solved=$data["solved"];
 		}
 		$this->_deleted=false;
@@ -43,11 +46,11 @@ class PbTech{
 		}	
 		else if ($this->_id!=NULL && $database->count('problemes_technique', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('problemes_technique', array("id" => $this->_id), array("idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
+			$database->update('problemes_technique', array("id" => $this->_id), array("photos" => $this->_photos, "idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
 		}
 		else
 		{
-			$database->create('problemes_technique', array("id" => $this->_id, "idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
+			$database->create('problemes_technique', array("photos" => $this->_photos, "id" => $this->_id, "idUsers" => $this->_idUser, "time_start" => $this->_timeCreated, "time_estimated" => $this->_timeEstimated, "description" => $this->_description, "isBungalow" => $this->_isBungalow, "solved" => $this->_solved));
 		}
 	}
 	public function getId(){
@@ -70,6 +73,9 @@ class PbTech{
 	}
 	public function getSolved(){
 		return $this->_solved;
+	}
+	public function getPhotos(){
+		return explode(',', $this->_photos);
 	}
 	public function getDeleted(){
 		return $this->_deleted;
@@ -94,6 +100,9 @@ class PbTech{
 	}
 	public function setSolved($solved){
 		$this->_solved=$solved;
+	}
+	public function setPhotos($photos){
+		$this->_photos=$photos;
 	}
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
