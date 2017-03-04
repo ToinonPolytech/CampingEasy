@@ -1,42 +1,58 @@
-﻿Problématiques futures et questions existentielles : 
-
-A tester : modifier activité / meséquipes / voir équipe / supprimer equipe /
-
+﻿Problèmes/Questions techniques  : 
 
 - Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
-- Début réservation et fin réservation toujours problématiques 
+- Gestion des doublons pour la plupart des entités
 
-- Problème du dynamique : quand on recharge une page on se retrouve sur l'acceuil et non sur la page où on était ... 
-	Facilement gérable, on stock en cookie, session ou je ne sais quoi le lieu où il était via le chargement dynamique et quand on est à l'accueil on regarde où il était
-
-_ Enlever l'affichage des activités passées
+Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
+- Un partenaire peut proposer autre chose que des activités : on gère ca de manière individuelle ? 
 
-- Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 
-
+TODO : 
 Modif db : 
 - Erreur dans la db : equipe  doit pouvoir être NULL pour une réservation 
 - Ajout pour le partenaire du type de service proposé / du iduser associé 
-- Ajout d'un critère réservable pour les lieux 
+- Ajout d'un critère réservable pour les lieux et des horaires / date 
+- Ajout des tables de réservations de lieux, de pain, de table de resto, d'état des lieux ...
+- Supression en cascade pour que la suppression d'une équipe supprime aussi tous les membres 
 
-
-TODO (les petites choses à ne pas oublier) :
-
-- Gérer les authentifications et l'affichage des pages en fonctions 
+Activite : 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
-- Vérif pour éviter les doublons lors de la sauvegarde en db (pour à peu près toutes les entités)
+- Enlever l'affichage des activités passées
+- Prévoir pour la durée des activité dans le formulaire : soit heure de fin soit possibilité de mettre un nombre d'heures et de minutes 
+- Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
+"mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
 
+
+
+Réservation : 
+- Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
+- Réservation d'état des lieux : ouverture d'une plage horaire de réservation ainsi que d'une fréquence et du nombre de réservations possibles par plage horaire (plusieurs staff en même temps pour l'état des lieux)
+
+
+
+Users : 
+- Gérer l'ajout des users staff avec date de départ et emplacement 
+
+Lieu commun : 
+- Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
+
+ Equipe : 
+- Prévoir d'autoriser des membres d'équipe à gérer l'équipe 
+ 
+Pages à créer :
+ 
 Client : 
--  Consulter partenaire : listes et affichage individuel => système de contact mail direct ? affichage des activités proposées par ce partenaire ? 
-Un partenaire peut proposer autre chose que des activités : on gère ca de manière individuelle ? 
+
+
 -  Réserver : - une table de resto (impliquera de connaitre la capacité max du resto ) 
 				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
 				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
 				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
 - Affichage du classement des équipes 
-- Gérer mes équipes / ajouter des personnes à l'équipe /donner un droit pour ajouter d'autres membres ?
+- Consultation des problèmes techniques 
+- Affichage des lieux / gestions des lieux => presque terminé 
 
 
 Admin: 
@@ -46,7 +62,7 @@ Admin:
 - Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
 - Ajouter / Gérer les options du restaurant 
-- 
+
 		
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 

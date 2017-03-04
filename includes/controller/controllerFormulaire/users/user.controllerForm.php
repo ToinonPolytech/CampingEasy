@@ -36,7 +36,12 @@
 		{
 			require_once(i("staff.class.php"));
 			require_once(i("staff.controller.class.php"));
-			$user = new Staff(NULL, NULL, $_POST['type'], 0, $_POST['nom'], $_POST['prenom'], NULL); // TODO : faire les droits en fonction de... ?
+			$droits=0;
+			for ($i=$puissance;$i>0;$i--)
+			{
+				$droits+=$i;
+			} // pour le moment un staff a tous les droits de client, à voir pour la suite 
+			$user = new Staff(NULL, NULL, $_POST['type'], $droits, $_POST['nom'], $_POST['prenom'], NULL); 
 			$controllerUser = new Controller_Staff($user);
 			$clef = $controllerUser->generateKey();
 			$userInfos = new UserInfo(NULL, $_POST['numPlace'], $_POST['mail'], strtotime($_POST["date"]), $clef);

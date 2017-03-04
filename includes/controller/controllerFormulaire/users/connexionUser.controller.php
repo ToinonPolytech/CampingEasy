@@ -6,6 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("user.class.php"));
 require_once(i("user.controller.class.php"));
+print_r($_POST); 
 ?>
 <div class="alert alert-danger" role="alert" name="infoErreur" id="infoErreur">
 	<?php

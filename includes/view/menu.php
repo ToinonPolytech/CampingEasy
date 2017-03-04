@@ -16,10 +16,9 @@
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesActivitesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes activités</a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesReservationsView.php')); ?>"><i class="fa fa-shopping-cart"></i>Mes réservations</a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererSousComptesView.php')); ?>"><i class="fa fa-shopping-cart"></i>Gérer sous comptes</a>
-			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutEquipeForm.php')); ?>"><i class="fa fa-shopping-cart"></i> Créer une équipe </a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesPartenairesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Les partenaires  </a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes équipes   </a>
-				
+			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesLieuxCommunsView.php')); ?>"><i class="fa fa-shopping-cart"></i> Espaces communs   </a>	
 			<?php
 				if ($_SESSION["access_level"]!="CLIENT")
 				{

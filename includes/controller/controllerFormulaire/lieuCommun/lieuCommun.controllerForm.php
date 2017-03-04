@@ -3,12 +3,21 @@
 	require_once(i("lieuCommun.class.php"));
 	require_once(i("lieuCommun.controller.class.php"));
 	if(isset($_POST['nom']) && isset($_POST['description']))
-	{
-		$LC = new lieuCommun(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars ($_POST['description']));
+	{	if(isset($_POST['id']))
+		{
+			$LC = new lieuCommun($_POST['id']);
+			$LC->setNom($_POST['nom']);
+			$LC->setDescription($_POST['description']); 
+		}
+		else
+		{
+			$LC = new lieuCommun(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars ($_POST['description']));
+		}
+		
 		$LCController=new Controller_LieuCommun($LC);
 		if($LCController->isGood()){
 			$LC->saveToDb();
-			echo "Lieu ajouté ";
+			echo "Lieu enregistré  ";
 		}
 	}	
 	else

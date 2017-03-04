@@ -35,21 +35,21 @@ class Controller_Activite {
 				else
 				{ 
 					echo 'ERREUR : La date de début est inférieure à la date actuelle';
-					return false;
+					
 				}
 			}
 			else
 			{
 				echo "la date de début n'est pas une forme numerique ";
-				return false;
 			}
+				
 		}
 		else 
 		{ 
 			echo "ERREUR : La date de début d'activité est vide ";
-			return false; 
+			
 		}
-		
+		return false; 
 	}
 	
 	public function dureeIsGood(){
@@ -62,20 +62,21 @@ class Controller_Activite {
 				}
 				else
 				{ echo "ERREUR : La durée de l'activité ne peut être négative ou nulle";
-				  return false; 
+				   
 				}
 			}
 			else
 			{
 				echo "ERREUR : la durée entrée n'est pas de la forme numérique";
-				return false;
+				
 			}
 		}
 		else 
 		{
 			echo "ERREUR : La durée de l'activité est vide";
-			return false; 
+			
 		}
+		return false; 
 		
 		
 	}
@@ -90,16 +91,16 @@ class Controller_Activite {
 			else 
 			{
 				echo 'ERREUR : Le nom doit contenir entre 3 et 40 caractères';
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo 'ERREUR : Le nom de l activité est vide';
-			return false; 
+			
 		}
 		
-				
+		return false; 		
 		
 		
 	}
@@ -113,16 +114,16 @@ class Controller_Activite {
 			else
 			{
 				echo 'ERREUR : Le descriptif de l activité doit contenir entre 20 et 300 caractères';
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo 'ERREUR : Le descriptif de l activite est vide';
-			return false;
+			
 		}
 		
-		
+		return false; 
 	}
 	
 	public function ageIsGood(){
@@ -146,14 +147,15 @@ class Controller_Activite {
 			else
 			{
 				echo "ERREUR : les valeurs des ages doivent être comprises entre 0 et 99 et l'age maximum doit être supérieur à l'age minimum";
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo "ERREUR : Les valeurs entrées pour les age maximum et/ou minimum ne sont pas des nombres entiers";
-			return false;
+			
 		}
+		return false; 
 	}
 	
 		
@@ -185,29 +187,29 @@ class Controller_Activite {
 	}
 	
 	public function typeIsGood(){
-		//le type reçu existe dans la base de données, s'il n'existait pas alors il est crée via un autre formulaire 
+		
 		
 		
 		if(!empty($this->act->getType()))
 		{ 
 			if($this->act->getType()=="SPORTIF" || $this->act->getType()=="INTELLECTUELLE")
-			{
+			{//à modifier à l'ajout de type 
 				return true;
 			}
 			else
 			{
 				echo "ERREUR : ce type d'activité n'existe pas ";
-				return false;
+				
 			}
 		}
 		else
 		{
 			echo 'ERREUR : Le type de l activite est vide';
-			return false;
+			
 		}
 		
 		
-		
+		return false;
 		
 	}
 	
@@ -254,22 +256,22 @@ class Controller_Activite {
 				}
 				else
 				{ echo "ERREUR : Le prix de l'activité ne peut être négatif";
-				  return false; 
+				  
 				}
 			}
 			else
 			{
 				echo "ERREUR : le prix de l'activité n'est pas de la forme numérique";
-				return false;
+				
 			}
 		}
 		else 
 		{	echo $this->act->getPrix();
 			echo "ERREUR : Le prix de l'activité est vide";
-			return false; 
+			
 		}
 		
-		
+		return false; 
 		
 	}
 	
@@ -283,15 +285,15 @@ class Controller_Activite {
 			}
 			else
 			{ echo "ERREUR : Le créateur de l'activité n'existe pas ";
-			  return false; 
+			   
 			}
 		}
 		else
 		{
-			echo "ERREUR :L'id du créateur de l'éctivité passé en paramètre n'est pas un entier ";
-			return false;
+			echo "ERREUR :L'id du créateur de l'activité passé en paramètre n'est pas un entier ";
+			
 		}
-	
+		return false; 
 		
 		
 		
@@ -312,14 +314,15 @@ class Controller_Activite {
 			}
 			else
 			{ echo "ERREUR : le nombre de points pour l'activité doit être compris entre 0 et 1 000 000 000  ";
-			  return false; 
+			   
 			}
 		}
 		else
 		{
 			echo "ERREUR : le nombre de points entré n'est pas un entier ";
-			return false;
+			
 		}
+		return false; 
 	}
 		
 			
