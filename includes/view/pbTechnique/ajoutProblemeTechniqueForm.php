@@ -15,7 +15,7 @@
 			<input type="radio" name="isBungalow" value="true" id="oui" checked="checked" />Oui
 			<input type="radio"  name="isBungalow" value="false" id="non" />Non<br/>
 			<label for="imageAjax" onclick="addImage();">Ajouter une photo</label><br/>
-			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechnique.controllerForm.php')); ?>', (window.FormData) ? new FormData($('#form-pbt')[0]) : $('#form-pbt').serialize(), '#formulaire-pbt', 'prepend'); return false;">Signaler</button>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechnique.controllerForm.php')); ?>', '#form-pbt', '#formulaire-pbt', 'prepend', true); return false;">Signaler</button>
 		</div>
 	</form>
 </div>
