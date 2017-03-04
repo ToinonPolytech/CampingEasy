@@ -26,7 +26,7 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 		}
 		if(isset($_POST['id']))
 		{
-			$act = new Activite(htmlspecialchar($_POST['id'])); 
+			$act = new Activite(htmlspecialchars($_POST['id'])); 
 			$act->setDate(htmlspecialchars(strtotime($_POST["timeStart"]))); 
 			$act->setNom(htmlspecialchars($_POST["nom"]));
 			$act->setDescriptif(htmlspecialchars($_POST["descriptif"]));
@@ -51,9 +51,10 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 		htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved,htmlspecialchars(strtotime($_POST["debutReservation"])),htmlspecialchars(strtotime($_POST["finReservation"])),$photos_path);
 		}
 		$actController = new Controller_Activite($act);	
-		echo $actController->isGood(); 
+		
+		
 		if($actController->isGood())
-		{	echo "isgood"; 
+		{	
 			$act->saveToDb();
 			echo "Activité enregistrée ";
 		}

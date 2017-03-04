@@ -1,4 +1,4 @@
-<?php
+ <?php
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 		
@@ -9,9 +9,9 @@ require_once(i("database.class.php"));
 if(isset($_POST['id']) && isset($_SESSION['id'])){
 	
 	$db = new Database();
-$db->delete("partenaire",array('id' => $_POST['id']),NULL); 
+$db->delete("problemes_technique",array('id' => $_POST['id'])); 
 
-echo 'Partenaire supprimé ';
+echo 'Problème supprimé ';
 
 }
 else

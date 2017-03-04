@@ -54,9 +54,9 @@
 				<label for="placesLim">Nombre de places</label><br/>
 				<input class="form-control" type="number" name="placesLim"  id="placesLim"/><br/>
 				<label for="debutReservation">Date début de la réservation</label><br/>
-				<input class="form-control" type="text" name="debutReservation" id="debutReservation" value="<?php echo $act['debutReservation']; ?>"/><br />
+				<input class="form-control" type="text" name="debutReservation" id="debutReservation" value="<?php echo date("d/m/y H:i",$act['debutReservation']); ?>"/><br />
 				<label for="finReservation">Date limite pour la réservation</label><br/>
-				<input class="form-control" type="text" name="finReservation" id="finReservation" value="<?php echo $act['debutReservation']; ?>"/><br />
+				<input class="form-control" type="text" name="finReservation" id="finReservation" value="<?php echo $act['finReservation']; ?>"/><br />
 			</div>
 			<input class="form-control mustBeReserved_hide" type="number" name="placesLim" value="<?php echo $act['capaciteMax']; ?>" id="placesLim"  style="display:none;"/><br/>
 			<label for="prix">Prix</label><br/>
@@ -69,6 +69,12 @@
 </div>
 <script type="text/javascript">
 	$("#timeStart").datetimepicker({
+		format:'d-m-Y H:00'
+	});
+	$("#debutReservation").datetimepicker({
+		format:'d-m-Y H:00'
+	});
+	$("#finReservation").datetimepicker({
 		format:'d-m-Y H:00'
 	});
 </script>

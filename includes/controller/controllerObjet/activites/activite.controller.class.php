@@ -15,9 +15,10 @@ class Controller_Activite {
 	public function isGood(){
 		
 		return($this->timeStartIsGood() && $this->dureeIsGood() && $this->nomIsGood() 
-		&& $this->descriptifIsGood() && $this->ageIsGood() && $this->lieuIsGood() &&
+		&& $this->descriptifIsGood() && $this->ageIsGood()  &&
 		$this->typeIsGood() && $this->placesLimIsGood() && $this->prixIsGood() &&
-		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()); 
+		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()
+		&& $this->lieuIsGood()); 
 		
 	}
 	
@@ -28,7 +29,7 @@ class Controller_Activite {
 			if(is_numeric($this->act->getDate()))
 			{
 				if($this->act->getDate()>time())
-				{
+				{		
 					return true;
 					
 				}
@@ -40,7 +41,7 @@ class Controller_Activite {
 			}
 			else
 			{
-				echo "la date de début n'est pas une forme numerique ";
+				echo "ERREUR : la date de début n'est pas une forme numerique ";
 			}
 				
 		}
@@ -57,8 +58,9 @@ class Controller_Activite {
 		{	if(is_numeric($this->act->getDuree()))
 			{
 				if($this->act->getDuree()>0)
-				{
-					return true; 					
+				{		
+					return true; 	
+									
 				}
 				else
 				{ echo "ERREUR : La durée de l'activité ne peut être négative ou nulle";
@@ -81,12 +83,15 @@ class Controller_Activite {
 		
 	}
 	public function nomIsGood(){
+		
 		if(!empty($this->act->getNom()))
-		{
+		{ echo $this->act->getNom(); 
+	
 			if((strlen($this->act->getNom())<40) &&
 		strlen($this->act->getNom())>3)
 			{
-			return true;
+				return true;
+			
 			}
 			else 
 			{
@@ -108,7 +113,7 @@ class Controller_Activite {
 		if(!empty($this->act->getDescriptif()))
 		{
 			if((strlen($this->act->getDescriptif())>=20) && strlen($this->act->getDescriptif())<=300)
-			{
+			{	
 				return true;
 			}
 			else
@@ -178,7 +183,7 @@ class Controller_Activite {
 			}
 			else 
 			{	$this->act->setLieu("Lieu non précisé");
-				echo "Attention : aucun lieu n'a été précisé. L'activité est enregistrée mais nous vous conseillons d'ajouter un lieu dans Gérer mes activités";
+				echo "Attention : aucun lieu n'a été précisé. Nous vous conseillons d'ajouter un lieu dans Gérer mes activités";
 				return true;
 			}
 		return false;

@@ -24,24 +24,26 @@
 		<?php
 		$i=0;
 		while($act=$db1->fetch())
-		{
-			$i++;
-			$nbRes=0; 
-			//on sélectionne le nombre de personnes inscrites dans la réservation pour l'activité concernée
-			$db2->select("reservation", array('idActivite' => $act['id']), array("nbrPersonne"));  
-			while ($nbPersRes = $db2->fetch())
-			{ //tant qu'il existe des réservations pour cette activité 
-				$nbRes=$nbRes+$nbPersRes["nbrPersonne"]; //on somme le nombre de personnes inscrites 
+		{	if($act['time_start']>=time())
+			{
+				$i++;
+				$nbRes=0; 
+				//on sélectionne le nombre de personnes inscrites dans la réservation pour l'activité concernée
+				$db2->select("reservation", array('idActivite' => $act['id']), array("nbrPersonne"));  
+				while ($nbPersRes = $db2->fetch())
+				{ //tant qu'il existe des réservations pour cette activité 
+					$nbRes=$nbRes+$nbPersRes["nbrPersonne"]; //on somme le nombre de personnes inscrites 
+				}
+				?>
+				<tr>
+					<td><?php echo htmlentities($act['nom']); ?></td> 
+					<td><?php echo date("d/m/y H:i",$act['time_start']); ?></td>
+					<td><?php echo $nbRes; ?></td>
+					<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>')">Supprimer</button></td>
+				</tr>
+				<?php
 			}
-			?>
-			<tr>
-				<td><?php echo htmlentities($act['nom']); ?></td> 
-				<td><?php echo date("d/m/y H:i",$act['time_start']); ?></td>
-				<td><?php echo $nbRes; ?></td>
-				<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
-				<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>')">Supprimer</button></td>
-			</tr>
-			<?php
 		}
 		if($i==0) echo "Vous n'avez pas d'activité";
 		?>

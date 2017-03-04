@@ -1,7 +1,8 @@
 ﻿Problèmes/Questions techniques  : 
 
-- Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
+
 - Gestion des doublons pour la plupart des entités
+- Modifier partenaire => to be continued 
 
 Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
@@ -18,7 +19,6 @@ Modif db :
 
 Activite : 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
-- Enlever l'affichage des activités passées
 - Prévoir pour la durée des activité dans le formulaire : soit heure de fin soit possibilité de mettre un nombre d'heures et de minutes 
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
@@ -29,7 +29,9 @@ Réservation :
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 - Réservation d'état des lieux : ouverture d'une plage horaire de réservation ainsi que d'une fréquence et du nombre de réservations possibles par plage horaire (plusieurs staff en même temps pour l'état des lieux)
 
-
+Partenaire : 
+- Probleme avec les regexp du partenaire 
+- Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
 
 Users : 
 - Gérer l'ajout des users staff avec date de départ et emplacement 
@@ -45,7 +47,7 @@ Pages à créer :
 Client : 
 
 
--  Réserver : - une table de resto (impliquera de connaitre la capacité max du resto ) 
+-  Réserver : 	- une table de resto (impliquera de connaitre la capacité max du resto ) 
 				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
 				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 

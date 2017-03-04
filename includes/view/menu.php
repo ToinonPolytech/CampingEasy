@@ -19,6 +19,7 @@
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesPartenairesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Les partenaires  </a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes équipes   </a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesLieuxCommunsView.php')); ?>"><i class="fa fa-shopping-cart"></i> Espaces communs   </a>	
+			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesProblemesTechniquesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes problèmes techniques  </a>	
 			<?php
 				if ($_SESSION["access_level"]!="CLIENT")
 				{

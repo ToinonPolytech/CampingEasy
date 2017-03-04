@@ -2,7 +2,8 @@
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 		
-require_once('../../modele/database.class.php');
+require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+require_once(i("database.class.php"));
 
 
 if(isset($_POST['id']) && isset($_SESSION['id'])){
