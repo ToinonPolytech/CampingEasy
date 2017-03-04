@@ -1,6 +1,6 @@
 function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path vers le fichier, voir loadToMain, lieu pour afficher le retour (.class #div ect...), les différents types d'écriture (replace, append, prepend), function à appeller a la fin du call ajax
 {
-	if (typeof(isImage)==="undefined" || !isImage)
+	if (typeof isImage =="undefined" || !isImage)
 	{
 		$params={url:urlCalled, type:"POST", data:dataUsed};
 	}
