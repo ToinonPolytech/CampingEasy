@@ -1,12 +1,19 @@
-function loadTo(urlCalled, dataUsed, location, type, callback) // path vers le fichier, voir loadToMain, lieu pour afficher le retour (.class #div ect...), les différents types d'écriture (replace, append, prepend), function à appeller a la fin du call ajax
+function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path vers le fichier, voir loadToMain, lieu pour afficher le retour (.class #div ect...), les différents types d'écriture (replace, append, prepend), function à appeller a la fin du call ajax
 {
-	$.ajax({
-		url: urlCalled,
+	if (typeof(isImage)==="undefined" || !isImage)
+	{
+		$params={url:urlCalled, type:"POST", data:dataUsed};
+	}
+	else
+	{
+		$params={url: urlCalled,
 		type: "POST",
-		data: dataUsed,
+		data: ((window.FormData) ? new FormData($(dataUsed)[0]) : $(dataUsed).serialize()),
 		contentType: false,
-		processData: false
-	}).done(function (data) {
+		processData: false};
+	}
+	
+	$.ajax($params).done(function (data) {
 		if (type=="replace")
 			$(location).html(data);
 		else if (type=="append")
