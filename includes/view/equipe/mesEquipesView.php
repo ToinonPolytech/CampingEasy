@@ -6,6 +6,7 @@
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
 <a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutEquipeForm.php')); ?>" class="pull-left">Créer une équipe </a>
+<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('classementEquipesView.php')); ?>" class="pull-left">Voir le classement </a>
 	<?php		
 		require_once(i("database.class.php"));
 		$db = new Database();

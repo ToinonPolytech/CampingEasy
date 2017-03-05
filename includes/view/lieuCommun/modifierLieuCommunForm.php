@@ -19,7 +19,7 @@
 					<label for="nom">Nom du lieu </label><br/>
 					<input class="form-control" type="text" name="nom" id="nom" value='<?php echo $lieu['nom'];?>' /> <br />
 					<label for="nom">Description du lieu</label><br/>
-					<textarea class="form-control" rows="6" cols="30" type="text" name="description" id="description" value='<?php echo $lieu['nom'];?>'><?php echo $lieu['nom'];?></textarea> <br />
+					<textarea class="form-control" rows="6" cols="30" type="text" name="description" id="description" value='<?php echo $lieu['description'];?>'><?php echo $lieu['description'];?></textarea> <br />
 					<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lieuCommun.controllerForm.php')); ?>', {id: <?php echo $_POST['id']; ?> ,nom : $('#nom').val(), description :  $('#description').val()}, '#form-camping', 'prepend'); return false;">Modifier</button>
 				</div>
 			</form>

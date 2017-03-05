@@ -1,13 +1,17 @@
 ﻿Problèmes/Questions techniques  : 
-
+- Ca serait pas mal que je comprenne un peu mieux le dynamique pour pouvoir faire des menus de critères de choix déroulants dynamiques 
+Si t'as le temps de m'expliquer un de ces jours 
 
 - Gestion des doublons pour la plupart des entités
-- Modifier partenaire => to be continued 
+- Réfléchir à plusieurs membres d'une famille dans une équipe : des points que pour 1 membres 
+- Gérer l'affichage des photos déjà envoyés dans la modification des entités 
 
 Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
 - Un partenaire peut proposer autre chose que des activités : on gère ca de manière individuelle ? 
-
+- Gestion des users en tant qu'admin  à définir 
+- Définir comment sont attribués les points dans pour les activité : un gagnant est désigné et c'est automatique ou l'animateur cherche le client et lui ajoute manuellement (plus long / moins fiable)
+Les points attibués aux équipes doivent automatiquement être ajoutés à tous les membres 
 
 TODO : 
 Modif db : 
@@ -22,25 +26,35 @@ Activite :
 - Prévoir pour la durée des activité dans le formulaire : soit heure de fin soit possibilité de mettre un nombre d'heures et de minutes 
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
-
-
+- Lien pour modifier activité depuis page d'une activite pour patron 
+- Pb d'affichage de la réservation sur la page activité 
 
 Réservation : 
 - Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
 - Réservation d'état des lieux : ouverture d'une plage horaire de réservation ainsi que d'une fréquence et du nombre de réservations possibles par plage horaire (plusieurs staff en même temps pour l'état des lieux)
+- affichage des réservations uniquement après la date actuelle 
+
 
 Partenaire : 
 - Probleme avec les regexp du partenaire 
-- Problème lors de la modif d'un partenaire : il n'accepte pas le numéro de téléphone 
+
 
 Users : 
 - Gérer l'ajout des users staff avec date de départ et emplacement 
+- Gérer le blocage des comptes 
+- géerre autorisation  avec notif de validation 
+- Problème dans la modification des sous users (nom se met a la place du prénom)
 
 Lieu commun : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
 
  Equipe : 
 - Prévoir d'autoriser des membres d'équipe à gérer l'équipe 
+- Une équipe joue sur une semaine : supprimée à la fin ou score remis à 0 ? comme ça tous les samedis ? 
+Demande d'jaouter une date de création ou d'expiration à 'équipe ? 
+- Suppression des équipes impossibles 
+- voir mes équpes dans classement ne fonctionne pas 
+
  
 Pages à créer :
  
@@ -64,6 +78,7 @@ Admin:
 - Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
 - Ajouter / Gérer les options du restaurant 
+- Gestion des problèmes techniques : voir tous ceux qui existent ? critère d'affichage résolu/ etc 
 
 		
 

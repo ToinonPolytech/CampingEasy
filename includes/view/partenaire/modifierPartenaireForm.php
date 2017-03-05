@@ -18,15 +18,15 @@
 				<div class="form-group">
 				
 					<label for="nom">Entrez le nom du partenaire</label><br/>
-					<input class="form-control" type="text" name="nom" id="nom" value=" <?php echo $part['nom']; ?>" required/><br/>
+					<input class="form-control" type="text" name="nom" id="nom" value="<?php echo $part['nom']; ?>" required/><br/>
 					<label for="nom">Description du partenaire</label><br/>
-					<textarea class="form-control" rows="6" cols="30" type="text"  name="libelle" value=" <?php echo $part['description']; ?>" id="libelle" required><?php echo $part['description']; ?></textarea> <br/>
+					<textarea class="form-control" rows="6" cols="30" type="text"  name="libelle" value="<?php echo $part['description']; ?>" id="libelle" required><?php echo $part['description']; ?></textarea> <br/>
 					<label for="nom">Email</label><br/>
-					<input class="form-control" type="email" name="mail" id="mail" value=" <?php echo $part['mail']; ?>" required/><br/>
+					<input class="form-control" type="email" name="mail" id="mail" value="<?php echo $part['mail']; ?>" required/><br/>
 					<label for="nom">Site Web</label><br/>
-					<input class="form-control" type="url" name="siteWeb" id="siteWeb" value=" <?php echo $part['url']; ?>"/><br/>
+					<input class="form-control" type="url" name="siteWeb" id="siteWeb" value="<?php echo $part['url']; ?>"/><br/>
 					<label for="nom">Téléphone</label><br/>
-					<input class="form-control" type="tel" name="telephone" id="telephone" value=" <?php echo $part['telephone']; ?>"/><br/>
+					<input class="form-control" type="tel" name="telephone" id="telephone" value="<?php echo $part['telephone']; ?>"/><br/>
 					<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('partenaire.controllerForm.php')); ?>', {id : <?php echo $_POST['id']; ?>, nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Modifier</button>
 				</div>
 			</form>

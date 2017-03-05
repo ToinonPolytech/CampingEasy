@@ -20,12 +20,12 @@
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes équipes   </a>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesLieuxCommunsView.php')); ?>"><i class="fa fa-shopping-cart"></i> Espaces communs   </a>	
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesProblemesTechniquesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Mes problèmes techniques  </a>	
+			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('classementEquipesView.php')); ?>"><i class="fa fa-shopping-cart"></i> Classement des équipes </a>	
 			<?php
 				if ($_SESSION["access_level"]!="CLIENT")
 				{
 					?>
 					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutLieuCommunForm.php')); ?>"><i class="fa fa-shopping-cart"></i>Ajouter un lieu commun</a>
-					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutPartenaireForm.php')); ?>"><i class="fa fa-shopping-cart"></i>Ajouter un partenaire </a>
 					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutUserForm.php')); ?>"><i class="fa fa-shopping-cart"></i>Ajouter un utilisateur </a>
 					<?php
 				}

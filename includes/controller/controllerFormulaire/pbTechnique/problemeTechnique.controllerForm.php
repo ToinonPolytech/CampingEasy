@@ -19,14 +19,26 @@
 			$photos=$imagesUpload->getUrl();
 		}
 		
+		
 		if (!isset($imagesUpload) || !$imagesUpload->getError())
-		{
+		{	
 			if(!isset($_POST['isBungalow']))
 				$isBungalow=false; 
 			else
 				$isBungalow=true;
+			if(isset($_POST['id']))
+			{
+				$pbTech = new PbTech($_POST['id']);
+				$pbTech->setDescription($_POST['description']); 
+				$pbTech->setPhoto($photos);
+			}
+			else
+			{
+				$pbTech = new PbTech(NULL, htmlspecialchars($_SESSION['id']), time(), NULL, htmlspecialchars ($_POST['description']), $isBungalow, $photos);
+			}
 			
-			$pbTech = new PbTech(NULL, htmlspecialchars($_SESSION['id']), time(), NULL, htmlspecialchars ($_POST['description']), $isBungalow, $photos);
+			
+			
 			$pbTechController = new Controller_PbTech($pbTech);
 			if($pbTechController->isGood())
 			{	 
