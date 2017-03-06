@@ -132,9 +132,6 @@ class Activite
 	public function getType() {
 	   return $this->_type;
 	}
-	public function getDateLim() {
-	   return $this->_dateLim;
-	}
 	public function getPlacesLim() {
 	   return $this->_placesLim;
 	}

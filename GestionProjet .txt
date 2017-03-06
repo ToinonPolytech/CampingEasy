@@ -6,27 +6,30 @@
 
 Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
+	- Oui bien entendu ! Même in simple @mailto devrait le faire
 - Un partenaire peut proposer autre chose que des activités : on gère ca de manière individuelle ? 
+	- Par exemple ? Le pain, lait ect ?
 
 
 TODO : 
 Modif db : 
-- Erreur dans la db : equipe  doit pouvoir être NULL pour une réservation 
-- Ajout pour le partenaire du type de service proposé / du iduser associé 
-- Ajout d'un critère réservable pour les lieux et des horaires / date 
+- Ajout pour le partenaire du type de service proposé 
+	- c.f au dessus
 - Ajout des tables de réservations de lieux, de pain, de table de resto, d'état des lieux ...
-- Supression en cascade pour que la suppression d'une équipe supprime aussi tous les membres 
+	- Plutôt modifier Reservation, on renomme 'idActivite' par 'id'. On rajoute une case 'type' ENUM, de valeurs ACTIVITE, RESTAU, LIEU_COMMUN, ETAT_LIEUX ect... non ?
 
 Activite : 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
 - Prévoir pour la durée des activité dans le formulaire : soit heure de fin soit possibilité de mettre un nombre d'heures et de minutes 
+	- Hum.. c'est à dire ? Qu'au lieu de dire 30 minutes, il puisse mettre fin 18h, et de notre coté on calcule ?
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
+	- Je te propose, pour ça, de créer un champ en db nommé 'idRecurrente', si c'est 0 ça veut dire que c'est un truc unique, sinon on met l'id de l'activité de base. Si on modifie l'activité de base ça modifie toutesles autres. Et il faut donc rajouter 2 autres champs : répétition tout les x jours/heures ? Et fin de la récurrence.
 
 
 
 Réservation : 
-- Ajouter une vérif pour les réservations tel que réservation impossible pour une activité qui se déroule après la date de départ 
+- Rajouter une clause pour les ages.
 - Réservation d'état des lieux : ouverture d'une plage horaire de réservation ainsi que d'une fréquence et du nombre de réservations possibles par plage horaire (plusieurs staff en même temps pour l'état des lieux)
 
 Partenaire : 
@@ -38,9 +41,11 @@ Users :
 
 Lieu commun : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
+	- Je dirais plus, un message d'alerte, et si confirmer -> suppression cascade + alerte aux utilisateurs qui avaient réservé.
 
  Equipe : 
 - Prévoir d'autoriser des membres d'équipe à gérer l'équipe 
+	- Dans la table équipe, mettre une colonne avec l'ensemble des idUsers pouvant la gérer
  
 Pages à créer :
  
@@ -66,6 +71,9 @@ Admin:
 - Ajouter / Gérer les options du restaurant 
 
 		
+Question à poser lors d'une vente au camping nécessaire pour l'application (à remplir) : 
+	- Durée d'un état des lieux
+
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
 
