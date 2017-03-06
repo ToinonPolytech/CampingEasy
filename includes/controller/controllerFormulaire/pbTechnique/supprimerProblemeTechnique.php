@@ -3,15 +3,18 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 		
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
-require_once(i("database.class.php"));
+require_once(i("problemeTechnique.class.php"));
 
 
-if(isset($_POST['id']) && isset($_SESSION['id'])){
+if(isset($_POST['id']) && auth()){
 	
-	$db = new Database();
-$db->delete("problemes_technique",array('id' => $_POST['id'])); 
-
-echo 'Problème supprimé ';
+	$pbTech = new PbTech($_POST['id']);
+	if ($pbTech->getIdUser()==$_SESSION["id"])
+	{
+		$pbTech->setDeleted(true);
+		$pbTech->saveToDb();
+		echo "Supprimé";
+	}
 
 }
 else

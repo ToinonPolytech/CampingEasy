@@ -12,10 +12,9 @@ if(isset($_POST['nom']) && isset($_POST['libelle']) && isset($_POST['mail']) && 
 		$partenaire->setSiteWeb(htmlspecialchars($_POST['siteWeb']));
 		$partenaire->setTelephone(htmlspecialchars($_POST['telephone']));
 	}
-	
 	else 
 	{
-	$partenaire = new Partenaire(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['libelle']), htmlspecialchars($_POST['mail']), htmlspecialchars($_POST['siteWeb']), htmlspecialchars($_POST['telephone']));
+		$partenaire = new Partenaire(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['libelle']), htmlspecialchars($_POST['mail']), htmlspecialchars($_POST['siteWeb']), htmlspecialchars($_POST['telephone']));
 	}
 	
 	

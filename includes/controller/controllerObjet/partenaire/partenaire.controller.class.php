@@ -114,26 +114,24 @@ class Controller_Partenaire
 	
 	
 	public function telephoneIsGood(){
-	
-			if(empty($this->partenaire->getTelephone()))
+		if(empty($this->partenaire->getTelephone()))
+		{
+			$this->partenaire->setTelephone(NULL); 
+			return true;
+		}
+		else
+		{
+			if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $this->partenaire->getTelephone()))
 			{
-				$this->partenaire->setTelephone(NULL); 
 				return true;
 			}
 			else
 			{
-				if(preg_match("#^0[1-68]([-. ]?[0-9]{2}){4}$#", $this->partenaire->getTelephone()))
-				{
-					return true;
-				}
-				else
-				{
-					echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
-					
-				}
+				echo "ERREUR : le numéro de téléphone n'a pas le bon format ";
+				
 			}
-		
-}
+		}	
+	}
 	
 }
 ?>

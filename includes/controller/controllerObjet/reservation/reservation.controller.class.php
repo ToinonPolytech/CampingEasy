@@ -2,7 +2,8 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("reservation.class.php"));
-
+require_once(i("activities.class.php"));
+require_once(i("user.class.php"));
 class Controller_Reservation
 {
 	private $_reservation;
@@ -10,7 +11,7 @@ class Controller_Reservation
 		$this->_reservation=$reservation;
 	}
 	public function isGood(){
-		return ($this->idActivitesIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood());
+		return ($this->idActivitesIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood() && $this->actIsAvailable);
 	}
 	public function idActivitesIsGood(){
 		if (!empty($this->_reservation->getIdActivite()))
@@ -76,6 +77,43 @@ class Controller_Reservation
 			echo "ERREUR : Vous devez indiquer pour combien vous réservez.";
 		
 		return false;
+	}
+	public function actIsAvailable(){
+		$act=new Activite($this->_reservation->getIdActivite());
+		$user=new User($this->_reservation->getIdUser());
+		if (!$act->getMustBeReserved())
+		{
+			echo "ERREUR : Cette activité ne peut être réservée.";
+			return false;
+		}
+		if ($act->getDebutReservation()>time())
+		{
+			echo "ERREUR : Cette activité n'est pas encore réservable.";
+			return false;
+		}
+		if ($act->getFinReservation()<time())
+		{
+			echo "ERREUR : Cette activité n'est plus réservable";
+			return false;
+		}
+		/*
+		TODO
+		if ($act->getAgeMin()>$user->getUserInfos()->)
+		{
+			echo "ERREUR : ";
+			return false;
+		}
+		if (!$act->getAgeMax())
+		{
+			echo "ERREUR : ";
+			return false;
+		}*/
+		if ($act->getDate()<time())
+		{
+			echo "ERREUR : Vous ne pouvez pas réserver une activité qui est déjà passé.";
+			return false;
+		}
+		return true;
 	}
 }
 ?>
