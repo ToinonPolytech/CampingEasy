@@ -9,12 +9,169 @@
 		<?php
 		if (auth()) 
 		{	 
-			echo "Vous êtes dorénavant connecté.";
 			?>
-			<script type="text/javascript">
-				loadTo("includes/view/menu.php", {}, "#menu_nav", "append");
-			</script>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutProblemeTechniqueForm.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Signaler un problème technique</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activitesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Les activités du camping</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesActivitesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Mes activités</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesReservationsView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Mes réservations</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererSousComptesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Gérer sous comptes</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesPartenairesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Les partenaires</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Mes équipes</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesLieuxCommunsView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Espaces communs</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesProblemesTechniquesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Mes problèmes techniques</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('classementEquipesView.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Classement des équipes</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverServices.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Réserver un Service</span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>			
 			<?php
+				if ($_SESSION["access_level"]!="CLIENT")
+				{
+					?>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-danger">
+							<div class="panel-heading"></div>
+							<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutLieuCommunForm.php')); ?>">
+								<div class="panel-footer">
+									<span class="pull-left">Ajouter un lieu commun</span>
+									<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-danger">
+							<div class="panel-heading"></div>
+							<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutUserForm.php')); ?>">
+								<div class="panel-footer">
+									<span class="pull-left">Ajouter un utilisateur</span>
+									<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>		
+					<?php
+				}
 		}
 		else
 		{

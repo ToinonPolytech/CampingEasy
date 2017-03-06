@@ -12,6 +12,10 @@ function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path 
 		contentType: false,
 		processData: false};
 	}
+	if (document.location==urlCalled)
+		window.history.replaceState($params.data, 'void', "index.php?p");
+	else
+		window.history.pushState($params.data, 'void', "index.php?p");
 	
 	$.ajax($params).done(function (data) {
 		if (type=="replace")
@@ -22,11 +26,17 @@ function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path 
 			$(location).prepend(data);
 		
 		if (typeof(callback) === "function") { callback(); }
-		
-		$("a[class!='ajaxed']").click(function(){
-			loadToMain($(this).attr("href"), "{}"); return false;
+		$("a").each(function(){
+			if (!$(this).hasClass("ajaxed"))
+			{
+				$(this).attr('rel', $(this).attr('href'));
+				$(this).attr('href', '');
+				$(this).addClass('ajaxed');
+				$(this).click(function(){
+					loadToMain($(this).attr("rel"), "{}"); return false;
+				});
+			}
 		});
-		$("a[class!='ajaxed']").addClass('ajaxed');
 	});
 }
 function loadToMain(urlCalled, dataUsed, callback) // dataUsed : { nomVar : valeur, nomVar2 : valeur2 }

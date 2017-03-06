@@ -34,18 +34,14 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu_nav">
-				<div class="navbar-header"><a class="navbar-brand" href="index.php">Camping Facile : Le projet turfu </a></div>
-				<ul class="nav navbar-right top-nav"></ul>
-				<?php 
-					if (auth()) require ("./includes/view/menu.php");
-				?>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="navbar-header"><a class="navbar-brand" href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('home.php')); ?>">Camping Facile : Le projet turfu </a></div>
 			</nav>
 			<div id="page-wrapper">
 				<div class="container-fluid">
 					<div id="mainAjax" name="mainAjax">
 					<?php
-						require ("./includes/view/home.php");
+						require_once(i("home.php"));
 					?>
 					</div>
 				</div>
@@ -57,11 +53,14 @@
 </html>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("a[class!='ajaxed']").click(function(){
-			loadToMain($(this).attr("href"), "{}"); return false;
+	$("a[class!='ajaxed']").each(function(){
+		$(this).attr('rel', $(this).attr('href'));
+		$(this).attr('href', '');
+		$(this).addClass('ajaxed');
+		$(this).click(function(){
+			loadToMain($(this).attr("rel"), "{}"); return false;
 		});
-	//$("a[class!='ajaxed']").attr('href', '');
-	$("a[class!='ajaxed']").addClass('ajaxed');
+	});
 	$.datetimepicker.setLocale('fr');
 });
 </script>
