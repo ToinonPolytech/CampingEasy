@@ -3,6 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("reservation.class.php"));
 require_once(i("activities.class.php"));
+require_once(i("lieuCommun.class.php"));
 require_once(i("user.class.php"));
 class Controller_Reservation
 {
@@ -11,18 +12,38 @@ class Controller_Reservation
 		$this->_reservation=$reservation;
 	}
 	public function isGood(){
-		return ($this->idActivitesIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood() && $this->actIsAvailable);
+		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
 	}
-	public function idActivitesIsGood(){
-		if (!empty($this->_reservation->getIdActivite()))
+	public function timeIsGood(){
+		if (!empty($this->_reservation->getTime()))
 		{
-			if (is_numeric($this->_reservation->getIdActivite()))
+			if (is_numeric($this->_reservation->getTime()))
 			{
-				$database=new Database();
-				if ($database->count('activities', array("id" => $this->_reservation->getIdActivite()))==1)
+				if ($this->_reservation->getTime()>time())
 					return true;
 				else
-					echo "ERREUR : L'activité n'existe pas.";
+					echo "ERREUR : Vous ne pouvez réserver dans le passé.";
+			}
+			else
+				echo "ERREUR : Merci de sélectionner l'horaire pour la réservation.";
+		}
+		else
+			echo "ERREUR : Merci de sélectionner l'horaire pour la réservation.";
+		
+		return false;
+	}
+	public function reservationIsAvailable(){
+		if ($this->_reservation->getType()=="ACTIVITE")
+			return $this->actIsAvailable();
+		
+		return false;
+	}
+	public function idIsGood(){
+		if (!empty($this->_reservation->getId()))
+		{
+			if (is_numeric($this->_reservation->getId()))
+			{
+				return true;
 			}
 			else
 				echo "ERREUR : L'activité n'est pas valide.";
@@ -55,7 +76,7 @@ class Controller_Reservation
 		if (!empty($this->_reservation->idEquipe()))
 		{
 			$database=new Database();
-			if ($this->_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $this->_reservation->getIdActivite()))==1)
+			if ($this->_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $this->_reservation->getId()))==1)
 				return true;
 			else
 				echo "ERREUR : Ce groupe n'existe pas.";
@@ -79,7 +100,13 @@ class Controller_Reservation
 		return false;
 	}
 	public function actIsAvailable(){
-		$act=new Activite($this->_reservation->getIdActivite());
+		$database=new Database();
+		if (!$database->count('activities', array("id" => $this->_reservation->getId()))==1)
+		{
+			echo "ERREUR : L'activité n'existe pas.";
+			return false;
+		}
+		$act=new Activite($this->_reservation->getId());
 		$user=new User($this->_reservation->getIdUser());
 		if (!$act->getMustBeReserved())
 		{
@@ -96,18 +123,6 @@ class Controller_Reservation
 			echo "ERREUR : Cette activité n'est plus réservable";
 			return false;
 		}
-		/*
-		TODO
-		if ($act->getAgeMin()>$user->getUserInfos()->)
-		{
-			echo "ERREUR : ";
-			return false;
-		}
-		if (!$act->getAgeMax())
-		{
-			echo "ERREUR : ";
-			return false;
-		}*/
 		if ($act->getDate()<time())
 		{
 			echo "ERREUR : Vous ne pouvez pas réserver une activité qui est déjà passé.";

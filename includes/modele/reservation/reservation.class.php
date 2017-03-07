@@ -1,26 +1,31 @@
 <?php
 require_once("database.class.php");
 class Reservation {
-	private $_idActivite;
+	private $_id;
+	private $_type;
 	private $_idUser;
+	private $_time;
 	private $_idEquipe;
 	private $_nbrPersonne;
 	private $_deleted;
-	public function __construct($idActivite, $idUser, $idEquipe=NULL, $nbrPersonne=NULL){
-		$this->_idActivite=$idActivite;
+	public function __construct($id, $type, $idUser, $time=NULL, $idEquipe=NULL, $nbrPersonne=NULL){
+		$this->_id=$id;
 		$this->_idUser=$idUser;
-		if ($idActivite==NULL && $idUser==NULL)
+		$this->_type=$type;
+		if ($id==NULL && $idUser==NULL)
 		{
 			$this->_idEquipe=$idEquipe;
 			$this->_nbrPersonne=$nbrPersonne;
+			$this->_time=$time;
 		}
 		else
 		{
 			$database = new Database();
-			$database->select('reservation', array("idActivite" => $idActivite, "idUser" => $idUser));
+			$database->select('reservation', array("id" => $id, "type" => $type, "idUser" => $idUser));
 			$data=$database->fetch();
 			$this->_idEquipe=$data["idEquipe"];
 			$this->_nbrPersonne=$data["nbrPersonne"];
+			$this->_time=$data["time"];
 		}
 		$this->_deleted=false;
 	}
@@ -28,19 +33,19 @@ class Reservation {
 		$database = new Database();
 		if ($this->_deleted)
 		{
-			$database->delete('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser));
+			$database->delete('reservation', array("id" => $this->_id, "type" => $type, "idUser" => $this->_idUser));
 		}	
-		else if ($database->count('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser))) // Existe en db, on update
+		else if ($database->count('reservation', array("id" => $this->_id, "type" => $type, "idUser" => $this->_idUser))) // Existe en db, on update
 		{
-			$database->update('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser), array("idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
+			$database->update('reservation', array("id" => $this->_id, "time" => $this->_time, "type" => $this->_type, "idUser" => $this->_idUser), array("idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
 		}
 		else
 		{
-			$database->create('reservation', array("idActivite" => $this->_idActivite, "idUser" => $this->_idUser, "idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
+			$database->create('reservation', array("id" => $this->_id, "time" => $this->_time, "type" => $this->_type, "idUser" => $this->_idUser, "idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
 		}
 	}
-    public function getIdActivites() {
-        return $this->_idActivite;
+    public function getId() {
+        return $this->_id;
     }
     public function getIdUser() {
         return $this->_idUser;
@@ -48,14 +53,23 @@ class Reservation {
     public function getIdEquipe() {
         return $this->_idEquipe;
     }
+	public function getType() {
+        return $this->_type;
+    }
     public function getNbrPersonne() {
         return $this->_nbrPersonne;
     }
 	public function getDeleted(){
 		return $this->_deleted;
 	}
-	public function setIdActivites($idActivite) {
-        $this->_idActivite=$idActivite;
+	public function getTime(){
+		return $this->_time;
+	}
+	public function setId($id) {
+        $this->_id=$id;
+    }
+	public function setType($type) {
+        $this->_type=$type;
     }
     public function setIdUser($idUser) {
         $this->_idUser=$idUser;
@@ -68,6 +82,9 @@ class Reservation {
     }
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
+	}
+	public function setTime($time){
+		$this->_time=$time;
 	}
 }
 ?>
