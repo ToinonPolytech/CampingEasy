@@ -71,7 +71,8 @@ Demande d'jaouter une date de création ou d'expiration à 'équipe ?
 
 	- Dans la table équipe, mettre une colonne avec l'ensemble des idUsers pouvant la gérer
 
- 
+ e-poCamp
+ fun-eCamp
 Pages à créer :
  
 Client : 
