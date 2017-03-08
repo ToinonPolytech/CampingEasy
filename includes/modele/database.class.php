@@ -42,7 +42,7 @@
 				{
 					if (is_array($value))
 					{
-						if ($value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=" && $value[0]!=" LIKE ")
+						if ($value[0]!="OR" && $value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=" && $value[0]!=" LIKE ")
 						{
 							$request.=$key.">=:".$key;
 							$array_where2[$key]=$value[0];
@@ -51,8 +51,17 @@
 						}
 						else
 						{
-							$request.=$key.$value[0].":".$key;
-							$array_where2[$key]=$value[1];
+							if ($value[0]=="OR")
+							{
+								$request.="( ".$key.$value[1][0].":".$key." OR ".$key.$value[2][0].":".$key."_bis )";
+								$array_where2[$key]=$value[1][1];
+								$array_where2[$key."_bis"]=$value[2][1];
+							}
+							else
+							{
+								$request.=$key.$value[0].":".$key;
+								$array_where2[$key]=$value[1];
+							}
 						}
 					}
 					else
