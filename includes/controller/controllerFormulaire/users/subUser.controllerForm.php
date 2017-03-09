@@ -16,12 +16,13 @@
 		echo "Vous n'avez pas les droits suffisants.";
 		exit();
 	}
+	
 	if(isset($_POST['nom']) && isset($_POST['prenom']))
 	{
 		$db = new Database();
 		$infoID= $db->getValue('users',array('id' => $_SESSION['id']), 'infoId');
 
-		$sousClient = new Client(NULL,$infoID, "CLIENT", NULL, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['nom'])); 
+		$sousClient = new Client(NULL,$infoID, "CLIENT", NULL, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom'])); 
 		$controllerSousClient = new Controller_Client($sousClient); 
 
 		$sousClient->setClef($controllerSousClient->generateKey());

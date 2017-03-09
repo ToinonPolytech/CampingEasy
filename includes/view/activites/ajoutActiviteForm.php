@@ -54,9 +54,9 @@
 				<input class="form-control" type="text" name="finReservation" id="finReservation"/><br />
 			</div>
 			<label for="prix">Prix</label><br/>
-			<input class="form-control" type="number" name="prix" id="prix"/><br/>
+			<input class="form-control" type="number" name="prix" id="prix" value="0"/><br/>
 			<label for="points">Points disponibles</label><br/>
-			<input class="form-control" type="number" name="points" id="points"/><br/>
+			<input class="form-control" type="number" name="points" id="points" value="0"/><br/>
 			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>',$('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
 	</form>

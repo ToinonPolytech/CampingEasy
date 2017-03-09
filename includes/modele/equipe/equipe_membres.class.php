@@ -1,6 +1,7 @@
  <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
+
 class Equipe_Membres {
 	private $_idEquipe;
 	private $_idUser;

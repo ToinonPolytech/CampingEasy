@@ -63,7 +63,7 @@ class Activite
 		else
 		{
 			$database = new Database();
-			$database->select('activites', array("id" => $id));
+			$database->select('activities', array("id" => $id));
 			$data=$database->fetch();
 			$this->_timeStart = $data['time_start'];
 			$this->_nom = $data['nom'];
@@ -75,7 +75,7 @@ class Activite
 			$this->_type = $data['type'];
 			$this->_placesLim =  $data['capaciteMax'];
 			$this->_prix =  $data['prix'];
-			$this->_idOwner = $data['idOwner'];
+			$this->_idOwner = $data['idDirigeant'];
 			$this->_points = $data["points"];
 			$this->_mustBeReserved = $data["mustBeReserved"];
 			$this->_debutReservation = $data["debutReservation"];

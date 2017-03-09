@@ -35,7 +35,7 @@ class User
 			$database = new Database();
 			$database->select('users', array("id" => $id));
 			$data=$database->fetch();
-			$this->_userInfos=new UserInfo($data["infoId"]);
+			$this->_infoId=new UserInfo($data["infoId"]);
 			$this->_accessLevel=$data["access_level"];
 			$this->_droits=$data["droits"];
 			$this->_nom=$data["nom"];

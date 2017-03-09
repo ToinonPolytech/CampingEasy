@@ -7,14 +7,16 @@ class Partenaire{
 	private $_nom;
 	private $_libelle;
 	private $_mail;
+	private $_idUser;
 	private $_siteWeb;
 	private $_telephone;
 	private $_deleted;
-	public function __construct($id, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
+	public function __construct($id, $idUser=NULL, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
 		$this->_id = $id;
 		if ($id==NULL)
 		{
 			$this->_nom = $nom;
+			$this->_idUser = $idUser; 
 			$this->_libelle = $description;
 			$this->_mail = $mail;
 			$this->_siteWeb = $url;
@@ -26,6 +28,7 @@ class Partenaire{
 			$database->select('partenaire', array("id" => $this->_id));
 			$data=$database->fetch();
 			$this->_nom = $data['nom'];
+			$this->_idUser = $data['idUser']; 
 			$this->_libelle = $data['description'];
 			$this->_mail = $data['mail'];
 			$this->_siteWeb = $data['url'];
@@ -41,11 +44,11 @@ class Partenaire{
 		}	
 		else if ($this->_id!=NULL && $database->count('partenaire', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
+			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
 		}
 		else
 		{
-			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone));
+			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
 		}
 	}
 	public function getId() {
@@ -69,6 +72,9 @@ class Partenaire{
 	public function getDeleted(){
 		return $this->_deleted;
 	}
+	public function getIdUser(){
+		return $this->_idUser;
+	}
 	public function setId($id) {
 	   $this->_id = $id;
 	}
@@ -86,6 +92,9 @@ class Partenaire{
 	}
 	public function setTelephone($telephone) {
 	   $this->_telephone = $telephone;
+	}
+	public function setIdUser($idUser){
+		$this->_idUser=$idUser;
 	}
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;

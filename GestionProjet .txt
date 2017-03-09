@@ -1,10 +1,8 @@
 ﻿Problèmes/Questions techniques  : 
-- Ca serait pas mal que je comprenne un peu mieux le dynamique pour pouvoir faire des menus de critères de choix déroulants dynamiques 
-Si t'as le temps de m'expliquer un de ces jours 
 
 - Gestion des doublons pour la plupart des entités
-- Réfléchir à plusieurs membres d'une famille dans une équipe : des points que pour 1 membres 
-- Gérer l'affichage des photos déjà envoyés dans la modification des entités 
+- Réfléchir à plusieurs membres d'une famille dans une équipe : des points que pour 1 membre
+- Gérer l'affichage des photos déjà envoyées dans la modification des entités 
 
 Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
@@ -15,15 +13,19 @@ Choix de conception :
 - Définir comment sont attribués les points dans pour les activité : un gagnant est désigné et c'est automatique ou l'animateur cherche le client et lui ajoute manuellement (plus long / moins fiable)
 Les points attibués aux équipes doivent automatiquement être ajoutés à tous les membres 
 
-	- Par exemple ? Le pain, lait ect ?
+
 
 
 TODO : 
 Modif db : 
 - Ajout pour le partenaire du type de service proposé 
-	- c.f au dessus
+- Ajout table état des lieux : date / plage horaire / fréquence / nombre d'états des lieux en même temps 
+- Ajout du service restaurant : en dur ? nombre de places dispo ? heures d'ouvertures fermeture ? enregistré comme lieu commun ? 	
+- Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?	
 - Ajout des tables de réservations de lieux, de pain, de table de resto, d'état des lieux ...
 	- Plutôt modifier Reservation, on renomme 'idActivite' par 'id'. On rajoute une case 'type' ENUM, de valeurs ACTIVITE, RESTAU, LIEU_COMMUN, ETAT_LIEUX ect... non ?
+- Ajout listes des membres pouvant modifier équipe + date de création 
+- Users: ajout de l'age et du nombre de personnes pour le user info 
 
 Activite : 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
@@ -32,12 +34,13 @@ Activite :
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
 
-- Lien pour modifier activité depuis page d'une activite pour patron 
-- Pb d'affichage de la réservation sur la page activité 
+
 
 	- Je te propose, pour ça, de créer un champ en db nommé 'idRecurrente', si c'est 0 ça veut dire que c'est un truc unique, sinon on met l'id de l'activité de base.
 	Si on modifie l'activité de base ça modifie toutesles autres. Et il faut donc rajouter 2 autres champs : répétition tout les x jours/heures ? Et fin de la récurrence.
-
+- Lien pour modifier activité depuis page d'une activite pour patron 
+- Pb d'affichage de la réservation sur la page activité 
+- Assurer la gestion des photos (et la transmission des données du formulaire) dans gérer activité 
 
 
 
@@ -48,7 +51,7 @@ Réservation :
 
 
 Partenaire : 
-- Probleme avec les regexp du partenaire 
+- Ajout des photos (mises NULL par défaut dans ma db)  
 
 
 Users : 
@@ -61,18 +64,20 @@ Lieu commun :
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
 	- Je dirais plus, un message d'alerte, et si confirmer -> suppression cascade + alerte aux utilisateurs qui avaient réservé.
 
+	
+En cours :
+- gestion des users => faire fonctionner les boutons de suppression , modif / ajouter la modification avec controler adapaté 
+- modif des sous users 	=> faire fonctionner avec controller adapté  
  Equipe : 
 - Prévoir d'autoriser des membres d'équipe à gérer l'équipe 
 - Une équipe joue sur une semaine : supprimée à la fin ou score remis à 0 ? comme ça tous les samedis ? 
-Demande d'jaouter une date de création ou d'expiration à 'équipe ? 
+Demande d'ajouter une date de création ou d'expiration à 'équipe ? 
 - Suppression des équipes impossibles 
 - voir mes équipes dans classement ne fonctionne pas 
+- faire fonctioinner ajout membres (je ne sais pas ce que retourne la fonction de recherche) => controller formulaire de equipe_membres à faire 
+- Dans la table équipe, mettre une colonne avec l'ensemble des idUsers pouvant la gérer
 
-
-	- Dans la table équipe, mettre une colonne avec l'ensemble des idUsers pouvant la gérer
-
- e-poCamp
- fun-eCamp
+ 
 Pages à créer :
  
 Client : 
@@ -83,14 +88,13 @@ Client :
 				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
 				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
-- Affichage du classement des équipes 
-- Consultation des problèmes techniques 
-- Affichage des lieux / gestions des lieux => presque terminé 
+
+
+
 
 
 Admin: 
 - Gérer réservations : affichage de celles ci avec critères de choix 
-- Gérer partenaires : même affichage pour les partenaires que client mais bouton pour modifier ? 
 - Gérer les comptes clients : modifs/ voir la clef / ... 
 - Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 

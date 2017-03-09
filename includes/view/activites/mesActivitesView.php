@@ -29,7 +29,7 @@
 				$i++;
 				$nbRes=0; 
 				//on sélectionne le nombre de personnes inscrites dans la réservation pour l'activité concernée
-				$db2->select("reservation", array('idActivite' => $act['id']), array("nbrPersonne"));  
+				$db2->select("reservation", array('id' => $act['id']), array("nbrPersonne"));  
 				while ($nbPersRes = $db2->fetch())
 				{ //tant qu'il existe des réservations pour cette activité 
 					$nbRes=$nbRes+$nbPersRes["nbrPersonne"]; //on somme le nombre de personnes inscrites 

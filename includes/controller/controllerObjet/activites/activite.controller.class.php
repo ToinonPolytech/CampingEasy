@@ -85,7 +85,7 @@ class Controller_Activite {
 	public function nomIsGood(){
 		
 		if(!empty($this->act->getNom()))
-		{ echo $this->act->getNom(); 
+		{  
 	
 			if((strlen($this->act->getNom())<40) &&
 		strlen($this->act->getNom())>3)

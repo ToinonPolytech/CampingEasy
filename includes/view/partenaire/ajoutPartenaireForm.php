@@ -18,7 +18,9 @@
 			<input class="form-control" type="url" name="siteWeb" id="siteWeb"/><br/>
 			<label for="nom">Téléphone</label><br/>
 			<input class="form-control" type="tel" name="telephone" id="telephone"/><br/>
-			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('partenaire.controllerForm.php')); ?>', {nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val()}, '#form-partenaire', 'prepend'); return false;">Ajouter</button>
+			<input type="checkbox" name="isUser" id="isUser"/>
+			<label for="isUser">Je suis ce partenaire </label><br/>
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('partenaire.controllerForm.php')); ?>', {nom : $('#nom').val(), libelle :  $('#libelle').val(), mail : $('#mail').val(), siteWeb : $('#siteWeb').val(), telephone : $('#telephone').val(),  isUser : $('#isUser').val()}, '#form-partenaire', 'prepend'); return false;">Ajouter</button>
 		</div>
 	</form>
 </div>
