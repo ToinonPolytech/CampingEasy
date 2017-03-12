@@ -4,7 +4,7 @@ require_once(i("activities.class.php"));
 require_once(i("activite.controller.class.php"));
 if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
-echo 'controller';
+
 if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"]) && isset($_POST["descriptif"]) 
 && isset($_POST["ageMin"]) && isset($_POST["ageMax"]) && isset($_POST["lieu"])
 && isset($_POST["type"]) && isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["points"]) && isset($_POST["lieu_type"]) && isset($_POST["debutReservation"]) && isset($_POST["finReservation"]))

@@ -16,7 +16,9 @@ else
 
 $dateDeb = date("d/m/Y", $timeDeb);
 $dateFin = date("d/m/Y", $timeDeb+6*3600*24);
+
 ?>
+<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutActiviteForm.php')); ?>" class="pull-left">Créer une activité </a>
 <div id="titreMois">
     <a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activitesView.php')); ?>?n=<?php echo date("n", $timeDeb-7*3600*24); ?>&d=<?php echo date("d", $timeDeb-7*3600*24); ?>&y=<?php echo date("y", $timeDeb-7*3600*24); ?>"><<</a> Semaine du  : <?php echo $dateDeb; ?> au <?php echo $dateFin; ?> 
 	<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activitesView.php')); ?>?n=<?php echo date("n", $timeDeb+7*3600*24); ?>&d=<?php echo date("d", $timeDeb+7*3600*24); ?>&y=<?php echo date("y", $timeDeb+7*3600*24); ?>">>></a>

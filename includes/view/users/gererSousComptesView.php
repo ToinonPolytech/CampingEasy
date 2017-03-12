@@ -39,7 +39,8 @@
 				<tr>
 					<td><?php echo $data['nom']; ?></td> 
 					<td><?php echo $data['prenom']; ?></td>
-					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button><td>
+					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerSubUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
 				</tr>
 			<?php
 			}

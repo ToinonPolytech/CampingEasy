@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("reservation.class.php"));
 require_once(i("reservation.controller.class.php"));
-
+echo 'controller';
 if (isset($_POST["id"]) && isset($_POST["type"]) && isset($_POST["idUser"]) && isset($_POST["idEquipe"]) && isset($_POST["nbrPersonnes"]))
 {
 	if ($_POST["type"]=="ACTIVITE")

@@ -57,7 +57,7 @@
 				}
 			}
 		  $sousClient->saveToDb(); 
-		  echo "Le sous compte a bien été ajouté "; 
+		  echo "Le sous compte a bien été enregistré "; 
 		}
 	}
 	else

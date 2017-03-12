@@ -3,6 +3,8 @@
 - Gestion des doublons pour la plupart des entités
 - Réfléchir à plusieurs membres d'une famille dans une équipe : des points que pour 1 membre
 - Gérer l'affichage des photos déjà envoyées dans la modification des entités 
+- Pour les modifs, il suffit juste de setId de l'objet crée à partir des données reçues pour que ca update ? (commr tu as fais dans sous_users)
+ //Je me suis fait chier à faire des set partout :'(
 
 Choix de conception : 
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact ? 
@@ -22,10 +24,12 @@ Modif db :
 - Ajout table état des lieux : date / plage horaire / fréquence / nombre d'états des lieux en même temps 
 - Ajout du service restaurant : en dur ? nombre de places dispo ? heures d'ouvertures fermeture ? enregistré comme lieu commun ? 	
 - Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?	
-- Ajout des tables de réservations de lieux, de pain, de table de resto, d'état des lieux ...
-	- Plutôt modifier Reservation, on renomme 'idActivite' par 'id'. On rajoute une case 'type' ENUM, de valeurs ACTIVITE, RESTAU, LIEU_COMMUN, ETAT_LIEUX ect... non ?
+
 - Ajout listes des membres pouvant modifier équipe + date de création 
 - Users: ajout de l'age et du nombre de personnes pour le user info 
+- Ajout récurrence activité : idRecurrente : -1 si non récurrente, 0 si récurrente, id de l'activité récurrente si c'est la récurrence ? 
+ajout du champ récurrence jour/heures et fin récurrence 
+
 
 Activite : 
 - Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
@@ -34,15 +38,16 @@ Activite :
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
 
-
-
 	- Je te propose, pour ça, de créer un champ en db nommé 'idRecurrente', si c'est 0 ça veut dire que c'est un truc unique, sinon on met l'id de l'activité de base.
 	Si on modifie l'activité de base ça modifie toutesles autres. Et il faut donc rajouter 2 autres champs : répétition tout les x jours/heures ? Et fin de la récurrence.
+		=> (penser à proposer dans le formulaire "répéter : tous les jours / toutes les semaines / tous les mois avec un menu déroulant pour simplifier")
+
 - Lien pour modifier activité depuis page d'une activite pour patron 
-- Pb d'affichage de la réservation sur la page activité 
+- Problème avec bouton de modification et de réservation dans gérer activité 
 - Assurer la gestion des photos (et la transmission des données du formulaire) dans gérer activité 
 
-
+Probleme technique : 
+- ajouter un champ de lieu (pas lieu commun mais pour la lisbilité ca serait mieux)
 
 Réservation : 
 - Rajouter une clause pour les ages.
@@ -57,8 +62,9 @@ Partenaire :
 Users : 
 - Gérer l'ajout des users staff avec date de départ et emplacement 
 - Gérer le blocage des comptes 
-- géerre autorisation  avec notif de validation 
+- gérer autorisation  avec notif de validation 
 - Problème dans la modification des sous users (nom se met a la place du prénom)
+- Prévoir un clef oubliée avec envoi par mail d'une nouvelle clef (car celle en db devra être cryptée)
 
 Lieu commun : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
@@ -66,8 +72,9 @@ Lieu commun :
 
 	
 En cours :
-- gestion des users => faire fonctionner les boutons de suppression , modif / ajouter la modification avec controler adapaté 
-- modif des sous users 	=> faire fonctionner avec controller adapté  
+- gestion des users => faire fonctionner les boutons de suppression , modif 
+ 
+
  Equipe : 
 - Prévoir d'autoriser des membres d'équipe à gérer l'équipe 
 - Une équipe joue sur une semaine : supprimée à la fin ou score remis à 0 ? comme ça tous les samedis ? 
@@ -95,7 +102,7 @@ Client :
 
 Admin: 
 - Gérer réservations : affichage de celles ci avec critères de choix 
-- Gérer les comptes clients : modifs/ voir la clef / ... 
+ 
 - Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
 - Ajouter / Gérer les options du restaurant 

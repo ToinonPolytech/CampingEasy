@@ -35,7 +35,7 @@ class User
 			$database = new Database();
 			$database->select('users', array("id" => $id));
 			$data=$database->fetch();
-			$this->_infoId=new UserInfo($data["infoId"]);
+			$this->_userInfos =new UserInfo($data["infoId"]);
 			$this->_accessLevel=$data["access_level"];
 			$this->_droits=$data["droits"];
 			$this->_nom=$data["nom"];
@@ -54,7 +54,7 @@ class User
 		}	
 		else if ($this->_id!=NULL && $database->count('users', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('users', array("id" => $this->_id), array("infoId" => $this->_infoId, "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
+			$database->update('users', array("id" => $this->_id), array("infoId" => $this->_userInfos->getId(), "access_level" => $this->_accessLevel, "droits" => $this->_droits, "nom" => $this->_nom, "prenom" => $this->_prenom, "code" => $this->_code));
 		}
 		else
 		{
@@ -67,6 +67,7 @@ class User
 			$this->_droits+=pow(2,$which); // on lui rajoute
 	}
 	public function getUserInfos(){
+		//retourne l'objet userinfo associé 
 		return $this->_userInfos;
 	}
 	public function getId(){

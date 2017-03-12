@@ -21,11 +21,11 @@
 			<thead>
 				<tr>
 				  <th>Nom</th>
-				  <th>Prénom<th>
+				  <th>Prénom</th>
 				   <th>Emplacement</th>
 				   <th>Qualité</th>
-					<th>Modifier </th>
-					<th> Supprimer </th> 
+					<th>Options</th>
+					
 									 
 				</tr>
 			</thead>
@@ -40,9 +40,10 @@
 					<td><?php echo $data['prenom']; ?></td>
 					<td><?php echo $infoU['emplacement']; ?></td>
 					<td><?php echo $data['access_level']; ?></td>
-					<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Consulter </button></td>
-					<td><button type="button" class="btn btn-info btn-sm" name="modifPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifierPartenaireForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerPartenaire.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
+					
+					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>,access_level : <?php echo $data['access_level'];?> }); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
+					
 					
 					
 				</tr>

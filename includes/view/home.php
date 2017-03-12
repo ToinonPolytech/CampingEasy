@@ -182,6 +182,18 @@
 							</a>
 						</div>
 					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-danger">
+							<div class="panel-heading"></div>
+							<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererProblemesTechniquesView.php')); ?>">
+								<div class="panel-footer">
+									<span class="pull-left">Gérer les problèmes techniques</span>
+									<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
 					<?php
 				}
 		}
