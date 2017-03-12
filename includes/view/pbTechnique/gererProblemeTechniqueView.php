@@ -26,9 +26,11 @@
 		
 		
 		<li class="list-group-item">Envoyer un message à l'utilisateur </li>
-		<form role="form" method="post" name="form-message" id="form-message" enctype="multipart/form-data">
-		<div class="form-group">
-			<textarea class="form-control" rows="6" cols="30" type="text" name="message" id="message"></textarea>
-			<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechniqueInfo.controllerForm.php')); ?>',{idPbTech : <?php echo $id;?>, message : $('#message').val()} '#form-message', 'prepend', true); return false;">Envoyer</button>
+		<form role="form" method="post" name="form-message" id="form-message">
+			<div class="form-group">
+				<textarea class="form-control" rows="6" cols="30" type="text" name="message" id="message"></textarea>
+				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechniqueInfo.controllerForm.php')); ?>', $.extend({}, $('#form-message').serialize(), {idPbTech : <?php echo $id;?>}), '#form-equipe', 'prepend'); return false;">Envoyer</button>
+			<div>
+		</form>
 	</ul>
 </div>
