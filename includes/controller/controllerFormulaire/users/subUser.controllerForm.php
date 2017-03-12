@@ -25,7 +25,7 @@
 		$sousClient = new Client(NULL,$infoID, "CLIENT", NULL, htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['prenom'])); 
 		$controllerSousClient = new Controller_Client($sousClient); 
 
-		$sousClient->setClef($controllerSousClient->generateKey());
+		
 
 		if(isset($_POST['creerSousCompte']) && $_POST['creerSousCompte']=="true")
 		{		
@@ -50,12 +50,16 @@
 			{
 				$clientChild=new Client($_POST["id"]);
 				$sousClient->setId($_POST["id"]); // saveToDb va comprendre qu'il faut UPDATE
+				$sousClient->setClef($db->getValue("users", array("id" => $_POST["id"]), "clef"));
 				if (!$controller->canEdit($clientChild))
 				{
 					echo "Une erreur s'est produite lors de l'envoi du formulaire";
 					exit();
 				}
 			}
+			else
+				$sousClient->setClef($controllerSousClient->generateKey());
+			
 		  $sousClient->saveToDb(); 
 		  echo "Le sous compte a bien été enregistré "; 
 		}
