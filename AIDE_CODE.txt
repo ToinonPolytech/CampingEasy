@@ -1,10 +1,10 @@
 Comment mettre en place l'upload des images (Exemple dans ajoutProblemeTechniqueForm.php) : 
 Rajouter un label : <label for="imageAjax" onclick="addImage();">Ajouter une photo</label>
 Modifier le enctype du formulaire comme ceci : enctype="multipart/form-data"
-Modifier les arguments de loadTo (le button), 2ème argument comme ceci : (window.FormData) ? new FormData($('#ID_DU_FORM')[0]) : $('#ID_DU_FORM').serialize()
+Modifier les arguments de loadTo (le button), 2Ã¨me argument comme ceci : (window.FormData) ? new FormData($('#ID_DU_FORM')[0]) : $('#ID_DU_FORM').serialize()
 
 Le formulaire est mis en place.
-Coté php (Exemple dans problemeTechnique.controllerForm.php) : 
+CotÃ© php (Exemple dans problemeTechnique.controllerForm.php) : 
 Rajouter : require_once(i("images.class.php"));
 Rajouter ceci avant tout ce qui est Controller :
 $photos="";
@@ -23,9 +23,37 @@ if (!isset($imagesUpload) || !$imagesUpload->getError())
 }
 else
 {
-	echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
+	echo "ERREUR : Un problÃ¨me est survenu lors de l'envoi du formulaire.";
 }
 
-Le coté php est géré
+Le cotÃ© php est gÃ©rÃ©
 ->getUrl(), renvoie l'ensemble des chemins vers le fichier sous la forme de chemin1,chemin2,
-$dir, définie le répertoire de sauvegarde
+$dir, dÃ©finie le rÃ©pertoire de sauvegarde
+
+loadTo(urlCalled, dataUsed, location, type, isImage, callback)
+
+urlCalled : Utilise le php : <?php echo str_replace($_SERVER["DOCUMENT_ROOT"], "", i("nom_fichier.php")); ?>
+dataUsed : - isImage est true alors mettre le selector cad : "#nom_form" (<form id="idform" => donc "#idform") 
+sinon mettre un objet JSON {var1 : value, var2 : value} ou utiliser $("#nom_form").serialize()
+location : selector du lieu oÃ¹ l'information sera ecrite. 
+type : 
+- preprend : ecrira e' debut de location
+- replace : remplace le contenu de la location par le nouveau
+- append : ecrit a la fin de la location
+isImage : true pour informer au script quune image sera upload
+false sinon
+callback : une fonction qui sera appelle a la fin du script 
+
+Warning : Seul les 3premiers arguments sont obligatoire
+
+loadToMain(urlCalled, dataUsed, callback)
+ 
+ Appelle la fonction LoadTo avec les memes arguments mais type : "replace" location : "#mainAjax", isImage : false, dataUsed : {}
+ 
+ Warning : Seul les 2premiers args sont obligatoires
+ 
+ Sinon  ne pas oublier le return false apres l.appel de la fonction dans un bouton
+ 
+ Utilise : $.extend({}, object1, object2); => reunis plusieurs objets JSON en un
+ 
+
