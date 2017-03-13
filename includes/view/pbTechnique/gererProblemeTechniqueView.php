@@ -7,7 +7,7 @@
 		exit();
 	$id=$_POST["id"];
 ?> 
-<div class="col-lg-6" style="width:40%;" name="form-equipe" id="form-equipe">
+<div class="col-lg-6" style="width:40%;" name="form-message" id="form-message">
 	<?php 
 		$pbt= new PbTech($id);
 	?>
@@ -29,7 +29,7 @@
 		<form role="form" method="post" name="form-message" id="form-message">
 			<div class="form-group">
 				<textarea class="form-control" rows="6" cols="30" type="text" name="message" id="message"></textarea>
-				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechniqueInfo.controllerForm.php')); ?>', $.extend({}, $('#form-message').serialize(), {idPbTech : <?php echo $id;?>}), '#form-equipe', 'prepend'); return false;">Envoyer</button>
+				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechniqueInfo.controllerForm.php')); ?>', $.extend({}, $('#form-message').serialize(), {idPbTech : <?php echo $id;?>}), '#form-message', 'prepend'); return false;">Envoyer</button>
 			<div>
 		</form>
 	</ul>

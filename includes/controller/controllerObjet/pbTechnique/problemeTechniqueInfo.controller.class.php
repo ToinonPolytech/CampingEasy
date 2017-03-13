@@ -10,21 +10,73 @@ class Controller_PbTechInfo{
 	}
 	public function isGood(){
 		// On ne vérifie pas le time, car le time n'est pas envoyé par le client mais géré depuis le serveur
+		
 		return($this->idIsGood() && $this->idPbTechIsGood() && $this->idUserIsGood() && $this->messageIsGood()); 
 	}
 	public function idIsGood(){
-		return ($this->_PbTechInfo->getId()==NULL && is_numeric($this->_PbTechInfo->getId()));
+		
+		if($this->_PbTechInfo->getId()!=NULL && is_numeric($this->_PbTechInfo->getId()))
+		{
+			return true;
+		}
+		else
+		{
+			echo 'ERREUR : id du message incorrect';
+		}
+		return false; 
 	}
 	public function idPbTechIsGood(){
 		$database = new Database();
-		return (is_numeric($this->_PbTechInfo->getIdPbTech()) && $database->count('problemes_technique', array("id" => $this->_PbTechInfo->getIdPbTech())));
+		if(is_numeric($this->_PbTechInfo->getIdPbTech()))
+		{
+			if($database->count('problemes_technique', array("id" => $this->_PbTechInfo->getIdPbTech())))
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : le problème concerné n'existe pas "; 
+				
+			}
+		}
+		else
+		{
+			echo "ERREUR : l'id du problème n'est pas un nombre";
+		}
+		return false; 
 	}
 	public function idUserIsGood(){
 		$database = new Database();
-		return (is_numeric($this->_PbTechInfo->getIdUser()) && $database->count('users', array("id" => $this->_PbTechInfo->getIdUser())));
+		if(is_numeric($this->_PbTechInfo->getIdPbTech()))
+		{
+			if( $database->count('users', array("id" => $this->_PbTechInfo->getIdUser())))
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : l'utilisateur concerné n'existe pas "; 
+				
+			}
+		}
+		else
+		{
+			echo "ERREUR : l'id de l'utilisateur n'est pas un nombre";
+		}
+		return false; 
 	}
+		
+	
 	public function messageIsGood(){
-		return (!empty($this->_PbTechInfo->getMessage()));
+		//à voir pour vérifications supplémentaire sur le message 
+		if(!empty($this->_PbTechInfo->getMessage()))
+		{
+			return true;
+		}
+		else
+		{
+			echo 'ERREUR : le message est vide'; 
+		}
 	}
 }
 

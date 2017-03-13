@@ -41,7 +41,7 @@
 					<td><?php echo $infoU['emplacement']; ?></td>
 					<td><?php echo $data['access_level']; ?></td>
 					
-					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>,access_level : <?php echo $data['access_level'];?> }); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>, access_level : <?php echo $data['access_level'];?> }); return false;">Modifier</button></td>
 					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
 					
 					

@@ -24,12 +24,12 @@
 </div>
 <?php if($_SESSION['id']==$act->getIdOwner())
 						{ ?>
-							<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Modifier</button>
+							<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Modifier</button>
 							<?php 
 							if($act->getPoints()>=0)
 							{ ?>
 							
-							<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Désigner un vainqueur (à faire)</button>
+							<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Désigner un vainqueur (à faire)</button>
 							
 						<?php 
 							}

@@ -20,14 +20,14 @@ Les points attibués aux équipes doivent automatiquement être ajoutés à tous
 
 TODO : 
 Modif db : 
-- Ajout pour le partenaire du type de service proposé 
-- Ajout table état des lieux : date / plage horaire / fréquence / nombre d'états des lieux en même temps 
-- Ajout du service restaurant : en dur ? nombre de places dispo ? heures d'ouvertures fermeture ? enregistré comme lieu commun ? 	
+- Ajout pour le partenaire du type de service proposé : chaine de caractères 
+- Ajout table état des lieux : date / plage horaire / fréquence / nombre d'états des lieux en même temps / récurrence / début d'ouverture aux réservations 
+- Ajout du service restaurant : en dur ? nombre de places dispo ? heures d'ouverture/  fermeture ? enregistré comme lieu commun ? 	=> je pense que ca doit être un service à part 
 - Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?	
 
-- Ajout listes des membres pouvant modifier équipe + date de création 
+- Ajout "peut modifier" dans equipe membres + date de création dans équipe 
 - Users: ajout de l'age et du nombre de personnes pour le user info 
-- Ajout récurrence activité : idRecurrente : -1 si non récurrente, 0 si récurrente, id de l'activité récurrente si c'est la récurrence ? 
+- Ajout récurrence activité : idRecurrente : -1 si non récurrente, 0 si récurrente, id de l'activité principale s'il s'agit d'une récurrence ? 
 ajout du champ récurrence jour/heures et fin récurrence 
 
 
@@ -70,6 +70,8 @@ Lieu commun :
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
 	- Je dirais plus, un message d'alerte, et si confirmer -> suppression cascade + alerte aux utilisateurs qui avaient réservé.
 
+Etat des lieux : 
+- si on cherche les plages horaires pour un état des lieux on regarde toutes les plages réservées et on laisse les autres ? 
 	
 En cours :
 - gestion des users => faire fonctionner les boutons de suppression , modif 
