@@ -56,4 +56,13 @@ loadToMain(urlCalled, dataUsed, callback)
  
  Utilise : $.extend({}, object1, object2); => reunis plusieurs objets JSON en un
  
+ ------------- DATABASE -----------
+ 
+ pour les args where : array("col" => arg)
+ Plusieurs possibilites : 
+ soit une valeur simple appliquant un =
+ sinon un array(type, val) 
+ type : " LIKE ", "OR", "<=" ect..... 
+ En fonction val peut prendre plusieurs valeurs "explication soon"
+ 
 
