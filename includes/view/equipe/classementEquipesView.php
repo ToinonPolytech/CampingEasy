@@ -9,7 +9,9 @@
 		
 		require_once(i("database.class.php"));
 		$db = new Database();
-		$db->select("equipe"); //manque sélection dans ordre de score 
+		 $db->setOrderCol("score");
+		 $db->setDesc(); 
+		$db->select("equipe");
 	?>
 	<table class='table'>
 		<thead>

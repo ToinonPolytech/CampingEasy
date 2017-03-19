@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 
 class UserInfo
-{
+{	protected $_id; 
 	protected $_numPlace;
 	protected $_email;
 	protected $_solde;

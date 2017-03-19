@@ -220,7 +220,7 @@ class Controller_Activite {
 	
 	public function placesLimIsGood(){
 		
-		if(!empty($this->act->getPlacesLim()))
+		if($this->act->getMustBeRserved()==1)
 		{	if(is_numeric($this->act->getPlacesLim()))
 			{
 				if($this->act->getPlacesLim()>=0)
