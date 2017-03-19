@@ -132,7 +132,7 @@ abstract class Controller_User
 		{
 			$array[$i]=pow(2,$i);
 		}
-		for ($i=$puissance-1;$i>0 && !$etat && $droits>0;$i--)
+		for ($i=$puissance-1;$i>=0 && !$etat && $droits>0;$i--)
 		{
 			if ($droits>=$array[$i])
 			{

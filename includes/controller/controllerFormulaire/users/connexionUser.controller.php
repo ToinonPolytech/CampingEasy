@@ -6,7 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("user.class.php"));
 require_once(i("user.controller.class.php"));
-print_r($_POST); 
+require_once(i("client.controller.class.php"));
 ?>
 <div class="alert alert-danger" role="alert" name="infoErreur" id="infoErreur">
 	<?php
@@ -17,14 +17,18 @@ print_r($_POST);
 		{
 			if ($database->count('users', array("clef" => $_COOKIE["clef"])))
 			{
-				$database->select('users', array("clef" => $_COOKIE["clef"]), "code");
+				$database->select('users', array("clef" => $_COOKIE["clef"]), "id");
 				$data = $database->fetch();
-				if ($data["code"]==NULL || $data["code"]==$_POST["code"]) 
+				$user=new User($data["id"]);
+				if ($user->getCode()==NULL || $user->getCode()==$_POST["code"])
 				{
-					if ($data["code"]==NULL) // Première connexion
+					if ($user->getCode()==NULL) // Première connexion
 					{
 						if (strlen($_POST["code"])==4 && is_numeric($_POST["code"]))
-							$database->update('users', array("clef" => $_COOKIE["clef"]), array("code" => $_POST["code"])); // On met le code en db
+						{
+							$user->setCode($_POST["code"]);
+							$user->saveToDb();
+						}
 						else
 						{
 							echo "<strong>Oops</strong><br/>";
@@ -37,11 +41,21 @@ print_r($_POST);
 							exit(); // On stop le fichier
 						}
 					}
-					$database->select('users', array("clef" => $_COOKIE["clef"]), array("id", "access_level", "infoId"));
-					$data=$database->fetch();
-					$_SESSION["id"]=$data["id"]; // Et hop ! On est connecté 
-					$_SESSION["access_level"]=$data["access_level"];
-					$_SESSION["infoId"]=$data["infoId"];
+					$controller= new Controller_Client($user);
+					if (!$controller->can(CAN_LOG))
+					{
+						echo "<strong>Oops</strong><br/>";
+						echo "Votre compte semble être bloqué.";
+						?>
+						<script type="text/javascript">
+							$("#infoErreur").fadeOut(5500, function(){ $("#infoErreur").remove(); });
+						</script>
+						<?php
+						exit(); // On stop le fichier
+					}
+					$_SESSION["id"]=$user->getId(); // Et hop ! On est connecté 
+					$_SESSION["access_level"]=$user->getAccessLevel();
+					$_SESSION["infoId"]=$user->getUserInfos()->getId();
 					?>
 					<script type="text/javascript">
 						loadToMain("includes/view/home.php", "{}");
