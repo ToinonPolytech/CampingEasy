@@ -10,13 +10,13 @@ class EtatDesLieux
 	private $_duree_moyenne;	
 	private $_deleted;
 	
-	public function __construct($id, $idUser=NULL, $debutTime=NULL, $duree_moyenne=NULL){
+	public function __construct($id, $idUser=NULL, $debutTime=NULL,$finTime=NULL, $duree_moyenne=NULL){
 		$this->_id=$id;
 		if ($id==NULL)
 		{
 			$this->_idUser=$idUser;
 			$this->_debutTime=$debutTime;
-			$this->_finTime=0;
+			$this->_finTime=$finTime;
 			$this->_duree_moyenne=$duree_moyenne;
 					
 		}
@@ -43,11 +43,11 @@ class EtatDesLieux
 		}	
 		else if ($this->_id!=NULL && $database->count('etat_lieux', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('etat_lieux', array("id" => $this->_id), array("idUser" => $this->_idUser, "debutTime" => $this->_debutTime, "finTime" => $this->_finTime, "duree_moyenne" => $this->_duree_moyenne);
+			$database->update('etat_lieux', array("id" => $this->_id), array("idUser" => $this->_idUser, "debutTime" => $this->_debutTime, "finTime" => $this->_finTime, "duree_moyenne" => $this->_duree_moyenne));
 		}
 		else
 		{
-			$database->create('etat_lieux', array("clef" => $this->_clef, "id" => $this->_id, "idUser" => $this->_idUser, "debutTime" => $this->_debutTime, "finTime" => $this->_finTime, "duree_moyenne" => $this->_duree_moyenne));
+			$database->create('etat_lieux', array("id" => $this->_id, "idUser" => $this->_idUser, "debutTime" => $this->_debutTime, "finTime" => $this->_finTime, "duree_moyenne" => $this->_duree_moyenne));
 			$this->_id=$database->lastInsertId(); // Ca marche ca ?
 		}
 	}

@@ -6,16 +6,15 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 		
 		
-if(isset($_POST['idUser']) && isset($_POST['dateDeb']) && isset($_POST['dateFin']) && isset($_POST['dateFin']) && isset($_POST['duree']))
+if(isset($_POST['users']) && isset($_POST['dateDeb']) && isset($_POST['dateFin']) && isset($_POST['duree']))
 {	
 	
-
 	
-	$edl = new EtatDesLieux(NULL,htmlspecialchars($_POST['idUser']), htmlspecialchars($_POST['dateDeb']), htmlspecialchars($_POST['dateFin']), htmlspecialchars($_POST['duree']));
+	$edl = new EtatDesLieux(NULL,htmlspecialchars($_POST['users']), htmlspecialchars(strtotime($_POST['dateDeb'])), htmlspecialchars(strtotime($_POST['dateFin'])), htmlspecialchars($_POST['duree']));
 	
 	$edlController = new Controller_EtatDesLieux($edl);
 	
-	if($_POST['id'])
+	if(isset($_POST['id']))
 	{
 		$edl->setId($_POST['id']);
 	}

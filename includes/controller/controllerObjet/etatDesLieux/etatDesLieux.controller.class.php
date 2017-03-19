@@ -4,7 +4,7 @@ require_once(i("database.class.php"));
 require_once(i("etatDesLieux.class.php"));
 
 class Controller_EtatDesLieux{
-	private edl; 
+	private $edl; 
 	
 	public function __construct ($edl){
 		$this->edl=$edl;
@@ -40,12 +40,13 @@ class Controller_EtatDesLieux{
 	public function timeIsGood(){
 		
 		if(!empty($this->edl->getDebutTime()) && !empty($this->edl->getFinTime()))
+			
 		{	if(is_numeric($this->edl->getDebutTime()) && is_numeric($this->edl->getFinTime()))
 			{
 				
 				if($this->edl->getDebutTime()<$this->edl->getFinTime())
 				{	
-					if(($this->edl->getFinTime()-$this->edl->getDebutTime()>84600)
+					if(($this->edl->getFinTime()-$this->edl->getDebutTime())<84600)
 					{
 						return true; 
 					}

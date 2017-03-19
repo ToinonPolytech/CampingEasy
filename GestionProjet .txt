@@ -47,7 +47,7 @@ Activite :
 						
 
 Probleme technique : 
-- ajouter un champ de lieu  de type texte 
+
 - gestion des messages postés à l'utilisateur presque OK, problème d'envoi du formulaire (message ne passe pas avec le bouton)
 
 
@@ -55,8 +55,7 @@ Probleme technique :
 
 Réservation : 
 - Rajouter une clause pour les ages.
-- Réservation d'état des lieux : ouverture d'une plage horaire de réservation ainsi que d'une fréquence et du nombre de réservations possibles par plage horaire (plusieurs staff en même temps pour l'état des lieux)
-- affichage des réservations uniquement après la date actuelle 
+
 
 
 
@@ -83,8 +82,8 @@ Lieu commun :
 	
 	
 Etat des lieux : 
-- si on cherche les plages horaires pour un état des lieux on regarde toutes les plages réservées et on laisse les autres ? 
-	
+- Ajouter controller objet : datedeb après aujourd'hui et user dispo sur la plage horaire 
+- 	
 
  
 
@@ -93,12 +92,12 @@ Etat des lieux :
 - Une équipe joue sur une semaine : supprimée à la fin ou score remis à 0 ? comme ça tous les samedis ? 
 Demande d'ajouter une date de création ou d'expiration à 'équipe ? 
 - Suppression des équipes impossibles 
-- voir mes équipes dans classement ne fonctionne pas 
 - faire fonctionner ajout membres (je ne sais pas ce que retourne la fonction de recherche) => controller formulaire de equipe_membres à faire 
-- Ajout du statut "peut gérer" dans la table equipe membres 
+
 - Ajout des points à une équipe : 
 								- Désigner 
  
+
 Pages à créer :
  
 Client : 
