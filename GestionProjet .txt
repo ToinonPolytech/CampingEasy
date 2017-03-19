@@ -92,10 +92,7 @@ Admin:
 - Ajouter / Gérer les options du restaurant 
 - Gestion des problèmes techniques : voir tous ceux qui existent ? critère d'affichage résolu/ etc 
 
-		
-Question à poser lors d'une vente au camping nécessaire pour l'application (à remplir) : 
-	- Durée d'un état des lieux
-		- Je pense que ca peut être demandé dans l'ouverture d'une plage d'état des lieux 
+
 
 
 TODO Lointain (améliorations possibles et détails dans un futur lointain ): 
