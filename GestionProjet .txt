@@ -13,24 +13,6 @@ Choix de conception :
 
 
 
-
-TODO : 
-Modif db : 
-- Ajout pour le partenaire du type de service proposé : chaine de caractères 
-- Ajout table état des lieux : date / plage horaire / fréquence / nombre d'états des lieux en même temps / récurrence / début d'ouverture aux réservations 
-- Ajout du service restaurant : en dur ? nombre de places dispo ? heures d'ouverture/  fermeture ? enregistré comme lieu commun ? 	=> je pense que ca doit être un service à part 
-- Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?	
-- Ajout dans User d'un statut bloqué pour bloquer provisoirement un sous user 
-- Ajout "peut modifier" dans equipe membres + date de création dans équipe 
-- Users: ajout de l'age et du nombre de personnes pour le user info 
-- Ajout récurrence activité : idRecurrente : -1 si non récurrente, 0 si récurrente, id de l'activité principale s'il s'agit d'une récurrence 
-ajout du champ récurrence jour/heures et fin récurrence 
-- Ajout lieu de type texte pour un problème technique 
-- Ajout pour le partenaire du type de service proposé : chaine de caractères 
-	=> Il faut qu'on regarde pour les partenaires ensemble comment on gère ça
-- Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?
-	=> De même pour les lieux communs
-
 Activite : 
 -Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
 	

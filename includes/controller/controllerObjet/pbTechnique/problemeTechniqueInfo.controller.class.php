@@ -14,8 +14,8 @@ class Controller_PbTechInfo{
 		return($this->idIsGood() && $this->idPbTechIsGood() && $this->idUserIsGood() && $this->messageIsGood()); 
 	}
 	public function idIsGood(){
-		
-		if($this->_PbTechInfo->getId()!=NULL && is_numeric($this->_PbTechInfo->getId()))
+		$database = new Database();
+		if($this->_PbTechInfo->getId()==NULL || $database->count('problemes_technique_info', array("id" => $this->_PbTechInfo->getId())))
 		{
 			return true;
 		}
