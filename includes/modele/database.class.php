@@ -9,7 +9,11 @@
 	class Database{
 		private $_db;
 		private $_objectRequest;
+		private $_asc;
+		private $_order_col;
 		public function __construct(){
+			$this->_asc=true;
+			$this->_order_col=NULL;
 			try
 			{
 				// On se connecte à MySQL
@@ -21,6 +25,21 @@
 				// En cas d'erreur précédemment, on affiche un message et on arrête tout
 				die('Erreur : '.$t->getMessage().' Numéro : '.$t->getCode());
 			}
+		}
+		public function setOrderCol($col){
+			$this->_order_col=$col;
+		}
+		public function setDesc(){
+			$this->_asc=false;
+		}
+		public function setAsc(){
+			$this->_asc=true;
+		}
+		public function prepare($request){
+			$this->_objectRequest=$this->_db->prepare($request);
+		}
+		public function execute($array){
+			$this->_objectRequest->execute($array);
 		}
 		public function request($request, $array_where=NULL, $array_update=NULL){
 			if (empty($array_where) || !is_array($array_where))
@@ -70,6 +89,12 @@
 						$request.=$key."=:".$key;
 					}
 				}
+			}
+			if ($this->_order_col!=NULL)
+			{
+				$request.=" ORDER BY ".$this->_order_col;
+				if (!$this->_asc)
+					$request.=" DESC";
 			}
 			if ($array_update!=NULL)
 			{

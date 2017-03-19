@@ -1,4 +1,4 @@
-Comment mettre en place l'upload des images (Exemple dans ajoutProblemeTechniqueForm.php) : 
+﻿Comment mettre en place l'upload des images (Exemple dans ajoutProblemeTechniqueForm.php) : 
 Rajouter un label : <label for="imageAjax" onclick="addImage();">Ajouter une photo</label>
 Modifier le enctype du formulaire comme ceci : enctype="multipart/form-data"
 Modifier les arguments de loadTo (le button), 2ème argument comme ceci : (window.FormData) ? new FormData($('#ID_DU_FORM')[0]) : $('#ID_DU_FORM').serialize()
@@ -37,7 +37,7 @@ dataUsed : - isImage est true alors mettre le selector cad : "#nom_form" (<form 
 sinon mettre un objet JSON {var1 : value, var2 : value} ou utiliser $("#nom_form").serialize()
 location : selector du lieu où l'information sera ecrite. 
 type : 
-- preprend : ecrira e' debut de location
+- preprend : ecrira en debut de location
 - replace : remplace le contenu de la location par le nouveau
 - append : ecrit a la fin de la location
 isImage : true pour informer au script quune image sera upload
@@ -58,11 +58,91 @@ loadToMain(urlCalled, dataUsed, callback)
  
  ------------- DATABASE -----------
  
- pour les args where : array("col" => arg)
- Plusieurs possibilites : 
- soit une valeur simple appliquant un =
- sinon un array(type, val) 
- type : " LIKE ", "OR", "<=" ect..... 
- En fonction val peut prendre plusieurs valeurs "explication soon"
- 
+Fonction getValue
+Arguments : $name_table, $array_where, $colonne (Aucun n'est optionnel)
+Retourne : La colonne de $name_table selon les conditions $array_where
+Exemple : $db->getValue("users", array("clef" => "GHJAUT"), "id"); // affichera 5 (par exemple)
+
+Fonction select
+Arguments : $name_table, $array_where, $array_select (Seul le premier est obligatoire)
+Retourne : void
+Utilité : Prépare un objet de requête accessible via fetch(). Cette requête sera sur $name_table et retournera soit toutes les données quand array_select est pris par défaut, soit les données choisi via $array_select. On peut lui mettre des conditions via $array_where
+Exemple : $db->select("users"); // Prépare un objet retournant tout les users
+$db->select("users", array("clef" => "GHJAUT"), "id"); // Prépare un objet permettant de retourner l'id des entrées users ayant comme clef GHJAUT 
+$db->select("users", array("clef" => "GHJAUT"), array("id", "nom", "prenom")); // Prépare un objet permettant de retourner l'id le nom et le prénom des entrées users ayant comme clef GHJAUT
+
+Fonction selectJoin
+Arguments : $name_table, $array_join, $array_where, $array_select (2 premiers obligatoire)
+Retourne : c.f select
+Utilité : c.f select + permet une jointure grâce à $array_join
+Exemple : $db->select("users", array(" users_info AS ui ON infoId=ui.id ")); // Prépare un objet retournant les informations des users reliés à leurs user_info
+
+Fonction delete
+Arguments : $name_table, $array_where
+Retourne: void
+Utilité : Supprime les entrées selon les conditions $array_where dans $name_table
+Exemple : $db->delete("users", array("id" => 10)); // Supprime le users ayant comme id 10
+
+Fonction update
+Arguments : $name_table, $array_where, $array_update
+Retourne: void
+Utilité : Remplace les valeurs $array_update des entités selon $array_where dans $name_table
+Exemple : $db->update("users", array("id" => 10), array("nom" => nouveauNom, "prenom" => nouveauPrenom")); // Met à jour les valeurs nom et prenom du users ayant comme id 10
+
+
+Fonction create
+Arguments : $name_table, $array_create
+Retourne: void
+Utilité : Insert de nouvelles données dans la table $name_table
+Exemple : $db->create("users", array("clef" => 'FHEAD58', 'nom' => 'GEORGET')); // Rajoute dans users, l'entité ayant comme clef FHEAD58 et comme nom GEORGET
+
+Fonction fetch
+Arguments : 
+Retourne : Un array de données selon l'objet qui a été préalablement créé
+Exemple : $db->select("users"); $data=$db->fetch(); // $data est un array contenant les données de la premiere entité de users
+
+Fonction count
+Arguments: $name_table, $array_where
+Retourne : Le nombre d'occurence dans $name_table respectant les conditions de $array_where
+Exemple : $db->count("users", array("nom" => "GEORGET")); // Retournera le nombre d'users ayant comme nom GEORGET
+
+Fonction lastInsertId
+Arguments : 
+Retourne : Le dernier ID créé grâce à un create()
+Utilité : Permet de récuperer un ID créé via un AUTO_INCREMENT
+Exemple : $db->create("users", array("clef" => 'FHEAD58', 'nom' => 'GEORGET')); $db->lastInsertId(); // Retourne l'id du users préalablement créé
+
+Fonction prepare
+Arguments : $request
+Retourne : 
+Utilité : Permet de préparer une requête
+Exemple : $db->prepare("SELECT * FROM users"); // Prépare la requête
+
+Fonction execute
+Arguments : $array
+Retourne : 
+Utilité : Permet de d'éxecuter une requête préparé avec les conditions $array
+Exemple : $db->prepare("SELECT * FROM users WHERE id=:id"); $db->execute(array("id" => 10)); // Exécuté la requête en mettant l'id à 10
+
+Fonction setOrderCol
+Arguments: $col
+Retourne :
+Utilité : Permet de trier la requête suivante selon une colonne (par défaut ASC)
+Exemple : $db->setOrderCol("points"); $db->setDesc(); $db->select("equipe"); // SQL : SELECT * FROM equipe ORDER BY points DESC
+
+Fonction setDesc / setAsc
+Arguments : 
+Retourne : 
+Utiltié : Permet de stipuler la manière de trier
+Exemple : $db->setAsc(); $db->setDesc(); // Respectivement, en ASC ou en DESC
+/!\ Par défaut lors de $db = new Database(); le tri est mis en ASC
+
+Explications sur les array_where : 
+
+array("id" => 10); // WHERE id=10
+array("id" => array(TYPE, 10)); // WHERE id TYPE 10
+TYPE : =, !=, <=, >=, <, > // Exemple : WHERE id=10, id!=10, <=10 ect...
+array("id" => array(10, 20)); // WHERE id>=10 AND id<=20
+array("id" => array("OR" => array(10, 20))); // WHERE (id=10 OR id=20) 
+array("nom" => array(" LIKE ", "GEOR%")); // WHERE nom LIKE GEOR%
 

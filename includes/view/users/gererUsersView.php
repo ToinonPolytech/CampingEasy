@@ -3,6 +3,7 @@
 		session_start();
 		
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
+	require_once(i("database.class.php"));
 	?> 
 	<div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
 	<?php
@@ -10,9 +11,7 @@
 	{
 			?>
 			<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutUserForm.php')); ?>" class="pull-left">Ajouter un utilisateur </a>
-		<?php
-		
-			require_once(i("database.class.php"));
+		<?php	
 			$db = new Database();
 			$db2 = new Database(); 
 			$db->select("users");
@@ -20,13 +19,11 @@
 		<table class='table'>
 			<thead>
 				<tr>
-				  <th>Nom</th>
-				  <th>Prénom</th>
-				   <th>Emplacement</th>
-				   <th>Qualité</th>
-					<th>Options</th>
-					
-									 
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Emplacement</th>
+					<th>Type</th>
+					<th>Options</th>					 
 				</tr>
 			</thead>
 			<tbody>
@@ -40,12 +37,8 @@
 					<td><?php echo $data['prenom']; ?></td>
 					<td><?php echo $infoU['emplacement']; ?></td>
 					<td><?php echo $data['access_level']; ?></td>
-					
-					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>, access_level : <?php echo $data['access_level'];?> }); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
-					
-					
-					
+					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>, access_level : '<?php echo $data['access_level']; ?>' }); return false;">Modifier</button>
+					<button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
 				</tr>
 				<?php
 			}
