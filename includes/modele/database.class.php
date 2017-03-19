@@ -44,6 +44,12 @@
 		public function request($request, $array_where=NULL, $array_update=NULL){
 			if (empty($array_where) || !is_array($array_where))
 			{
+				if ($this->_order_col!=NULL)
+				{
+					$request.=" ORDER BY ".$this->_order_col;
+					if (!$this->_asc)
+						$request.=" DESC";
+				}
 				$this->_objectRequest=$this->_db->query($request);
 				return;
 			}			

@@ -9,8 +9,8 @@
 		
 		require_once(i("database.class.php"));
 		$db = new Database();
-		 $db->setOrderCol("score");
-		 $db->setDesc(); 
+		$db->setOrderCol("score");
+		$db->setDesc(); 
 		$db->select("equipe");
 	?>
 	<table class='table'>
