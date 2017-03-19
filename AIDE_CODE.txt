@@ -30,32 +30,40 @@ Le coté php est géré
 ->getUrl(), renvoie l'ensemble des chemins vers le fichier sous la forme de chemin1,chemin2,
 $dir, définie le répertoire de sauvegarde
 
-loadTo(urlCalled, dataUsed, location, type, isImage, callback)
+----------------------- JAVASCRIPT AJAX -----------------------------
 
+Fonction loadTo
+Arguments : urlCalled, dataUsed, location, type, isImage, callback (3 premier sont obligatoire)
+Retourne :
+Utilité : Permet de charger dynamiquement une page coté serveur pour l'afficher au client.
+Exemple : loadTo('<?php echo str_replace($_SERVER["DOCUMENT_ROOT"], "", i("users.php")); ?>', {}, '#ma_div1', 'replace'); // Affiche le résutlat de la page users.php sans données POST dans la div id="ma_div1")
 urlCalled : Utilise le php : <?php echo str_replace($_SERVER["DOCUMENT_ROOT"], "", i("nom_fichier.php")); ?>
-dataUsed : - isImage est true alors mettre le selector cad : "#nom_form" (<form id="idform" => donc "#idform") 
-sinon mettre un objet JSON {var1 : value, var2 : value} ou utiliser $("#nom_form").serialize()
-location : selector du lieu où l'information sera ecrite. 
+dataUsed : 
+	Si isImage est true : 
+		alors mettre le selector cad : "#nom_form" (<form id="idform" => donc "#idform") 
+	sinon mettre un objet JSON {var1 : value, var2 : value} ou utiliser $("#nom_form").serialize()
+location : selector du lieu où l'information sera ecrite. (<div id="premiere"> <span id="deuxieme"> </span> <span class="troisieme"></span></div><div id="premire_bis"></div>, si on veut écrire dans premiere on fera "#premiere", si on veut écrire dans le span "troisieme" on fera ".troisieme")
 type : 
 - preprend : ecrira en debut de location
 - replace : remplace le contenu de la location par le nouveau
 - append : ecrit a la fin de la location
+- next : ecrit après la location
+- before : ecrit avant la location
 isImage : true pour informer au script quune image sera upload
 false sinon
 callback : une fonction qui sera appelle a la fin du script 
 
-Warning : Seul les 3premiers arguments sont obligatoires
+Fonction loadToMain
+Arguments : urlCalled, dataUsed, callback
+Retourne :
+Utilité : Permet de charger dynamiquent une page coté serveur pour l'afficher au client dans le contenu principal de la page
+Fonctionnement : Appelle la fonction LoadTo(urlCalled, {}, "#mainAjax", "replace", false, callback)
 
-loadToMain(urlCalled, dataUsed, callback)
- 
- Appelle la fonction LoadTo avec les memes arguments mais type : "replace" location : "#mainAjax", isImage : false, dataUsed : {}
- 
- Warning : Seul les 2premiers args sont obligatoires
- 
- Sinon  ne pas oublier le return false apres l.appel de la fonction dans un bouton
- 
- Utilise : $.extend({}, object1, object2); => reunis plusieurs objets JSON en un
- 
+Fonction : $.extend
+Arguements : {}, object1, object2
+Retourne : Fusionne plusieurs élements JSON
+Exemple : $.extend({}, object1, object2);
+
  ------------- DATABASE -----------
  
 Fonction getValue
