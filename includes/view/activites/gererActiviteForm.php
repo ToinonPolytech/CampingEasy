@@ -62,7 +62,8 @@
 			<input class="form-control" type="number" name="prix" value="<?php echo $act->getPrix(); ?>" id="prix"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" value="<?php echo $act->getPoints(); ?>" id="points"/><br/>
-			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>', $j.extend({}, $('#form_act').serialize(), {id : <?php echo $act->getId(); ?>});, '#form-act', 'prepend'); return false;">Enregistrer les modifications</button>
+			<input type="hidden"  name="id" value="<?php echo $act->getId(); ?>" id="id" />
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>', $('#form_act').serialize(), '#form-act', 'prepend'); return false;">Enregistrer les modifications</button>
 		</div>
 	</form>
 </div>

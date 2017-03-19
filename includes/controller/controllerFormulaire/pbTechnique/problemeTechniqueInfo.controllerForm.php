@@ -16,7 +16,7 @@ if(isset($_SESSION['id']) && isset($_POST['idPbTech']) && isset($_POST['message'
 	}	
 	else
 	{
-		echo "ERREUR : Un problème est survenu lors de l'envoie du formulaire. *";
+		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire. *";
 
 	}	
 }

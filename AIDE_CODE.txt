@@ -44,7 +44,7 @@ isImage : true pour informer au script quune image sera upload
 false sinon
 callback : une fonction qui sera appelle a la fin du script 
 
-Warning : Seul les 3premiers arguments sont obligatoire
+Warning : Seul les 3premiers arguments sont obligatoires
 
 loadToMain(urlCalled, dataUsed, callback)
  

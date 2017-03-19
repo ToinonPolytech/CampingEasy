@@ -4,7 +4,7 @@
 		
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	
-		?><div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe"><a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipes.php')); ?>" class="pull-left">Voir mes équipes </a>
+		?><div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe"><a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesEquipesView.php')); ?>" class="pull-left">Voir mes équipes </a>
 	<?php
 		
 		require_once(i("database.class.php"));

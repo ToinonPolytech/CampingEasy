@@ -25,7 +25,7 @@
 				   <th>Emplacement</th>
 				   <th>Qualité</th>
 					<th>Options</th>
-					
+				
 									 
 				</tr>
 			</thead>

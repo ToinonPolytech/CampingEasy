@@ -18,7 +18,7 @@ class Controller_Activite {
 		&& $this->descriptifIsGood() && $this->ageIsGood()  &&
 		$this->typeIsGood() && $this->placesLimIsGood() && $this->prixIsGood() &&
 		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()
-		&& $this->lieuIsGood()); 
+		&& $this->lieuIsGood() && $this->dateReservationIsGood()); 
 		
 	}
 	
@@ -27,8 +27,8 @@ class Controller_Activite {
 	public function timeStartIsGood(){
 		if(!empty($this->act->getDate())){
 			if(is_numeric($this->act->getDate()))
-			{
-				if($this->act->getDate()>time())
+			{	
+				if($this->act->getDate()>=time())
 				{		
 					return true;
 					
@@ -338,6 +338,39 @@ class Controller_Activite {
 		echo "ERREUR : Vous devez indiquer si l'activité doit être réserver ou non.";
 		return false;
 	}	
+	
+	public function dateReservationIsGood(){
+		if($this->act->getMustBeReserved()==0)
+		{
+			$this->act->setFinReservation(0);
+			$this->act->setDebutReservation(0);
+			return true;
+		}
+		else
+		{		
+			if(is_numeric($this->act->getDebutReservation()) && is_numeric($this->act->getFinReservation()))
+			{	
+				if($this->act->getDebutReservation()<$this->act->getFinReservation())
+				{		
+					return true;
+					
+				}
+				else
+				{ 
+					echo 'ERREUR : La date de début de réservation est supérieure à la date de fin de réservation';
+					
+				}
+			}
+			else
+			{
+				echo "ERREUR : l'une des dates de réservation n'est pas au format numérique  ";
+			}
+				
+		}
+			
+		return false; 
+	}
+	
 }
 
 

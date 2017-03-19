@@ -23,7 +23,7 @@
 					echo $data['prenom'];
 					echo '  '.$data['nom'];
 					?>
-					<button type="button" class="btn btn-danger btn-sm" name="suppMembre" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerMembreEquipe.php')); ?>', {idUser : <?php echo $data["idUser"]; ?>, idEquipe : <?php echo $id ?>}); return false;">Supprimer</button>
+					<button type="button" class="btn btn-danger btn-sm" name="suppMembre" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerMembreEquipe.php')); ?>', {idUser : <?php echo $data["idUser"]; ?>, idEquipe : <?php echo $id; ?>}); return false;">Supprimer</button>
 					<?php
 				}
 			?>

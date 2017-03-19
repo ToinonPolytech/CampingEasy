@@ -4,7 +4,7 @@
 	
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 ?>
-<div class="col-lg-6" style="width:100%;" name="form-edl" id="form-edl">
+<div class="col-lg-6" style="width:40%;" name="form-edl" id="form-edl">
 	<span class="pull-left">Ouverture de plage d'état des lieux </span><br/>
 	<form role="form" method="post"  id="form_edl">
 		<div class="form-group">
@@ -15,10 +15,13 @@
 			<label for="frequence">Fréquence de l'état des lieux en minutes </label><br/>
 			<select name="frequence" id="frequence">
 				<?php 
-					for($i=5;$i<=5;$i+5)
-					{ ?>
+				$i=0;
+				while($i<=60)
+					{ $i=$i+5; 
+					?>
 						<option value="<?php echo $i;?>"><?php echo $i;?></option>
-					<?php } ?>
+					<?php } 
+					?>
 			</select><br/>
 			<label for="nbSimult">Nombre d'état des lieux simultanés possibles</label><br/>
 			<input class="form-control" type="number" name="nbSimult" id="nbSimult" required/><br/>
