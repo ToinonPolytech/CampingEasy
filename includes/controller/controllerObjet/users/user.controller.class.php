@@ -124,18 +124,23 @@ abstract class Controller_User
 		Exemple : can(CAN_CREATE_SUBACCOUNT); grâce au fichier config.php cela donne la puissance adéquate et tout est géré automatiquement.
 	**/
 	public function can($which){
+		global $puissance;
 		$etat=false;
 		$droits = $this->_user->getDroits();
-		$p=0;$n=1;
-		while ($n<$droits) { $n*=2; $p++; }
-		if ($n>$droits) { $p--; $n/=2; }
-		for ($i=$droits;$i>0 && !$etat && $which<=$p;$n/=2){
-			if ($i>$n){
-				$i-=$n;
+		$array=array();
+		for ($i=0;$i<$puissance;$i++)
+		{
+			$array[$i]=pow(2,$i);
+		}
+		for ($i=$puissance-1;$i>0 && !$etat && $droits>0;$i--)
+		{
+			if ($droits>=$array[$i])
+			{
+				if ($i==$which)
+					$etat=true;
+				
+				$droits-=$array[$i];
 			}
-			if ($p==$which)
-				$etat=true;
-			$p--;
 		}
 		return $etat;
 	}

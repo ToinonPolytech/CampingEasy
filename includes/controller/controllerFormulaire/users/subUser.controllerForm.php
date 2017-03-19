@@ -26,7 +26,7 @@
 		$controllerSousClient = new Controller_Client($sousClient); 
 
 		
-
+		$sousClient->addDroits(CAN_LOG);
 		if(isset($_POST['creerSousCompte']) && $_POST['creerSousCompte']=="true")
 		{		
 		  $sousClient->addDroits(CAN_CREATE_SUBACCOUNT);
@@ -43,7 +43,6 @@
 		{
 		  $sousClient->addDroits(CAN_PAY);
 		}
-
 		if($controllerSousClient->isGood())
 		{
 			if (isset($_POST["id"]))
@@ -56,12 +55,14 @@
 					echo "Une erreur s'est produite lors de l'envoi du formulaire";
 					exit();
 				}
+				 echo "Le sous compte a bien été modifié "; 
 			}
 			else
+			{
 				$sousClient->setClef($controllerSousClient->generateKey());
-			
-		  $sousClient->saveToDb(); 
-		  echo "Le sous compte a bien été enregistré "; 
+				echo "Le sous compte a bien été enregistré "; 
+			}
+			$sousClient->saveToDb(); 
 		}
 	}
 	else

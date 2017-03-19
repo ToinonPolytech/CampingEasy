@@ -28,7 +28,7 @@
 			{
 				?>
 				<tr>
-					<td><?php echo $db2->getValue("activities", array("id" => $_POST["id"]), "nom"); ?></td> 
+					<td><?php echo $db2->getValue("activities", array("id" => $data["id"]), "nom"); ?></td> 
 					<td><?php echo date("d/m/y H:i", $data['time']); ?></td>
 					<td><?php echo $data['nbrPersonne'];?></td>
 					<td>

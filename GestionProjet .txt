@@ -9,8 +9,7 @@ Choix de conception :
 
 	
 
-- Définir comment sont attribués les points dans pour les activités : un gagnant est désigné et c'est automatique ou l'animateur cherche le client et lui ajoute manuellement (plus long / moins fiable)
-Les points attibués aux équipes doivent automatiquement être ajoutés à tous les membres 
+
 
 
 
@@ -27,12 +26,15 @@ Modif db :
 - Ajout récurrence activité : idRecurrente : -1 si non récurrente, 0 si récurrente, id de l'activité principale s'il s'agit d'une récurrence 
 ajout du champ récurrence jour/heures et fin récurrence 
 - Ajout lieu de type texte pour un problème technique 
-
+- Ajout pour le partenaire du type de service proposé : chaine de caractères 
+	=> Il faut qu'on regarde pour les partenaires ensemble comment on gère ça
+- Ajout réservabilité des lieux : ajout des attributs isReservable / plages horaires / pour chaque jour de la semaine  ?
+	=> De même pour les lieux communs
 
 Activite : 
-- Ajouter des types d'activités et choisir si féminin ou masculin (pour le moment SPORTIF ou INTELECTUELLE )
-Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
+-Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
 	
+- Gérer l'affichage des photos déjà envoyées dans la modification des entités 
 - Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
 "mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
 
@@ -120,7 +122,7 @@ Admin:
 - Ajouter / Gérer les options du restaurant 
 
 
-		
+
 
 
 
