@@ -6,8 +6,8 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 
 if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"]) && isset($_POST["descriptif"]) 
-&& isset($_POST["ageMin"]) && isset($_POST["ageMax"]) && isset($_POST["lieu"])
-&& isset($_POST["type"]) && isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["points"]) && isset($_POST["lieu_type"]) && isset($_POST["debutReservation"]) && isset($_POST["finReservation"]))
+&& isset($_POST["lieu"])
+&& isset($_POST["placesLim"]) && isset($_POST["prix"]) && isset($_POST["points"]) && isset($_POST["lieu_type"]) && isset($_POST["debutReservation"]) && isset($_POST["finReservation"]))
 {	 
 	$photos_path=""; // TODO
 	
@@ -24,9 +24,16 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 			$db = new Database();
 			$lieu=$db->getValue("lieu_commun", array("id" => $_POST["lieu"]), "nom");
 		}
-		
+		$type="";
+		foreach ($_POST as $key => $val)
+		{
+			if (strstr($key, "TYPE_"))
+			{
+				$type.=$val." ";
+			}
+		}
 		$act = new Activite(NULL, htmlspecialchars(strtotime($_POST["timeStart"])), htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["descriptif"]), htmlspecialchars($_POST["duree"]),
-		htmlspecialchars($_POST["ageMin"]), htmlspecialchars($_POST["ageMax"]), htmlspecialchars($lieu), htmlspecialchars($_POST["type"]),
+		htmlspecialchars($lieu), $type,
 		htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved,htmlspecialchars(strtotime($_POST["debutReservation"])),htmlspecialchars(strtotime($_POST["finReservation"])),$photos_path);
 		
 		

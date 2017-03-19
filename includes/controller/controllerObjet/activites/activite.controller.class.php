@@ -15,7 +15,7 @@ class Controller_Activite {
 	public function isGood(){
 		
 		return($this->timeStartIsGood() && $this->dureeIsGood() && $this->nomIsGood() 
-		&& $this->descriptifIsGood() && $this->ageIsGood()  &&
+		&& $this->descriptifIsGood()  &&
 		$this->typeIsGood() && $this->placesLimIsGood() && $this->prixIsGood() &&
 		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()
 		&& $this->lieuIsGood() && $this->dateReservationIsGood()); 
@@ -131,41 +131,6 @@ class Controller_Activite {
 		return false; 
 	}
 	
-	public function ageIsGood(){
-		if(empty($this->act->getAgeMin()))
-			{
-				$this->act->setAgeMin(0);
-			}
-		if(empty($this->act->getAgeMax()))
-			{
-				$this->act->setAgeMax(0);
-			}
-		
-		
-		if(is_numeric($this->act->getAgeMin()) && is_numeric($this->act->getAgeMax()))
-		{
-			if(($this->act->getAgeMin()>=0) && ($this->act->getAgeMax()<100))
-			{ if(($this->act->getAgeMin()<=$this->act->getAgeMax()) ||  $this->act->getAgeMin()==0 )
-				
-				return true;
-			}
-			else
-			{
-				echo "ERREUR : les valeurs des ages doivent être comprises entre 0 et 99 et l'age maximum doit être supérieur à l'age minimum";
-				
-			}
-		}
-		else
-		{
-			echo "ERREUR : Les valeurs entrées pour les age maximum et/ou minimum ne sont pas des nombres entiers";
-			
-		}
-		return false; 
-	}
-	
-		
-		
-	
 	public function lieuIsGood(){
 		$database = new Database();
 		
@@ -192,20 +157,9 @@ class Controller_Activite {
 	}
 	
 	public function typeIsGood(){
-		
-		
-		
 		if(!empty($this->act->getType()))
 		{ 
-			if($this->act->getType()=="SPORTIF" || $this->act->getType()=="INTELLECTUELLE")
-			{//à modifier à l'ajout de type 
-				return true;
-			}
-			else
-			{
-				echo "ERREUR : ce type d'activité n'existe pas ";
-				
-			}
+			return true;
 		}
 		else
 		{
@@ -220,7 +174,7 @@ class Controller_Activite {
 	
 	public function placesLimIsGood(){
 		
-		if($this->act->getMustBeRserved()==1)
+		if($this->act->getMustBeReserved()==1)
 		{	if(is_numeric($this->act->getPlacesLim()))
 			{
 				if($this->act->getPlacesLim()>=0)
@@ -228,8 +182,8 @@ class Controller_Activite {
 					return true; 					
 				}
 				else
-				{ echo "ERREUR : Le nombre de places maximum pour l'activité ne peut être négatif ";
-				
+				{ 
+					echo "ERREUR : Le nombre de places maximum pour l'activité ne peut être négatif ";
 				}
 			}
 			else

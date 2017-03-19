@@ -18,11 +18,26 @@ $dateDeb = date("d/m/Y", $timeDeb);
 $dateFin = date("d/m/Y", $timeDeb+6*3600*24);
 
 ?>
+<style>
+	.SPORITVE_off { display:none; }
+	.INTELLECTUELLE_off { display:none; }
+	.CULTURELLE_off { display:none; }
+	.FETE_off { display:none; }
+	.SPORITVE { display:block; }
+	.INTELLECTUELLE { display:block; }
+	.CULTURELLE { display:block; }
+	.FETE { display:block; }
+</style>
 <a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutActiviteForm.php')); ?>" class="pull-left">Créer une activité </a>
 <div id="titreMois">
     <a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activitesView.php')); ?>?n=<?php echo date("n", $timeDeb-7*3600*24); ?>&d=<?php echo date("d", $timeDeb-7*3600*24); ?>&y=<?php echo date("y", $timeDeb-7*3600*24); ?>"><<</a> Semaine du  : <?php echo $dateDeb; ?> au <?php echo $dateFin; ?> 
 	<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activitesView.php')); ?>?n=<?php echo date("n", $timeDeb+7*3600*24); ?>&d=<?php echo date("d", $timeDeb+7*3600*24); ?>&y=<?php echo date("y", $timeDeb+7*3600*24); ?>">>></a>
 </div>
+<br/>
+<input type="checkbox" name="TYPE_1" id="TYPE_1" value="SPORITVE" checked> Sportive
+<input type="checkbox" name="TYPE_2" id="TYPE_2" value="INTELLECTUELLE" checked> Intelectuelle 
+<input type="checkbox" name="TYPE_3" id="TYPE_3" value="CULTURELLE" checked> Culturelle
+<input type="checkbox" name="TYPE_3" id="TYPE_3" value="FETE" checked> Fête
 <?php
 	$jourTexte = array('Samedi', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi');
 	switch(date('m'))
@@ -79,7 +94,7 @@ $dateFin = date("d/m/Y", $timeDeb+6*3600*24);
 							{
 								$done=true;
 								?>
-								<td><a href='see' onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;"><?php echo $data["nom"]; ?></a></td>
+								<td class="<?php echo $data["type"]; ?>"><a href='see' onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;"><?php echo $data["nom"]; ?></a></td>
 								<?php
 							}
 						}
@@ -93,3 +108,29 @@ $dateFin = date("d/m/Y", $timeDeb+6*3600*24);
 		?>  
 	</thead>
 </table>
+<script type="text/javascript">
+	$("input[type='checkbox']").click(function(){
+		if ($(this).is(":checked"))
+		{
+			$val=$(this).val();
+			$("td").each(function(){
+				if ($(this).hasClass($val+"_off"))
+				{
+					$(this).removeClass($val+"_off");
+					$(this).addClass($val);
+				}
+			});
+		}
+		else
+		{
+			$val=$(this).val();
+			$("td").each(function(){
+				if ($(this).hasClass($val))
+				{
+					$(this).removeClass($val);
+					$(this).addClass($val+"_off");
+				}
+			});
+		}
+	});
+</script>

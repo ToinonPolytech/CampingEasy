@@ -49,7 +49,7 @@
 		
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" checked="<?php if($act->getMustBeReserved()){ echo 'checked';} ?>" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
-			<div class="mustBeReserved_hide" style="display:none;">
+			<div class="mustBeReserved_hide" <?php if(!$act->getMustBeReserved()){ ?>style="display:none;" <?php } ?>>
 				<label for="placesLim">Nombre de places</label><br/>
 				<input class="form-control" type="number" name="placesLim"  id="placesLim"/><br/>
 				<label for="debutReservation">Date début de la réservation</label><br/>
@@ -69,7 +69,10 @@
 </div>
 <script type="text/javascript">
 	$("#timeStart").datetimepicker({
-		format:'d-m-Y H:00'
+		format:'d-m-Y H:00',
+		onChangeDateTime:function(dp,$input){
+			$("#finReservation").val($input.val());
+		}
 	});
 	$("#debutReservation").datetimepicker({
 		format:'d-m-Y H:00'

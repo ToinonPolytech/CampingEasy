@@ -17,10 +17,6 @@
 			<textarea class="form-control" name="descriptif" id="descriptif" rows="6" cols="30"></textarea> <br />
 			<label for="duree">Durée en minutes</label><br/>
 			<input class="form-control" type="number" name="duree" id="duree"/> <br/>
-			<label for="ageMin">Âge Minimum</label><br/>
-			<input class="form-control" type="number" name="ageMin" id="ageMin"/> <br/>
-			<label for="ageMax">Âge Maximum</label><br/>
-			<input class="form-control" type="number" name="ageMax" id="ageMax"/> <br/>
 			<label for="lieu">Lieu</label><br/>
 			<input type="radio" checked name="lieu_type" id="lieu_type" value="1" onclick="$('#lieu').hide().attr('id', 'lieu0').attr('name', 'lieu0'); $('select[id=lieu1]').attr('id', 'lieu').attr('name', 'lieu').show();"/> Lieu Commun
 			<input type="radio" name="lieu_type" id="lieu_type" value="0" onclick="$('#lieu').hide().attr('id', 'lieu1').attr('name', 'lieu1'); $('input[id=lieu0]').attr('id', 'lieu').attr('name', 'lieu').show();"/> Lieu autre
@@ -38,11 +34,11 @@
 				?>
 			</select><br/>
 			<label for="type">Type d'activité</label><br/>
-			<select name="type" id="type">
-				<option value="SPORTIF">SPORTIF</option>
-				<option value="INTELLECTUELLE">INTELLECTUELLE</option>
-			</select><br/>
-		
+			<input type="checkbox" name="TYPE_1" id="TYPE_1" value="SPORITVE"> Sportive
+			<input type="checkbox" name="TYPE_2" id="TYPE_2" value="INTELLECTUELLE"> Intelectuelle 
+			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="CULTURELLE"> Culturelle
+			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="FETE"> Fête
+			<br/>
 			<label for="mustBeReserved">Doit être réservé ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
 			<div class="mustBeReserved_hide" style="display:none;">

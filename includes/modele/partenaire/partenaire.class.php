@@ -11,7 +11,8 @@ class Partenaire{
 	private $_siteWeb;
 	private $_telephone;
 	private $_deleted;
-	public function __construct($id, $idUser=NULL, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL){
+	private $_photos;
+	public function __construct($id, $idUser=NULL, $nom=NULL, $description=NULL, $mail=NULL, $url=NULL, $telephone=NULL, $photos=""){
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -21,6 +22,7 @@ class Partenaire{
 			$this->_mail = $mail;
 			$this->_siteWeb = $url;
 			$this->_telephone = $telephone;
+			$this->_photos = $photos;
 		}
 		else
 		{
@@ -33,6 +35,7 @@ class Partenaire{
 			$this->_mail = $data['mail'];
 			$this->_siteWeb = $data['url'];
 			$this->_telephone = $data['telephone'];
+			$this->_photos = $data["photos"];
 		}
 		$this->_deleted=false;
 	}
@@ -44,11 +47,11 @@ class Partenaire{
 		}	
 		else if ($this->_id!=NULL && $database->count('partenaire', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('partenaire', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
+			$database->update('partenaire', array("id" => $this->_id), array("photos" => $this->_photos, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
 		}
 		else
 		{
-			$database->create('partenaire', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
+			$database->create('partenaire', array("photos" => $this->_photos, "id" => $this->_id, "nom" => $this->_nom, "description" => $this->_libelle, "mail" => $this->_mail, "url" => $this->_siteWeb, "telephone" => $this->_telephone, "idUser" => $this->_idUser));
 		}
 	}
 	public function getId() {

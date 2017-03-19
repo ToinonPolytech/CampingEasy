@@ -10,8 +10,6 @@ class Activite
 	private $_duree;
 	private $_nom;
 	private $_descriptif;
-	private $_ageMin;
-	private $_ageMax;
 	private $_lieu;
 	private $_type;
 	private $_placesLim;
@@ -39,7 +37,7 @@ class Activite
 		-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 		-mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
 	*/
-	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $ageMin=NULL, $ageMax=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL, $debutReservation=NULL, $finReservation=NULL, $photos=NULL) {
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL, $debutReservation=NULL, $finReservation=NULL, $photos=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
 		{	
@@ -47,8 +45,6 @@ class Activite
 			$this->_nom = $nom;
 			$this->_descriptif = $descriptif;
 			$this->_duree = $duree;
-			$this->_ageMin =  $ageMin;
-			$this->_ageMax =  $ageMax;
 			$this->_lieu =  $lieu;
 			$this->_type = $type;
 			$this->_placesLim =  $placesLim;
@@ -69,8 +65,6 @@ class Activite
 			$this->_nom = $data['nom'];
 			$this->_descriptif = $data['description'];
 			$this->_duree = $data['duree'];
-			$this->_ageMin =  $data['ageMin'];
-			$this->_ageMax =  $data['ageMax'];
 			$this->_lieu =  $data['lieu'];
 			$this->_type = $data['type'];
 			$this->_placesLim =  $data['capaciteMax'];
@@ -92,11 +86,11 @@ class Activite
 		}	
 		else if ($this->_id!=NULL && $database->count('activities', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
-			$database->update('activities', array("id" => $this->_id), array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->update('activities', array("id" => $this->_id), array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		}
 		else
 		{
-			$database->create('activities', array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "ageMin" => $this->_ageMin, "ageMax" => $this->_ageMax, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->create('activities', array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
 		} 
 	}
 	public function getId() {
@@ -116,12 +110,6 @@ class Activite
 	}
 	public function getCategorie() {
 	   return $this->_categorie;
-	}
-	public function getAgeMin() {
-	   return $this->_ageMin;
-	}
-	public function getAgeMax() {
-	   return $this->_ageMax;
 	}
 	public function getLieu() {
 	   return $this->_lieu;
@@ -173,12 +161,6 @@ class Activite
 	}
 	public function setCategorie($categorie) {
 	   $this->_categorie = $categorie;
-	}
-	public function setAgeMin($ageMin) {
-	   $this->_ageMin = $ageMin;
-	}
-	public function setAgeMax($ageMax) {
-	   $this->_ageMax = $ageMax;
 	}
 	public function setLieu($lieu) {
 	   $this->_lieu = $lieu;
