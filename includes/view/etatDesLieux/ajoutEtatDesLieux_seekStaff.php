@@ -24,7 +24,7 @@
 				}
 			?>
 		</select>
-		<button class="btn btn-success" onclick="alert($('#form_edl').serialize()); return false;">Assigner</button>
+		<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('etatDesLieux.controllerForm.php')); ?>', $('#form_edl').serialize(), '#formulaire-edl', 'prepend', true); return false;">Assigner</button>
 		<?php
 	}
 ?>
