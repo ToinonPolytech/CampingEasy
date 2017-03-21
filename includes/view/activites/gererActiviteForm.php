@@ -21,10 +21,6 @@
 			<textarea class="form-control" name="descriptif" value="<?php echo $act->getDescriptif(); ?>" id="descriptif" rows="6" cols="30"><?php echo $act->getDescriptif();  ?></textarea> <br />
 			<label for="duree">Durée en minutes</label><br/>
 			<input class="form-control" type="number" name="duree" value="<?php echo $act->getDuree(); ?>" id="duree"/> <br/>
-			<label for="ageMin">Âge Minimum</label><br/>
-			<input class="form-control" type="number" name="ageMin" value="<?php echo $act->getAgeMin(); ?>" id="ageMin"/> <br/>
-			<label for="ageMax">Âge Maximum</label><br/>
-			<input class="form-control" type="number" name="ageMax" value="<?php echo $act->getAgeMax(); ?>" id="ageMax"/> <br/>
 			<label for="lieu">Lieu</label><br/>
 			<input type="radio" checked name="lieu_type" id="lieu_type" value="1" onclick="$('#lieu').hide().attr('id', 'lieu0').attr('name', 'lieu0'); $('select[id=lieu1]').attr('id', 'lieu').attr('name', 'lieu').show();"/> Lieu Commun
 			<input type="radio" name="lieu_type" id="lieu_type" value="0" onclick="$('#lieu').hide().attr('id', 'lieu1').attr('name', 'lieu1'); $('input[id=lieu0]').attr('id', 'lieu').attr('name', 'lieu').show();"/> Lieu autre

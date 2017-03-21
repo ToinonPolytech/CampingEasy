@@ -15,8 +15,6 @@
 		<li class="list-group-item">Nom : <?php echo $act->getNom(); ?></li>
 		<li class="list-group-item">Date : <?php echo date("d/m/y H:i", $act->getDate()); ?></li>
 		<li class="list-group-item">Description : <?php echo $act->getDescriptif(); ?></li>
-		<li class="list-group-item">Age minimum : <?php echo $act->getAgeMin(); ?></li>
-		<li class="list-group-item">Age maximum : <?php echo $act->getAgeMAx(); ?></li>
 		<li class="list-group-item">Lieu : <?php echo $act->getLieu(); ?></li>
 		<li class="list-group-item">Points à remporter au cours de cette activité : <?php echo $act->getPoints(); ?></li>
 		<li class="list-group-item">Prix de l activité : <?php echo $act->getPrix(); ?></li>
