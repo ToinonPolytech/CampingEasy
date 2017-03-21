@@ -1,6 +1,8 @@
 ﻿Problèmes/Questions techniques  : 
 
-
+Pour toi mon rayou en priorité : 
+- Pouvoir modifier activité (gérer les types comme dans ajout)
+- 
 
 
 
@@ -29,8 +31,8 @@ Activite :
 						
 
 Probleme technique : 
+- voir les messages du technicien / pouvoir répondre ? 
 
-- gestion des messages postés à l'utilisateur presque OK, problème d'envoi du formulaire (message ne passe pas avec le bouton)
 
 
 

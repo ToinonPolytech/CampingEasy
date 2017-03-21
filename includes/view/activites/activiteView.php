@@ -40,7 +40,7 @@
 
 				<label for="nom">Nombre de personnes à inscrire</label><br/>
 				<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control" value="1"/><br/>
-				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', $j.extend({}, $('#form_reservation').serialize(), {type : 'ACTIVITE', id : <?php echo $id;?>}), '#form-equipe', 'prepend'); return false;">Réserver</button>
+				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', $.extend({}, $('#form_reservation').serialize(), {type : 'ACTIVITE', id : <?php echo $id;?>}), '#form-equipe', 'prepend'); return false;">Réserver</button>
 			</form>
 		</div>
 		<?php	
