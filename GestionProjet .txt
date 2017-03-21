@@ -2,7 +2,7 @@
 
 Pour toi mon rayou en priorité : 
 - Pouvoir modifier activité (gérer les types comme dans ajout)
-- 
+
 
 
 
@@ -38,9 +38,8 @@ Probleme technique :
 
 
 Réservation : 
-- Rajouter une clause pour les ages.
-
-
+-Secu réservation 
+- Pouvoir modifier/consulter 
 
 
 
