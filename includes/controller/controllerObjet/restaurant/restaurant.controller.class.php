@@ -4,7 +4,7 @@ require_once(i("database.class.php"));
 require_once(i("restaurant.class.php"));
 
 class Controller_Restaurant{
-	private resto; 
+	private $resto; 
 	
 	public function __construct ($resto){
 		$this->resto=$resto;
@@ -98,7 +98,7 @@ class Controller_Restaurant{
 	}
 	public function heureIsGood(){
 		
-		if(!empty($this->resto->getHeureOuverture()) && !empty($this->resto->getHeureFermeture()))
+		if(!empty($this->resto->getHeureOuverture()))
 		{
 			return true; 
 		}

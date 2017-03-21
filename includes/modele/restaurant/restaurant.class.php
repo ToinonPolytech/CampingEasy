@@ -8,10 +8,24 @@ class Restaurant{
 	private $_description;
 	private $_capacite;
 	private $_hOuv;
-	private $_hFerm;
+	
+	/** Ceci est une horaire d'ouverture fermé tout le temps
+	0 = dimanche
+	1 = lundi ect.. (c.f date("w"))
+	-------------------------------
+	Dans le sous-tableau, 0 = 00h, 1 = 00h30 ect... 47=23h30
+	$array=array();
+	for ($i=0;$i<=6;$i++)
+	{
+		$array[$i]=array();
+		for ($j=0;$j<48;$j++)
+			$array[$i][$j]=false;
+	}
+	$array=serialize($array);
+	**/
 	private $_photo;
 	private $_deleted;
-	public function __construct($id, $nom=NULL, $description=NULL, $capacite=NULL, $hOuv=NULL, $hFerm=NULL, $photo=NULL){
+	public function __construct($id, $nom=NULL, $description=NULL, $capacite=NULL, $hOuv=NULL, $photo=NULL){
 		$this->_id = $id;
 		if ($id==NULL)
 		{
@@ -19,7 +33,6 @@ class Restaurant{
 			$this->_description = $description; 
 			$this->_capacite = $description;
 			$this->_hOuv = $hOuv;
-			$this->_hFerm = $url;
 			$this->_photo = $photo;
 		}
 		else
@@ -31,7 +44,6 @@ class Restaurant{
 			$this->_description = $data['description']; 
 			$this->_capacite = $data['description'];
 			$this->_hOuv = $data['hOuv'];
-			$this->_hFerm = $data['hFerm'];
 			$this->_photo = $data['photo'];
 		}
 		$this->_deleted=false;
@@ -44,11 +56,11 @@ class Restaurant{
 		}	
 		else if ($this->_id!=NULL && $database->count('restaurant', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('restaurant', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "heureFermeture" => $this->_hFerm, "photo" => $this->_photo, "description" => $this->_description));
+			$database->update('restaurant', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photo" => $this->_photo, "description" => $this->_description));
 		}
 		else
 		{
-			$database->create('restaurant', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "heureFermeture" => $this->_hFerm, "photo" => $this->_photo, "description" => $this->_description));
+			$database->create('restaurant', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photo" => $this->_photo, "description" => $this->_description));
 		}
 	}
 	public function getId() {
@@ -62,9 +74,6 @@ class Restaurant{
 	}
 	public function getHeureOuverture() {
 	   return $this->_hOuv;
-	}
-	public function getHeureFermeture() {
-	   return $this->_hFerm;
 	}
 	public function getPhoto() {
 	   return $this->_photo;
@@ -86,9 +95,6 @@ class Restaurant{
 	}
 	public function setHeureOuverture($hOuv) {
 	   $this->_hOuv = $hOuv;
-	}
-	public function setHeureFermeture($hFerm) {
-	   $this->_hFerm = $hFerm;
 	}
 	public function setPhoto($photo) {
 	   $this->_photo = $photo;
