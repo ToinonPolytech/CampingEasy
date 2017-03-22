@@ -6,7 +6,7 @@ require_once(i("reservation.class.php"));
 require_once(i("reservation.controller.class.php"));
 if (!auth())
 	exit();
-echo $_POST["nbrPersonnes"];
+
 if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"]))
 {	if(isset($_POST["idEquipe"]))
 	{
@@ -30,7 +30,7 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.*";
 		exit();
 	}
-	$reservation = new Reservation(NULL,htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["type"]), $_SESSION["id"],$idEquipe, htmlspecialchars($_POST["nbrPersonnes"]), $time);
+	$reservation = new Reservation(htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["type"]), $_SESSION["id"],$idEquipe, htmlspecialchars($_POST["nbrPersonnes"]), $time);
 	$reservationController = new Controller_Reservation($reservation);
 	if ($reservationController->isGood())
 	{

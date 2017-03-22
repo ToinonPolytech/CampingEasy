@@ -34,7 +34,7 @@ class Reservation {
 		$database = new Database();
 		if ($this->_deleted)
 		{
-			$database->delete('reservation', array("id" => $this->_id, "type" => $type, "idUser" => $this->_idUser));
+			$database->delete('reservation', array("id" => $this->_id, "type" => $this->_type, "idUser" => $this->_idUser));
 		}	
 		else if ($database->count('reservation', array("id" => $this->_id, "type" => $type, "idUser" => $this->_idUser))) // Existe en db, on update
 		{

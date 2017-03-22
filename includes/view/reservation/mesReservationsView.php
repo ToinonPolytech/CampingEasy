@@ -32,8 +32,8 @@
 					<td><?php echo date("d/m/y H:i", $data['time']); ?></td>
 					<td><?php echo $data['nbrPersonne'];?></td>
 					<td>
-						<button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i("reservationView.php")); ?>', {id : <?php echo $data["id"]; ?>, type : <?php echo $data["type"]; ?> }); return false;">Consulter</button>
-						<button type="button" class="btn btn-danger btn-sm" name="suppReservation" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerReservation.php')); ?>', {id : <?php echo $data["id"]; ?>, type : <?php echo $data["type"]; ?>}); return false;">Annuler</button>
+						<button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i("reservationView.php")); ?>', {id : <?php echo $data["id"]; ?>, type : 'ACTIVITE' }); return false;">Consulter</button>
+						<button type="button" class="btn btn-danger btn-sm" name="suppReservation" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerReservation.php')); ?>', {id : <?php echo $data["id"]; ?>, type : 'ACTIVITE' }); return false;">Annuler</button>
 					</td>
 				</tr>
 				<?php

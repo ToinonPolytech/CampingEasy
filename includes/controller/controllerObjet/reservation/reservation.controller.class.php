@@ -12,7 +12,7 @@ class Controller_Reservation
 		$this->_reservation=$reservation;
 	}
 	public function isGood(){
-		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() && $this->idEquipeIsGood() && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
+		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() /*&& $this->idEquipeIsGood()*/ && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
 	}
 	public function timeIsGood(){
 		if (!empty($this->_reservation->getTime()))
@@ -32,6 +32,28 @@ class Controller_Reservation
 		
 		return false;
 	}
+	public function typeIsGood(){
+		if(!empty($this->_reservation->getType()))
+		{
+			if($this->_reservation->getType()=='ACTIVITE' || $this->_reservation->getType()=='LIEU_COMMUN' 
+			|| $this->_reservation->getType()=='RESTAURANT' ||$this->_reservation->getType()=='ETAT_LIEUX')
+			{
+				return true;
+			}
+			else
+			{
+				echo "ERREUR : le service que vous chez à réserver n'existe pas";
+				
+			}
+		}
+		else
+		{
+			echo "ERREUR : aucun service à réserver selectionné"; 
+		}
+		return false;
+		
+		
+	}
 	public function reservationIsAvailable(){
 		if ($this->_reservation->getType()=="ACTIVITE")
 			return $this->actIsAvailable();
@@ -39,6 +61,7 @@ class Controller_Reservation
 		return false;
 	}
 	public function idIsGood(){
+		echo $this->_reservation->getId();
 		if (!empty($this->_reservation->getId()))
 		{
 			if (is_numeric($this->_reservation->getId()))
@@ -46,10 +69,10 @@ class Controller_Reservation
 				return true;
 			}
 			else
-				echo "ERREUR : L'activité n'est pas valide.";
+				echo "ERREUR : Le service réservé n'est pas valide.";
 		}
 		else
-			echo "ERREUR : Vous devez sélectionner une activité.";
+			echo "ERREUR : Vous devez sélectionner un service à réserver .";
 		
 		return false;
 	}
@@ -72,7 +95,8 @@ class Controller_Reservation
 		
 		return false;
 	}
-	public function idEquipeIsGood(){
+	//Stand by pour le moment pour la réservation par équipe 
+	/*public function idEquipeIsGood(){
 		if (!empty($this->_reservation->idEquipe()))
 		{
 			$database=new Database();
@@ -85,7 +109,7 @@ class Controller_Reservation
 			echo "ERREUR : Vous devez indiquer un groupe ou si vous vous inscrivez tout seul.";
 
 		return false;
-	}
+	}*/
 	public function nbrPersonneIsGood(){
 		if (!empty($this->_reservation->getNbrPersonne()))
 		{

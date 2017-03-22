@@ -1,7 +1,7 @@
 ﻿Problèmes/Questions techniques  : 
 
 Pour toi mon rayou en priorité : 
-- Pouvoir modifier activité (gérer les types comme dans ajout)
+
 
 
 
@@ -39,7 +39,8 @@ Probleme technique :
 
 Réservation : 
 -Secu réservation 
-- Pouvoir modifier/consulter 
+- Je voulais mettre type : $data['type'] dans les boutons d'envoi consulter/annuler mais dans firebug il me dit qu'il ne connait pas
+le type activite. En revanche quand je mets  type : 'ACTIVITE' ca fonctionne, j'ai laissé comme aç 
 
 
 
@@ -118,3 +119,4 @@ TODO Lointain (améliorations possibles et détails dans un futur lointain ):
 - système de messages au staff pour un contact direct 
 - revoir les systèmes de modif en place avec la technique du set id 
 - Gestion des doublons pour la plupart des entités => 
+- Message d'alerte si un membre de la même famille réserve une activité alors qu'un autre membre a déjà réservé 

@@ -1,6 +1,7 @@
 <?php 
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("activities.class.php"));
+	require_once(i("database.class.php"));
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
 	if (!isset($_POST["id"]) || !is_numeric($_POST["id"]))
@@ -33,16 +34,26 @@
 							}
 						}
 	if($act->getMustBeReserved()==1 && $act->getDebutReservation()<=time() && $act->getFinReservation()>=time())
-	{
-		?>
-		<div class="col-lg-6 pull-right" style="width:40%;">
-			<form method="post" id="form_reservation" name="form_reservation">
+	{	$db= new Database();
+	
+		if($db->count('reservation',array('idUser' => $_SESSION['id'], 'id' => $id,'type' => 'ACTIVITE'))==0)
+		{
+			?>
+			<div class="col-lg-6 pull-right" style="width:40%;">
+				<form method="post" id="form_reservation" name="form_reservation">
 
-				<label for="nom">Nombre de personnes à inscrire</label><br/>
-				<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control" value="1"/><br/>
-				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', {nbrPersonnes : $('#nbrPersonnes').val(),type : 'ACTIVITE', id : <?php echo $id;?>}), '#form-equipe', 'prepend'); return false;">Réserver</button>
-			</form>
-		</div>
-		<?php	
+					<label for="nom">Nombre de personnes à inscrire</label><br/>
+					<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control" value="1"/><br/>
+					<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', {nbrPersonnes : $('#nbrPersonnes').val(), type : 'ACTIVITE', id : <?php echo $id;?>}, '#form-equipe', 'prepend'); return false;">Réserver</button>
+				</form>
+			</div>
+			<?php
+		}
+		else
+		{
+			echo 'Vous avez déjà une réservation pour cette activité'; ?>
+			<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i("reservationView.php")); ?>', {id : <?php echo $id; ?>, type : 'ACTIVITE' }); return false;">Consulter ma réservation</button>
+		<?php 
+		}
 	}
 ?>

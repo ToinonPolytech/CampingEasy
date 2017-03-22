@@ -10,7 +10,7 @@ if (isset($_POST['id']) && isset($_POST['type']) && isset($_SESSION['id']))
 {
 	$reservation=new Reservation(htmlspecialchars($_POST['id']), htmlspecialchars($_POST['type']), $_SESSION['id']);
 	$reservation->setDeleted(true);
-	$resevation->saveToDb();
+	$reservation->saveToDb();
 	echo 'Réservation supprimée';
 }
 else
