@@ -12,6 +12,7 @@ class Controller_Reservation
 		$this->_reservation=$reservation;
 	}
 	public function isGood(){
+		
 		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() /*&& $this->idEquipeIsGood()*/ && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
 	}
 	public function timeIsGood(){

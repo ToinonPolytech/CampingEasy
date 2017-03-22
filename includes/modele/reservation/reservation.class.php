@@ -9,12 +9,13 @@ class Reservation {
 	private $_idEquipe;
 	private $_nbrPersonne;
 	private $_deleted;
-	public function __construct($id, $type, $idUser, $time=NULL, $idEquipe=NULL, $nbrPersonne=NULL){
+	public function __construct($id, $type, $idUser,$idEquipe=NULL, $nbrPersonne=NULL, $time=NULL){
 		$this->_id=$id;
 		$this->_idUser=$idUser;
 		$this->_type=$type;
-		if ($id==NULL && $idUser==NULL)
-		{
+		
+		if ($time!=NULL && $nbrPersonne!=NULL)
+		{	
 			$this->_idEquipe=$idEquipe;
 			$this->_nbrPersonne=$nbrPersonne;
 			$this->_time=$time;
@@ -36,7 +37,7 @@ class Reservation {
 		{
 			$database->delete('reservation', array("id" => $this->_id, "type" => $this->_type, "idUser" => $this->_idUser));
 		}	
-		else if ($database->count('reservation', array("id" => $this->_id, "type" => $type, "idUser" => $this->_idUser))) // Existe en db, on update
+		else if ($database->count('reservation', array("id" => $this->_id, "type" => $this->_type, "idUser" => $this->_idUser))) // Existe en db, on update
 		{
 			$database->update('reservation', array("id" => $this->_id, "time" => $this->_time, "type" => $this->_type, "idUser" => $this->_idUser), array("idEquipe" => $this->_idEquipe, "nbrPersonne" => $this->_nbrPersonne));
 		}

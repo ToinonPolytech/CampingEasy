@@ -7,9 +7,11 @@
 <div class="col-lg-6" style="width:100%;" name="form-equipe" id="form-equipe">
 <a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutProblemeTechniqueForm.php')); ?>" class="pull-left"> Signaler un problème technique  </a>
 	<?php		
+		
 		require_once(i("database.class.php"));
 		$db = new Database();
 		$db->select("problemes_technique",array( 'idUsers' => $_SESSION['id']));
+		$db2 = new Database(); 
 	?>
 	<table class='table'>
 		<thead>
@@ -39,6 +41,22 @@
 				
 			</tr>
 			<?php
+			if($db2->count('problemes_technique_info', array('idPbTech' => $data['id'], "idUser" => array('!=',$_SESSION['id'])))>0)
+			{	$db2->select('problemes_technique_info', array('idPbTech' => $data['id'], "idUser" => array('!=',$_SESSION['id'])));
+				while($mes=$db2->fetch())
+				{ 
+					require_once(i('user.class.php'));
+					$user= new User($mes['idUser']);
+					?>
+					
+					<tr>
+						<td><?php echo 'Message du technicien :'?> </td>
+						<td><i><?php echo $mes['message']?></i></td>
+						<td><i><?php echo ' envoyé par '.$user->getPrenom().' '.$user->getNom().' le '.date("d/m/y H:i",$mes['time']);?> </i></td>
+					</tr> 
+				<?php 
+				}
+			}
 		}
 		?>
 		</tbody>

@@ -12,7 +12,8 @@ Choix de conception :
 	
 
 
-
+Modif db : 
+- Supprimer idEquipe dans reservation 
 
 
 Activite : 

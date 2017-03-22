@@ -30,6 +30,7 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.*";
 		exit();
 	}
+	
 	$reservation = new Reservation(htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["type"]), $_SESSION["id"],$idEquipe, htmlspecialchars($_POST["nbrPersonnes"]), $time);
 	$reservationController = new Controller_Reservation($reservation);
 	if ($reservationController->isGood())
