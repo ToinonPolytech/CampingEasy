@@ -45,19 +45,7 @@
 					<td><?php echo $data['prenom']; ?></td>
 					
 					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button></td>
-					<?php 
-					if($cuser->can(CAN_LOG))
-					{	?>
-						<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>, action : 'bloque'}, 'form-equipe'); return false;">Bloquer</button></td>
-					<?php
-					}
-					else
-					{
-					?>
-						<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>, action : 'debloque'}); return false;">Déloquer</button></td>
-						<?php
-					}
-					?>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>}, 'form-equipe'); return false;"><?php if ($cuser->can(CAN_LOG)) { echo "Bloquer"; } else { echo "Débloquer"; } ?></button></td>
 				</tr>
 			<?php
 			}

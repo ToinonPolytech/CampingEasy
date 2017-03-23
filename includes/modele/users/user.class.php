@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("userInfo.class.php"));
-
+require_once(i("client.controller.class.php"));
 class User
 {
 	protected $_id;
@@ -63,16 +63,14 @@ class User
 		}
 	}
 	public function addDroits($which){
-		require_once(i("client.controller.class.php")); // je ne sais pas si c'est sa place 
 		$controller= new Controller_Client($this);
 		if (!$controller->can($which)) // Si le droit n'est pas déjà activé
 			$this->_droits+=pow(2,$which); // on lui rajoute
 	}
 	
-	public function subDroits($which){
-		require_once(i("client.controller.class.php")); // je ne sais pas si c'est sa place 
+	public function removeDroits($which){
 		$controller = new Controller_Client($this);
-		if (!$controller->can($which)) // Si le droit est activé
+		if ($controller->can($which)) // Si le droit est activé
 			$this->_droits-=pow(2,$which); // on lui enlève 
 	}
 	
