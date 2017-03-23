@@ -8,21 +8,6 @@ class Restaurant{
 	private $_description;
 	private $_capacite;
 	private $_hOuv;
-	
-	/** Ceci est une horaire d'ouverture fermé tout le temps
-	0 = dimanche
-	1 = lundi ect.. (c.f date("w"))
-	-------------------------------
-	Dans le sous-tableau, 0 = 00h, 1 = 00h30 ect... 47=23h30
-	$array=array();
-	for ($i=0;$i<=6;$i++)
-	{
-		$array[$i]=array();
-		for ($j=0;$j<48;$j++)
-			$array[$i][$j]=false;
-	}
-	$array=serialize($array);
-	**/
 	private $_photo;
 	private $_deleted;
 	public function __construct($id, $nom=NULL, $description=NULL, $capacite=NULL, $hOuv=NULL, $photo=NULL){
@@ -31,7 +16,7 @@ class Restaurant{
 		{
 			$this->_nom = $nom;
 			$this->_description = $description; 
-			$this->_capacite = $description;
+			$this->_capacite = $capacite;
 			$this->_hOuv = $hOuv;
 			$this->_photo = $photo;
 		}
@@ -42,9 +27,9 @@ class Restaurant{
 			$data=$database->fetch();
 			$this->_nom = $data['nom'];
 			$this->_description = $data['description']; 
-			$this->_capacite = $data['description'];
+			$this->_capacite = $data['capacite'];
 			$this->_hOuv = $data['hOuv'];
-			$this->_photo = $data['photo'];
+			$this->_photo = $data['photos'];
 		}
 		$this->_deleted=false;
 	}
@@ -56,11 +41,11 @@ class Restaurant{
 		}	
 		else if ($this->_id!=NULL && $database->count('restaurant', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('restaurant', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photo" => $this->_photo, "description" => $this->_description));
+			$database->update('restaurant', array("id" => $this->_id), array("nom" => $this->_nom, "capacite" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photos" => $this->_photo, "description" => $this->_description));
 		}
 		else
 		{
-			$database->create('restaurant', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photo" => $this->_photo, "description" => $this->_description));
+			$database->create('restaurant', array("id" => $this->_id, "nom" => $this->_nom, "capacite" => $this->_capacite, "heureOuverture" => $this->_hOuv, "photos" => $this->_photo, "description" => $this->_description));
 		}
 	}
 	public function getId() {

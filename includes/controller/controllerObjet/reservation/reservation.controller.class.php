@@ -58,6 +58,8 @@ class Controller_Reservation
 	public function reservationIsAvailable(){
 		if ($this->_reservation->getType()=="ACTIVITE")
 			return $this->actIsAvailable();
+		else if ($this->_reservation->getType()=="RESTAURANT")
+			return true;
 		
 		return false;
 	}

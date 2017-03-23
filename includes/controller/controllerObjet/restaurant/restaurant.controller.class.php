@@ -13,7 +13,7 @@ class Controller_Restaurant{
 	public function isGood(){
 		
 		
-		return ($this->nomIsGood() && $this->descriptionIsGood() && $this->capaciteIsgood() && $this->heureIsGood()); 
+		return ($this->nomIsGood() && $this->descriptionIsGood() && $this->capaciteIsgood()); 
 	}
 	
 	public function nomIsGood(){
@@ -47,13 +47,13 @@ class Controller_Restaurant{
 		
 		if(!empty($this->resto->getDescription()))
 		{
-			if((strlen($this->resto->getDescription())>=20) && strlen($this->resto->getDescription())<=300)
+			if((strlen($this->resto->getDescription())>=20) && strlen($this->resto->getDescription())<=500)
 			{
 				return true;
 			}
 			else
 			{
-				echo 'ERREUR : Le descriptif du restaurant doit contenir entre 20 et 300 caractères';
+				echo 'ERREUR : Le descriptif du restaurant doit contenir entre 20 et 500 caractères';
 				
 			}
 		}
@@ -96,16 +96,4 @@ class Controller_Restaurant{
 		return false; 
 		
 	}
-	public function heureIsGood(){
-		
-		if(!empty($this->resto->getHeureOuverture()))
-		{
-			return true; 
-		}
-		else 
-		{
-			echo "ERREUR : les horaires d'ouverture et/ou fermeture sont vides ";
-		}
-	}
-	
 }

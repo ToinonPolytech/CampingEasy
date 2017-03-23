@@ -63,10 +63,31 @@
 		format:'d-m-Y H:00',
 		onChangeDateTime:function(dp,$input){
 			$("#finReservation").val($input.val());
-		}
+		},
+		onShow:function( ct ){
+		   this.setOptions({
+			minDate:0
+		   })
+		  }
 	});
-	$("#debutReservation,#finReservation").datetimepicker({
+	$("#debutReservation").datetimepicker({
 		startDate:new Date(),
-		format:'d-m-Y H:00'
+		format:'d-m-Y H:00',
+		onShow:function( ct ){
+		   this.setOptions({
+			minDate:$('#debutReservation').val()?$('#debutReservation').val():0,
+			maxDate:$('#finReservation').val()?$('#finReservation').val():($('#timeStart').val()?$('#timeStart').val():false)
+		   })
+		  }
+	});
+	$("#finReservation").datetimepicker({
+		startDate:new Date(),
+		format:'d-m-Y H:00',
+		onShow:function( ct ){
+		   this.setOptions({
+			minDate:$('#debutReservation').val()?$('#debutReservation').val():0,
+			maxDate:$('#timeStart').val()?$('#timeStart').val():false
+		   })
+		  }
 	});
 </script>

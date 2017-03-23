@@ -8,7 +8,8 @@ if (!auth())
 	exit();
 
 if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"]))
-{	if(isset($_POST["idEquipe"]))
+{	
+	if(isset($_POST["idEquipe"]))
 	{
 		$idEquipe =  htmlspecialchars($_POST["idEquipe"]);
 	}
@@ -27,7 +28,7 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 	}
 	else
 	{
-		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.*";
+		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
 		exit();
 	}
 	
@@ -37,6 +38,10 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 	{
 		$reservation->saveToDb();
 		echo 'Réservation effectuée'; 
+	}
+	else
+	{
+		echo "ERREUR : Un problème est survenu lors de l'envoi du formulaire.";
 	}
 }
 else
