@@ -1,19 +1,22 @@
 ﻿Problèmes/Questions techniques  : 
-
+- varchar trop court pour les heures d'ouverture du restau en db (mit à 10000 de mon côté )
 Pour toi mon rayou en priorité : 
+- Les modifs db 
+- On utilise controller_client dans la classe user pour gérer les droits, n'est ce pas un peu risqué ? On doit pouvoir changer aussi les droits du staff non ? Si non faudra ajouter une erreur pouer empêcher de le faire 
 
-
-
-
+En cours : 
+- Pouvoir bloquer un user : reste à faire la fonction subDroit dans user class pour enlever les droits. 
 
 
 Choix de conception : 
-
+- On doit revoir les vues pour l'affichage des services : il faudrait pouvoir consulter les restaurants avec les heures d'ouverture, dans la même 
+page que les lieux communs je pense et qu'on appellerait "nos services". => à définir 
 	
 
 
 Modif db : 
 - Supprimer idEquipe dans reservation 
+- Réservabilité du lieu : estReservable + horaire (comme restau)
 
 
 Activite : 
@@ -60,7 +63,7 @@ Users :
 
 
 
-Lieu commun : 
+Lieu  : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
 	- Je dirais plus, un message d'alerte, et si confirmer -> suppression cascade + alerte aux utilisateurs qui avaient réservé.
 
@@ -88,7 +91,7 @@ Pages à créer :
 Client : 
 
 
--  Réserver : 	- une table de resto (impliquera de connaitre la capacité max du resto ) 
+-  Réserver : 	
 				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
 				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
@@ -121,3 +124,7 @@ TODO Lointain (améliorations possibles et détails dans un futur lointain ):
 - revoir les systèmes de modif en place avec la technique du set id 
 - Gestion des doublons pour la plupart des entités => 
 - Message d'alerte si un membre de la même famille réserve une activité alors qu'un autre membre a déjà réservé 
+
+
+Autres choix de conception à définir au moment de l'implémentation dans un camping: 
+- Veulent ils pouvoir définir une autre occurence pour une activité sans pour autant avoir une récurrence 

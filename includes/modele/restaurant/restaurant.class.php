@@ -28,7 +28,7 @@ class Restaurant{
 			$this->_nom = $data['nom'];
 			$this->_description = $data['description']; 
 			$this->_capacite = $data['capacite'];
-			$this->_hOuv = $data['hOuv'];
+			$this->_hOuv = $data['heureOuverture'];
 			$this->_photo = $data['photos'];
 		}
 		$this->_deleted=false;

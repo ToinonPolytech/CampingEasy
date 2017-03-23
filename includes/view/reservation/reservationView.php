@@ -34,12 +34,20 @@
 					$lien= "lieuCommunView.php";
 					require_once(i("lieuCommun.class.php"));
 					$obet = new LieuCommun($_POST['id']);
+					
 				}
 				else if($res->getType()=='RESTAURANT')
 				{
 					$lien= "restaurantView.php.php";
 					require_once(i("restaurant.class.php"));
 					$objet = new Restaurant($_POST['id']);
+					?>
+					<li class="list-group-item">Nombre de personnes pour la réservation : </li>
+					<form method="post" id="form_reservation" name="form_reservation">
+						<input type="number" name="nbrPersonnes" id="nbrPersonnes" class="form-control" value="<?php echo $res->getNbrPersonne();?>"/>
+						<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reservation.controllerForm.php')); ?>', {nbrPersonnes : $('#nbrPersonnes').val(), type : 'ACTIVITE', id : <?php echo $_POST['id'];?>}, '#form-equipe', 'prepend'); return false;">Modifier</button>
+					</form>
+					<?php 
 				}
 				?>
 			<li class="list-group-item">Concerne : <?php echo $objet->getNom(); ?></li>			

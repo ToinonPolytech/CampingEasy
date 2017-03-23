@@ -9,6 +9,7 @@
 	
 	require_once(i("client.class.php"));
 	require_once(i("client.controller.class.php"));
+	
 	$client=new Client($_SESSION["id"]);
 	$controller=new Controller_Client($client);
 	if (!$controller->can(CAN_CREATE_SUBACCOUNT))
@@ -18,6 +19,7 @@
 	<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutSousCompteForm.php')); ?>" class="pull-left">Ajouter un sous-compte</a>
 	<?php		
 		require_once(i("database.class.php"));
+		require_once(i("user.class.php"));
 		$db = new Database();
 		$db->select("users", array('infoId' => $_SESSION["infoId"]));
 	?>
@@ -34,13 +36,28 @@
 		while($data=$db->fetch())
 		{   
 			if ($data["id"]!=$_SESSION["id"])
-			{
+			{	$user = new User($data['id']);
+				$cuser = new Controller_Client($user);
+				
 			?>
 				<tr>
 					<td><?php echo $data['nom']; ?></td> 
 					<td><?php echo $data['prenom']; ?></td>
+					
 					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerUser.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button></td>
+					<?php 
+					if($cuser->can(CAN_LOG))
+					{	?>
+						<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>, action : 'bloque'}, 'form-equipe'); return false;">Bloquer</button></td>
+					<?php
+					}
+					else
+					{
+					?>
+						<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>, action : 'debloque'}); return false;">Déloquer</button></td>
+						<?php
+					}
+					?>
 				</tr>
 			<?php
 			}
