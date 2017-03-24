@@ -4,7 +4,7 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("client.class.php"));
-
+	require_once(i("client.controller.class.php"));
 	if (!auth())
 		exit();
 

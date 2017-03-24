@@ -109,6 +109,18 @@
 			<div class="col-lg-3 col-md-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading"></div>
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverEtatDesLieuxForm.php')); ?>">
+						<div class="panel-footer">
+							<span class="pull-left">Résever mon état des lieux </span>
+							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"></div>
 					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('mesProblemesTechniquesView.php')); ?>">
 						<div class="panel-footer">
 							<span class="pull-left">Mes problèmes techniques</span>
@@ -158,18 +170,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6">
-						<div class="panel panel-danger">
-							<div class="panel-heading"></div>
-							<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutUserForm.php')); ?>">
-								<div class="panel-footer">
-									<span class="pull-left">Ajouter un utilisateur</span>
-									<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-									<div class="clearfix"></div>
-								</div>
-							</a>
-						</div>
-					</div>	
+					
 					<div class="col-lg-3 col-md-6">
 						<div class="panel panel-danger">
 							<div class="panel-heading"></div>

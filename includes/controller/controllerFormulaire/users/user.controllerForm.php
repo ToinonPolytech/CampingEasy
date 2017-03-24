@@ -17,7 +17,7 @@
 			{
 				$droits+=$i;
 			}
-			if(isset($_POST['id']) &&  isset($_POST['idInfo'])
+			if(isset($_POST['id']) &&  isset($_POST['idInfo']))
 			{	//si modification 
 				$user = new Client(htmlspecialchars($_POST['id']),$_POST['idInfo']);
 				$userInfos = $user->getUserInfos();
@@ -55,7 +55,7 @@
 			{
 				$droits+=$i;
 			} // pour le moment un staff a tous les droits de client, à voir pour la suite 
-			if(isset($_POST['id']) &&  isset($_POST['idInfo'])
+			if(isset($_POST['id']) &&  isset($_POST['idInfo']))
 			{	//si modification 
 				$user = new Staff(htmlspecialchars($_POST['id']),$_POST['idInfo']);
 				$userInfos = $user->getUserInfos();

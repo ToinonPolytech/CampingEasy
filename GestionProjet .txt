@@ -95,7 +95,7 @@ Client :
 				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
 				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
 						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
-				- réserver état des lieux : menu déroulant avec heures restantes (on laisse définir par l'admin la fréquence de possiblité ainsi que les heures) 
+			
 
 
 
@@ -124,6 +124,7 @@ TODO Lointain (améliorations possibles et détails dans un futur lointain ):
 - revoir les systèmes de modif en place avec la technique du set id 
 - Gestion des doublons pour la plupart des entités => 
 - Message d'alerte si un membre de la même famille réserve une activité alors qu'un autre membre a déjà réservé 
+- choisir un mode de répartition des états des lieux pour le staff 
 
 
 Autres choix de conception à définir au moment de l'implémentation dans un camping: 

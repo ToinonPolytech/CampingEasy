@@ -5,7 +5,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i('client.class.php'));
 	require_once(i('staff.class.php'));
-	if(isset($_POST['id']) && isset($_POST['access_level'))
+	if(isset($_POST['id']) && isset($_POST['access_level']))
 	{	if($_POST['access_level']=='CLIENT')
 		{
 			$user = new Client($_POST['id']);
