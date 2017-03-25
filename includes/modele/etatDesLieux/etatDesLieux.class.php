@@ -17,8 +17,7 @@ class EtatDesLieux
 			$this->_idUser=$idUser;
 			$this->_debutTime=$debutTime;
 			$this->_finTime=$finTime;
-			$this->_duree_moyenne=$duree_moyenne;
-					
+			$this->_duree_moyenne=$duree_moyenne;		
 		}
 		else
 		{
@@ -28,9 +27,7 @@ class EtatDesLieux
 			$this->_idUser=$data["idUser"];
 			$this->_debutTime=$data["debutTime"];
 			$this->_finTime=$data["finTime"];
-			$this->_duree_moyenne=$data["duree_moyenne"];
-			
-			
+			$this->_duree_moyenne=$data["duree_moyenne"];		
 		}
 		$this->_deleted=false;
 	}
