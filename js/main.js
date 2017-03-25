@@ -22,8 +22,8 @@ function loadTo(urlCalled, dataUsed, location, type, isImage, callback) // path 
 			$(location).html(data);
 		else if (type=="append")
 			$(location).append(data);
-		else if (type=="next")
-			$(location).next(data);
+		else if (type=="after")
+			$(location).after(data);
 		else if (type=="before")
 			$(location).before(data);
 		else
