@@ -9,6 +9,7 @@ if (!auth())
 
 if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"]))
 {	
+	$id=$_POST["id"];
 	if(isset($_POST["idEquipe"]))
 	{
 		$idEquipe =  htmlspecialchars($_POST["idEquipe"]);
@@ -20,7 +21,26 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 	if ($_POST["type"]=="ACTIVITE")
 	{
 		$db=new Database();
-		$time=$db->getValue("activities", array("id" => $_POST["id"]), "time_start");
+		$time=$db->getValue("activities", array("id" => $id), "time_start");
+	}
+	else if ($_POST["type"]=="ETAT_LIEUX")
+	{
+		$time=$_POST["time"];
+		$db=new Database();
+		$db->select("etat_lieux", array("debutTime" => array("<=", $time), "finTime" => array(">=", $time), array("idUser", "debutTime", "finTime", "duree_moyenne")));
+		$db2=new Database();
+		$staffDispo=array();
+		while ($data=$db->fetch())
+		{
+			/// Il ne doit pas avoir de réservation pendant les horaires sélectionnés par le user
+			if ($db2->count("reservation", array("id" => $data["idUser"], "type" => "ETAT_LIEUX", "time" => array($time-$data["duree_moyenne"]+1, $time+$data["duree_moyenne"]-1)))==0)
+			{
+				$count=$db2->count("reservation", array("id" => $data["idUser"], "type" => "ETAT_LIEUX", "time" => array($data["debutTime"], $data["finTime"])));
+				$staffDispo[$data["idUser"]]=$count;
+			}
+		}
+		arsort($staffDispo); // On tri de manière décroissante en conservant les index
+		$id=key($staffDispo);
 	}
 	else if (isset($_POST["time"]))
 	{
@@ -32,7 +52,7 @@ if (isset($_POST["id"]) && isset($_POST["type"])  && isset($_POST["nbrPersonnes"
 		exit();
 	}
 	
-	$reservation = new Reservation(htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["type"]), $_SESSION["id"],$idEquipe, htmlspecialchars($_POST["nbrPersonnes"]), $time);
+	$reservation = new Reservation(htmlspecialchars($id), htmlspecialchars($_POST["type"]), $_SESSION["id"], htmlspecialchars($_POST["nbrPersonnes"]), $time);
 	$reservationController = new Controller_Reservation($reservation);
 	if ($reservationController->isGood())
 	{
