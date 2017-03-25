@@ -13,7 +13,37 @@ class Controller_Reservation
 	}
 	public function isGood(){
 		
-		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() /*&& $this->idEquipeIsGood()*/ && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
+		return ($this->idIsGood() && $this->typeIsGood() && $this->idUserIsGood() && $this->nbrPersonneIsGood() && $this->reservationIsAvailable() && $this->timeIsGood());
+	}
+	public function etatLieuxIsGood(){
+		$user = new Client($this->_reservation->getIdUser()); 
+		$dateDep= date('d/m/Y', $user->getUserInfos()->getTimeDepart());
+		$debutJournee=strtotime(date('y-m-d', $user->getUserInfos()->getTimeDepart()));
+		$finJournee=$debutJournee+3600*24;
+		$db = new Database();
+		$db2= new Database();
+		$db->select('reservation',array('type' => 'ETAT_LIEUX', 'time' => array($debutJournee, $finJournee)),"time");
+		$db2->select('etat_lieux',array('debutTime' => array('>=', $debutJournee), 'finTime' => array('<=', $finJournee)));
+		$hDispo=array();
+		$hPrise=array();
+		while($res=$db->fetch())
+		{
+			if (isset($hPrise[$res['time']]))
+				$hPrise[$res['time']]+=1;
+			else
+				$hPrise[$res['time']]=1;
+		}
+		while($edl=$db2->fetch())
+		{	
+			for($i=$edl['debutTime'];$i<=$edl['finTime'];$i+=60*$edl['duree_moyenne'])
+			{
+				if (isset($hDispo[$i]))
+					$hDispo[$i]+=1;
+				else
+					$hDispo[$i]=1;
+			}
+		}
+		return (isset($hDispo[$this->_reservation->getTime()]) && $hDispo[$this->_reservation->getTime()]-$hPrise[$this->_reservation->getTime()]>0 && $db->count("etat_lieux", array("idUser" => $this->_reservation->getId(), "debutTime" => array("<=", $this->_reservation->getTime()), "finTime" => array(">=", $this->_reservation->getTime())))>0);
 	}
 	public function timeIsGood(){
 		if (!empty($this->_reservation->getTime()))
@@ -60,11 +90,12 @@ class Controller_Reservation
 			return $this->actIsAvailable();
 		else if ($this->_reservation->getType()=="RESTAURANT")
 			return true;
+		else if ($this->_reservation->getType()=="ETAT_LIEUX")
+			return $this->etatLieuxIsGood();
 		
 		return false;
 	}
 	public function idIsGood(){
-		echo $this->_reservation->getId();
 		if (!empty($this->_reservation->getId()))
 		{
 			if (is_numeric($this->_reservation->getId()))
@@ -98,21 +129,6 @@ class Controller_Reservation
 		
 		return false;
 	}
-	//Stand by pour le moment pour la réservation par équipe 
-	/*public function idEquipeIsGood(){
-		if (!empty($this->_reservation->idEquipe()))
-		{
-			$database=new Database();
-			if ($this->_reservation->getIdEquipe()==0 || $database->count('equipe', array("id" => $this->_reservation->getId()))==1)
-				return true;
-			else
-				echo "ERREUR : Ce groupe n'existe pas.";
-		}
-		else
-			echo "ERREUR : Vous devez indiquer un groupe ou si vous vous inscrivez tout seul.";
-
-		return false;
-	}*/
 	public function nbrPersonneIsGood(){
 		if (!empty($this->_reservation->getNbrPersonne()))
 		{
