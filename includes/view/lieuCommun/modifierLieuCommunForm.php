@@ -148,8 +148,6 @@
 				</div>
 			</form>
 		</div>
-		
-
 <script type="text/javascript">
 	$("input[name^='horaire_close'],input[name^='horaire_open']").datetimepicker({
 		startDate:new Date(),
