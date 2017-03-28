@@ -18,7 +18,7 @@ class Controller_Activite {
 		&& $this->descriptifIsGood()  &&
 		$this->typeIsGood() && $this->placesLimIsGood() && $this->prixIsGood() &&
 		$this->idOwnerIsGood() && $this->pointsIsGood() && $this->mustBeReservedIsGood()
-		&& $this->lieuIsGood() && $this->dateReservationIsGood()); 
+		&& $this->lieuIsGood() && $this->dateReservationIsGood() && $this->recurrenteIsGood()); 
 		
 	}
 	
@@ -324,7 +324,34 @@ class Controller_Activite {
 			
 		return false; 
 	}
-	
+	public function recurrenteIsGood(){
+		if($empty($this->act->getIdRecurrente()) || $this->act->getIdRecurrente()==-1)
+		{
+			$this->act->setIdRecurrente(-1);
+			return true; 
+		}
+		else
+		{
+			if(is_numeric($this->act->getIdRecurrente()))
+			{
+				
+				$db = new Database();		
+				if($db->count('activities',array('id' => $this->act->getIdRecurrente())))
+				{
+					return true; 
+				}
+				else
+				{
+					echo "ERREUR : activité de référence inexistante"; 
+				}
+			}
+			else
+			{
+				echo "ERREUR : id de l'activité de récurrence de mauvais type" ;
+			}
+				return false;
+		}
+	}
 }
 
 

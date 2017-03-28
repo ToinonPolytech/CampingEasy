@@ -21,6 +21,7 @@ class Activite
 	private $_finReservation;
 	private $_photos;
 	private $_deleted;
+	private $_idRecurrente;
 	/*données : 
 		-id : Int => clef primaire 
 		-timeStart : Int => secondes   
@@ -36,8 +37,9 @@ class Activite
 		-prix : (type= payante) float => prix par personnes de l'activité 
 		-idPart : (type = partenariat) Int => Id du partenaire associé à l'activité 
 		-mustBeReserved : (type = boolean) => 1 il faut réserver, sinon pas besoin
+		-idRecurrente: in t => -1 si non récurrente, 0 si activité de base, id de l'activité de base si récurrente 
 	*/
-	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL, $debutReservation=NULL, $finReservation=NULL, $photos=NULL) {
+	public function __construct($id, $timeStart=NULL, $nom=NULL, $descriptif=NULL, $duree=NULL, $lieu=NULL, $type=NULL, $placesLim=NULL, $prix=NULL, $idOwner=NULL, $points=NULL, $mustBeReserved=NULL, $debutReservation=NULL, $finReservation=NULL, $photos=NULL, $idRecurrente=NULL) {
 		$this->_id = $id;
 		if ($id==NULL)
 		{	
@@ -55,6 +57,7 @@ class Activite
 			$this->_debutReservation = $debutReservation;
 			$this->_finReservation = $finReservation;
 			$this->_photos = $photos;
+			$this->_idRecurrente = $idRecurrente;
 		}
 		else
 		{
@@ -75,6 +78,7 @@ class Activite
 			$this->_debutReservation = $data["debutReservation"];
 			$this->_finReservation = $data["finReservation"];
 			$this->_photos = $data["photos"];
+			$this->_idRecurrente = $data['idRecurrente'];
 		}
 		$this->_deleted=false;
 	}
@@ -86,11 +90,15 @@ class Activite
 		}	
 		else if ($this->_id!=NULL && $database->count('activities', array("id" => $this->_id))) //Id non null et Existe en db, on update
 		{
-			$database->update('activities', array("id" => $this->_id), array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->update('activities', array("id" => $this->_id), 
+			array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos,
+			"mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, 
+			"description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, 
+			"prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner,'idRecurrente' => $this->_idRecurrente));
 		}
 		else
 		{
-			$database->create('activities', array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner));
+			$database->create('activities', array("debutReservation" => $this->_debutReservation, "finReservation" => $this->_finReservation, "photos" => $this->_photos, "id" => $this->_id, "mustBeReserved" => $this->_mustBeReserved, "time_start" => $this->_timeStart, "duree" => $this->_duree, "nom" => $this->_nom, "description" => $this->_descriptif, "type" => $this->_type, "lieu" => $this->_lieu, "points" => $this->_points, "prix" => $this->_prix, "capaciteMax" => $this->_placesLim, "idDirigeant" => $this->_idOwner,'idRecurrente' => $this->_idRecurrente));
 		} 
 	}
 	public function getId() {
@@ -140,6 +148,9 @@ class Activite
 	}
 	public function getFinReservation(){
 		return $this->_finReservation;
+	}
+	public function getIdRecurrente(){
+		return $this->_idRecurrente;
 	}
 	public function getPhotos(){
 		return $this->_photos;
@@ -198,6 +209,9 @@ class Activite
 	}
 	public function setFinReservation($finR){
 		$this->_finReservation=$finR;
+	}
+	public function setIdRecurrente($idRec){
+		$this->_idRecurrente=$idRec;
 	}
 	public function setPhotos($photos){
 		$this->_photos=$photos;

@@ -39,7 +39,7 @@
 			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="CULTURELLE"> Culturelle
 			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="FETE"> Fête
 			<br/>
-			<label for="mustBeReserved">Doit être réservé ?</label><br/>
+			<label for="mustBeReserved">Doit être réservée ?</label><br/>
 			<input type="checkbox" name="mustBeReserved" id="mustBeReserved" onclick="if ($(this).is(':checked')) { $('.mustBeReserved_hide').show(); } else { $('.mustBeReserved_hide').hide(); }"/><br/>
 			<div class="mustBeReserved_hide" style="display:none;">
 				<label for="placesLim">Nombre de places</label><br/>
@@ -49,12 +49,26 @@
 				<label for="finReservation">Date limite pour la réservation</label><br/>
 				<input class="form-control" type="text" name="finReservation" id="finReservation"/><br />
 			</div>
+			<label for="recurrente">Récurrente ? </label><br/>
+			<input type="checkbox" name="recurrente" id="recurrente" onclick="if ($(this).is(':checked')) { $('.estRecurrente_hide').show(); } else { $('.estRecurrente_hide').hide(); }"/><br/>
+			<div class="estRecurrente_hide" style="display:none;" >
+				<label for="recurrence">Récurrence</label><br/>
+				<select class="form-control" name="recurrence" id="recurrence">
+					<option value="1" >Tous les jours</option>
+					<option value="2" >Tous les deux jours</option>
+					<option value="7" >Chaque semaines</option>
+					<option value="30" >Chaque mois</option>
+				</select></br>
+				<label for="finRecurrence">Récurrence</label><br/>
+				<input class="form-control" type="text" name="finRecurrence" id="finRecurrence"/> <br />
+			</div>			
 			<label for="prix">Prix</label><br/>
 			<input class="form-control" type="number" name="prix" id="prix" value="0"/><br/>
 			<label for="points">Points disponibles</label><br/>
 			<input class="form-control" type="number" name="points" id="points" value="0"/><br/>
 			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>',$('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
+		
 	</form>
 </div>
 <script type="text/javascript">
@@ -89,5 +103,9 @@
 			maxDate:$('#timeStart').val()?$('#timeStart').val():false
 		   })
 		  }
+	});
+	$("#finRecurrence").datetimepicker({
+		format:'d-m-Y',
+		timepicker:false
 	});
 </script>

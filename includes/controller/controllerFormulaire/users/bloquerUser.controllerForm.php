@@ -8,29 +8,32 @@ if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 	if (!auth())
 		exit();
 
-
-
 	if(isset($_POST['id']))
 	{
-		$client_edit = new Client(htmlspecialchars($_POST['id']));
-		$clientOwner = new Client(htmlspecialchars($_SESSION['id']));
-		$cclient = new Controller_Client($client);
-		$cclient_owner = new Controller_Client($clientOwner);
+		$user_edit = new Client(htmlspecialchars($_POST['id']));
+		$cuser = new Controller_Client($user_edit);
 		
-		if (!$cclient_owner->canEdit($client_edit))
-			exit();
-		
+		if(isset($_SESSION['access_level'])=='CLIENT')
+		{	
+			
+			$clientOwner = new Client(htmlspecialchars($_SESSION['id']));
+			$cclient_owner = new Controller_Client($clientOwner);
+			
+			if (!$cclient_owner->canEdit($user_edit))
+				exit();
+		}
+				
 		if ($cuser->can(CAN_LOG))
 		{
-			$client_edit->removeDroits(CAN_LOG);
+			$user_edit->removeDroits(CAN_LOG);
 			echo 'Utilisateur bloqué';
 		}
 		else
 		{
-			$client_edit->addDroits(CAN_LOG);
+			$user_edit->addDroits(CAN_LOG);
 			echo 'Utilisateur débloqué'; 
 		}
-		$client_edit->saveToDb();
+		$user_edit->saveToDb();
 	}
 	else
 	{

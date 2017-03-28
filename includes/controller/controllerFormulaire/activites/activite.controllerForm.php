@@ -45,10 +45,28 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 			{
 				$act->setId($_POST['id']);
 			}
+					
 			$act->saveToDb();
 			echo "Activité enregistrée ";
 		}
-	
+		if(isset($_POST['estRecurrente']) && isset($_POST['finRecurrence']))
+			{
+				$rec=$act->getDate();
+					while($rec<=$_POST['finRecurrence'])
+					{
+						$actR= new Activite(NULL, htmlspecialchars(strtotime($_POST["timeStart"])), htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["descriptif"]), htmlspecialchars($_POST["duree"]),
+						htmlspecialchars($lieu), $type,
+						htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved,htmlspecialchars(strtotime($_POST["debutReservation"])),htmlspecialchars(strtotime($_POST["finReservation"])),$photos_path,$act->getId());
+						$actRC = new Controller_Activite($actR);
+						if($actRC->isGood())
+						{
+							$act->saveToDb();
+						}
+					
+					
+					}
+			}
+		
 	}
 }
 else

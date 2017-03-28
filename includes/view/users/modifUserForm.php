@@ -23,11 +23,11 @@
 				<div class="form-group">
 					
 					<label for="numPlace">Numéro d'emplacement </label><br/>
-					<input class="form-control" type="number" name="numPlace" id="numPlace" value="<?php echo $userInfo->getUserInfos()->getEmplacement();?>"/> <br />
+					<input class="form-control" type="number" name="numPlace" id="numPlace" value="<?php echo $userInfo->getEmplacement();?>"/> <br />
 					<label for="email">Adresse mail</label><br/>
-					<input class="form-control" type="email" name="email" id="email" value="<?php echo $userInfo->getUserInfos()->getEmail();?>"/> <br />
+					<input class="form-control" type="email" name="email" id="email" value="<?php echo $userInfo->getEmail();?>"/> <br />
 					<label for="date">Date de départ</label><br/>
-					<input id="date" name="date" type="text"  value="<?php echo $userInfo->getTimeDepart();?>"><br />
+					<input id="date" name="date" type="text"  value="<?php echo date("d/m/y H:m", $userInfo->getTimeDepart());?>"><br />
 					<label for="type">Type du compte</label><br/>
 					<select class="form-control" name="type" id="type"  value="<?php echo $user->getAccessLevel();?>">
 						<option value="CLIENT">Client</option>

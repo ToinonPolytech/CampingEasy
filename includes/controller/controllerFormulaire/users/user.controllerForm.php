@@ -11,7 +11,7 @@
 		{
 			require_once(i("client.class.php"));
 			require_once(i("client.controller.class.php"));
-			// Le client maître, a tout les droits disponible pour un client
+			// Le client maître, a tout les droits disponibles pour un client
 			$droits=0;
 			for ($i=$puissance;$i>0;$i--)
 			{
@@ -21,7 +21,7 @@
 			{	//si modification 
 				$user = new Client(htmlspecialchars($_POST['id']),$_POST['idInfo']);
 				$userInfos = $user->getUserInfos();
-				$user->setType(htmlspecialchars($_POST['type']));
+				$user->setAccessLevel(htmlspecialchars($_POST['type']));
 				$user->setNom(htmlspecialchars($_POST['nom']));
 				$user->setPrenom(htmlspecialchars($_POST['prenom']));
 				$userInfos->setEmplacement(htmlspecialchars($_POST['numPlace']));

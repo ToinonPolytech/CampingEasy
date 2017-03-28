@@ -8,12 +8,14 @@
 	
 	if (!auth())
 		exit();
-	
-	$clientParent=new Client($_SESSION["id"]);
 	$clientChild=new Client($_POST["id"]);
-	$controller=new Controller_Client($clientParent);
-	if (!$controller->canEdit($clientChild))
-		exit();
+	if($_SESSION['access_level']=='CLIENT')
+	{
+		$clientParent=new Client($_SESSION["id"]);
+		$controller=new Controller_Client($clientParent);
+		if (!$controller->canEdit($clientChild))
+			exit();
+	}
 	$controller=new Controller_Client($clientChild);
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-user" id="form-user">
