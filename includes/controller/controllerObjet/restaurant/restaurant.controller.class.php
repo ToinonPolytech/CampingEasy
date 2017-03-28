@@ -11,9 +11,7 @@ class Controller_Restaurant{
 	}
 	
 	public function isGood(){
-		
-		
-		return ($this->nomIsGood() && $this->descriptionIsGood() && $this->capaciteIsgood()); 
+		return ($this->nomIsGood() && $this->descriptionIsGood() && $this->capaciteIsgood() && $this->heureOuvertureIsGood()); 
 	}
 	
 	public function nomIsGood(){
@@ -95,5 +93,27 @@ class Controller_Restaurant{
 		}
 		return false; 
 		
+	}
+	public function heureOuvertureIsGood{
+		$temp=@unserialize($this->resto->getHeureOuverture()); // @ pour masquer le warning en cas d'erreur
+		$returnValue=false;
+		if (is_array($temp))
+		{
+			$returnValue=true;
+			for ($i=0;$i<7;$i++)
+			{
+				for ($j=0;$j<48;$j++)
+				{
+					if (!isset($temp[$i][$j]) || !is_bool($temp[$i][$j]))
+					{
+						$returnValue=false;
+					}
+				}
+			}
+		}
+		if (!$returnValue)
+			echo 'ERREUR : Les heures de réservation sont erronées.';
+		
+		return $returnValue;
 	}
 }

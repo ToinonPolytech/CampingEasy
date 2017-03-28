@@ -31,7 +31,6 @@ if (isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["capaci
 				$horaires[$i][$j]=false;
 			}
 		}
-		$error=0;
 		foreach ($_POST as $key => $value)
 		{
 			if (strstr($key, "horaire_open"))

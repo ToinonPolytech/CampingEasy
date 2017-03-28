@@ -14,9 +14,8 @@ class Controller_LieuCommun {
 		$this->LC=$LC;
 	}
 	public function isGood(){
-		return ($this->nomIsGood() && $this->descriptionIsGood());
+		return ($this->nomIsGood() && $this->descriptionIsGood() && $this->estReservableIsGood() && $this->heureReservableIsGood());
 	}
-	
 	public function nomIsGood(){
 		if(!empty($this->LC->getNom()))
 		{
@@ -36,10 +35,6 @@ class Controller_LieuCommun {
 			return false; 
 		}	
 	}
-	 
-
- 
- 
 	public function descriptionIsGood(){
 	if(!empty($this->LC->getDescription()))
 		{
@@ -58,19 +53,35 @@ class Controller_LieuCommun {
 			echo 'ERREUR : La description du lieu est vide';
 			return false;
 		}
-		
-		
 	} 	
-
-
+	public function estReservableIsGood(){
+		if (is_bool($this->LC->getEstReservable()))
+			return true;
+		
+		echo 'ERREUR : Le type de réservation est erroné.';
+		return false;
+	}
+	public function heureReservableIsGood{
+		$temp=@unserialize($this->LC->getHeureReservable()); // @ pour masquer le warning en cas d'erreur
+		$returnValue=false;
+		if (is_array($temp))
+		{
+			$returnValue=true;
+			for ($i=0;$i<7;$i++)
+			{
+				for ($j=0;$j<48;$j++)
+				{
+					if (!isset($temp[$i][$j]) || !is_bool($temp[$i][$j]))
+					{
+						$returnValue=false;
+					}
+				}
+			}
+		}
+		if (!$returnValue)
+			echo 'ERREUR : Les heures de réservation sont erronées.';
+		
+		return $returnValue;
+	}
 }
-
-
-
-
-
-
-
-
-
 ?>
