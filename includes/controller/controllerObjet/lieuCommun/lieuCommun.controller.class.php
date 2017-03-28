@@ -61,7 +61,7 @@ class Controller_LieuCommun {
 		echo 'ERREUR : Le type de réservation est erroné.';
 		return false;
 	}
-	public function heureReservableIsGood{
+	public function heureReservableIsGood(){
 		$temp=@unserialize($this->LC->getHeureReservable()); // @ pour masquer le warning en cas d'erreur
 		$returnValue=false;
 		if (is_array($temp))

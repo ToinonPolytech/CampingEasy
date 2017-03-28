@@ -7,9 +7,10 @@ class LieuCommun {
 	private $_description; 
 	private $_estReservable;
 	private $_heureReservable;
+	private $_photos;
 	private $_deleted;
 	
-	public function __construct($id, $nom=NULL, $description=NULL, $estReservable=false, $heureReservable=NULL){
+	public function __construct($id, $nom=NULL, $description=NULL, $estReservable=false, $heureReservable=NULL, $photos=NULL){
 		$this->_id=$id;
 		if ($id==NULL)
 		{
@@ -17,6 +18,7 @@ class LieuCommun {
 			$this->_description=$description;
 			$this->_estReservable=$estReservable;
 			$this->_heureReservable=$heureReservable;
+			$this->_photos=$photos;
 		}
 		else
 		{
@@ -27,6 +29,7 @@ class LieuCommun {
 			$this->_description=$data["description"];
 			$this->_estReservable=$data["estReservable"];
 			$this->_heureReservable=$data["timeReservation"];
+			$this->_photos=$data["photos"];
 		}
 		$this->_deleted=false;
 	}
@@ -38,11 +41,11 @@ class LieuCommun {
 		}	
 		else if ($this->_id!=NULL && $database->count('lieu_commun', array("id" => $this->_id))) // Existe en db, on update
 		{
-			$database->update('lieu_commun', array("id" => $this->_id), array("nom" => $this->_nom, "description" => $this->_description, "timeReservation" => $this->_heureReservable, "estReservable" => $this->_estReservable));
+			$database->update('lieu_commun', array("id" => $this->_id), array("photos" => $this->_photos, "nom" => $this->_nom, "description" => $this->_description, "timeReservation" => $this->_heureReservable, "estReservable" => $this->_estReservable));
 		}
 		else
 		{
-			$database->create('lieu_commun', array("id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "timeReservation" => $this->_heureReservable, "estReservable" => $this->_estReservable));
+			$database->create('lieu_commun', array("photos" => $this->_photos, "id" => $this->_id, "nom" => $this->_nom, "description" => $this->_description, "timeReservation" => $this->_heureReservable, "estReservable" => $this->_estReservable));
 		}
 	}
 	public function getId() {
@@ -60,6 +63,9 @@ class LieuCommun {
 	public function getHeureReservable() {
 		return $this->_heureReservable;
 	} 
+	public function getPhotos(){
+		return $this->_photos;
+	}
 	public function getDeleted(){
 		return $this->_deleted;
 	}
@@ -80,5 +86,8 @@ class LieuCommun {
 	} 
 	public function setDeleted($deleted){
 		$this->_deleted=$deleted;
+	}
+	public function setPhotos($photos){
+		$this->_photos=$photos;
 	}
 }

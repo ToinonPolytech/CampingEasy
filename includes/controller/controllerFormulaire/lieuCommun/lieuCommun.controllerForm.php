@@ -1,8 +1,15 @@
 <?php 
+	if (!isset($_SESSION))
+		session_start();
+	
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("lieuCommun.class.php"));
 	require_once(i("lieuCommun.controller.class.php"));
 	require_once(i("images.class.php"));
+	
+	if (!auth())
+		exit();
+	
 	if (isset($_POST['nom']) && isset($_POST['description']))
 	{	
 		$photos="";
@@ -25,8 +32,10 @@
 					$horaires[$i][$j]=false;
 				}
 			}
+			$estReservable=false;
 			if (isset($_POST["estReservable"]) && $_POST["estReservable"])
 			{
+				$estReservable=true;
 				foreach ($_POST as $key => $value)
 				{
 					if (strstr($key, "horaire_open"))
@@ -73,7 +82,7 @@
 				}
 			}
 			$horaires=serialize($horaires);
-			$LC = new lieuCommun(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['description']), htmlspecialchars($_POST['estReservable']), $horaires);
+			$LC = new lieuCommun(NULL,htmlspecialchars($_POST['nom']), htmlspecialchars($_POST['description']), $estReservable, $horaires, $photos);
 			
 			if(isset($_POST['id']))
 				$LC->setId($_POST['id']);
