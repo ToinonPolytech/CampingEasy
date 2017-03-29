@@ -11,7 +11,15 @@
 <div class="col-lg-6" style="width:40%;" name="form-equipe" id="form-equipe">
 	<?php 
 		$act= new Activite($id);
+		if($act->getIdRecurrente()!=-1){
+			
+			echo "Ceci est une récurrence d'activité"; 
+			?>
+			<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id: <?php echo $act->getIdRecurrente(); ?> }); return false;">Voir l'activité de base</button>
+			<?php 
+		}
 	?>
+	
 	<ul class="list-group">
 		<li class="list-group-item">Nom : <?php echo $act->getNom(); ?></li>
 		<li class="list-group-item">Date : <?php echo date("d/m/y H:i", $act->getDate()); ?></li>

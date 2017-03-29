@@ -49,22 +49,45 @@ if (isset($_POST["timeStart"]) && isset($_POST["duree"]) && isset($_POST["nom"])
 			$act->saveToDb();
 			echo "Activité enregistrée ";
 		}
-		if(isset($_POST['estRecurrente']) && isset($_POST['finRecurrence']))
-			{
-				$rec=$act->getDate();
-					while($rec<=$_POST['finRecurrence'])
-					{
-						$actR= new Activite(NULL, htmlspecialchars(strtotime($_POST["timeStart"])), htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["descriptif"]), htmlspecialchars($_POST["duree"]),
+		$db = new Database();
+		$idact= $db->lastInsertId(); //ne fonctionne pas
+		//une fois l'activité enregistrée on s'occupe des récurrences
+		if(isset($_POST['finRecurrence']) && isset($_POST['recurrence']))
+			{	
+				$rec=$act->getDate(); //on prend la date de l'originale 
+				
+					while($rec<=strtotime($_POST['finRecurrence']))//tant que la date ne dépasse pas la fin de récurrence
+					{	echo date("d/m/y",$rec)."   ";
+						
+						if($_POST['recurrence']==1)
+						{
+							$rec=$rec+86400; // +1 jours 
+						}
+						else if($_POST['recurrence']==2)
+						{
+							$rec=$rec+172800; //+ 2 jours 
+						}
+						else if($_POST['reccurence']==7)
+						{
+							$rec=$rec+604800; //+7jours 
+						}
+						//manque + un mois à gérer
+						$actR= new Activite(NULL,$rec, htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["descriptif"]), htmlspecialchars($_POST["duree"]),
 						htmlspecialchars($lieu), $type,
-						htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved,htmlspecialchars(strtotime($_POST["debutReservation"])),htmlspecialchars(strtotime($_POST["finReservation"])),$photos_path,$act->getId());
+						htmlspecialchars($_POST["placesLim"]), htmlspecialchars($_POST["prix"]),$_SESSION['id'], htmlspecialchars($_POST["points"]),$mustBeReserved,htmlspecialchars(strtotime($_POST["debutReservation"])),htmlspecialchars(strtotime($_POST["finReservation"])),$photos_path,$idact);
+						//nouvelle récurrence créée, manque le bon idRécurrente
 						$actRC = new Controller_Activite($actR);
 						if($actRC->isGood())
 						{
-							$act->saveToDb();
+							$actR->saveToDb();
 						}
-					
-					
+						else
+						{
+							echo "ERREUR : impossible d'enregistrer la récurrence";
+						}
+						 
 					}
+					echo 'Recurrences enregistrées';
 			}
 		
 	}

@@ -6,7 +6,16 @@
 	require_once(i("activities.class.php"));
 	
 	$act= new Activite($_POST['id']);
-	
+	if($act->getIdRecurrente(>0){
+			
+			echo "Attention ceci est une récurrence d'activité, les modifications ne porteront que sur cette récurrence"; 
+			?>
+			<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $act->getIdRecurrente(); ?> }); return false;">Modifier l'activité originale</button>
+			<?php 
+		}
+	if($act->getIdRecurrente()!==0 ){
+		echo "Attention cette activite comporte des récurrences. Les modifications apportées affecteront les autres récurrences. Vous pouvez choisir les récurrences à affecter en bas de page"; 
+	}
 	
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-act" id="form-act">

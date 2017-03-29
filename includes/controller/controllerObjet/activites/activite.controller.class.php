@@ -325,7 +325,7 @@ class Controller_Activite {
 		return false; 
 	}
 	public function recurrenteIsGood(){
-		if($empty($this->act->getIdRecurrente()) || $this->act->getIdRecurrente()==-1)
+		if(empty($this->act->getIdRecurrente()) || $this->act->getIdRecurrente()==-1)
 		{
 			$this->act->setIdRecurrente(-1);
 			return true; 

@@ -34,7 +34,7 @@
 				?>
 			</select><br/>
 			<label for="type">Type d'activité</label><br/>
-			<input type="checkbox" name="TYPE_1" id="TYPE_1" value="SPORITVE"> Sportive
+			<input type="checkbox" name="TYPE_1" id="TYPE_1" value="SPORTIVE"> Sportive
 			<input type="checkbox" name="TYPE_2" id="TYPE_2" value="INTELLECTUELLE"> Intelectuelle 
 			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="CULTURELLE"> Culturelle
 			<input type="checkbox" name="TYPE_3" id="TYPE_3" value="FETE"> Fête
@@ -49,17 +49,17 @@
 				<label for="finReservation">Date limite pour la réservation</label><br/>
 				<input class="form-control" type="text" name="finReservation" id="finReservation"/><br />
 			</div>
-			<label for="recurrente">Récurrente ? </label><br/>
-			<input type="checkbox" name="recurrente" id="recurrente" onclick="if ($(this).is(':checked')) { $('.estRecurrente_hide').show(); } else { $('.estRecurrente_hide').hide(); }"/><br/>
+			<label for="estRecurrente">Récurrente ? </label><br/>
+			<input type="checkbox" name="estRecurrente" id="estRecurrente" onclick="if ($(this).is(':checked')) { $('.estRecurrente_hide').show(); } else { $('.estRecurrente_hide').hide(); }"/><br/>
 			<div class="estRecurrente_hide" style="display:none;" >
 				<label for="recurrence">Récurrence</label><br/>
 				<select class="form-control" name="recurrence" id="recurrence">
 					<option value="1" >Tous les jours</option>
 					<option value="2" >Tous les deux jours</option>
-					<option value="7" >Chaque semaines</option>
+					<option value="7" >Chaque semaine</option>
 					<option value="30" >Chaque mois</option>
 				</select></br>
-				<label for="finRecurrence">Récurrence</label><br/>
+				<label for="finRecurrence">Fin de la récurrence</label><br/>
 				<input class="form-control" type="text" name="finRecurrence" id="finRecurrence"/> <br />
 			</div>			
 			<label for="prix">Prix</label><br/>
@@ -105,6 +105,7 @@
 		  }
 	});
 	$("#finRecurrence").datetimepicker({
+		startDate:new Date(),
 		format:'d-m-Y',
 		timepicker:false
 	});

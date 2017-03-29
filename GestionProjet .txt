@@ -2,8 +2,18 @@
 - varchar trop court pour les heures d'ouverture du restau en db (mit à 10000 de mon côté )
 
 
+Reccurence des activités cahier des charges : 
+- Les clients ne peuvent pas définir d'activité récurrente
+- La récurrence d'activité fonctionne pour le moment pour tous les jours/deuxjours/semaines mais l'idrecurrente n'est pas affecté (voir commentaire controllerform)
+Problème : comment gérer une activité réservable récurrente : - début/fin de la réservabilité par rapport à celle orignale : même différence de temps entre la date et la date de réservation choisie ? 
+- Modification : 
+		- Pouvoir modifier juste une récurrence n'affectant pas les autres 
+		- Pouvoir modifier l'activité originale en choisissant : -d'affecter toutes les récurrence (annulant les modifications uniques portant sur elles)
+																- affecter certaines choisies parmi la liste des récurrences : dans cette liste on doit
+																avoir un message pour celles sur lequelles des modifications ont été apportées (éventuellement voir la nature des modifs)
 
-
+Il faut donc gérer le controller et le formulaire  en fonction de ca ...																
+																
 Pour toi mon rayou en priorité : 
 - Les modifs db 
 - Ajouter membre à équipe 
@@ -39,6 +49,7 @@ Activite :
 - Ajout d'une photo 
 - Modifier activité : - si on modifie la date de début modifier en dynamique la date de début et fin réservation 
 						- gestion des types différente de ajoutActivite 
+- Client ne peut pas mettre d'activité payante 
 						
 						
 
@@ -69,6 +80,7 @@ Users :
 - Prévoir un clef oubliée avec envoi par mail d'une nouvelle clef (car celle en db devra être cryptée)
 - Après blocage des sous users renvoyer sur la même page  
 - Ajouter date arrivée 
+- Prévoir un type "PARTENAIRE"
 
 
 Lieu  : 
