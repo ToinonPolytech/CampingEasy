@@ -11,4 +11,10 @@
 	/**
 		TODO : A FAIRE
 	**/
+	
+	/** CAN_ STAFF **/
+	$puissance=0;
+	define("CAN_LOG_STAFF", $puissance); $puissance++;
+	define("CAN_CREATE_ACCOUNT_STAFF", $puissance); $puissance++;
+	define("CAN_EDIT_ACCOUNT_STAFF", $puissance); $puissance++;
 ?>

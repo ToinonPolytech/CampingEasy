@@ -2,10 +2,8 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 require_once(i("database.class.php"));
 require_once(i("equipe.class.php"));
-/**
-	Cette classe permet juste de définir celle de Client et Staff, on ne l'utilisera jamais
-**/
-abstract class Controller_User
+
+class Controller_User
 {
 	protected $_user;
 	protected $_withInfoId;
