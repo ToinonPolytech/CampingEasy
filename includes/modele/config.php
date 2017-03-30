@@ -8,6 +8,7 @@
 	define("CAN_CREATE_ACTIVITIES", $puissance); $puissance++;
 	define("CAN_JOIN_ACTIVITIES", $puissance); $puissance++;
 	define("CAN_PAY", $puissance); $puissance++;
+	$puissance_max=$puissance;
 	/**
 		TODO : A FAIRE
 	**/
@@ -17,4 +18,7 @@
 	define("CAN_LOG_STAFF", $puissance); $puissance++;
 	define("CAN_CREATE_ACCOUNT_STAFF", $puissance); $puissance++;
 	define("CAN_EDIT_ACCOUNT_STAFF", $puissance); $puissance++;
+	
+	if ($puissance_max>$puissance)
+		$puissance=$puissance_max;
 ?>
