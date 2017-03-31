@@ -16,7 +16,13 @@
 		<?php
 	}
 	
-	if (!auth())
+	if (!auth() || $_SESSION["access_level"]=="CLIENT" || $_SESSION["access_level"]=="PARTENAIRE")
+		exit();
+	
+	$user=new User($_SESSION["id"]);
+	$cuser=new Controller_User($user);
+	
+	if (!$cuser->can(CAN_ADD_RESTAURANT_STAFF))
 		exit();
 ?>
 <div class="col-lg-6" style="width:100%;" name="form-act" id="form-act">
