@@ -15,10 +15,9 @@ Problème : comment gérer une activité réservable récurrente : - début/fin 
 Il faut donc gérer le controller et le formulaire  en fonction de ca ...																
 																
 Pour toi mon rayou en priorité : 
-- Les modifs db 
+- Les modifs db
 - Ajouter membre à équipe 
 - Effectuer les modifs pour modifActivite au niveau du type (faire comme ajoutactivite )
-- Modif des users non fonctionnelle 
 
 
 
