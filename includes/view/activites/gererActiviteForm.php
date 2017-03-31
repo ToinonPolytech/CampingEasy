@@ -6,7 +6,7 @@
 	require_once(i("activities.class.php"));
 	
 	$act= new Activite($_POST['id']);
-	if($act->getIdRecurrente(>0){
+	if($act->getIdRecurrente()>0){
 			
 			echo "Attention ceci est une récurrence d'activité, les modifications ne porteront que sur cette récurrence"; 
 			?>

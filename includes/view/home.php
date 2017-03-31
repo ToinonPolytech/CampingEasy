@@ -109,9 +109,9 @@
 			<div class="col-lg-3 col-md-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading"></div>
-					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lesLieuxCommunsView.php')); ?>">
+					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('nosServicesView.php')); ?>">
 						<div class="panel-footer">
-							<span class="pull-left">Espaces communs</span>
+							<span class="pull-left">Nos services</span>
 							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 							<div class="clearfix"></div>
 						</div>
@@ -123,7 +123,7 @@
 					<div class="panel-heading"></div>
 					<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverEtatDesLieuxForm.php')); ?>">
 						<div class="panel-footer">
-							<span class="pull-left">Résever mon état des lieux </span>
+							<span class="pull-left">Réserver mon état des lieux </span>
 							<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 							<div class="clearfix"></div>
 						</div>

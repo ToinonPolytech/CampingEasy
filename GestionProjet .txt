@@ -13,7 +13,8 @@ Problème : comment gérer une activité réservable récurrente : - début/fin 
 																avoir un message pour celles sur lequelles des modifications ont été apportées (éventuellement voir la nature des modifs)
 
 Il faut donc gérer le controller et le formulaire  en fonction de ca ...																
-																
+		
+		
 Pour toi mon rayou en priorité : 
 - Les modifs db 
 - Ajouter membre à équipe 
@@ -34,16 +35,13 @@ page que les lieux communs je pense et qu'on appellerait "nos services". => à d
 
 Modif db : 
 
-- Réservabilité du lieu : estReservable + horaire (comme restau)
 
 
 Activite : 
 -Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
 	
 - Gérer l'affichage des photos déjà envoyées dans la modification des entités 
-- Instaurer les activités récurrentes, leur récurrence et l'ajout automatique dans la db de toutes les activités => faire attention que dans
-"mes activités" elle n'apparaisse qu'une fois et que la modif de cette activité modif toutes les autres 
-
+- Récurrence des acitvités 
 - Problème avec bouton de modification et de réservation dans gérer activité 
 - Assurer la gestion des photos (et la transmission des données du formulaire) dans gérer activité 
 - Ajout d'une photo 
@@ -54,7 +52,7 @@ Activite :
 						
 
 Probleme technique : 
-- voir les messages du technicien / pouvoir répondre ? 
+- 
 
 
 
@@ -85,13 +83,13 @@ Users :
 
 Lieu  : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
-	- Je dirais plus, un message d'alerte, et si confirmer -> suppression cascade + alerte aux utilisateurs qui avaient réservé.
+	
 
 	
 	
 Etat des lieux : 
 - Ajouter controller objet : datedeb après aujourd'hui et user dispo sur la plage horaire 
-- 	
+
 
  
 
@@ -149,3 +147,5 @@ TODO Lointain (améliorations possibles et détails dans un futur lointain ):
 
 Autres choix de conception à définir au moment de l'implémentation dans un camping: 
 - Veulent ils pouvoir définir une autre occurence pour une activité sans pour autant avoir une récurrence 
+
+Autres fonctionnalités : voir la fiche descriptives des membres du staff (photo et petite biographie)
