@@ -154,3 +154,48 @@ array("id" => array(10, 20)); // WHERE id>=10 AND id<=20
 array("id" => array("OR" => array(10, 20))); // WHERE (id=10 OR id=20) 
 array("nom" => array(" LIKE ", "GEOR%")); // WHERE nom LIKE GEOR%
 
+------------------ Horaires ---------------------
+Elles sont stockés en DB dans un array serialize, 
+$data=$db->fetch();
+$horaires=unserialize($data["horaires"]);
+
+$horaires est un tableau à deux entrées.
+Première entrée correspond au jour. (c.f date("w") php) (0 : DIMANCHE, 1 : LUNDI, ... , 6 : SAMEDI)
+La seconde entrée correspond à un intervalle de 30minutes. (0 : 00h, 1 : 00h30, 2 : 1h00, ..., 46 : 23h00, 47 : 23h30) (x : (x quo 2)h(x%2)*30)
+Prenons $horaires[3][25] : Mercredi 12h30. Si c'est true alors le mercredi 12h30 jusqu'à 13h00 c'est ouvert. Sinon fermé.
+Façons d'utiliser : 
+foreach ($horaires as $day => $horaires_sub)
+{
+	switch ($day)
+	{
+		case 0:
+			echo "Dimanche";
+			break;
+		case 1:
+			echo "Lundi";
+			break;
+		case 2:
+			echo "Mardi";
+			break;
+		case 3:
+			echo "Mercredi";
+			break;
+		case 4:
+			echo "Jeudi";
+			break;
+		case 5:
+			echo "Vendredi";
+			break;
+		case 6:
+			echo "Samedi";
+			break;
+	}
+	foreach ($horaires_sub as $heures => $bool)
+	{
+		if (flor($heures/2)<10) echo "0";
+		echo floor($heures/2)."h";
+		if ($heures%2) echo "30"; else echo "00";
+		if ($bool) echo "Ouvert"; else echo "Fermé"; 
+		echo "<br/>";
+	}
+	echo "<br/>";
