@@ -19,6 +19,8 @@
 	$puissance=1;
 	define("CAN_CREATE_ACCOUNT_STAFF", $puissance); $puissance++;
 	define("CAN_EDIT_ACCOUNT_STAFF", $puissance); $puissance++;
+	define("CAN_EDIT_RESTAURANT_STAFF", $puissance); $puissance++;
+	define("CAN_ADD_RESTAURANT_STAFF", $puissance); $puissance++;
 	
 	if ($puissance_max>$puissance)
 		$puissance=$puissance_max;

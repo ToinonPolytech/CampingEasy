@@ -71,10 +71,14 @@ class Image_upload{
 		}
 		if ($this->_error>0)
 		{
-			foreach ($this->_url as $val)
-			{
-				unlink($val); // Erreur, on supprime tout
-			}
+			$this->cancel();
+		}
+	}
+	public function cancel()
+	{
+		foreach ($this->_url as $val)
+		{
+			unlink($val); // Erreur, on supprime tout
 		}
 	}
 	public function getError()
