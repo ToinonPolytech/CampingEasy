@@ -66,13 +66,13 @@
 				<td><?php echo $data['nom']; ?></td> 
 				<td><?php echo $data['description']; ?></td>
 				
-				<td><button type="button" class="btn btn-info btn-sm" name="ereservLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverRestau.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Réserver une table</button></td>
+				<td><button type="button" class="btn btn-info btn-sm" name="ereservLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverRestau.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Réserver une table non ok </button></td>
 				
 						
 				<?php if ($_SESSION["access_level"]!="CLIENT")
 				{ ?> 				
-					<td><button type="button" class="btn btn-info btn-sm" name="modifLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifierLieuCommunForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerRestau.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer</button><td>
+					<td><button type="button" class="btn btn-info btn-sm" name="modifLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifierRestaurantForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Modifier</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerRestau.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Supprimer non ok </button><td>
 				<?php } ?> 
 				
 			</tr>
