@@ -45,8 +45,8 @@
 				
 				<?php if($data['estReservable']==1 )// si état des lieux réservable => page de réservation de lieu ou dynamique avec champs pour la réservation 
 				?>
-						<td><button type="button" class="btn btn-info btn-sm" name="ereservLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverLieuForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Réserver</button></td>
-				
+						<td><button type="button" class="btn btn-info btn-sm" name="reservLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('reserverLieuForm.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Réserver</button></td>
+						<td><button type="button" class="btn btn-info btn-sm" name="reservLieu" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('lieuCommunView.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Détail</button></td>
 						
 				<?php if ($_SESSION["access_level"]!="CLIENT")
 				{ ?> 				

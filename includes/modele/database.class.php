@@ -197,6 +197,8 @@
 			}
 			$request.=")";
 			$this->_objectRequest=$this->_db->prepare($request);
+			$this->_objectRequest->errorInfo();
+			print_r($this->_objectRequest->errorInfo());
 			$this->_objectRequest->execute($array_create);
 		}
 		public function fetch(){

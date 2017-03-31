@@ -8,12 +8,12 @@
 	
 		require_once(i("database.class.php"));
 		$db = new Database();
-		$db->selectJoin("activities", array("users AS u ON idDirigeant=u.id"), array('access_level' => 'CLIENT'));
+		$db->selectJoin("activities AS act", array("users AS u ON idDirigeant=u.id"), array('access_level' => 'CLIENT'), array('u.nom AS unom','u.prenom AS prenom','act.nom AS anom','time_start','act.id'));
 	?>
 	<table class='table'>
 		<thead>
 			<tr>
-			  <th>Utilisateur</th>
+			  <th>Client</th>
 			  <th>Activité proposée</th>
 			   <th>Date </th>
 			   <th>Options</th> 
@@ -25,8 +25,8 @@
 		{	
 			?>
 			<tr>
-				<td><?php echo $data['u.nom']+" "+$data['u.prenom']; ?></td> 
-				<td><?php echo $data['activities.nom']; ?></td>
+				<td><?php echo $data['unom']." ".$data['prenom']; ?></td> 
+				<td><?php echo $data['anom']; ?></td>
 				<td><?php echo date("d/m/y H:m" , $data['time_start']);  ?></td>
 				<td><button type="button" class="btn btn-info btn-sm" name="voirActivite" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>', {id : <?php echo $data["id"]; ?>  }); return false;">Voir</button></td>
 							
