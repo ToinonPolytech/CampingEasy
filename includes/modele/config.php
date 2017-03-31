@@ -4,6 +4,8 @@
 	$db_name="dbname";
 	$puissance=0;
 	define("CAN_LOG", $puissance); $puissance++;
+	
+	/** CAN_ USER **/
 	define("CAN_CREATE_SUBACCOUNT", $puissance); $puissance++;
 	define("CAN_CREATE_ACTIVITIES", $puissance); $puissance++;
 	define("CAN_JOIN_ACTIVITIES", $puissance); $puissance++;
@@ -14,8 +16,7 @@
 	**/
 	
 	/** CAN_ STAFF **/
-	$puissance=0;
-	define("CAN_LOG_STAFF", $puissance); $puissance++;
+	$puissance=1;
 	define("CAN_CREATE_ACCOUNT_STAFF", $puissance); $puissance++;
 	define("CAN_EDIT_ACCOUNT_STAFF", $puissance); $puissance++;
 	

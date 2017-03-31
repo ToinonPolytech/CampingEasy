@@ -45,7 +45,7 @@
 					<td><?php echo $data['prenom']; ?></td>
 					
 					<td><button type="button" class="btn btn-warning" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>}, 'form-equipe'); return false;"><?php if ($cuser->can(CAN_LOG)) { echo "Bloquer"; } else { echo "Débloquer"; } ?></button></td>
+					<td id="<?php echo $data["id"]; ?>_options"><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>}, '#<?php echo $data["id"]; ?>_options', 'replace'); return false;"><?php if ($cuser->can(CAN_LOG)) { echo "Bloquer"; } else { echo "Débloquer"; } ?></button></td>
 				</tr>
 			<?php
 			}

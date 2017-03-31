@@ -4,7 +4,7 @@
 		
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("database.class.php"));
-	
+	require_once(i("user.class.php"));
 	if (!auth() || $_SESSION["access_level"]=="CLIENT" || $_SESSION["access_level"]=="PARTENAIRE")
 		exit();
 	
@@ -13,8 +13,10 @@
 		<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('ajoutUserForm.php')); ?>" class="pull-left">Ajouter un utilisateur </a>
 		<?php	
 			$db = new Database();
-			$db2 = new Database(); 
-			$db->select("userinfos");
+			$db2 = new Database();
+			$db->setOrderCol("ui.id");
+			$db->setAsc();
+			$db->selectJoin("userinfos AS ui", array(" users AS u ON u.infoId=ui.id"), array(), array("emplacement", "email", "time_depart", "access_level", "nom", "prenom", "u.id", "infoId", "droits"));
 		?>
 		<table class='table'>
 			<thead>
@@ -30,39 +32,25 @@
 			</thead>
 			<tbody>
 			<?php
+			$old_id=-1;
 			while($data=$db->fetch())
 			{	
-				$db2->select('users',array('infoId' => $data['id'], 'clef' => $data['clef']));
-				$user = $db2->fetch();
+				$user=new User(NULL, NULL, NULL, $data["droits"], NULL, NULL, NULL, NULL);
+				$cUser=new Controller_User($user);
 				?>
 				<tr>
-					<td><?php echo $data['emplacement']; ?></td>
-					<td><?php echo $data['email']; ?></td>
-					<td><?php echo date("d/m/y H:m", $data['time_depart']); ?></td>
-					<td><?php echo $user['access_level']; ?></td>
-					<td><?php echo $user['nom']; ?></td>
-					<td><?php echo $user['prenom']; ?></td>
-					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $user["id"]; ?>}); return false;">Modifier</button>
-					<button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $user["id"]; ?>}); return false;">Bloquer</button></td>
-					
+					<td><?php if ($old_id!=$data["infoId"]) { echo $data['emplacement']; } ?></td>
+					<td><?php if ($old_id!=$data["infoId"]) { echo $data['email']; } ?></td>
+					<td><?php if ($old_id!=$data["infoId"]) { echo date("d/m/y H:m", $data['time_depart']); } ?></td>
+					<td><?php echo $data['access_level']; ?></td>
+					<td><?php echo $data['nom']; ?></td>
+					<td><?php echo $data['prenom']; ?></td>
+					<td id="<?php echo $data["id"]; ?>_options"><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifUserForm.php')); ?>', {id : <?php echo $data["id"]; ?>}); return false;">Modifier</button>
+					<?php if ($cUser->can(CAN_LOG)) { ?><button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>}, '#<?php echo $data["id"]; ?>_options', 'replace'); return false;">Bloquer</button><?php } else { ?><button type="button" class="btn btn-success btn-sm" name="suppUser" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $data["id"]; ?>}, '#<?php echo $data["id"]; ?>_options', 'replace'); return false;">Débloquer</button><?php } ?>
+					</td>
 				</tr>
 				<?php
-				$db2->select('users',array('infoId' => $data['id'], 'id' => array('!=',$user['id'])));
-				while($user=$db2->fetch())
-				{
-				?> 
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><?php echo $user['access_level']; ?></td>
-					<td><?php echo $user['nom']; ?></td>
-					<td><?php echo $user['prenom']; ?></td>
-					<td><button type="button" class="btn btn-info btn-sm" name="modifUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('modifSousComptesForm.php')); ?>', {id : <?php echo $user["id"]; ?> }); return false;">Modifier</button>
-					<button type="button" class="btn btn-danger btn-sm" name="suppUser" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('bloquerUser.controllerForm.php')); ?>', {id : <?php echo $user["id"]; ?>}); return false;">Bloquer</button></td>
-				</tr>
-				<?php
-				}
+				$old_id=$data["infoId"];
 			}
 			?>
 			</tbody>
