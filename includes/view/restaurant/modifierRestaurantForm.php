@@ -4,6 +4,7 @@
 	
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("database.class.php"));
+	require_once(i("user.class.php"));
 	
 	function makeDayForm($d, $name_day, $horaires)
 	{
