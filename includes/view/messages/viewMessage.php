@@ -12,7 +12,7 @@
 		exit();
 	$db=new Database();
 	$user=new User($_POST["id"]);
-	?>
+?>
 <div class="col-lg-6" name="form-connexion" id="form-connexion">
 	<h3>Discussion avec <?php echo htmlentities($user->getNom())." ".htmlentities($user->getPrenom()); ?></h3>
 	<?php
