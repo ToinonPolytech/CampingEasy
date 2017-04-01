@@ -94,7 +94,7 @@ class Controller_Restaurant{
 		return false; 
 		
 	}
-	public function heureOuvertureIsGood{
+	public function heureOuvertureIsGood(){
 		$temp=@unserialize($this->resto->getHeureOuverture()); // @ pour masquer le warning en cas d'erreur
 		$returnValue=false;
 		if (is_array($temp))
