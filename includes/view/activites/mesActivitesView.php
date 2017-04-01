@@ -15,9 +15,11 @@
 			<tr>
 				<th>Nom </th>
 				<th>Date </th>
-				<th>Nombre de personnes inscrites</th>
-				<th>Modifier</th>
-				<th>Supprimer</th> 
+				<?php 
+				if($_SESSION['access_level']!='CLIENT')echo '<th>Nombre de personnes inscrites</th>'
+				?>											
+				<th>Options</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -38,9 +40,16 @@
 				<tr>
 					<td><?php echo htmlentities($act['nom']); ?></td> 
 					<td><?php echo date("d/m/y H:i",$act['time_start']); ?></td>
+					<?php 
+					if($_SESSION['access_level']!='CLIENT')
+					{
+					?>
 					<td><?php echo $nbRes; ?></td>
-					<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>',{id : <?php echo $act["id"]; ?>}); return false;">Modifier</button></td>
-					<td><button type="button" class="btn btn-danger btn-sm" name="suppReservation"  onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>')">Supprimer</button></td>
+					<?php 
+					}
+					?>	
+					<td><button type="button" class="btn btn-info btn-sm" name="modifActivite"  onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activiteView.php')); ?>',{id : <?php echo $act["id"]; ?>}); return false;">Voir</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>', {id : <?php echo $act['id'];?>}); return false;">Supprimer</button></td>
 				</tr>
 				<?php
 			}

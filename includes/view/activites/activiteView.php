@@ -13,7 +13,7 @@
 	<?php 
 		$act= new Activite($id);
 		$user = new User($act->getIdOwner());
-		if($act->getIdRecurrente()!=-1){
+		if($act->getIdRecurrente()>0){
 			
 			echo "Ceci est une récurrence d'activité"; 
 			?>
@@ -39,9 +39,10 @@
 		?>
 	</ul>
 </div>
-<?php if($_SESSION['id']==$act->getIdOwner())
+<?php if($_SESSION['id']==$act->getIdOwner() || $_SESSION['access_level']!='CLIENT')
 						{ ?>
 							<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('gererActiviteForm.php')); ?>', {id: <?php echo $_POST['id']; ?> }); return false;">Modifier</button>
+							<button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerActivite.php')); ?>', {id : <?php echo $id;?>}); return false;">Supprimer</button>
 							<?php 
 							if($act->getPoints()>=0)
 							{ ?>

@@ -136,7 +136,7 @@ class Controller_Activite {
 		
 		if(!empty($this->act->getLieu()))
 			{
-				if(strlen($this->act->getLieu())<50 && (strlen($this->act->getLieu())>4))
+				if(strlen($this->act->getLieu())<51 && (strlen($this->act->getLieu())>3))
 				{
 					return true;
 				}

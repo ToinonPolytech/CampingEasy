@@ -34,6 +34,11 @@ Choix de conception :
 Modif db : 
 
 
+Gobal /services à ajouter : 
+- Alerte de confirmation des suppressions 
+- Sécurité 
+- Navigation 
+- Gestion du pain : ajouter pain ou autre bouffe / jour de livraison ? / prix 
 
 Activite : 
 -Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
@@ -42,12 +47,14 @@ Activite :
 - Ajout des photos dans ajout act et modif 
 - Modifier activité : - si on modifie la date de début modifier en dynamique la date de début et fin réservation 
 					- gestion des types différente de ajoutActivite 
-
+- Suppression activite : gérer les droits (pour le moment tout le staff et client propriétaire ) / bouton envoi sur une nouvelle page
 						
 						
 
 Probleme technique : 
-- 
+- Déclarer comme résolu ou en cours 
+- Supression ne maintiens pas sur la page 
+- Ajouter un bouton suppression pour le client sur la page de modif 
 
 
 
@@ -55,15 +62,14 @@ Probleme technique :
 
 Réservation : 
 -Secu réservation 
-- Je voulais mettre type : $data['type'] dans les boutons d'envoi consulter/annuler mais dans firebug il me dit qu'il ne connait pas
-le type activite. En revanche quand je mets  type : 'ACTIVITE' ca fonctionne, j'ai laissé comme aç 
+
 
 
 
 Partenaire : 
 - Ajout des photos (mises NULL par défaut dans ma db)  
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact 
-
+-Ajout partenaireVIew 
 
 
 Users : 
@@ -78,6 +84,7 @@ Users :
 Lieu  : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
 - Ajout lieu non fonctionnel chez moi 	
+- Réservation du lieu 
 
 	
 	
@@ -105,8 +112,7 @@ Client :
 
 -  Réserver : 	
 				-	du pain, viennoiseries (les produits proposés devront être ajoutés par l'admin)
-				-  réserver un lieu : affichage de tous les lieux + proposition de réservation avec menu déroulant proposant les heures restantes et demande de la durée 
-						=> un lieu doit avoir un critère de réservabilité et une limite de durée de réservation définie 
+			
 			
 
 
@@ -114,8 +120,7 @@ Client :
 
 
 Admin: 
-- Gérer réservations : affichage de celles ci avec critères de choix 
- 
+- Gérer réservations : affichage de celles ci avec critères de choix  
 - Ajouter des points : à une équipe et un user fait par un admin 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
 
