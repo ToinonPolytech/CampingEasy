@@ -153,6 +153,7 @@ TYPE : =, !=, <=, >=, <, > // Exemple : WHERE id=10, id!=10, <=10 ect...
 array("id" => array(10, 20)); // WHERE id>=10 AND id<=20
 array("id" => array("OR" => array(10, 20))); // WHERE (id=10 OR id=20) 
 array("nom" => array(" LIKE ", "GEOR%")); // WHERE nom LIKE GEOR%
+array("OR" => array("id" => 10, "infoId" => 5), "nom" => "autre"); // WHERE (id=10 OR infoId=5) AND nom='autre'
 
 ------------------ Horaires ---------------------
 Elles sont stockés en DB dans un array serialize, 

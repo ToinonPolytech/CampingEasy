@@ -65,34 +65,84 @@
 					$request.=$key." IS NULL";
 				else
 				{
-					if (is_array($value))
+					if ($key=="OR")
 					{
-						if ($value[0]!="OR" && $value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=" && $value[0]!=" LIKE ")
+						$request.="(";
+						$put_or=false;
+						foreach ($value as $key2 => $value2)
 						{
-							$request.=$key.">=:".$key;
-							$array_where2[$key]=$value[0];
-							$request.=" AND ".$key."<=:".$key."_bis";
-							$array_where2[$key."_bis"]=$value[1];
-						}
-						else
-						{
-							if ($value[0]=="OR")
-							{
-								$request.="( ".$key.$value[1][0].":".$key." OR ".$key.$value[2][0].":".$key."_bis )";
-								$array_where2[$key]=$value[1][1];
-								$array_where2[$key."_bis"]=$value[2][1];
-							}
+							if ($put_or)
+								$request.=" OR ";
+							
+							if ($value2==NULL)
+								$request.=$key2." IS NULL";
 							else
 							{
-								$request.=$key.$value[0].":".$key;
-								$array_where2[$key]=$value[1];
+								if (is_array($value2))
+								{
+									if ($value2[0]!="OR" && $value2[0]!="=" && $value2[0]!="<=" && $value2[0]!=">=" && $value2[0]!="<" && $value2[0]!=">" && $value2[0]!="!=" && $value2[0]!=" LIKE ")
+									{
+										$request.=$key2.">=:".$key2;
+										$array_where2[$key2]=$value2[0];
+										$request.=" AND ".$key2."<=:".$key2."_bis";
+										$array_where2[$key2."_bis"]=$value2[1];
+									}
+									else
+									{
+										if ($value2[0]=="OR")
+										{
+											$request.="( ".$key2.$value2[1][0].":".$key2." OR ".$key2.$value2[2][0].":".$key2."_bis )";
+											$array_where2[$key2]=$value2[1][1];
+											$array_where2[$key2."_bis"]=$value2[2][1];
+										}
+										else
+										{
+											$request.=$key2.$value2[0].":".$key2;
+											$array_where2[$key2]=$value2[1];
+										}
+									}
+								}
+								else
+								{
+									$array_where2[$key2]=$value2;
+									$request.=$key2."=:".$key2;
+								}
+								$put_or=true;
 							}
 						}
+						$request.=")";
 					}
 					else
 					{
-						$array_where2[$key]=$value;
-						$request.=$key."=:".$key;
+						if (is_array($value))
+						{
+							if ($value[0]!="OR" && $value[0]!="=" && $value[0]!="<=" && $value[0]!=">=" && $value[0]!="<" && $value[0]!=">" && $value[0]!="!=" && $value[0]!=" LIKE ")
+							{
+								$request.=$key.">=:".$key;
+								$array_where2[$key]=$value[0];
+								$request.=" AND ".$key."<=:".$key."_bis";
+								$array_where2[$key."_bis"]=$value[1];
+							}
+							else
+							{
+								if ($value[0]=="OR")
+								{
+									$request.="( ".$key.$value[1][0].":".$key." OR ".$key.$value[2][0].":".$key."_bis )";
+									$array_where2[$key]=$value[1][1];
+									$array_where2[$key."_bis"]=$value[2][1];
+								}
+								else
+								{
+									$request.=$key.$value[0].":".$key;
+									$array_where2[$key]=$value[1];
+								}
+							}
+						}
+						else
+						{
+							$array_where2[$key]=$value;
+							$request.=$key."=:".$key;
+						}
 					}
 				}
 			}
