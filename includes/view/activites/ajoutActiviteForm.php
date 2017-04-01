@@ -61,11 +61,18 @@
 				</select></br>
 				<label for="finRecurrence">Fin de la récurrence</label><br/>
 				<input class="form-control" type="text" name="finRecurrence" id="finRecurrence"/> <br />
-			</div>			
-			<label for="prix">Prix</label><br/>
-			<input class="form-control" type="number" name="prix" id="prix" value="0"/><br/>
-			<label for="points">Points disponibles</label><br/>
-			<input class="form-control" type="number" name="points" id="points" value="0"/><br/>
+			</div>
+			<?php
+			if($_SESSION['access_level']!='CLIENT')
+			{
+			?>
+					<label for="prix">Prix</label><br/>
+					<input class="form-control" type="number" name="prix" id="prix" value="0"/><br/>
+					<label for="points">Points disponibles</label><br/>
+					<input class="form-control" type="number" name="points" id="points" value="0"/><br/>
+			<?php
+			}
+			?>
 			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('activite.controllerForm.php')); ?>',$('#form_act').serialize(), '#form-act', 'prepend'); return false;">Créer</button>
 		</div>
 		

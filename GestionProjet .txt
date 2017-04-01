@@ -18,8 +18,8 @@ Il faut donc gérer le controller et le formulaire  en fonction de ca ...
 Pour toi mon rayou en priorité : 
 - Récurrence des activités 
 - Ajouter membre à équipe 
-- Effectuer les modifs pour modifActivite au niveau du type (faire comme ajoutactivite )
-
+- Effectuer les modifs pour modifActivite au niveau du type (faire comme ajoutactivite ) 
+- Petit tuto dans aidecode  pour l'utilisation des photos afin de permettre l'affichage quand nécessaire 
 
 
 
@@ -27,9 +27,8 @@ Pour toi mon rayou en priorité :
 
 
 Choix de conception : 
-- On doit revoir les vues pour l'affichage des services : il faudrait pouvoir consulter les restaurants avec les heures d'ouverture, dans la même 
-page que les lieux communs je pense et qu'on appellerait "nos services". => à définir 
-- On utilise controller_client dans la classe user pour gérer les droits, n'est ce pas un peu risqué ? On doit pouvoir changer aussi les droits du staff non ? Si non faudra ajouter une erreur pouer empêcher de le faire 
+
+- On utilise controller_client dans la classe user pour gérer les droits, n'est ce pas un peu risqué ? On doit pouvoir changer aussi les droits du staff non ? Si non faudra ajouter une erreur pour empêcher de le faire 
 
 
 Modif db : 
@@ -38,15 +37,12 @@ Modif db :
 
 Activite : 
 -Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
-	
 - Gérer l'affichage des photos déjà envoyées dans la modification des entités 
-- Récurrence des acitvités 
-- Problème avec bouton de modification et de réservation dans gérer activité 
-- Assurer la gestion des photos (et la transmission des données du formulaire) dans gérer activité 
-- Ajout d'une photo 
+- Récurrence des activités
+- Ajout des photos dans ajout act et modif 
 - Modifier activité : - si on modifie la date de début modifier en dynamique la date de début et fin réservation 
-						- gestion des types différente de ajoutActivite 
-- Client ne peut pas mettre d'activité payante 
+					- gestion des types différente de ajoutActivite 
+
 						
 						
 
@@ -71,18 +67,17 @@ Partenaire :
 
 
 Users : 
-- Gérer l'ajout des users staff avec date de départ et emplacement 
-- Blocage des comptes fonctionne uniquement sur les non staff 
 - gérer autorisation  avec notif de validation 
 - Prévoir un clef oubliée avec envoi par mail d'une nouvelle clef (car celle en db devra être cryptée)
 - Après blocage des sous users renvoyer sur la même page  
 - Ajouter date arrivée 
 - Prévoir un type "PARTENAIRE"
+- Changer l'ajout des user avec une page spécifique CLIENT et une autre staff ? Permettrait d'ajouter une fiche biographique et une photo du staff 
 
 
 Lieu  : 
 - Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
-	
+- Ajout lieu non fonctionnel chez moi 	
 
 	
 	
@@ -121,9 +116,9 @@ Client :
 Admin: 
 - Gérer réservations : affichage de celles ci avec critères de choix 
  
-- Ajouter des points : à une équipe et un user : l'admin le fait ou c'est automatique en désignant le gagnant d'une activité 
+- Ajouter des points : à une équipe et un user fait par un admin 
 - Ajouter / gérer les options de commandes de pain : savoir si c'est un partenaire ou admin 
-- Ajouter / Gérer les options du restaurant 
+
 
 
 

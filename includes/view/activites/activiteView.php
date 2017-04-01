@@ -1,6 +1,7 @@
 <?php 
 	require_once($_SERVER['DOCUMENT_ROOT']."/includes/fonctions/general.php");
 	require_once(i("activities.class.php"));
+	require_once(i("user.class.php"));
 	require_once(i("database.class.php"));
 	if (!isset($_SESSION)) // Pour gérer les appels dynamiques
 		session_start();
@@ -11,6 +12,7 @@
 <div class="col-lg-6" style="width:40%;" name="form-equipe" id="form-equipe">
 	<?php 
 		$act= new Activite($id);
+		$user = new User($act->getIdOwner());
 		if($act->getIdRecurrente()!=-1){
 			
 			echo "Ceci est une récurrence d'activité"; 
@@ -25,8 +27,16 @@
 		<li class="list-group-item">Date : <?php echo date("d/m/y H:i", $act->getDate()); ?></li>
 		<li class="list-group-item">Description : <?php echo $act->getDescriptif(); ?></li>
 		<li class="list-group-item">Lieu : <?php echo $act->getLieu(); ?></li>
+		<li class="list-group-item">Proposé par : <?php echo $user->getPrenom()." ".$user->getNom(); ?></li>
+		<?php
+		if($user->getAccessLevel()!='CLIENT')
+		{
+		?>
 		<li class="list-group-item">Points à remporter au cours de cette activité : <?php echo $act->getPoints(); ?></li>
 		<li class="list-group-item">Prix de l activité : <?php echo $act->getPrix(); ?></li>
+		<?php 
+		}
+		?>
 	</ul>
 </div>
 <?php if($_SESSION['id']==$act->getIdOwner())
