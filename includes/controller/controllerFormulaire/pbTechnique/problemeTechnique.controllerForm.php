@@ -26,22 +26,18 @@
 				$isBungalow=false; 
 			else
 				$isBungalow=true;
-			if(isset($_POST['id']))
-			{
-				$pbTech = new PbTech($_POST['id']);
-				$pbTech->setDescription($_POST['description']); 
-				$pbTech->setPhoto($photos);
-			}
-			else
-			{
-				$pbTech = new PbTech(NULL, htmlspecialchars($_SESSION['id']), time(), NULL, htmlspecialchars ($_POST['description']), $isBungalow, $photos);
-			}
+			
+			$pbTech = new PbTech(NULL, htmlspecialchars($_SESSION['id']), time(), NULL, htmlspecialchars ($_POST['description']), $isBungalow, $photos);
+			
 			
 			
 			
 			$pbTechController = new Controller_PbTech($pbTech);
 			if($pbTechController->isGood())
-			{	 
+			{	 if(isset($_POST['id']))
+				{
+					$pbTech->setId( htmlspecialchars ($_POST['id']));
+				}
 				$pbTech->saveToDb();
 				echo "Le problème a bien été signalé, vous serez informés de l'heure de venue du technicien";
 			}

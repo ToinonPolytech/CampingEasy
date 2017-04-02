@@ -42,7 +42,7 @@ Gobal /services à ajouter :
 
 Activite : 
 -Ajout de deux possibilités pour la durée d'une activité : Heure de fin + durée avec deux menus déroulants heure/min. Modifie l'heure de fin en dynamique et inversement 
-- Gérer l'affichage des photos déjà envoyées dans la modification des entités 
+- Gérer l'affichage des photos déjà envoyées dans la modification
 - Récurrence des activités
 - Ajout des photos dans ajout act et modif 
 - Modifier activité : - si on modifie la date de début modifier en dynamique la date de début et fin réservation 
@@ -52,9 +52,8 @@ Activite :
 						
 
 Probleme technique : 
-- Déclarer comme résolu ou en cours 
+- Déclarer comme résolu ou en cours  --T--
 - Supression ne maintiens pas sur la page 
-- Ajouter un bouton suppression pour le client sur la page de modif 
 
 
 
@@ -67,42 +66,41 @@ Réservation :
 
 
 Partenaire : 
-- Ajout des photos (mises NULL par défaut dans ma db)  
+- Ajout des photos  
 - Ajout d'un service d'envoi de mail depuis l'appli à un partenaire avec un bouton de contact 
--Ajout partenaireVIew 
+- Ajout partenaireView => dans nos services ? 
 
 
 Users : 
 - gérer autorisation  avec notif de validation 
 - Prévoir un clef oubliée avec envoi par mail d'une nouvelle clef (car celle en db devra être cryptée)
 - Après blocage des sous users renvoyer sur la même page  
-- Ajouter date arrivée 
+- Ajouter date arrivée dans la db 
 - Prévoir un type "PARTENAIRE"
 - Changer l'ajout des user avec une page spécifique CLIENT et une autre staff ? Permettrait d'ajouter une fiche biographique et une photo du staff 
 
 
 Lieu  : 
-- Suppression d'un lieu : autoriser pour un lieu utilisé réservé ou utilisé dans une activité ? message d'erreur ? suppression cascade ? 
+- Suppression d'un lieu : alerte et gérer la suppression en cascade des activités associées 
 - Ajout lieu non fonctionnel chez moi 	
 - Réservation du lieu 
 
 	
 	
 Etat des lieux : 
-- Ajouter controller objet : datedeb après aujourd'hui et user dispo sur la plage horaire 
+- Ajouter controller objet : datedeb après aujourd'hui et user dispo sur la plage horaire  --T--
 - Reservation ne fonctionne pas si aucune plage n'est sélectionnée : erreur db 
 
  
 
  Equipe : 
-- Autorisation des membres de l'équipe à gérer 
+- Autorisation des membres de l'équipe à gérer  --T--
 - Une équipe joue sur une semaine : supprimée à la fin ou score remis à 0 ? comme ça tous les samedis ? 
-Demande d'ajouter une date de création ou d'expiration à 'équipe ? 
+Demande d'ajouter une date de création ou d'expiration à l'équipe ? 
 - Suppression des équipes impossibles => contraintes sur les membres ? 
 - faire fonctionner ajout membres (je ne sais pas ce que retourne la fonction de recherche) => controller formulaire de equipe_membres à faire 
+- Pouvoir ajouter des points à une équipe --T--
 
-- Ajout des points à une équipe : 
-								- Désigner 
  
 
 Pages à créer :

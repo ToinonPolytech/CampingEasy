@@ -42,8 +42,8 @@
 					}
 				}
 			?>
-			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechnique.controllerForm.php')); ?>', '#form-pbt', '#formulaire-pbt', 'prepend', true); return false;">Signaler</button>
-
+			<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechnique.controllerForm.php')); ?>', '#form-pbt', '#formulaire-pbt', 'prepend', true); return false;">Modifier</button>
+			<td><button type="button" class="btn btn-danger btn-sm" name="suppPart" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('supprimerProblemeTechnique.php')); ?>', {id : <?php echo $pb->getId(); ?>}); return false;">Supprimer</button><td>
 		</div>
 	</form>
 </div>

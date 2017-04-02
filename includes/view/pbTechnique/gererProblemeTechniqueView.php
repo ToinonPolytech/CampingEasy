@@ -25,6 +25,14 @@
 				<textarea class="form-control" rows="6" cols="30" type="text" name="message" id="message"></textarea>
 				<input type="hidden" value="<?php echo $id; ?>" id="idPbTech" name="idPbTech" />
 				<button class="btn btn-success" onclick="loadTo('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('problemeTechniqueInfo.controllerForm.php')); ?>', $('#form-message').serialize(), '#message-gerer', 'prepend'); return false;">Envoyer</button>
+				<?php
+				if($pbt->getSolved()!='RESOLU')
+				{
+				?>
+				<button class="btn btn-success" onclick="loadToMain('<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', i('etatProblemeTechnique.php')); ?>',{idPbTech : <?php echo $id;?>, etat : <?php if($pbt->getSolved()=='NON_RESOLU'){echo $etat='EN_COURS';}else{echo $etat='RESOLU';}?>}); return false;">Marquer commme <?php echo $etat;?>non ok</button>
+				<?php
+				}
+				?>
 			<div>
 		</form>
 	</ul>
