@@ -192,7 +192,7 @@ foreach ($horaires as $day => $horaires_sub)
 	}
 	foreach ($horaires_sub as $heures => $bool)
 	{
-		if (flor($heures/2)<10) echo "0";
+		if (floor($heures/2)<10) echo "0";
 		echo floor($heures/2)."h";
 		if ($heures%2) echo "30"; else echo "00";
 		if ($bool) echo "Ouvert"; else echo "Fermé"; 
